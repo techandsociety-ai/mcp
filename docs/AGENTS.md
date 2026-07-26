@@ -8,7 +8,7 @@ The MCP server itself lives in a separate repo (`techandsociety-ai/mcp-server`).
 
 ## The MCP server
 
-- **Live URL**: `https://social-media-demographics-mcp-dnbn5uv2jq-uc.a.run.app/mcp`
+- **Live URL**: `https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp`
 - **Transport**: Remote MCP over HTTPS (not stdio)
 - **Auth**: Google OAuth — users connect via Settings → Connectors → Add custom connector in Claude
 - **Backend**: Google Cloud Run + BigQuery (`chip50` GCP project, dataset `social_media_demographics`)

@@ -5,7 +5,7 @@
 **Current state:**
 - Repo: private, under Nanocentury AI GitHub org
 - GCP project: `chip50` (Cloud Run + BigQuery)
-- Cloud Run URL: `https://social-media-demographics-mcp-dnbn5uv2jq-uc.a.run.app/mcp`
+- Cloud Run URL: `https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp`
 - Docs site: `docs/` folder served via GitHub Pages
 
 ---
