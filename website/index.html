@@ -785,6 +785,38 @@ footer {
 .reveal[data-delay="6"] { transition-delay: 0.42s; }
 
 /* ═══════════════════════════════════════════════
+   SERIES DIVIDER
+═══════════════════════════════════════════════ */
+.series-divider {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 0 12px;
+  border-bottom: 1px solid var(--border);
+  margin-top: 20px;
+}
+.series-label {
+  font-family: var(--font-tight);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--sky);
+  display: flex; align-items: center; gap: 8px;
+}
+.series-label::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--sky);
+  flex-shrink: 0;
+}
+.series-label--school { color: var(--amber); }
+.series-label--school::before { background: var(--amber); }
+.series-count {
+  font-family: var(--font-tight);
+  font-size: 9.5px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* ═══════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media (max-width: 960px) {
@@ -997,157 +1029,396 @@ footer {
   <div class="container">
     <div class="reports-header reveal">
       <div class="section-tag" style="margin-bottom:0;">Reports</div>
-      <div class="reports-count">6 ENTRIES · 2025–2026</div>
+      <div class="reports-count">21 REPORTS · WAVE 38.6 · 2026</div>
     </div>
 
-    <!-- 01 -->
-    <a class="report-row reveal" href="#" data-delay="1">
+    <!-- ── AI@WORK ─────────────────────────────────────── -->
+    <div class="series-divider reveal">
+      <span class="series-label">AI@Work Series</span>
+      <span class="series-count">13 Reports · <a href="work/index.html" style="color:var(--sky);text-decoration:none;letter-spacing:inherit;">View series →</a></span>
+    </div>
+
+    <a class="report-row reveal" href="work/01-ai-use-at-work.html" data-delay="1">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <polyline points="6,54 18,46 30,49 44,36 58,27 72,20 88,15 100,11"
-            stroke="#2DC4B6" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <polyline points="6,34 18,39 30,44 44,42 58,50 72,54 88,58 100,62"
-            stroke="#C4706C" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <polyline points="6,60 18,57 30,50 44,38 58,32 72,28 88,24 100,20"
-            stroke="#EDAA1B" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-opacity="0.7"/>
-          <circle cx="100" cy="11" r="2.8" fill="#2DC4B6"/>
-          <circle cx="100" cy="62" r="2.8" fill="#C4706C"/>
-          <circle cx="100" cy="20" r="2.5" fill="#EDAA1B" fill-opacity="0.8"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">01</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JUNE 2026 · <span class="t">Platforms, Democracy</span></div>
-        <div class="rrow-title">Splintering the Public Square</div>
-        <div class="rrow-desc">The demographics of alt-tech platforms — Truth Social, Gab, Parler, Mastodon, and Bluesky — and what platform sorting means for the digital commons.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Who Uses AI at Work</div>
+        <div class="rrow-desc">A majority of U.S. workers now use AI on the job — but adoption is sharply divided by education, income, gender, and age. And who uses AI is not the same as who trusts it.</div>
       </div>
     </a>
 
-    <!-- 02 -->
-    <a class="report-row reveal" href="#" data-delay="2">
+    <a class="report-row reveal" href="work/02-what-workers-use-ai-for.html" data-delay="2">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <rect x="4"  y="4"  width="46" height="34" fill="#2DC4B6" fill-opacity="0.65" rx="1"/>
-          <rect x="54" y="4"  width="22" height="34" fill="#BF4E2C" fill-opacity="0.62" rx="1"/>
-          <rect x="80" y="4"  width="20" height="34" fill="#7B6BA8" fill-opacity="0.60" rx="1"/>
-          <rect x="4"  y="42" width="28" height="22" fill="#5B9A7A" fill-opacity="0.60" rx="1"/>
-          <rect x="36" y="42" width="32" height="22" fill="#C4706C" fill-opacity="0.55" rx="1"/>
-          <rect x="72" y="42" width="28" height="22" fill="#EDAA1B" fill-opacity="0.48" rx="1"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">02</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · MAY 2026 · <span class="t">Platforms, Safety</span></div>
-        <div class="rrow-title">Digital Battlegrounds</div>
-        <div class="rrow-desc">A map of online abuse and harassment across major platforms — and the demographic groups most often targeted, from 2022 to 2026.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">What Workers Actually Use AI For</div>
+        <div class="rrow-desc">The most common AI uses at work are troubleshooting and brainstorming — not writing code. AI at work is a broad thinking aid, and the task patterns reveal sharp demographic divides.</div>
       </div>
     </a>
 
-    <!-- 03 -->
-    <a class="report-row reveal" href="#" data-delay="3">
+    <a class="report-row reveal" href="work/03-ai-productivity.html" data-delay="3">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <path d="M8 48 Q20 28 34 42 Q46 54 60 34 Q74 18 90 32" stroke="#BF4E2C" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <path d="M8 44 Q20 34 34 40 Q46 46 60 36 Q74 26 90 36" stroke="#BF4E2C" stroke-width="0.7" fill="none" stroke-linecap="round" stroke-opacity="0.3"/>
-          <circle cx="60" cy="34" r="2.2" fill="#EDAA1B"/>
-          <circle cx="34" cy="42" r="2.0" fill="#EDAA1B" fill-opacity="0.7"/>
-          <!-- clock icon -->
-          <circle cx="20" cy="36" r="12" stroke="#2DC4B6" stroke-width="1" fill="none" stroke-opacity="0.45"/>
-          <line x1="20" y1="36" x2="20" y2="26" stroke="#2DC4B6" stroke-width="1.2" stroke-opacity="0.7" stroke-linecap="round"/>
-          <line x1="20" y1="36" x2="27" y2="36" stroke="#2DC4B6" stroke-width="0.9" stroke-opacity="0.5" stroke-linecap="round"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">03</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · APRIL 2026 · <span class="t">Health, Platforms</span></div>
-        <div class="rrow-title">Scrolling Away Sleep</div>
-        <div class="rrow-desc">How problematic TikTok use disrupts sleep, attention, and mental health — a PHQ-9 analysis across 38 survey waves of nationally representative data.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Faster, But Not Freer</div>
+        <div class="rrow-desc">Most workers who use AI say it makes them more productive — but the time it frees tends to become more work, expectations are rising, and workers see employers as the main beneficiary.</div>
       </div>
     </a>
 
-    <!-- 04 -->
-    <a class="report-row reveal" href="#" data-delay="4">
+    <a class="report-row reveal" href="work/04-shadow-ai.html" data-delay="4">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <!-- sankey-style flow -->
-          <rect x="4"  y="6"  width="9" height="56" fill="#2DC4B6" fill-opacity="0.55" rx="1"/>
-          <rect x="91" y="4"  width="9" height="20" fill="#2DC4B6" fill-opacity="0.68" rx="1"/>
-          <rect x="91" y="27" width="9" height="15" fill="#7B6BA8" fill-opacity="0.65" rx="1"/>
-          <rect x="91" y="45" width="9" height="19" fill="#C4706C" fill-opacity="0.58" rx="1"/>
-          <path d="M13 16 Q52 16 91 12" stroke="#2DC4B6" stroke-width="9" fill="none" stroke-opacity="0.28"/>
-          <path d="M13 36 Q52 36 91 33" stroke="#7B6BA8" stroke-width="6" fill="none" stroke-opacity="0.30"/>
-          <path d="M13 52 Q52 56 91 52" stroke="#C4706C" stroke-width="7" fill="none" stroke-opacity="0.28"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">04</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · MARCH 2026 · <span class="t">Platforms, Democracy</span></div>
-        <div class="rrow-title">Migration After Musk</div>
-        <div class="rrow-desc">Who left X after the Elon Musk acquisition — and where they went. A logistic regression analysis of platform migration by demographics and partisan identity.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Don't Ask, Don't Tell</div>
+        <div class="rrow-desc">A majority of workers use AI mostly without mentioning it, without a rulebook, and often after feeding it confidential data. Two-thirds of business owners suspect their employees use AI without disclosing it.</div>
       </div>
     </a>
 
-    <!-- 05 -->
-    <a class="report-row reveal" href="#" data-delay="5">
+    <a class="report-row reveal" href="work/05-ai-job-loss-anxiety.html" data-delay="1">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <line x1="8" y1="62" x2="96" y2="62" stroke="#192E4A" stroke-width="1"/>
-          <rect x="10" y="20" width="14" height="42" fill="#2DC4B6" fill-opacity="0.68" rx="1"/>
-          <rect x="28" y="30" width="14" height="32" fill="#2DC4B6" fill-opacity="0.50" rx="1"/>
-          <rect x="46" y="42" width="14" height="20" fill="#EDAA1B" fill-opacity="0.58" rx="1"/>
-          <rect x="64" y="36" width="14" height="26" fill="#BF4E2C" fill-opacity="0.58" rx="1"/>
-          <rect x="82" y="24" width="14" height="38" fill="#BF4E2C" fill-opacity="0.78" rx="1"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">05</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · FEBRUARY 2026 · <span class="t">Trust, Politics</span></div>
-        <div class="rrow-title">Who Trusts What</div>
-        <div class="rrow-desc">Institutional trust in science, government, and media across the partisan spectrum — and how the rise of AI chatbots is reshaping the trust landscape.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Whose Job Is Next?</div>
+        <div class="rrow-desc">A near-majority of workers expect AI to eventually cost people in their field their jobs — but far fewer fear for their own. Anxiety is highest among the young and white-collar workers, inverting the automation-era pattern.</div>
       </div>
     </a>
 
-    <!-- 06 -->
-    <a class="report-row reveal" href="#" data-delay="6">
+    <a class="report-row reveal" href="work/06-degrees-and-hiring.html" data-delay="2">
       <div class="rthumb">
         <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
           <rect width="104" height="68" fill="#0C1D35"/>
-          <!-- simple choropleth-style grid -->
-          <g opacity="0.85">
-            <rect x="4"  y="4"  width="10" height="8" fill="#2DC4B6" fill-opacity="0.30" rx="0.5"/>
-            <rect x="16" y="4"  width="10" height="8" fill="#2DC4B6" fill-opacity="0.50" rx="0.5"/>
-            <rect x="28" y="4"  width="10" height="8" fill="#2DC4B6" fill-opacity="0.80" rx="0.5"/>
-            <rect x="40" y="4"  width="10" height="8" fill="#7B6BA8" fill-opacity="0.40" rx="0.5"/>
-            <rect x="52" y="4"  width="10" height="8" fill="#BF4E2C" fill-opacity="0.45" rx="0.5"/>
-            <rect x="64" y="4"  width="10" height="8" fill="#BF4E2C" fill-opacity="0.68" rx="0.5"/>
-            <rect x="76" y="4"  width="10" height="8" fill="#BF4E2C" fill-opacity="0.88" rx="0.5"/>
-            <rect x="88" y="4"  width="12" height="8" fill="#EDAA1B" fill-opacity="0.55" rx="0.5"/>
-
-            <rect x="4"  y="15" width="10" height="8" fill="#2DC4B6" fill-opacity="0.55" rx="0.5"/>
-            <rect x="16" y="15" width="10" height="8" fill="#2DC4B6" fill-opacity="0.38" rx="0.5"/>
-            <rect x="28" y="15" width="10" height="8" fill="#7B6BA8" fill-opacity="0.48" rx="0.5"/>
-            <rect x="40" y="15" width="10" height="8" fill="#7B6BA8" fill-opacity="0.60" rx="0.5"/>
-            <rect x="52" y="15" width="10" height="8" fill="#BF4E2C" fill-opacity="0.38" rx="0.5"/>
-            <rect x="64" y="15" width="10" height="8" fill="#BF4E2C" fill-opacity="0.58" rx="0.5"/>
-            <rect x="76" y="15" width="10" height="8" fill="#BF4E2C" fill-opacity="0.78" rx="0.5"/>
-            <rect x="88" y="15" width="12" height="8" fill="#BF4E2C" fill-opacity="0.50" rx="0.5"/>
-
-            <rect x="4"  y="26" width="22" height="8" fill="#2DC4B6" fill-opacity="0.48" rx="0.5"/>
-            <rect x="28" y="26" width="10" height="8" fill="#7B6BA8" fill-opacity="0.42" rx="0.5"/>
-            <rect x="40" y="26" width="20" height="8" fill="#BF4E2C" fill-opacity="0.50" rx="0.5"/>
-            <rect x="62" y="26" width="38" height="8" fill="#BF4E2C" fill-opacity="0.65" rx="0.5"/>
-          </g>
-          <!-- legend -->
-          <rect x="4"  y="52" width="8" height="4" fill="#2DC4B6" fill-opacity="0.7" rx="0.5"/>
-          <text x="15" y="57" font-family="Inter" font-size="6.5" fill="#7A8FA8">More liberal</text>
-          <rect x="60" y="52" width="8" height="4" fill="#BF4E2C" fill-opacity="0.7" rx="0.5"/>
-          <text x="71" y="57" font-family="Inter" font-size="6.5" fill="#7A8FA8">More conservative</text>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">06</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JANUARY 2026 · <span class="t">Geography, Platforms</span></div>
-        <div class="rrow-title">The Geography of the Feed</div>
-        <div class="rrow-desc">A state-by-state analysis of platform adoption, political posting, and how geography shapes the American social media experience.</div>
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Do Degrees Still Matter in the Age of AI?</div>
+        <div class="rrow-desc">The public worries that AI is devaluing college degrees — but hiring managers disagree. They still reward degrees and technical majors, and about half now screen résumés with AI.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/07-reskilling.html" data-delay="3">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">07</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">The AI Training Gap</div>
+        <div class="rrow-desc">Most workers get no AI training from their employer, and what exists flows to the already-advantaged. Workers say the obstacle is time, not willingness — and they're clear about who should pay.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/08-ai-governance-policy.html" data-delay="4">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">08</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Rein In the Titans, Cushion the Workers</div>
+        <div class="rrow-desc">Americans distrust AI and its corporate elite, are wary of exporting the technology, but back a worker safety net across party lines. Views diverge most sharply by AI use itself.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/09-parents-and-college.html" data-delay="1">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">09</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Doubling Down on the Diploma</div>
+        <div class="rrow-desc">Contrary to the fear that AI is making college obsolete, American parents are on balance more likely to send their kids to college because of AI — not less. The pull is strongest among the most educated.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/10-small-business-owners.html" data-delay="2">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">10</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Main Street's AI Bet</div>
+        <div class="rrow-desc">Most small-business owners who see AI as relevant are already using it and plan to spend more — but they're buying subscriptions rather than building systems, and cost savings remain unproven.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/11-capstone-engagement-vs-fear.html" data-delay="3">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">11</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">CAPSTONE · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">Engagement, Not Fear</div>
+        <div class="rrow-desc">Who actually drives demand for an AI safety net? The answer inverts the usual class story — it's the engaged, not the fearful, who most strongly support worker protections.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/12-synthesis-the-ai-and-work-divide.html" data-delay="4">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">12</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">SYNTHESIS · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">The AI &amp; Work Divide</div>
+        <div class="rrow-desc">A synthesis of eleven AI@Work studies: who uses AI, who trusts it, who is protected, and who wants protection all fall along a small number of durable lines. The central axis is engagement versus fear.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="work/13-gender-and-ai.html" data-delay="1">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#4BC5E8" fill-opacity="0.30">13</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#4BC5E8" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#4BC5E8" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#4BC5E8" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#4BC5E8" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-title">The AI Gender Gap</div>
+        <div class="rrow-desc">Across nearly two hundred AI measures — using it, trusting it, feeling it, fearing it — men out-engage women almost everywhere. The gap is not about the jobs people hold; it's a confidence gap.</div>
+      </div>
+    </a>
+
+    <!-- ── AI@SCHOOL ───────────────────────────────────── -->
+    <div class="series-divider reveal" style="margin-top:16px;">
+      <span class="series-label series-label--school">AI@School Series</span>
+      <span class="series-count">8 Reports · <a href="school/index.html" style="color:var(--amber);text-decoration:none;letter-spacing:inherit;">View series →</a></span>
+    </div>
+
+    <a class="report-row reveal" href="school/01-ai-goes-to-school.html" data-delay="1">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">01</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">AI Goes to School</div>
+        <div class="rrow-desc">Two-thirds of currently-enrolled students have used AI for their coursework — but most use it lightly. Students treat AI more as a tutor than a ghostwriter, though the heaviest users are a growing minority.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/02-i-learn-they-cheat.html" data-delay="2">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">02</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">I Learn, They Cheat</div>
+        <div class="rrow-desc">Currently-enrolled students extend AI's benefits to themselves and its harms to everyone else — believing AI helps them learn but makes their peers learn less, even when their own behavior is identical.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/03-the-rules-vacuum.html" data-delay="3">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">03</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">The Rules Vacuum</div>
+        <div class="rrow-desc">Two-thirds of students use AI for schoolwork, but only one in ten says instructors encourage it, and half say it isn't built into any required courses. AI adoption has outrun the rulebook.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/04-ai-as-leveler.html" data-delay="4">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">04</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">A Leveler With an Asterisk</div>
+        <div class="rrow-desc">For the students least able to pay for academic help, AI is often the irreplaceable option — a free tutor standing in for the paid one they can't afford. But those who stand to benefit most often have the least access.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/05-the-credential-question.html" data-delay="1">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">05</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">The Credential Question</div>
+        <div class="rrow-desc">Americans think AI is denting the value of a college degree — but the discount is uneven. Bachelor's degrees and the humanities are marked down; STEM and advanced degrees hold or gain.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/07-curious-and-afraid.html" data-delay="2">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">07</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">Curious and Afraid</div>
+        <div class="rrow-desc">The generation that has folded AI into its coursework is also the most anxious about it. Among currently-enrolled students, concern and fear outrank every positive emotion except curiosity.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/08-fluent-but-credulous.html" data-delay="3">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">08</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">Fluent but Credulous</div>
+        <div class="rrow-desc">Two-thirds of students rate themselves skilled with AI, and most grasp that it can err. But on the specific misconceptions that matter when using AI for schoolwork, fluency masks credulity.</div>
+      </div>
+    </a>
+
+    <a class="report-row reveal" href="school/09-capstone-engaged-uneasy.html" data-delay="4">
+      <div class="rthumb">
+        <svg viewBox="0 0 104 68" xmlns="http://www.w3.org/2000/svg" width="104" height="68">
+          <rect width="104" height="68" fill="#0C1D35"/>
+          <text x="8" y="50" font-family="Inter Tight,system-ui" font-size="30" font-weight="300" fill="#EDAA1B" fill-opacity="0.30">09</text>
+          <line x1="4" y1="62" x2="68" y2="62" stroke="#EDAA1B" stroke-width="1.5" stroke-opacity="0.45"/>
+          <circle cx="80" cy="62" r="2.5" fill="#EDAA1B" fill-opacity="0.70"/>
+          <circle cx="90" cy="62" r="1.8" fill="#EDAA1B" fill-opacity="0.35"/>
+          <circle cx="98" cy="62" r="1.3" fill="#EDAA1B" fill-opacity="0.18"/>
+        </svg>
+      </div>
+      <div class="rinfo">
+        <div class="rrow-meta">CAPSTONE · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-title">Engaged, Uneasy, and Uncritical</div>
+        <div class="rrow-desc">Students have adopted AI about as fully as any group in the country, and they are not comfortable with it. Using AI more makes students more excited — not more careful or more skeptical.</div>
       </div>
     </a>
 

@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>I Learn, They Cheat: The Self-Serving Story Students Tell About AI — AI@School</title>
+<meta name="description" content="Currently-enrolled students extend AI&#x27;s benefits to themselves and its harms to everyone else. They say AI helps them learn but makes their peers learn less; they use it lightly bu"/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#f5a500; --acct:#7a5200; --soft:#fff5de;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#f5b731; --acct:#f5b731; --soft:#2e2408;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#f5b731; --acct:#f5b731; --soft:#2e2408;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@School Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#i-learn-they-dont">"I Learn; They Don't"</a><a href="#and-they-say-theyre-not-coasting">And They Say They're Not Coasting</a><a href="#i-dabble-theyre-all-in">"I Dabble; They're All In"</a><a href="#who-leans-in-and-who-still-prefers-a-human-teacher">Who Leans In — and Who Still Prefers a Human Teacher</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-and-response-codes">Appendix C — Question wording and response codes</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@School</div><h1>I Learn, They Cheat: The Self-Serving Story Students Tell About AI</h1><p class="dek">Currently-enrolled students extend AI's benefits to themselves and its harms to everyone else. They say AI helps <em>them</em> learn but makes their peers learn less; they use it lightly but believe their classmates lean on it heavily — even as nearly half admit their own corner-cutting. The one thing they get right is how many peers use AI at all.</p><p class="srcline"><em>Source: CHIP50 (Civic Health and Institutions Project / COVID States Project), Wave 38.6, fielded June 21–July 13, 2026. Analysis restricted to currently-enrolled students (n = 2,214). All figures are weighted estimates and are self-reports — measures of what students say and believe, not audited behavior.</em></p><p class="pos"><em>Series position: Report 2 of the AI@School series (see the series index) — Part I, Behaviour. The perception layer on Report 1's adoption baseline: what students believe about their own use versus their classmates', and where those beliefs are accurate.</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on <strong>CHIP50 Wave 38.6</strong> (total unweighted N = 23,462; fielded June 21–July 13, 2026), restricted to <strong>currently-enrolled students</strong> (<code>school_recency = "currently enrolled"</code>). Base sizes vary by item and are labeled throughout: the peer-perception and self-reliance items (<code>ai_learn_others</code>, <code>ai_course_extent</code>/<code>extent2</code>, <code>ai_banned</code>, <code>ai_course_other</code>) were asked of the full currently-enrolled sample (n ≈ 2,206–2,285); the self-learning and human-teacher items (<code>ai_learn</code>, <code>ai_vs_tutor</code>) were asked only of the ~1,430 currently-enrolled students who had used AI for schoolwork.</p>
+<p><strong>A note that is central to this report, not a footnote.</strong> Every figure here is a self-report. The report's core finding is a <em>gap between how students describe their own AI use and how they describe their peers'</em> — and a gap like that can arise because students flatter themselves, because they overestimate others, or both. We do not treat these as measures of actual behavior. The interesting fact is the asymmetry in students' own accounts, and where it is (and isn't) large.</p>
+<p>All percentages and means are survey-weighted to national demographic targets; unweighted N is a reliability cue only. Descriptive differences are labeled as such; demographic claims are confirmed against survey-weighted regressions (Appendix). Partisanship uses the 7-point <code>party7</code>.</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>A self-serving split on learning</strong> — 41% of students who use AI say it helps <em>them</em> learn more, but only 21% say it helps <em>other</em> students learn more.</li><li><strong>"They learn less"</strong> — 35% think AI makes other students learn <em>less</em>, about 2.5× the 14% who say the same about themselves.</li><li><strong>Not a shortcut, on average</strong> — asked how AI changed their study time, currently-enrolled users split almost evenly: 33% now spend <em>more</em> time on the material, 34% the same, and 32% less — not the collapse in effort the "offloading" fear predicts.</li><li><strong>"I dabble, they're all in"</strong> — just 18% of students do "most" or "all" of their own schoolwork with AI, yet 44% believe their peers do.</li><li><strong>Right about how many, wrong about how much</strong> — students accurately sense that most peers use AI (they estimate ~62%; the actual share is ~65%), so the bias is not about <em>whether</em> peers use AI but about <em>how heavily</em>.</li><li><strong>They admit their own corner-cutting</strong> — 46% say they have used AI in ways that could be considered cheating at least once (21% several times or more), even as they impute heavier reliance to everyone else.</li><li><strong>A human teacher still wins</strong> — only 29% of current students rate AI as better than a human teacher for learning, while 39% say it is worse. And students' embrace of AI tracks how much they trust AI companies, which largely accounts for the partisan (though not the gender) tilt.</li><li><strong>Engagement has a racial pattern too</strong> — net of party and income, Black (and often Hispanic) students are more likely to say AI helps them learn, to rate it above a human teacher, and to report cutting corners with it: the same all-in engagement, its upside and downside moving together.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>The public conversation about students and AI is dominated by a single fear: that generative tools have become an engine of mass cheating. Students see the same headlines — and, it turns out, they largely apply the worry to <em>other people</em>. CHIP50's Wave 38.6 supplement asked currently-enrolled students both how AI affects their own coursework and how it affects their classmates', and the two accounts diverge sharply and consistently. Students describe their own use as a modest learning aid and their peers' use as heavy, and even harmful to learning.</p>
+<p>This pattern has a name — pluralistic ignorance — and it is well documented for AI specifically. A University of Chicago study of undergraduates found that 60% admitted using AI themselves while 90% believed their peers did, a 30-point gap the authors attribute to some mix of under-reporting one's own use and over-estimating everyone else's.<sup class="fnref" id="fnref-uchicago"><a href="#fn-uchicago">1</a></sup> It echoes decades of public-health research showing that false perceptions that "everyone else is doing it" can become self-fulfilling.<sup class="fnref" id="fnref-kqed"><a href="#fn-kqed">2</a></sup> Because everything in this report is self-reported, that ambiguity is unavoidable — and it is precisely why the <em>shape</em> of the gap matters. As we show, CHIP50 students are fairly accurate about how <em>many</em> peers use AI; where their accounts diverge is in how <em>much</em> they think peers rely on it and whether it helps peers learn. That points to an evaluative asymmetry — a story students tell about who uses AI well and who abuses it — more than a simple miscount.</p>
+<hr/>
+<h2 id="i-learn-they-dont">"I Learn; They Don't"</h2>
+<p><strong>Students are far more generous about AI's effect on their own learning than their peers'.</strong> Among currently-enrolled students who use AI for schoolwork, <strong>41% say it helps them learn more</strong>, 45% say it makes no difference, and just 14% say they learn less. But asked the same question about <em>other students at their school</em>, the optimism collapses: only <strong>21% think AI helps their peers learn more</strong>, while <strong>35% think it makes other students learn <em>less</em></strong> — and another 15% say they aren't sure (Table 1).</p>
+<p>Lined up, the asymmetry is stark. Students are roughly <strong>twice as likely to credit AI with helping their own learning as their peers'</strong> (41% vs. 21%), and <strong>two and a half times as likely to say it hurts others' learning as their own</strong> (35% vs. 14%). The generosity students extend to their own use — "it's a study aid that helps me understand" — is almost entirely withheld from everyone else, whose use they read as a crutch that erodes learning.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 176" width="100%" height="176" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. Does AI help you learn? Self-report (learn more / no difference / learn less) shown directly above the same categories asked about other students at the school. Base: currently-enrolled AI users, unweighted n ≈ 1,356 (self); currently-enrolled students, unweighted n ≈ 2,206 (peers). CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="146" class="cg"/>
+<text x="250.0" y="162" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="146" class="cg"/>
+<text x="374.0" y="162" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="146" class="cg"/>
+<text x="498.0" y="162" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="146" class="cg"/>
+<text x="622.0" y="162" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="146" class="cg"/>
+<text x="746.0" y="162" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="146" class="cg"/>
+<text x="870.0" y="162" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Learn more</text>
+<rect x="361.0" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="376.0" y="15" class="ct clg">About the same</text>
+<rect x="501.6" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="516.6" y="15" class="ct clg">Learn less</text>
+<text x="240" y="55.5" class="ct clab">Yourself (ai_learn, AI users)</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — Learn more: 41</title><rect x="250.0" y="30" width="508.4" height="13" rx="3" class="cs1"/></g>
+<text x="764.4" y="40" class="ct cval">41</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — About the same: 45</title><rect x="250.0" y="45" width="558.0" height="13" rx="3" class="cs2"/></g>
+<text x="814.0" y="55" class="ct cval">45</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — Learn less: 14</title><rect x="250.0" y="60" width="173.6" height="13" rx="3" class="cs3"/></g>
+<text x="429.6" y="70" class="ct cval">14</text>
+<text x="240" y="111.5" class="ct clab">Other students (ai_learn_others, all)</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — Learn more: 21</title><rect x="250.0" y="86" width="260.4" height="13" rx="3" class="cs1"/></g>
+<text x="516.4" y="96" class="ct cval">21</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — About the same: 26</title><rect x="250.0" y="101" width="322.4" height="13" rx="3" class="cs2"/></g>
+<text x="578.4" y="111" class="ct cval">26</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — Learn less: 35</title><rect x="250.0" y="116" width="434.0" height="13" rx="3" class="cs3"/></g>
+<text x="690.0" y="126" class="ct cval">35</text>
+</svg><figcaption><em>Figure 1. Does AI help you learn? Self-report (learn more / no difference / learn less) shown directly above the same categories asked about other students at the school. Base: currently-enrolled AI users, unweighted n ≈ 1,356 (self); currently-enrolled students, unweighted n ≈ 2,206 (peers). CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th></th><th>Learn more</th><th>About the same</th><th>Learn less</th><th>(Not sure)</th></tr></thead><tbody><tr><td><strong>Yourself</strong> (<code>ai_learn</code>, AI users)</td><td>41</td><td>45</td><td>14</td><td>—</td></tr><tr><td><strong>Other students</strong> (<code>ai_learn_others</code>, all)</td><td>21</td><td>26</td><td>35</td><td>15</td></tr></tbody></table></div></details></figure>
+<blockquote><strong>Comparative context.</strong> The self–peer split mirrors the University of Chicago finding that students see far more AI use in others than they admit in themselves.<sup class="fnref" id="fnref-uchicago"><a href="#fn-uchicago">1</a></sup> CHIP50 adds that the gap is evaluative as well as quantitative: students don't just think peers use AI more, they think peers <em>benefit less</em> from it.</blockquote>
+<hr/>
+<h2 id="and-they-say-theyre-not-coasting">And They Say They're Not Coasting</h2>
+<p><strong>A subtler version of the cheating fear is that even honest AI users quietly stop doing the hard cognitive work — that AI becomes a way to spend less time thinking.</strong> CHIP50 lets us test that directly. Asked how AI has changed the amount of time they spend studying or learning the material, currently-enrolled AI users split almost evenly into thirds: <strong>33% say they now spend <em>more</em> time</strong> (12% "much more," 21% "somewhat more"), <strong>34% about the same</strong>, and <strong>32% less</strong> (25% "somewhat less," 8% "much less") (Table 6). The average lands squarely on "about the same."</p>
+<p>That is not the picture the offloading worry predicts. If AI were mainly a shortcut, the responses would pile up at "less time"; instead the distribution is nearly symmetric, and about as many students say AI has drawn them into spending <em>more</em> time on the material as say it has let them spend less. It fits the self-learning story above: the 41% who say AI helps them learn more are, for the most part, describing a tool that adds engagement rather than subtracting effort. The usual caveat governs — "how much time I study" is exactly the kind of thing students may round in a flattering direction — but on their own accounts, the median AI user is not coasting.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. How AI has changed time spent studying. Base: currently-enrolled AI users; unweighted n ≈ 1,429. CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="226" class="cg"/>
+<text x="405.0" y="242" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="226" class="cg"/>
+<text x="560.0" y="242" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="226" class="cg"/>
+<text x="715.0" y="242" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more time</text>
+<g class="cb"><title>Much more time: 12</title><rect x="250.0" y="12" width="74.4" height="17" rx="3" class="cs1"/></g>
+<text x="330.4" y="26" class="ct cval">12</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more time</text>
+<g class="cb"><title>Somewhat more time: 21</title><rect x="250.0" y="42" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="56" class="ct cval">21</text>
+<text x="240" y="84.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 34</title><rect x="250.0" y="72" width="210.8" height="17" rx="3" class="cs1"/></g>
+<text x="466.8" y="86" class="ct cval">34</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less time</text>
+<g class="cb"><title>Somewhat less time: 25</title><rect x="250.0" y="102" width="155.0" height="17" rx="3" class="cs1"/></g>
+<text x="411.0" y="116" class="ct cval">25</text>
+<text x="240" y="144.5" class="ct clab">Much less time</text>
+<g class="cb"><title>Much less time: 8</title><rect x="250.0" y="132" width="49.6" height="17" rx="3" class="cs1"/></g>
+<text x="305.6" y="146" class="ct cval">8</text>
+<text x="240" y="174.5" class="ct clab">Net: more time</text>
+<g class="cb"><title>Net: more time: 33</title><rect x="250.0" y="162" width="204.6" height="17" rx="3" class="cs1"/></g>
+<text x="460.6" y="176" class="ct cval">33</text>
+<text x="240" y="204.5" class="ct clab">Net: less time</text>
+<g class="cb"><title>Net: less time: 32</title><rect x="250.0" y="192" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="206" class="ct cval">32</text>
+</svg><figcaption><em>Figure 2. How AI has changed time spent studying. Base: currently-enrolled AI users; unweighted n ≈ 1,429. CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 6 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>Weighted %</th></tr></thead><tbody><tr><td>Much more time</td><td>12</td></tr><tr><td>Somewhat more time</td><td>21</td></tr><tr><td>About the same</td><td>34</td></tr><tr><td>Somewhat less time</td><td>25</td></tr><tr><td>Much less time</td><td>8</td></tr><tr><td><strong>Net: more time</strong></td><td><strong>33</strong></td></tr><tr><td><strong>Net: less time</strong></td><td><strong>32</strong></td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="i-dabble-theyre-all-in">"I Dabble; They're All In"</h2>
+<p><strong>Students picture their peers as far more dependent on AI than they report being themselves — but only when it comes to intensity, not prevalence.</strong> Asked how much of their <em>own</em> schoolwork they do with AI, most currently-enrolled students describe light use: 24% say "none," 24% "not much," 34% "some," and only 14% "most" and 4% "all" — about <strong>18% at the heavy end</strong>. Asked how much of their schoolwork <em>other students</em> do with AI, the distribution shifts dramatically toward heavy use: <strong>44% believe their peers do "most" or "all" of their schoolwork with AI</strong> (Table 2). On a 1-to-5 "none-to-all" scale, students rate their peers' reliance (mean 3.3) nearly a full point above their own (2.5).</p>
+<p>Yet this is not a case of students imagining AI everywhere. Asked to estimate what <em>share</em> of their classmates use AI at all, students put it at about <strong>62% on average — almost exactly the 65% who actually report doing so</strong> (Table 3). In other words, students are close to right about <em>how many</em> peers use AI and far off about <em>how much</em>: they accept that most classmates use it, but imagine those classmates doing the bulk of their work with it, in a way few students say they do themselves.</p>
+<p>The self-image is reinforced by what students admit about their own conduct. Nearly half — <strong>46% — say they have used AI in ways that could be considered cheating at least once</strong> (25% once or twice, 15% several times, 6% frequently), leaving 54% who say never (Table 3). That is not a portrait of scrupulous abstainers; it is a portrait of students who cut corners themselves and still imagine their peers cutting more.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 310" width="100%" height="310" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Share of schoolwork done with AI — own use vs. perceived peer use on the None→All scale, annotated with the peer-prevalence estimate (62% believed vs. 65% actual). Base: currently-enrolled students; unweighted n ≈ 2,206–2,285. CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="280" class="cg"/>
+<text x="250.0" y="296" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="280" class="cg"/>
+<text x="374.0" y="296" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="280" class="cg"/>
+<text x="498.0" y="296" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="280" class="cg"/>
+<text x="622.0" y="296" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="280" class="cg"/>
+<text x="746.0" y="296" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="280" class="cg"/>
+<text x="870.0" y="296" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Yourself (ai_course_extent)</text>
+<rect x="486.8" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="501.8" y="15" class="ct clg">Other students (ai_course_extent2)</text>
+<text x="240" y="48.0" class="ct clab">None</text>
+<g class="cb"><title>None — Yourself (ai_course_extent): 24</title><rect x="250.0" y="30" width="297.6" height="13" rx="3" class="cs1"/></g>
+<text x="553.6" y="40" class="ct cval">24</text>
+<g class="cb"><title>None — Other students (ai_course_extent2): 5</title><rect x="250.0" y="45" width="62.0" height="13" rx="3" class="cs2"/></g>
+<text x="318.0" y="55" class="ct cval">5</text>
+<text x="240" y="89.0" class="ct clab">Not much</text>
+<g class="cb"><title>Not much — Yourself (ai_course_extent): 24</title><rect x="250.0" y="71" width="297.6" height="13" rx="3" class="cs1"/></g>
+<text x="553.6" y="81" class="ct cval">24</text>
+<g class="cb"><title>Not much — Other students (ai_course_extent2): 8</title><rect x="250.0" y="86" width="99.2" height="13" rx="3" class="cs2"/></g>
+<text x="355.2" y="96" class="ct cval">8</text>
+<text x="240" y="130.0" class="ct clab">Some</text>
+<g class="cb"><title>Some — Yourself (ai_course_extent): 34</title><rect x="250.0" y="112" width="421.6" height="13" rx="3" class="cs1"/></g>
+<text x="677.6" y="122" class="ct cval">34</text>
+<g class="cb"><title>Some — Other students (ai_course_extent2): 42</title><rect x="250.0" y="127" width="520.8" height="13" rx="3" class="cs2"/></g>
+<text x="776.8" y="137" class="ct cval">42</text>
+<text x="240" y="171.0" class="ct clab">Most</text>
+<g class="cb"><title>Most — Yourself (ai_course_extent): 14</title><rect x="250.0" y="153" width="173.6" height="13" rx="3" class="cs1"/></g>
+<text x="429.6" y="163" class="ct cval">14</text>
+<g class="cb"><title>Most — Other students (ai_course_extent2): 37</title><rect x="250.0" y="168" width="458.8" height="13" rx="3" class="cs2"/></g>
+<text x="714.8" y="178" class="ct cval">37</text>
+<text x="240" y="212.0" class="ct clab">All</text>
+<g class="cb"><title>All — Yourself (ai_course_extent): 4</title><rect x="250.0" y="194" width="49.6" height="13" rx="3" class="cs1"/></g>
+<text x="305.6" y="204" class="ct cval">4</text>
+<g class="cb"><title>All — Other students (ai_course_extent2): 7</title><rect x="250.0" y="209" width="86.8" height="13" rx="3" class="cs2"/></g>
+<text x="342.8" y="219" class="ct cval">7</text>
+<text x="240" y="253.0" class="ct clab">Most or all</text>
+<g class="cb"><title>Most or all — Yourself (ai_course_extent): 18</title><rect x="250.0" y="235" width="223.2" height="13" rx="3" class="cs1"/></g>
+<text x="479.2" y="245" class="ct cval">18</text>
+<g class="cb"><title>Most or all — Other students (ai_course_extent2): 44</title><rect x="250.0" y="250" width="545.6" height="13" rx="3" class="cs2"/></g>
+<text x="801.6" y="260" class="ct cval">44</text>
+</svg><figcaption><em>Figure 3. Share of schoolwork done with AI — own use vs. perceived peer use on the None→All scale, annotated with the peer-prevalence estimate (62% believed vs. 65% actual). Base: currently-enrolled students; unweighted n ≈ 2,206–2,285. CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>Yourself (<code>ai_course_extent</code>)</th><th>Other students (<code>ai_course_extent2</code>)</th></tr></thead><tbody><tr><td>None</td><td>24</td><td>5</td></tr><tr><td>Not much</td><td>24</td><td>8</td></tr><tr><td>Some</td><td>34</td><td>42</td></tr><tr><td>Most</td><td>14</td><td>37</td></tr><tr><td>All</td><td>4</td><td>7</td></tr><tr><td><strong>Most or all</strong></td><td><strong>18</strong></td><td><strong>44</strong></td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="who-leans-in-and-who-still-prefers-a-human-teacher">Who Leans In — and Who Still Prefers a Human Teacher</h2>
+<p><strong>Beneath the self–peer story, the students most inclined to embrace AI are a familiar pair: Republicans and men.</strong> Survey-weighted regressions (Appendix) show that, controlling for the standard demographics, Republican and Strong-Republican students report the most cheating-adjacent use, are the most likely to say AI helps them learn, and rate AI most favorably against a human teacher; Democratic and independent students are consistently lower on all three. Men report more cheating-adjacent use than women and rate AI more favorably versus a teacher, though the gender gap on self-reported <em>learning</em> is not statistically reliable. Age, having been the illusory headline of the adoption story, works differently here: it does not predict <em>how much</em> AI students use (the flagship's central correction), but among current students it does predict how they <em>judge</em> it. Read on the survey's native age bands, older enrolled students are consistently more positive — every age band above 18–20 rates AI more favorably against a human teacher than the youngest students do, rising from +0.29 among 21–30s to +0.67 among 41–50s on the five-point scale — and students 31 and older are likelier to say AI helps them learn. On cheating-adjacent use, by contrast, there is no gradient at all: only the 51-and-older group stands apart, reporting markedly less of it.</p>
+<p>That partisan tilt, on closer inspection, is a <strong>trust gap</strong>. Trust in AI companies is itself sharply partisan — Strong Republicans average 2.8 on a 1-to-4 scale, versus roughly 1.8–2.4 for everyone else (lowest among Democrats and independents) — and when trust in AI is added to the models, the partisan effect largely vanishes: party ID no longer predicts whether a student says AI helps them learn, and its effect on the teacher comparison is roughly halved, while trust becomes the single strongest predictor (doubling the model's explanatory power). Republican students embrace AI more, in short, in large part because they trust its makers more. Notably, this does <em>not</em> explain the gender or age patterns, which survive the trust control — only the partisan gap is a trust story.</p>
+<p>Partisanship and gender are not the only independent axes. <strong>Race is a third, and it runs one way across the board.</strong> Net of party, gender, age, income, and the rest, Black students — and, on the teacher comparison, Hispanic students too — are more likely to say AI helps them learn, rate AI more favorably against a human teacher (Black +0.29, Hispanic +0.24 on the five-point scale), and report more cheating-adjacent use (Black +0.14, Hispanic +0.12). The favorable and unfavorable sides move together: this is not a group that is more virtuous or more suspect about AI, but one that is simply <em>more engaged</em> with it and says so. It is the same pattern the flagship finds for adoption and intensity and the affective report finds for excitement — Black students especially are among the most AI-embracing on campus once their partisan and economic composition is held constant.</p>
+<p>There is a further twist that complicates the self-serving reading. The gap between how much students say <em>they</em> use AI and how much they believe their <em>peers</em> do is not spread evenly: it is <strong>smallest among Strong Republicans</strong> — who use AI heavily and say so — and <strong>largest among Lean Democrats and Democrats</strong>, who use it less but still picture their peers as all-in. Learning follows the same pattern: Republicans think their peers benefit from AI at rates close to how they rate themselves, whereas Democrats reserve the credit for themselves and are far more likely to say peers learn <em>less</em>. The self–peer asymmetry at the heart of this report is, in other words, disproportionately a left-of-center pattern.</p>
+<p>For all this, students have not concluded that the machine beats the teacher. Among currently-enrolled AI users, <strong>only 29% rate AI as better than a human teacher for learning the material, 32% call it about the same, and 39% say it is worse</strong> (Table 4). The self-image that recurs across this report — <em>I use AI in moderation, I learn from it, and I still value a real teacher, but my classmates overuse it and don't even learn</em> — is real and consistent, but it is voiced most sharply by the students who use AI least and trust it least. Because it is self-reported, we cannot say how much of it is true; what we can say is who tells it.</p>
+<blockquote><strong>Comparative context.</strong> That students keep a human teacher above AI is consistent with the Pew finding that students view AI as far more acceptable for research (54%) than for writing essays (18%) — an assistant, not a replacement.<sup class="fnref" id="fnref-pew"><a href="#fn-pew">3</a></sup></blockquote>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>Ask students about their own AI use and they describe a disciplined study aid; ask them about their classmates and they describe an epidemic of dependence and cheating. The same students who say AI helps them learn think it makes others learn less; the same students who dab at it for a few tasks believe their peers do nearly everything with it; and the same students who admit their own corner-cutting impute heavier corner-cutting to everyone else. The one place the story holds together is prevalence: students know roughly how many of their peers use AI. Everything past that — how much, how well, how honestly — bends in a self-serving direction.</p>
+<p>Because these are self-reports, the asymmetry cannot tell us who is right. It may be that students flatter themselves, that they overestimate their peers, or both. But the gap itself is the finding, and it carries a practical warning drawn from the same research on alcohol and drugs that first named pluralistic ignorance: when students believe "everyone else is doing all their work with AI," that belief can become permission. Institutions worried about AI and integrity may be fighting not only what students do, but what students wrongly believe everyone else is doing. What almost none of them are doing is settling the question in writing: Report 3 finds the classroom rules for AI largely absent, leaving the belief unchallenged.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data.</strong> CHIP50 Wave 38.6, fielded June 21–July 13, 2026; total unweighted N = 23,462. Restricted to currently-enrolled students (<code>school_recency = "currently enrolled"</code>).</p>
+<p><strong>Bases.</strong> <code>ai_learn</code>, <code>ai_vs_tutor</code>, <code>ai_study_effort</code> (asked of currently-enrolled AI users): n ≈ 1,356, 1,429, and 1,429. The three items sit behind the same route; <code>ai_learn</code> is 73 cases (about 5%) short of the other two purely through item-level non-response, not a narrower filter. No reweighting was applied for it, and the shortfall is spread across response categories rather than concentrated in one. <code>ai_learn_others</code>, <code>ai_course_extent</code>, <code>ai_course_extent2</code>, <code>ai_banned</code>, <code>ai_course_other</code> (asked of all currently-enrolled): n ≈ 2,206–2,285.</p>
+<p><strong>Weighting.</strong> Survey-weighted to national demographic targets; unweighted N is a reliability cue only. Not a probability sample of U.S. students.</p>
+<p><strong>Measures (verified coding).</strong> <code>ai_learn</code> — "Do AI tools help you learn coursework material?" <strong>3 = learn more · 2 = about the same · 1 = learn less</strong> (verified against the fielded questionnaire; the stored order is the reverse of an earlier data-dictionary draft). <code>ai_learn_others</code> — same about peers, 1 = others learn more … 3 = others learn less, 5 = not sure. <code>ai_study_effort</code> — "How has AI changed the amount of time you spend studying/learning the material?" 1 = much more time … 5 = much less time. <code>ai_course_extent</code> / <code>ai_course_extent2</code> — self / peer share of schoolwork done with AI, <strong>1 = None … 5 = All</strong>. <code>ai_course_other</code> — estimated % of peers who use AI (0–100 slider). <code>ai_banned</code> — "How often have you used AI in ways that could be considered cheating?" 1 = Never … 4 = Frequently. <code>ai_vs_tutor</code> — AI vs. a human teacher, <strong>5 = AI much better … 1 = AI much worse</strong>. Partisanship: 7-point <code>party7</code>.</p>
+<p><strong>Self-report caveat.</strong> All estimates are self-reported and may reflect social-desirability bias; the self–peer gaps in particular cannot be decomposed into "students underreport their own use" vs. "students overestimate peers'."</p>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<h3 id="table-1-ai-and-learning-self-vs-peers-currently-enrolled-wei">Table 1. AI and learning — self vs. peers (currently-enrolled; weighted %)</h3>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 176" width="100%" height="176" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Share of schoolwork done with AI — own use vs. perceived peer use on the None→All scale, annotated with the peer-prevalence estimate (62% believed vs. 65% actual). Base: currently-enrolled students; unweighted n ≈ 2,206–2,285. CHIP50 Wave 38.6, fielded June 21–July 13, 2026. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="146" class="cg"/>
+<text x="250.0" y="162" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="146" class="cg"/>
+<text x="374.0" y="162" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="146" class="cg"/>
+<text x="498.0" y="162" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="146" class="cg"/>
+<text x="622.0" y="162" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="146" class="cg"/>
+<text x="746.0" y="162" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="146" class="cg"/>
+<text x="870.0" y="162" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Learn more</text>
+<rect x="361.0" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="376.0" y="15" class="ct clg">About the same</text>
+<rect x="501.6" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="516.6" y="15" class="ct clg">Learn less</text>
+<text x="240" y="55.5" class="ct clab">Yourself (ai_learn, AI users)</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — Learn more: 41</title><rect x="250.0" y="30" width="508.4" height="13" rx="3" class="cs1"/></g>
+<text x="764.4" y="40" class="ct cval">41</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — About the same: 45</title><rect x="250.0" y="45" width="558.0" height="13" rx="3" class="cs2"/></g>
+<text x="814.0" y="55" class="ct cval">45</text>
+<g class="cb"><title>Yourself (ai_learn, AI users) — Learn less: 14</title><rect x="250.0" y="60" width="173.6" height="13" rx="3" class="cs3"/></g>
+<text x="429.6" y="70" class="ct cval">14</text>
+<text x="240" y="111.5" class="ct clab">Other students (ai_learn_others, all)</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — Learn more: 21</title><rect x="250.0" y="86" width="260.4" height="13" rx="3" class="cs1"/></g>
+<text x="516.4" y="96" class="ct cval">21</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — About the same: 26</title><rect x="250.0" y="101" width="322.4" height="13" rx="3" class="cs2"/></g>
+<text x="578.4" y="111" class="ct cval">26</text>
+<g class="cb"><title>Other students (ai_learn_others, all) — Learn less: 35</title><rect x="250.0" y="116" width="434.0" height="13" rx="3" class="cs3"/></g>
+<text x="690.0" y="126" class="ct cval">35</text>
+</svg><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th></th><th>Learn more</th><th>About the same</th><th>Learn less</th><th>(Not sure)</th></tr></thead><tbody><tr><td><strong>Yourself</strong> (<code>ai_learn</code>, AI users)</td><td>41</td><td>45</td><td>14</td><td>—</td></tr><tr><td><strong>Other students</strong> (<code>ai_learn_others</code>, all)</td><td>21</td><td>26</td><td>35</td><td>15</td></tr></tbody></table></div></details></figure>
+<p><em>Self base ≈ 1,356 AI users; peer base ≈ 2,206 currently-enrolled students. "Other students" also includes 4% "they don't use AI." Weighted %.</em></p>
+<h3 id="table-2-how-much-schoolwork-is-done-with-ai-self-vs-perceive">Table 2. How much schoolwork is done with AI — self vs. perceived peers (currently-enrolled; weighted %)</h3>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 310" width="100%" height="310" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="chart">
+<line x1="250.0" y1="24" x2="250.0" y2="280" class="cg"/>
+<text x="250.0" y="296" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="280" class="cg"/>
+<text x="374.0" y="296" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="280" class="cg"/>
+<text x="498.0" y="296" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="280" class="cg"/>
+<text x="622.0" y="296" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="280" class="cg"/>
+<text x="746.0" y="296" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="280" class="cg"/>
+<text x="870.0" y="296" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Yourself (ai_course_extent)</text>
+<rect x="486.8" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="501.8" y="15" class="ct clg">Other students (ai_course_extent2)</text>
+<text x="240" y="48.0" class="ct clab">None</text>
+<g class="cb"><title>None — Yourself (ai_course_extent): 24</title><rect x="250.0" y="30" width="297.6" height="13" rx="3" class="cs1"/></g>
+<text x="553.6" y="40" class="ct cval">24</text>
+<g class="cb"><title>None — Other students (ai_course_extent2): 5</title><rect x="250.0" y="45" width="62.0" height="13" rx="3" class="cs2"/></g>
+<text x="318.0" y="55" class="ct cval">5</text>
+<text x="240" y="89.0" class="ct clab">Not much</text>
+<g class="cb"><title>Not much — Yourself (ai_course_extent): 24</title><rect x="250.0" y="71" width="297.6" height="13" rx="3" class="cs1"/></g>
+<text x="553.6" y="81" class="ct cval">24</text>
+<g class="cb"><title>Not much — Other students (ai_course_extent2): 8</title><rect x="250.0" y="86" width="99.2" height="13" rx="3" class="cs2"/></g>
+<text x="355.2" y="96" class="ct cval">8</text>
+<text x="240" y="130.0" class="ct clab">Some</text>
+<g class="cb"><title>Some — Yourself (ai_course_extent): 34</title><rect x="250.0" y="112" width="421.6" height="13" rx="3" class="cs1"/></g>
+<text x="677.6" y="122" class="ct cval">34</text>
+<g class="cb"><title>Some — Other students (ai_course_extent2): 42</title><rect x="250.0" y="127" width="520.8" height="13" rx="3" class="cs2"/></g>
+<text x="776.8" y="137" class="ct cval">42</text>
+<text x="240" y="171.0" class="ct clab">Most</text>
+<g class="cb"><title>Most — Yourself (ai_course_extent): 14</title><rect x="250.0" y="153" width="173.6" height="13" rx="3" class="cs1"/></g>
+<text x="429.6" y="163" class="ct cval">14</text>
+<g class="cb"><title>Most — Other students (ai_course_extent2): 37</title><rect x="250.0" y="168" width="458.8" height="13" rx="3" class="cs2"/></g>
+<text x="714.8" y="178" class="ct cval">37</text>
+<text x="240" y="212.0" class="ct clab">All</text>
+<g class="cb"><title>All — Yourself (ai_course_extent): 4</title><rect x="250.0" y="194" width="49.6" height="13" rx="3" class="cs1"/></g>
+<text x="305.6" y="204" class="ct cval">4</text>
+<g class="cb"><title>All — Other students (ai_course_extent2): 7</title><rect x="250.0" y="209" width="86.8" height="13" rx="3" class="cs2"/></g>
+<text x="342.8" y="219" class="ct cval">7</text>
+<text x="240" y="253.0" class="ct clab">Most or all</text>
+<g class="cb"><title>Most or all — Yourself (ai_course_extent): 18</title><rect x="250.0" y="235" width="223.2" height="13" rx="3" class="cs1"/></g>
+<text x="479.2" y="245" class="ct cval">18</text>
+<g class="cb"><title>Most or all — Other students (ai_course_extent2): 44</title><rect x="250.0" y="250" width="545.6" height="13" rx="3" class="cs2"/></g>
+<text x="801.6" y="260" class="ct cval">44</text>
+</svg><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>Yourself (<code>ai_course_extent</code>)</th><th>Other students (<code>ai_course_extent2</code>)</th></tr></thead><tbody><tr><td>None</td><td>24</td><td>5</td></tr><tr><td>Not much</td><td>24</td><td>8</td></tr><tr><td>Some</td><td>34</td><td>42</td></tr><tr><td>Most</td><td>14</td><td>37</td></tr><tr><td>All</td><td>4</td><td>7</td></tr><tr><td><strong>Most or all</strong></td><td><strong>18</strong></td><td><strong>44</strong></td></tr></tbody></table></div></details></figure>
+<p><em>Base ≈ 2,211 (self) / 2,285 (peers) currently-enrolled students. Scale verified 1 = None … 5 = All. Weighted %.</em></p>
+<h3 id="table-3-prevalence-estimate-and-own-conduct-currently-enroll">Table 3. Prevalence estimate and own conduct (currently-enrolled)</h3>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="chart">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">80</text>
+<text x="240" y="24.5" class="ct clab">Estimated share of peers who use AI (ai_course_other, mean of 0–100 slider)</text>
+<g class="cb"><title>Estimated share of peers who use AI (ai_course_other, mean of 0–100 slider): 62%</title><rect x="250.0" y="12" width="480.5" height="17" rx="3" class="cs1"/></g>
+<text x="736.5" y="26" class="ct cval">62%</text>
+<text x="240" y="54.5" class="ct clab">Actual share who report using AI (ai_course)</text>
+<g class="cb"><title>Actual share who report using AI (ai_course): ~65%</title><rect x="250.0" y="42" width="503.8" height="17" rx="3" class="cs1"/></g>
+<text x="759.8" y="56" class="ct cval">~65%</text>
+<text x="240" y="84.5" class="ct clab">Used AI in a way that could be cheating — at least once (ai_banned)</text>
+<g class="cb"><title>Used AI in a way that could be cheating — at least once (ai_banned): 46%</title><rect x="250.0" y="72" width="356.5" height="17" rx="3" class="cs1"/></g>
+<text x="612.5" y="86" class="ct cval">46%</text>
+<text x="240" y="114.5" class="ct clab">— several times or frequently</text>
+<g class="cb"><title>— several times or frequently: 21%</title><rect x="250.0" y="102" width="162.8" height="17" rx="3" class="cs1"/></g>
+<text x="418.8" y="116" class="ct cval">21%</text>
+<text x="240" y="144.5" class="ct clab">— never</text>
+<g class="cb"><title>— never: 54%</title><rect x="250.0" y="132" width="418.5" height="17" rx="3" class="cs1"/></g>
+<text x="674.5" y="146" class="ct cval">54%</text>
+</svg><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Measure</th><th>Value</th></tr></thead><tbody><tr><td>Estimated share of peers who use AI (<code>ai_course_other</code>, mean of 0–100 slider)</td><td>62%</td></tr><tr><td>Actual share who report using AI (<code>ai_course</code>)</td><td>~65%</td></tr><tr><td>Used AI in a way that could be cheating — at least once (<code>ai_banned</code>)</td><td>46%</td></tr><tr><td>— several times or frequently</td><td>21%</td></tr><tr><td>— never</td><td>54%</td></tr></tbody></table></div></details></figure>
+<p><em>Base ≈ 2,209–2,214 currently-enrolled students. Weighted.</em></p>
+<h3 id="table-4-ai-vs-a-human-teacher-currently-enrolled-ai-users-we">Table 4. AI vs. a human teacher (currently-enrolled AI users; weighted %)</h3>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 136" width="100%" height="136" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="chart">
+<line x1="250.0" y1="6" x2="250.0" y2="106" class="cg"/>
+<text x="250.0" y="122" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="106" class="cg"/>
+<text x="405.0" y="122" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="106" class="cg"/>
+<text x="560.0" y="122" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="106" class="cg"/>
+<text x="715.0" y="122" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="106" class="cg"/>
+<text x="870.0" y="122" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Better or much better than a human teacher</text>
+<g class="cb"><title>Better or much better than a human teacher: 29</title><rect x="250.0" y="12" width="179.8" height="17" rx="3" class="cs1"/></g>
+<text x="435.8" y="26" class="ct cval">29</text>
+<text x="240" y="54.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 32</title><rect x="250.0" y="42" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="56" class="ct cval">32</text>
+<text x="240" y="84.5" class="ct clab">Worse or much worse</text>
+<g class="cb"><title>Worse or much worse: 39</title><rect x="250.0" y="72" width="241.8" height="17" rx="3" class="cs1"/></g>
+<text x="497.8" y="86" class="ct cval">39</text>
+</svg><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>AI is…</th><th>%</th></tr></thead><tbody><tr><td>Better or much better than a human teacher</td><td>29</td></tr><tr><td>About the same</td><td>32</td></tr><tr><td>Worse or much worse</td><td>39</td></tr></tbody></table></div></details></figure>
+<p><em>Base ≈ 1,429 currently-enrolled AI users. Scale 5 = AI much better … 1 = AI much worse. Weighted %.</em></p>
+<h3 id="table-5-what-predicts-students-ai-attitudes-currently-enroll">Table 5. What predicts students' AI attitudes (currently-enrolled; survey-weighted regressions)</h3>
+<div class="tw"><table><thead><tr><th>Outcome</th><th>Partisanship</th><th>Gender</th><th>Age</th><th>Race</th><th>Other</th></tr></thead><tbody><tr><td>Cheating-adjacent use (<code>ai_banned</code>)</td><td>(Strong) Republicans <strong>higher</strong> ✓</td><td>Men <strong>higher</strong> ✓</td><td>Non-monotonic: 21–30 slightly higher ✓ (+0.11), 51+ <strong>markedly lower</strong> ✓ (−0.26); 31–50 n.s.</td><td>Black, Hispanic <strong>higher</strong> ✓</td><td>Lower education higher</td></tr><tr><td>Learns more (<code>ai_learn</code>)</td><td>Republicans <strong>more positive</strong> ✓</td><td>n.s.</td><td>Older <strong>more positive</strong> ✓ (31–40 +0.25, 51+ <strong>+0.43</strong>; 21–30 and 41–50 n.s.)</td><td>Black <strong>higher</strong> ✓</td><td>Grad, upper-income more positive</td></tr><tr><td>AI vs. teacher (<code>ai_vs_tutor</code>)</td><td>Republicans <strong>rate AI higher</strong> ✓</td><td>Men <strong>rate AI higher</strong> ✓</td><td>Older <strong>rate AI higher</strong> ✓ — a clean ladder (21–30 +0.29, 31–40 +0.45, 41–50 <strong>+0.67</strong>, 51+ +0.54)</td><td>Black, Hispanic <strong>rate AI higher</strong> ✓</td><td>Grad rate AI <em>worse</em>; South rates AI higher ✓</td></tr></tbody></table></div>
+<p><em>OLS, survey-weighted, on party7 + gender + education + income + urban/rural + Census region + age band + race, among currently-enrolled students. Reference: Strong Republican, Female, College degree, Rural, Midwest, age 18–20, White. Age uses the survey's native <code>age_cat_8</code> bins — 18–20 / 21–30 / 31–40 / 41–50 — with the three oldest bins collapsed into 51+ (<code>age_stu5</code>), because only 14 currently-enrolled respondents fall above age 60. n = 2,202 (<code>ai_banned</code>, all enrolled), 1,349 (<code>ai_learn</code>, users), 1,422 (<code>ai_vs_tutor</code>, users). ✓ = significant at p &lt;.05. Adding trust in AI companies (<code>pol_trust_ai</code>) absorbs almost the entire partisan effect — party terms become non-significant on <code>ai_learn</code> and largely so on <code>ai_vs_tutor</code>, while trust becomes the strongest single predictor (see the report-2 trust/partisan-gap addendum). The gender and age effects are not trust-mediated; the race effects largely survive the trust control too, though the Black advantage on the <em>learning</em> item is partly absorbed by it. Urbanicity is null across all three outcomes; Census region is null on <code>ai_banned</code> and <code>ai_learn</code>, with one exception on <code>ai_vs_tutor</code>, where Southern students rate AI higher than Midwestern students (+0.19, p =.018).</em></p>
+<h3 id="table-6-how-ai-changed-study-time-currently-enrolled-ai-user">Table 6. How AI changed study time (currently-enrolled AI users; weighted %)</h3>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="chart">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="226" class="cg"/>
+<text x="405.0" y="242" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="226" class="cg"/>
+<text x="560.0" y="242" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="226" class="cg"/>
+<text x="715.0" y="242" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more time</text>
+<g class="cb"><title>Much more time: 12</title><rect x="250.0" y="12" width="74.4" height="17" rx="3" class="cs1"/></g>
+<text x="330.4" y="26" class="ct cval">12</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more time</text>
+<g class="cb"><title>Somewhat more time: 21</title><rect x="250.0" y="42" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="56" class="ct cval">21</text>
+<text x="240" y="84.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 34</title><rect x="250.0" y="72" width="210.8" height="17" rx="3" class="cs1"/></g>
+<text x="466.8" y="86" class="ct cval">34</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less time</text>
+<g class="cb"><title>Somewhat less time: 25</title><rect x="250.0" y="102" width="155.0" height="17" rx="3" class="cs1"/></g>
+<text x="411.0" y="116" class="ct cval">25</text>
+<text x="240" y="144.5" class="ct clab">Much less time</text>
+<g class="cb"><title>Much less time: 8</title><rect x="250.0" y="132" width="49.6" height="17" rx="3" class="cs1"/></g>
+<text x="305.6" y="146" class="ct cval">8</text>
+<text x="240" y="174.5" class="ct clab">Net: more time</text>
+<g class="cb"><title>Net: more time: 33</title><rect x="250.0" y="162" width="204.6" height="17" rx="3" class="cs1"/></g>
+<text x="460.6" y="176" class="ct cval">33</text>
+<text x="240" y="204.5" class="ct clab">Net: less time</text>
+<g class="cb"><title>Net: less time: 32</title><rect x="250.0" y="192" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="206" class="ct cval">32</text>
+</svg><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>Weighted %</th></tr></thead><tbody><tr><td>Much more time</td><td>12</td></tr><tr><td>Somewhat more time</td><td>21</td></tr><tr><td>About the same</td><td>34</td></tr><tr><td>Somewhat less time</td><td>25</td></tr><tr><td>Much less time</td><td>8</td></tr><tr><td><strong>Net: more time</strong></td><td><strong>33</strong></td></tr><tr><td><strong>Net: less time</strong></td><td><strong>32</strong></td></tr></tbody></table></div></details></figure>
+<p><em>Base ≈ 1,429 currently-enrolled AI users (<code>ai_study_effort</code>, 1 = much more … 5 = much less). Rows may not sum to exactly 100 due to rounding. Nets are computed on unrounded percentages and will not always equal the sum of the two rounded rows above them: "less time" is 24.85 + 7.63 = 32.5, displayed 32, even though the displayed components read 25 and 8. Weighted %.</em></p>
+<h3 id="demographic-robustness-ses-urbanicity-region">Demographic robustness (SES, urbanicity, region)</h3>
+<p>The <strong>race</strong> findings are integrated in the body ("Who Leans In") and Table 5 (Black +0.11 on learning, +0.29 vs. teacher; Hispanic +0.24 vs. teacher; Black +0.14 / Hispanic +0.12 on cheating-adjacent use). On the other dimensions: lower education predicts more cheating-adjacent use; income effects are scattered. <strong>Urbanicity and Census region are null</strong> across all three outcomes — and the null is a narrow range, not an absence of analysis: student AI adoption runs from 59.1% in the Northeast to 67.9% in the West, with no region significantly different from another (model F p =.054).</p>
+
+
+
+<h2 id="appendix-c-question-wording-and-response-codes">Appendix C — Question wording and response codes</h2>
+<p><em>Source: the Wave 38.6 Qualtrics instrument provided by the CHIP50 / COVID States team (the Wave 38.6 codebook, 2026-07-20), which is the authoritative record of item wording and stored numeric codes for this wave. Stems below are the codebook's condensed forms, not screen-verbatim text; response options and codes are verbatim. Where an item's stored code order differs from its on-screen display order, the stored codes are authoritative and are the ones used throughout this report.</em></p>
+<ul><li><strong><code>school_recency</code></strong> — "When did you last attend school or university?" (1 = Currently enrolled … 5 = More than 10 years ago). Code 1 defines the currently-enrolled base.</li><li><strong><code>ai_learn</code></strong> — "Do AI tools help you learn coursework material?" (3 = Learn more; 2 = About the same; 1 = Learn less; 0 = Don't use AI for coursework). <strong>Note the descending code order:</strong> the stored codes run high-to-low, the reverse of an earlier data-dictionary draft.</li><li><strong><code>ai_learn_others</code></strong> — "Do AI tools help <em>other students</em> learn?" (1 = Learn more; 2 = About the same; 3 = Learn less; 4 = Don't use AI; 5 = Not sure).</li><li><strong><code>ai_course_extent</code></strong> — "How much of <em>your</em> schoolwork do you do with AI?" (5 = All; 4 = Most; 3 = Some; 2 = Not much; 1 = None).</li><li><strong><code>ai_course_extent2</code></strong> — the same question asked about <em>other students</em> (same scale).</li><li><strong><code>ai_course_other_1</code></strong> — "What percentage of other students use AI?" (0–100 numeric slider).</li><li><strong><code>ai_study_effort</code></strong> — "How has AI changed the amount of time you spend studying?" (1 = Much more; 2 = Somewhat more; 3 = About the same; 4 = Somewhat less; 5 = Much less).</li><li><strong><code>ai_banned</code></strong> — "How often have you used AI in ways that could be considered cheating?" (1 = Never; 2 = Once or twice; 3 = Several times; 4 = Frequently).</li><li><strong><code>ai_vs_tutor</code></strong> — AI compared with a human teacher (5 = Much better; 4 = Better; 3 = About the same; 2 = Worse; 1 = Much worse).</li><li><strong><code>pol_trust_ai</code></strong> — trust that AI companies "do what is right" (4 = A lot; 3 = Some; 2 = Not too much; 1 = Not at all), from the institutional-trust battery.</li><li><strong><code>party7</code></strong> — derived 7-point party identification (1 = Strong Republican … 7 = Strong Democrat).</li></ul>
+<section class="fnotes"><h2>Notes and sources</h2><ol><li id="fn-uchicago">A. Kale et al., University of Chicago, study of 338 undergraduates presented April 2026 (Barcelona), reported in The Hechinger Report, "Sex, drugs and … AI?: Students think everyone else is doing it more than they are." 60% of students admitted using AI themselves while 90% believed their peers used it — a 30-point gap the authors attribute to some mix of under-reporting one's own use and over-estimating peers'. <a href="https://hechingerreport.org/proof-points-ai-use-college-campuses/" target="_blank" rel="noopener">https://hechingerreport.org/proof-points-ai-use-college-campuses/</a> <a href="#fnref-uchicago" aria-label="back to text">↩</a></li><li id="fn-kqed">KQED MindShift, "Is Everyone Using AI? How False Perceptions Can Become Self-fulfilling," on pluralistic ignorance and AI use on campus. <a href="https://www.kqed.org/mindshift/66379/is-everyone-using-ai-how-false-perceptions-can-become-self-fulfilling" target="_blank" rel="noopener">https://www.kqed.org/mindshift/66379/is-everyone-using-ai-how-false-perceptions-can-become-self-fulfilling</a> <a href="#fnref-kqed" aria-label="back to text">↩</a></li><li id="fn-pew">Pew Research Center, "About a quarter of U.S. teens have used ChatGPT for schoolwork, double the share in 2023" (Jan. 15, 2025). Teens call AI use more acceptable for research (54%) than essays (18%). <a href="https://www.pewresearch.org/short-reads/2025/01/15/about-a-quarter-of-us-teens-have-used-chatgpt-for-schoolwork-double-the-share-in-2023/" target="_blank" rel="noopener">https://www.pewresearch.org/short-reads/2025/01/15/about-a-quarter-of-us-teens-have-used-chatgpt-for-schoolwork-double-the-share-in-2023/</a> <a href="#fnref-pew" aria-label="back to text">↩</a></li></ol></section>
+    <div class="foot">
+      <div class="nav"><a href="01-ai-goes-to-school.html"><span>Previous</span>AI Goes to School: How Students Actually Use It</a><a href="03-the-rules-vacuum.html" style="text-align:right"><span>Next</span>The Rules Vacuum: AI Adoption Outran the Rulebook</a></div>
+      <p>AI@School · CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>
