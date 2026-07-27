@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The AI Training Gap — and Who Should Pay to Close It — AI@Work</title>
+<meta name="description" content="Most workers get no AI training from their employer, and the training that exists flows to the already-advantaged. Workers know it — 43% say they need AI training — and they are cl"/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#2a78d6; --acct:#1c5cab; --soft:#eaf2fd;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@Work Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#most-workers-get-no-ai-training">Most workers get no AI training</a><a href="#training-flows-to-the-already-advantaged">Training flows to the already-advantaged</a><a href="#workers-want-more-especially-those-who-use-ai-most">Workers want more — especially those who use AI most</a><a href="#workers-know-they-need-it-and-whats-stopping-them">Workers know they need it — and what's stopping them</a><a href="#who-should-pay-government-employers-not-workers">Who should pay: government, employers — not workers</a><a href="#a-bipartisan-mandate-for-public-action">A bipartisan mandate for public action</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@Work</div><h1>The AI Training Gap — and Who Should Pay to Close It</h1><p class="dek"><em>Most workers get no AI training from their employer, and the training that exists flows to the already-advantaged. Workers know it — 43% say they need AI training — and they are clear about the obstacle: time, not willingness. Asked who should pay to reskill workers at risk from AI, Americans point to government and employers — and, notably, to the tech companies building AI — far more than to workers themselves, and they back government retraining programs across party lines.</em></p><p class="srcline">Source: AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement, fielded June 21–July 13, 2026 (interim extract; data collection ongoing). Employer-training and worker-need items were asked of employed respondents (unweighted n ≈ 10,950–10,993), with the retraining logistics follow-ups on smaller conditional bases (n ≈ 4,700–5,800); the who-should-pay and AI-policy items were asked of all adults (unweighted n ≈ 23,462). All figures are weighted estimates, weighted to U.S. Census population targets, and are self-reports — what respondents say about their own expectations and experience, not audited behaviour.</p><p class="pos"><em>Series position: Report 7 of the AI@Work series (see the series index) — the worker-side policy response. Training flows along the socioeconomic divide (to the already-advantaged), and retraining policy is a partisan consensus with pure independents the lone holdout — shown on the 7-point party scale.</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on the AI@Work survey (CHIP50 Wave 38.6), a survey of <strong>23,462 U.S. adults</strong> (weighted n = 23,485) fielded June 21–July 13, 2026. All percentages are <strong>weighted to U.S. Census population targets</strong> and are population-representative; unweighted respondent counts are reported as a reliability guide only.</p>
+<p><strong>These are interim estimates.</strong> Wave 38.6 launched June 21, 2026 and data collection is ongoing; the figures in this report reflect responses received through July 13, 2026 and will be revised in a later release.</p>
+<p>The report uses <strong>several bases.</strong> Whether the employer provides AI training (<code>ai_train</code>), how useful more training would be (<code>ai_train_more</code>), and whether the worker feels they need AI training (<code>retrain_need</code>) were asked of employed respondents (unweighted n ≈ 10,950–10,993). The retraining-logistics follow-ups — knowing where to get training (<code>retrain_know</code>), time willing to invest (<code>retrain_time</code>), preferred mode (<code>retrain_mode</code>), and biggest barrier (<code>retrain_barrier</code>) — were asked on smaller conditional bases (unweighted n ≈ 4,700–5,800). The items on who should pay to reskill at-risk workers (<code>ai_upskill_pay</code>) and on AI-policy support (<code>policy_retrain</code>, <code>policy_lilas</code>) were asked of all adults (unweighted n ≈ 23,462), as questions of public-policy preference. Each figure states its base. The <code>ai_train_more</code> scale (1 = extremely useful … 4 = not at all useful) was confirmed against the data — usefulness rises steeply with a worker's own AI use — and the two policy scales, which run in <em>opposite</em> numeric directions, were each direction-checked against party (see Methods).</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>Most workers get no AI training.</strong> 53% of employed Americans say their employer provides no AI training at all; just 19% report formal training (workshops or courses) and 25% informal tips or guides.</li><li><strong>Training flows to the already-advantaged.</strong> Only 33% of workers with a graduate degree get no training, versus 59–62% of those with a high-school education or less; data and analytical workers, and higher earners, are trained far more than manual and lower-income workers.</li><li><strong>Demand outstrips supply.</strong> 55% of workers say more employer AI training would be useful — and that demand is highest among the workers who already use AI the most.</li><li><strong>Workers say they need it.</strong> 43% of employed Americans say they need AI training for their work (16% "definitely"); against 53% who get none from their employer, that is a clear unmet demand.</li><li><strong>The obstacle is time, not willingness.</strong> Among workers who see a need, the top barrier is time away from work (36%), ahead of cost (24%) and not knowing what to learn (23%); 86% would invest at least a day, and most prefer online or hybrid formats.</li><li><strong>Government and employers should pay — not workers.</strong> Asked who should pay to reskill workers at risk from AI, 55% of Americans say government and 53% say employers; only 20% say workers themselves.</li><li><strong>A "polluter pays" streak for AI.</strong> 42% say the technology companies that build AI should help pay to retrain the workers it displaces.</li><li><strong>Retraining programs draw bipartisan support — with one holdout.</strong> About 60% of Americans support government job-retraining programs (65% of those who give an opinion — the analysis tool drops this item's "not sure" responses; just 13% oppose) and 53% back portable "Lifelong Learning Accounts," with solid majorities across <em>every</em> partisan group, left and right. The lone exception is pure independents (49% and 37%) — less opposed than checked out.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>As AI reshapes what jobs require, reskilling has become the policy watchword — the hope that workers can be trained to work alongside the technology rather than be displaced by it. But that hope runs into a basic question: is anyone actually doing the training, and who is supposed to pay for it? The evidence from employers is not encouraging. A June 2025 BCG survey of more than 10,000 employees across eleven countries found only about a third say they have been properly trained on AI, even as regular use climbs — a persistent gap between adoption and preparation (<a href="https://www.bcg.com/publications/2025/ai-at-work-momentum-builds-but-gaps-remain" target="_blank" rel="noopener">BCG</a>).</p>
+<p>Wave 38.6 shows the same gap in the U.S. workforce and adds two things: who is being left out of what training exists, and what the public thinks should be done about it. The findings are a study in mismatch. Employer AI training is scarce and, where it exists, concentrated among the workers who are already the most educated, highest-paid, and most AI-fluent — the same divide that structures AI use itself. Meanwhile, workers want more training, and the public overwhelmingly locates the responsibility to provide it with employers and government, and even with the technology companies building AI, rather than with workers themselves.</p>
+<hr/>
+<h2 id="most-workers-get-no-ai-training">Most workers get no AI training</h2>
+<p class="lede"><strong>A majority of workers say their employer offers no AI training of any kind.</strong></p>
+<p>Asked what AI training or resources their employer has provided, 53% of workers say <strong>none</strong> — no formal or informal training at all. Just 19% report formal training such as workshops, courses, or seminars, and 25% report informal training such as email guides, tips, or optional links; another 10% are unsure. (Workers could select more than one, so the formal and informal shares overlap.) The picture is one of widespread AI use running well ahead of any employer effort to build the skills to use it — the adoption-without-preparation gap seen in international surveys, visible here in a large U.S. sample.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. Employer-provided AI training (select-all: formal / informal / none / not sure). Base: employed respondents; unweighted n ≈ 10,993. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">No, they have not provided any training</text>
+<g class="cb"><title>No, they have not provided any training: 53</title><rect x="250.0" y="12" width="328.6" height="17" rx="3" class="cs1"/></g>
+<text x="584.6" y="26" class="ct cval">53</text>
+<text x="240" y="54.5" class="ct clab">Yes, informal training (email guides, tips, optional links)</text>
+<g class="cb"><title>Yes, informal training (email guides, tips, optional links): 25</title><rect x="250.0" y="42" width="155.0" height="17" rx="3" class="cs1"/></g>
+<text x="411.0" y="56" class="ct cval">25</text>
+<text x="240" y="84.5" class="ct clab">Yes, formal training (workshops, courses, seminars)</text>
+<g class="cb"><title>Yes, formal training (workshops, courses, seminars): 19</title><rect x="250.0" y="72" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="86" class="ct cval">19</text>
+<text x="240" y="114.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 10</title><rect x="250.0" y="102" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="116" class="ct cval">10</text>
+</svg><figcaption><em>Figure 1. Employer-provided AI training (select-all: formal / informal / none / not sure). Base: employed respondents; unweighted n ≈ 10,993. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>No, they have not provided any training</td><td>53</td></tr><tr><td>Yes, informal training (email guides, tips, optional links)</td><td>25</td></tr><tr><td>Yes, formal training (workshops, courses, seminars)</td><td>19</td></tr><tr><td>Not sure</td><td>10</td></tr></tbody></table></div></details></figure>
+<blockquote><strong>Comparative context.</strong> Wave 38.6's 19% "formal training" and 47% "any training" bracket BCG's finding that only about one-third of employees globally say they have been properly trained, and both point to the same adoption-outpaces-training gap (<a href="https://www.bcg.com/publications/2025/ai-at-work-momentum-builds-but-gaps-remain" target="_blank" rel="noopener">BCG</a>).</blockquote>
+<hr/>
+<h2 id="training-flows-to-the-already-advantaged">Training flows to the already-advantaged</h2>
+<p class="lede"><strong>The scarce AI training that exists is concentrated among the most educated, highest-paid, and most AI-fluent workers.</strong></p>
+<p>Employer AI training does not reach the workforce evenly — it mirrors the AI-adoption divide. Only 33% of workers with a graduate degree report no training, versus 59% of high-school graduates and 60% of those with less than a high-school education. The same tilt runs through occupation and income: workers in data or analytical jobs are far more likely to be trained (36% get none) than those in manual or physical labor (61% get none), and only about 35% of workers in the highest income brackets get no training versus roughly 62% in lower-middle brackets. Training also tracks AI use directly — three-quarters (75%) of workers who never use AI on the job get no training, versus 19% of daily users.</p>
+<p>The result is a reskilling system, such as it is, that flows toward the workers who need it least and away from those who might need it most. The educated, higher-income, white-collar workers who already use AI most are also the ones most likely to be trained further, while the less-educated, lower-paid, and manual workers receive the least support. Whatever one thinks the goal of reskilling should be, employer training as it currently operates reinforces the existing AI divide rather than closing it.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 316" width="100%" height="316" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Share of workers receiving no employer AI training, by education, job type, and income. Base: employed respondents; unweighted n ≈ 10,993. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="286" class="cg"/>
+<text x="250.0" y="302" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="286" class="cg"/>
+<text x="405.0" y="302" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="286" class="cg"/>
+<text x="560.0" y="302" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="286" class="cg"/>
+<text x="715.0" y="302" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="286" class="cg"/>
+<text x="870.0" y="302" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Education</text>
+<text x="240" y="54.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree: 33</title><rect x="250.0" y="42" width="204.6" height="17" rx="3" class="cs1"/></g>
+<text x="460.6" y="56" class="ct cval">33</text>
+<text x="240" y="84.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree: 49</title><rect x="250.0" y="72" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="86" class="ct cval">49</text>
+<text x="240" y="114.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college: 62</title><rect x="250.0" y="102" width="384.4" height="17" rx="3" class="cs1"/></g>
+<text x="640.4" y="116" class="ct cval">62</text>
+<text x="240" y="144.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate: 59</title><rect x="250.0" y="132" width="365.8" height="17" rx="3" class="cs1"/></g>
+<text x="621.8" y="146" class="ct cval">59</text>
+<text x="240" y="174.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less: 60</title><rect x="250.0" y="162" width="372.0" height="17" rx="3" class="cs1"/></g>
+<text x="628.0" y="176" class="ct cval">60</text>
+<text x="8" y="212" class="ct cgrp">Income</text>
+<text x="240" y="234.5" class="ct clab">Lowest brackets (~$15–35k)</text>
+<text x="256" y="236" class="ct cgap">62–63</text>
+<text x="240" y="264.5" class="ct clab">Highest brackets ($150k+)</text>
+<text x="256" y="266" class="ct cgap">35–37</text>
+</svg><svg class="cv" viewBox="0 0 948 316" width="100%" height="316" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Share of workers receiving no employer AI training, by education, job type, and income. Base: employed respondents; unweighted n ≈ 10,993. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="286" class="cg"/>
+<text x="250.0" y="302" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="286" class="cg"/>
+<text x="405.0" y="302" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="286" class="cg"/>
+<text x="560.0" y="302" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="286" class="cg"/>
+<text x="715.0" y="302" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="286" class="cg"/>
+<text x="870.0" y="302" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Job type</text>
+<text x="240" y="54.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 36</title><rect x="250.0" y="42" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="56" class="ct cval">36</text>
+<text x="240" y="84.5" class="ct clab">(not a data job)</text>
+<g class="cb"><title>(not a data job): 59</title><rect x="250.0" y="72" width="365.8" height="17" rx="3" class="cs1"/></g>
+<text x="621.8" y="86" class="ct cval">59</text>
+<text x="240" y="114.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 61</title><rect x="250.0" y="102" width="378.2" height="17" rx="3" class="cs1"/></g>
+<text x="634.2" y="116" class="ct cval">61</text>
+<text x="240" y="144.5" class="ct clab">(not a manual job)</text>
+<g class="cb"><title>(not a manual job): 46</title><rect x="250.0" y="132" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="146" class="ct cval">46</text>
+<text x="8" y="182" class="ct cgrp">AI use at work</text>
+<text x="240" y="204.5" class="ct clab">Never</text>
+<g class="cb"><title>Never: 75</title><rect x="250.0" y="192" width="465.0" height="17" rx="3" class="cs1"/></g>
+<text x="721.0" y="206" class="ct cval">75</text>
+<text x="240" y="234.5" class="ct clab">About weekly</text>
+<g class="cb"><title>About weekly: 44</title><rect x="250.0" y="222" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="236" class="ct cval">44</text>
+<text x="240" y="264.5" class="ct clab">Several times a day</text>
+<g class="cb"><title>Several times a day: 19</title><rect x="250.0" y="252" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="266" class="ct cval">19</text>
+</svg><figcaption><em>Figure 2. Share of workers receiving no employer AI training, by education, job type, and income. Base: employed respondents; unweighted n ≈ 10,993. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Group</th><th>% no training</th><th>Group</th><th>% no training</th></tr></thead><tbody><tr><td><strong>Education</strong></td><td></td><td><strong>Job type</strong></td><td></td></tr><tr><td>Graduate degree</td><td>33</td><td>Data / analysis job</td><td>36</td></tr><tr><td>College degree</td><td>49</td><td>(not a data job)</td><td>59</td></tr><tr><td>Some college</td><td>62</td><td>Manual-labor job</td><td>61</td></tr><tr><td>High-school graduate</td><td>59</td><td>(not a manual job)</td><td>46</td></tr><tr><td>Some high school or less</td><td>60</td><td><strong>AI use at work</strong></td><td></td></tr><tr><td><strong>Income</strong></td><td></td><td>Never</td><td>75</td></tr><tr><td>Lowest brackets (~$15–35k)</td><td>62–63</td><td>About weekly</td><td>44</td></tr><tr><td>Highest brackets ($150k+)</td><td>35–37</td><td>Several times a day</td><td>19</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="workers-want-more-especially-those-who-use-ai-most">Workers want more — especially those who use AI most</h2>
+<p class="lede"><strong>A majority of workers would find more employer AI training useful, and the appetite is strongest among heavy AI users.</strong></p>
+<p>The training gap is not for lack of demand. 55% of workers say more employer AI training would be extremely (19%) or somewhat (36%) useful; 45% say not very or not at all. And usefulness rises sharply with a worker's own AI use: workers who use AI several times a day overwhelmingly want more training, while those who never use it see little point. This is the opposite of a saturation story — the workers deepest into AI are the hungriest for more support, suggesting that training demand grows rather than shrinks as adoption spreads.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. How useful more employer AI training would be. Base: employed respondents; unweighted n ≈ 10,954. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Extremely useful</text>
+<g class="cb"><title>Extremely useful: 19</title><rect x="250.0" y="12" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="26" class="ct cval">19</text>
+<text x="240" y="54.5" class="ct clab">Somewhat useful</text>
+<g class="cb"><title>Somewhat useful: 36</title><rect x="250.0" y="42" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="56" class="ct cval">36</text>
+<text x="240" y="84.5" class="ct clab">Not very useful</text>
+<g class="cb"><title>Not very useful: 21</title><rect x="250.0" y="72" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="86" class="ct cval">21</text>
+<text x="240" y="114.5" class="ct clab">Not at all useful</text>
+<g class="cb"><title>Not at all useful: 24</title><rect x="250.0" y="102" width="148.8" height="17" rx="3" class="cs1"/></g>
+<text x="404.8" y="116" class="ct cval">24</text>
+</svg><figcaption><em>Figure 3. How useful more employer AI training would be. Base: employed respondents; unweighted n ≈ 10,954. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Extremely useful</td><td>19</td></tr><tr><td>Somewhat useful</td><td>36</td></tr><tr><td>Not very useful</td><td>21</td></tr><tr><td>Not at all useful</td><td>24</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="workers-know-they-need-it-and-whats-stopping-them">Workers know they need it — and what's stopping them</h2>
+<p class="lede"><strong>More than four in ten workers say they need AI training for their job — and the thing standing in the way is time, not reluctance.</strong></p>
+<p>The demand for training is not just a preference for "more" in the abstract; a large share of workers say they actually need it. Asked whether they need training or retraining on AI for their work, <strong>43% of employed Americans say yes — 16% "definitely" and 28% "probably"</strong> — while 47% say no and 9% aren't sure. Set against the 53% whose employer provides no training at all, that is a direct measure of unmet demand: a plurality of workers see a need their workplace is not meeting.</p>
+<p>What holds them back is not unwillingness. Among workers who see a need for training, the single biggest barrier is <strong>time away from work (36%)</strong>, well ahead of <strong>cost (24%)</strong> and <strong>not knowing what to learn (23%)</strong>; distrust of the programs themselves (10%) and other reasons round out the list, and only 6% say they don't really need retraining after all. The appetite to invest is real: <strong>86% would commit at least a day to AI training</strong>, with a full week the most common answer (41%), and workers split their format preference between hybrid (35%), online (33%), and in-person (26%). The obstacle, in short, is structural — finding the hours and knowing where to start — rather than motivational.</p>
+<p>That "where to start" problem is itself substantial. Among workers open to training, <strong>just 46% know where to get it; 36% do not and another 18% are unsure</strong> — so a majority lack a clear path to the training they say they need. A reskilling agenda, on this evidence, has to solve not only who pays and who provides, but the more basic problem of pointing workers to training that fits the time they can spare.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 4. Do workers need AI training, and what stops them? — panel A: need for AI training (retrain_need, employed, n ≈ 10,967); panel B: biggest barrier among those who see a need (retrain_barrier, n ≈ 4,738). AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Yes, definitely</text>
+<g class="cb"><title>Yes, definitely: 15.7</title><rect x="250.0" y="12" width="97.3" height="17" rx="3" class="cs1"/></g>
+<text x="353.3" y="26" class="ct cval">15.7</text>
+<text x="240" y="54.5" class="ct clab">Yes, probably</text>
+<g class="cb"><title>Yes, probably: 27.7</title><rect x="250.0" y="42" width="171.7" height="17" rx="3" class="cs1"/></g>
+<text x="427.7" y="56" class="ct cval">27.7</text>
+<text x="240" y="84.5" class="ct clab">No</text>
+<g class="cb"><title>No: 47.5</title><rect x="250.0" y="72" width="294.5" height="17" rx="3" class="cs1"/></g>
+<text x="550.5" y="86" class="ct cval">47.5</text>
+<text x="240" y="114.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 9.2</title><rect x="250.0" y="102" width="57.0" height="17" rx="3" class="cs1"/></g>
+<text x="313.0" y="116" class="ct cval">9.2</text>
+</svg><figcaption><em>Figure 4. Do workers need AI training, and what stops them? — panel A: need for AI training (<code>retrain_need</code>, employed, n ≈ 10,967); panel B: biggest barrier among those who see a need (<code>retrain_barrier</code>, n ≈ 4,738). AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 5 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Yes, definitely</td><td>15.7</td></tr><tr><td>Yes, probably</td><td>27.7</td></tr><tr><td>No</td><td>47.5</td></tr><tr><td>Not sure</td><td>9.2</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="who-should-pay-government-employers-not-workers">Who should pay: government, employers — not workers</h2>
+<p class="lede"><strong>Americans locate the responsibility to reskill at-risk workers with government, employers, and the tech industry — rarely with workers themselves.</strong></p>
+<p>Asked who should pay for upskilling, reskilling, and lifelong learning for workers at risk from new technology, the public's answer is collective, not individual. State and federal government (55%) and employers (53%) top the list, followed by the technology companies that build AI (42%) — a striking "those who make the disruption should help fix it" sentiment. Unions and industry associations (23%), workers themselves (20%), and colleges and universities (18%) trail well behind. The single clearest signal is what Americans reject: only one in five thinks workers should have to pay to retrain themselves.</p>
+<p>The politics are more bipartisan than the topic might suggest. Majorities of Democrats, independents, and Republicans alike say employers should pay (53%, 50%, 55%). The partisan gap is on government: 60% of Democrats versus 47% of Republicans, with independents in between — a difference of degree, not direction, since even a plurality of Republicans favor a government role. Republicans are the most likely to say workers should pay for themselves, but even among them that view tops out at 25%. And holding the tech industry responsible is essentially bipartisan (40–43% across parties). Across the spectrum, in other words, Americans see reskilling as a shared obligation of employers, government, and AI's makers — not a burden for individual workers to shoulder alone.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 5. Who should pay to reskill workers at risk from AI (select-all), overall and by party for the top responses. Base: all adults; unweighted n ≈ 23,462. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0</text>
+<line x1="456.7" y1="6" x2="456.7" y2="226" class="cg"/>
+<text x="456.7" y="242" class="ct ctick" data-chrome="1">20</text>
+<line x1="663.3" y1="6" x2="663.3" y2="226" class="cg"/>
+<text x="663.3" y="242" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">60</text>
+<text x="240" y="24.5" class="ct clab">State and federal government</text>
+<g class="cb"><title>State and federal government: 55</title><rect x="250.0" y="12" width="568.3" height="17" rx="3" class="cs1"/></g>
+<text x="824.3" y="26" class="ct cval">55</text>
+<text x="240" y="54.5" class="ct clab">Employers</text>
+<g class="cb"><title>Employers: 53</title><rect x="250.0" y="42" width="547.7" height="17" rx="3" class="cs1"/></g>
+<text x="803.7" y="56" class="ct cval">53</text>
+<text x="240" y="84.5" class="ct clab">Technology companies</text>
+<g class="cb"><title>Technology companies: 42</title><rect x="250.0" y="72" width="434.0" height="17" rx="3" class="cs1"/></g>
+<text x="690.0" y="86" class="ct cval">42</text>
+<text x="240" y="114.5" class="ct clab">Unions / industry associations</text>
+<g class="cb"><title>Unions / industry associations: 23</title><rect x="250.0" y="102" width="237.7" height="17" rx="3" class="cs1"/></g>
+<text x="493.7" y="116" class="ct cval">23</text>
+<text x="240" y="144.5" class="ct clab">Workers themselves</text>
+<g class="cb"><title>Workers themselves: 20</title><rect x="250.0" y="132" width="206.7" height="17" rx="3" class="cs1"/></g>
+<text x="462.7" y="146" class="ct cval">20</text>
+<text x="240" y="174.5" class="ct clab">Colleges and universities</text>
+<g class="cb"><title>Colleges and universities: 18</title><rect x="250.0" y="162" width="186.0" height="17" rx="3" class="cs1"/></g>
+<text x="442.0" y="176" class="ct cval">18</text>
+<text x="240" y="204.5" class="ct clab">Other</text>
+<g class="cb"><title>Other: 4</title><rect x="250.0" y="192" width="41.3" height="17" rx="3" class="cs1"/></g>
+<text x="297.3" y="206" class="ct cval">4</text>
+</svg><figcaption><em>Figure 5. Who should pay to reskill workers at risk from AI (select-all), overall and by party for the top responses. Base: all adults; unweighted n ≈ 23,462. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 4 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Payer</th><th>All</th><th>Democrat</th><th>Independent</th><th>Republican</th></tr></thead><tbody><tr><td>State and federal government</td><td>55</td><td>60</td><td>55</td><td>47</td></tr><tr><td>Employers</td><td>53</td><td>53</td><td>50</td><td>55</td></tr><tr><td>Technology companies</td><td>42</td><td>43</td><td>43</td><td>40</td></tr><tr><td>Unions / industry associations</td><td>23</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Workers themselves</td><td>20</td><td>19</td><td>19</td><td>25</td></tr><tr><td>Colleges and universities</td><td>18</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Other</td><td>4</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="a-bipartisan-mandate-for-public-action">A bipartisan mandate for public action</h2>
+<p class="lede"><strong>When the question turns from who pays to what government should do, Americans back retraining programs by a wide margin — 65% support to 13% opposed — with solid majorities across every partisan group; only the unaffiliated middle hangs back.</strong></p>
+<p>The public's appetite for a policy response is strong and, among people who identify with either party, strikingly uniform. Asked about government job-retraining programs for workers affected by AI and automation, <strong>65% of Americans with an opinion are supportive (35% strongly) and just 13% opposed</strong>, with the remainder neutral. (The analysis tool drops this item's "not sure" responses — about 8% of adults — so the shares are computed among opinion-holders; counting "not sure," all-adult support is roughly 60%, which puts it on the same footing as the 53% for Lifelong Learning Accounts below, an item whose "not sure" the tool <em>does</em> retain.) Support is nearly identical from one end of the partisan spectrum to the other — Strong Republicans (69%), Republicans (67%), and Lean Republicans (69%) are as supportive as Democrats (64%), Lean Democrats (70%), and Strong Democrats (68%) — a rare instance of a government-spending program drawing solid majorities on the right as well as the left. The one group that stands apart is <strong>pure independents, whose support falls to 49%.</strong> This is exactly the distinction the 7-point scale exists to catch: the ordinary 3-point measure buries pure independents together with the party-leaning independents who vote and think like partisans, averaging a real 15-to-20-point gap down to "independents slightly lower." And the gap is disengagement, not opposition — only about 15% of pure independents actually oppose retraining programs; the rest sit at "neutral" (36%, the highest of any group). A second, more novel instrument shows the identical shape: <strong>53% support portable "Lifelong Learning Accounts"</strong> — individual accounts workers could draw on throughout their careers — against just 10% opposed, with majorities across every partisan group (53–60%) but again only 37% among pure independents, whose shortfall this time parks in "not sure" (16%, the highest of any group) rather than opposition.</p>
+<p>This bipartisan consensus on <em>programs</em> is worth setting beside the more partisan pattern on <em>payment</em>. When the earlier question framed government as the entity that should foot the bill (<code>ai_upskill_pay</code>), support skewed Democratic (60% vs. 47% of Republicans). When the question instead asks whether government should <em>run retraining programs</em>, the partisan gap all but disappears. The distinction is real and politically useful: Americans across parties want a public retraining response; they differ more on how explicitly to label it a government expense. For a policymaker, the retraining-program framing commands a genuinely bipartisan majority that the who-pays framing does not.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 6. Support for AI-related retraining policy: government job-retraining programs (policy_retrain) and portable Lifelong Learning Accounts (policy_lilas). Base: all adults; unweighted n ≈ 21,600–23,450. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly support</text>
+<g class="cb"><title>Strongly support: 35.2</title><rect x="250.0" y="12" width="218.2" height="17" rx="3" class="cs1"/></g>
+<text x="474.2" y="26" class="ct cval">35.2</text>
+<text x="240" y="54.5" class="ct clab">Support</text>
+<g class="cb"><title>Support: 29.3</title><rect x="250.0" y="42" width="181.7" height="17" rx="3" class="cs1"/></g>
+<text x="437.7" y="56" class="ct cval">29.3</text>
+<text x="240" y="84.5" class="ct clab">Neutral</text>
+<g class="cb"><title>Neutral: 22.3</title><rect x="250.0" y="72" width="138.3" height="17" rx="3" class="cs1"/></g>
+<text x="394.3" y="86" class="ct cval">22.3</text>
+<text x="240" y="114.5" class="ct clab">Oppose</text>
+<g class="cb"><title>Oppose: 6.3</title><rect x="250.0" y="102" width="39.1" height="17" rx="3" class="cs1"/></g>
+<text x="295.1" y="116" class="ct cval">6.3</text>
+<text x="240" y="144.5" class="ct clab">Strongly oppose</text>
+<g class="cb"><title>Strongly oppose: 6.9</title><rect x="250.0" y="132" width="42.8" height="17" rx="3" class="cs1"/></g>
+<text x="298.8" y="146" class="ct cval">6.9</text>
+</svg><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 6. Support for AI-related retraining policy: government job-retraining programs (policy_retrain) and portable Lifelong Learning Accounts (policy_lilas). Base: all adults; unweighted n ≈ 21,600–23,450. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly support</text>
+<g class="cb"><title>Strongly support: 21.7</title><rect x="250.0" y="12" width="134.5" height="17" rx="3" class="cs1"/></g>
+<text x="390.5" y="26" class="ct cval">21.7</text>
+<text x="240" y="54.5" class="ct clab">Support</text>
+<g class="cb"><title>Support: 31.0</title><rect x="250.0" y="42" width="192.2" height="17" rx="3" class="cs1"/></g>
+<text x="448.2" y="56" class="ct cval">31.0</text>
+<text x="240" y="84.5" class="ct clab">Neutral</text>
+<g class="cb"><title>Neutral: 27.3</title><rect x="250.0" y="72" width="169.3" height="17" rx="3" class="cs1"/></g>
+<text x="425.3" y="86" class="ct cval">27.3</text>
+<text x="240" y="114.5" class="ct clab">Oppose</text>
+<g class="cb"><title>Oppose: 5.6</title><rect x="250.0" y="102" width="34.7" height="17" rx="3" class="cs1"/></g>
+<text x="290.7" y="116" class="ct cval">5.6</text>
+<text x="240" y="144.5" class="ct clab">Strongly oppose</text>
+<g class="cb"><title>Strongly oppose: 4.6</title><rect x="250.0" y="132" width="28.5" height="17" rx="3" class="cs1"/></g>
+<text x="284.5" y="146" class="ct cval">4.6</text>
+<text x="240" y="174.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 9.9</title><rect x="250.0" y="162" width="61.4" height="17" rx="3" class="cs1"/></g>
+<text x="317.4" y="176" class="ct cval">9.9</text>
+</svg><figcaption><em>Figure 6. Support for AI-related retraining policy: government job-retraining programs (<code>policy_retrain</code>) and portable Lifelong Learning Accounts (<code>policy_lilas</code>). Base: all adults; unweighted n ≈ 21,600–23,450. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 8 · Table 9 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly support</td><td>35.2</td></tr><tr><td>Support</td><td>29.3</td></tr><tr><td>Neutral</td><td>22.3</td></tr><tr><td>Oppose</td><td>6.3</td></tr><tr><td>Strongly oppose</td><td>6.9</td></tr></tbody></table></div><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly support</td><td>21.7</td></tr><tr><td>Support</td><td>31.0</td></tr><tr><td>Neutral</td><td>27.3</td></tr><tr><td>Oppose</td><td>5.6</td></tr><tr><td>Strongly oppose</td><td>4.6</td></tr><tr><td>Not sure</td><td>9.9</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>The reskilling conversation assumes a training system that, for most American workers, does not yet exist. A majority get no AI training from their employers, and what little training there is flows to the workers who are already the most advantaged — the educated, the well-paid, the white-collar, the already-fluent — reinforcing the AI divide rather than bridging it. Workers want more, especially those closest to the technology. And the public is clear about where responsibility lies: with employers, government, and the companies building AI, not with workers left to fend for themselves.</p>
+<p>The gap between that expectation and the current reality is the story. Workers are not the obstacle: 43% say they need AI training and the great majority are willing to invest real time in it — what stops them is finding the hours and knowing where to begin, not a lack of will. Americans see reskilling as a collective obligation, and they back a public response — government retraining programs and portable learning accounts alike command bipartisan majorities. But the collective institutions — employers above all — are largely not delivering it, and the market is steering what exists toward those who need it least. Closing the AI training gap will require not just more training but training aimed at the workers the current system is passing by, on terms — time, cost, and a clear path to start — that those workers can actually meet.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data source.</strong> AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement. Total unweighted n = 23,462; weighted n = 23,485. Fielded June 21–July 13, 2026. Data collection was ongoing at the time of this extract — figures reflect responses through July 13, 2026 and are preliminary. Estimates are weighted to U.S. Census population targets.</p>
+<p><strong>Measures and bases.</strong> <code>ai_train</code> (select-all: formal / informal / no training / not sure), <code>ai_train_more</code> (usefulness of more training; 4-point), and <code>retrain_need</code> (need for AI training; yes definitely / yes probably / no / not sure) were asked of employed respondents (unweighted n ≈ 10,950–10,993). The retraining-logistics follow-ups were asked on smaller conditional bases: <code>retrain_barrier</code> (biggest barrier; n ≈ 4,738), <code>retrain_know</code> (knows where to get training; n ≈ 5,765), <code>retrain_time</code> (time willing to invest; n ≈ 5,767), and <code>retrain_mode</code> (online/in-person/hybrid; n ≈ 5,097). <code>ai_upskill_pay</code> (select-all: who should pay, seven options), <code>policy_retrain</code> (support for government retraining programs; 5-point + not sure), and <code>policy_lilas</code> (support for portable Lifelong Learning Accounts; 5-point + not sure) were asked of all adults (unweighted n ≈ 21,600–23,462). Select-all items report the share selecting each option and do not sum to 100%. <strong>Note (data-integrity review):</strong> the analysis tool drops <code>policy_retrain</code>'s "not sure" responses (served base 21,579 vs. 23,450 for <code>policy_lilas</code>, which retains them), so <code>policy_retrain</code> shares are computed among opinion-holders. The reported 65% support is therefore ~5 points above the all-adult figure (~60% with "not sure" retained); the party, age, and education breakdowns share this opinion-holder base, so their <em>shape</em> is unaffected, and the ~60% all-adult figure is the one to compare against the "not sure"-inclusive 53% for Lifelong Learning Accounts.</p>
+<p><strong>Coding.</strong> <code>ai_train_more</code> is coded 1 = extremely useful … 4 = not at all useful, confirmed against the data (the weighted mean falls monotonically as AI-use frequency rises — heavier users find more training more useful). "No training" is <code>ai_train</code> option 3. <code>retrain_need</code> (1 = yes definitely, 2 = yes probably, 3 = no, 4 = not sure), <code>retrain_barrier</code>, <code>retrain_know</code>, <code>retrain_time</code>, and <code>retrain_mode</code> are labeled category sets reported per the authoritative codebook; the skip logic is confirmed internally — <code>retrain_barrier</code>'s base (~4,738) matches the count who said they need training on <code>retrain_need</code> (~4,744), so the "need" direction (1–2 = needs training) is verified by the gate. <strong>The two policy scales run in opposite numeric directions and were each direction-checked against party:</strong> <code>policy_retrain</code> is coded 5 = strongly support … 1 = strongly oppose (support 4+5 = 64.5%; weighted means Dem 3.84 / Ind 3.70 / Rep 3.85, all above the 3.0 midpoint, confirming high = support); <code>policy_lilas</code> is coded 1 = strongly support … 5 = strongly oppose, 6 = not sure (support 1+2 = 52.6%; weighted means Dem 2.62 / Ind 2.89 / Rep 2.58, all below midpoint, confirming low = support). Applying a single direction to both would have inverted the LILAs result — the trap was checked and avoided.</p>
+<p><strong>Estimation.</strong> Cross-tabulations are weighted shares (share selecting each select-all option, or share in each category). No regression is reported (this is a topline descriptive report). The party breakdowns of the policy items are descriptive weighted shares, not modeled effects. The two policy-support items (<code>policy_retrain</code>, <code>policy_lilas</code>) are broken out on the <strong>7-point party scale</strong> (<code>party7</code>; Table 8b) rather than the 3-point measure, because the pure-independent trough — the report's one departure from bipartisan consensus — is invisible on <code>party3</code>, which merges pure independents with party-leaning independents. Cells with unweighted n &lt; 10 are suppressed. (The who-pays item, <code>ai_upskill_pay</code>, retains the 3-point breakdown in Table 4, where the finding is a Democrat–Republican difference of degree that <code>party3</code> captures adequately.)</p>
+<p><strong>Reproducibility.</strong> Figures map to Appendix B tables; values copied verbatim from the underlying tabulations. Wording and coding sourced from the Qualtrics instrument via the project's authoritative Wave 38.6 codebook.</p>
+<hr/>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1. Employer-provided AI training (ai_train; employed; unweighted n ≈ 10,993; select-all; weighted % selecting — do not sum).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">No, they have not provided any training</text>
+<g class="cb"><title>No, they have not provided any training: 53</title><rect x="250.0" y="12" width="328.6" height="17" rx="3" class="cs1"/></g>
+<text x="584.6" y="26" class="ct cval">53</text>
+<text x="240" y="54.5" class="ct clab">Yes, informal training (email guides, tips, optional links)</text>
+<g class="cb"><title>Yes, informal training (email guides, tips, optional links): 25</title><rect x="250.0" y="42" width="155.0" height="17" rx="3" class="cs1"/></g>
+<text x="411.0" y="56" class="ct cval">25</text>
+<text x="240" y="84.5" class="ct clab">Yes, formal training (workshops, courses, seminars)</text>
+<g class="cb"><title>Yes, formal training (workshops, courses, seminars): 19</title><rect x="250.0" y="72" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="86" class="ct cval">19</text>
+<text x="240" y="114.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 10</title><rect x="250.0" y="102" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="116" class="ct cval">10</text>
+</svg><figcaption><strong>Table 1. Employer-provided AI training</strong> (<code>ai_train</code>; employed; unweighted n ≈ 10,993; select-all; weighted % selecting — do not sum).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>No, they have not provided any training</td><td>53</td></tr><tr><td>Yes, informal training (email guides, tips, optional links)</td><td>25</td></tr><tr><td>Yes, formal training (workshops, courses, seminars)</td><td>19</td></tr><tr><td>Not sure</td><td>10</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 316" width="100%" height="316" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Share receiving no employer AI training, by group (weighted %; employed respondents).">
+<line x1="250.0" y1="6" x2="250.0" y2="286" class="cg"/>
+<text x="250.0" y="302" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="286" class="cg"/>
+<text x="405.0" y="302" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="286" class="cg"/>
+<text x="560.0" y="302" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="286" class="cg"/>
+<text x="715.0" y="302" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="286" class="cg"/>
+<text x="870.0" y="302" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Education</text>
+<text x="240" y="54.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree: 33</title><rect x="250.0" y="42" width="204.6" height="17" rx="3" class="cs1"/></g>
+<text x="460.6" y="56" class="ct cval">33</text>
+<text x="240" y="84.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree: 49</title><rect x="250.0" y="72" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="86" class="ct cval">49</text>
+<text x="240" y="114.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college: 62</title><rect x="250.0" y="102" width="384.4" height="17" rx="3" class="cs1"/></g>
+<text x="640.4" y="116" class="ct cval">62</text>
+<text x="240" y="144.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate: 59</title><rect x="250.0" y="132" width="365.8" height="17" rx="3" class="cs1"/></g>
+<text x="621.8" y="146" class="ct cval">59</text>
+<text x="240" y="174.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less: 60</title><rect x="250.0" y="162" width="372.0" height="17" rx="3" class="cs1"/></g>
+<text x="628.0" y="176" class="ct cval">60</text>
+<text x="8" y="212" class="ct cgrp">Income</text>
+<text x="240" y="234.5" class="ct clab">Lowest brackets (~$15–35k)</text>
+<text x="256" y="236" class="ct cgap">62–63</text>
+<text x="240" y="264.5" class="ct clab">Highest brackets ($150k+)</text>
+<text x="256" y="266" class="ct cgap">35–37</text>
+</svg><svg class="cv" viewBox="0 0 948 316" width="100%" height="316" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Share receiving no employer AI training, by group (weighted %; employed respondents).">
+<line x1="250.0" y1="6" x2="250.0" y2="286" class="cg"/>
+<text x="250.0" y="302" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="286" class="cg"/>
+<text x="405.0" y="302" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="286" class="cg"/>
+<text x="560.0" y="302" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="286" class="cg"/>
+<text x="715.0" y="302" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="286" class="cg"/>
+<text x="870.0" y="302" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Job type</text>
+<text x="240" y="54.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 36</title><rect x="250.0" y="42" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="56" class="ct cval">36</text>
+<text x="240" y="84.5" class="ct clab">(not a data job)</text>
+<g class="cb"><title>(not a data job): 59</title><rect x="250.0" y="72" width="365.8" height="17" rx="3" class="cs1"/></g>
+<text x="621.8" y="86" class="ct cval">59</text>
+<text x="240" y="114.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 61</title><rect x="250.0" y="102" width="378.2" height="17" rx="3" class="cs1"/></g>
+<text x="634.2" y="116" class="ct cval">61</text>
+<text x="240" y="144.5" class="ct clab">(not a manual job)</text>
+<g class="cb"><title>(not a manual job): 46</title><rect x="250.0" y="132" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="146" class="ct cval">46</text>
+<text x="8" y="182" class="ct cgrp">AI use at work</text>
+<text x="240" y="204.5" class="ct clab">Never</text>
+<g class="cb"><title>Never: 75</title><rect x="250.0" y="192" width="465.0" height="17" rx="3" class="cs1"/></g>
+<text x="721.0" y="206" class="ct cval">75</text>
+<text x="240" y="234.5" class="ct clab">About weekly</text>
+<g class="cb"><title>About weekly: 44</title><rect x="250.0" y="222" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="236" class="ct cval">44</text>
+<text x="240" y="264.5" class="ct clab">Several times a day</text>
+<g class="cb"><title>Several times a day: 19</title><rect x="250.0" y="252" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="266" class="ct cval">19</text>
+</svg><figcaption><strong>Table 2. Share receiving no employer AI training, by group</strong> (weighted %; employed respondents).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Group</th><th>% no training</th><th>Group</th><th>% no training</th></tr></thead><tbody><tr><td><strong>Education</strong></td><td></td><td><strong>Job type</strong></td><td></td></tr><tr><td>Graduate degree</td><td>33</td><td>Data / analysis job</td><td>36</td></tr><tr><td>College degree</td><td>49</td><td>(not a data job)</td><td>59</td></tr><tr><td>Some college</td><td>62</td><td>Manual-labor job</td><td>61</td></tr><tr><td>High-school graduate</td><td>59</td><td>(not a manual job)</td><td>46</td></tr><tr><td>Some high school or less</td><td>60</td><td><strong>AI use at work</strong></td><td></td></tr><tr><td><strong>Income</strong></td><td></td><td>Never</td><td>75</td></tr><tr><td>Lowest brackets (~$15–35k)</td><td>62–63</td><td>About weekly</td><td>44</td></tr><tr><td>Highest brackets ($150k+)</td><td>35–37</td><td>Several times a day</td><td>19</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. How useful more employer AI training would be (ai_train_more; employed; unweighted n ≈ 10,954; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Extremely useful</text>
+<g class="cb"><title>Extremely useful: 19</title><rect x="250.0" y="12" width="117.8" height="17" rx="3" class="cs1"/></g>
+<text x="373.8" y="26" class="ct cval">19</text>
+<text x="240" y="54.5" class="ct clab">Somewhat useful</text>
+<g class="cb"><title>Somewhat useful: 36</title><rect x="250.0" y="42" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="56" class="ct cval">36</text>
+<text x="240" y="84.5" class="ct clab">Not very useful</text>
+<g class="cb"><title>Not very useful: 21</title><rect x="250.0" y="72" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="86" class="ct cval">21</text>
+<text x="240" y="114.5" class="ct clab">Not at all useful</text>
+<g class="cb"><title>Not at all useful: 24</title><rect x="250.0" y="102" width="148.8" height="17" rx="3" class="cs1"/></g>
+<text x="404.8" y="116" class="ct cval">24</text>
+</svg><figcaption><strong>Table 3. How useful more employer AI training would be</strong> (<code>ai_train_more</code>; employed; unweighted n ≈ 10,954; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Extremely useful</td><td>19</td></tr><tr><td>Somewhat useful</td><td>36</td></tr><tr><td>Not very useful</td><td>21</td></tr><tr><td>Not at all useful</td><td>24</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 4. Who should pay to reskill workers at risk from AI (ai_upskill_pay; all adults; unweighted n ≈ 23,462; select-all; weighted % selecting — do not sum), overall and by party.">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0</text>
+<line x1="456.7" y1="6" x2="456.7" y2="226" class="cg"/>
+<text x="456.7" y="242" class="ct ctick" data-chrome="1">20</text>
+<line x1="663.3" y1="6" x2="663.3" y2="226" class="cg"/>
+<text x="663.3" y="242" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">60</text>
+<text x="240" y="24.5" class="ct clab">State and federal government</text>
+<g class="cb"><title>State and federal government: 55</title><rect x="250.0" y="12" width="568.3" height="17" rx="3" class="cs1"/></g>
+<text x="824.3" y="26" class="ct cval">55</text>
+<text x="240" y="54.5" class="ct clab">Employers</text>
+<g class="cb"><title>Employers: 53</title><rect x="250.0" y="42" width="547.7" height="17" rx="3" class="cs1"/></g>
+<text x="803.7" y="56" class="ct cval">53</text>
+<text x="240" y="84.5" class="ct clab">Technology companies</text>
+<g class="cb"><title>Technology companies: 42</title><rect x="250.0" y="72" width="434.0" height="17" rx="3" class="cs1"/></g>
+<text x="690.0" y="86" class="ct cval">42</text>
+<text x="240" y="114.5" class="ct clab">Unions / industry associations</text>
+<g class="cb"><title>Unions / industry associations: 23</title><rect x="250.0" y="102" width="237.7" height="17" rx="3" class="cs1"/></g>
+<text x="493.7" y="116" class="ct cval">23</text>
+<text x="240" y="144.5" class="ct clab">Workers themselves</text>
+<g class="cb"><title>Workers themselves: 20</title><rect x="250.0" y="132" width="206.7" height="17" rx="3" class="cs1"/></g>
+<text x="462.7" y="146" class="ct cval">20</text>
+<text x="240" y="174.5" class="ct clab">Colleges and universities</text>
+<g class="cb"><title>Colleges and universities: 18</title><rect x="250.0" y="162" width="186.0" height="17" rx="3" class="cs1"/></g>
+<text x="442.0" y="176" class="ct cval">18</text>
+<text x="240" y="204.5" class="ct clab">Other</text>
+<g class="cb"><title>Other: 4</title><rect x="250.0" y="192" width="41.3" height="17" rx="3" class="cs1"/></g>
+<text x="297.3" y="206" class="ct cval">4</text>
+</svg><figcaption><strong>Table 4. Who should pay to reskill workers at risk from AI</strong> (<code>ai_upskill_pay</code>; all adults; unweighted n ≈ 23,462; select-all; weighted % selecting — do not sum), overall and by party.</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Payer</th><th>All</th><th>Democrat</th><th>Independent</th><th>Republican</th></tr></thead><tbody><tr><td>State and federal government</td><td>55</td><td>60</td><td>55</td><td>47</td></tr><tr><td>Employers</td><td>53</td><td>53</td><td>50</td><td>55</td></tr><tr><td>Technology companies</td><td>42</td><td>43</td><td>43</td><td>40</td></tr><tr><td>Unions / industry associations</td><td>23</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Workers themselves</td><td>20</td><td>19</td><td>19</td><td>25</td></tr><tr><td>Colleges and universities</td><td>18</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Other</td><td>4</td><td>—</td><td>—</td><td>—</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 5. Do workers need AI training for their work? (retrain_need; employed; unweighted n ≈ 10,967; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Yes, definitely</text>
+<g class="cb"><title>Yes, definitely: 15.7</title><rect x="250.0" y="12" width="97.3" height="17" rx="3" class="cs1"/></g>
+<text x="353.3" y="26" class="ct cval">15.7</text>
+<text x="240" y="54.5" class="ct clab">Yes, probably</text>
+<g class="cb"><title>Yes, probably: 27.7</title><rect x="250.0" y="42" width="171.7" height="17" rx="3" class="cs1"/></g>
+<text x="427.7" y="56" class="ct cval">27.7</text>
+<text x="240" y="84.5" class="ct clab">No</text>
+<g class="cb"><title>No: 47.5</title><rect x="250.0" y="72" width="294.5" height="17" rx="3" class="cs1"/></g>
+<text x="550.5" y="86" class="ct cval">47.5</text>
+<text x="240" y="114.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 9.2</title><rect x="250.0" y="102" width="57.0" height="17" rx="3" class="cs1"/></g>
+<text x="313.0" y="116" class="ct cval">9.2</text>
+</svg><figcaption><strong>Table 5. Do workers need AI training for their work?</strong> (<code>retrain_need</code>; employed; unweighted n ≈ 10,967; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Yes, definitely</td><td>15.7</td></tr><tr><td>Yes, probably</td><td>27.7</td></tr><tr><td>No</td><td>47.5</td></tr><tr><td>Not sure</td><td>9.2</td></tr></tbody></table></div></details></figure>
+<p><em>Need training (definitely + probably) = 43.3%.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 6. Biggest barrier to AI retraining, among workers who see a need (retrain_barrier; unweighted n ≈ 4,738; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Time away from work</text>
+<g class="cb"><title>Time away from work: 36.0</title><rect x="250.0" y="12" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="26" class="ct cval">36.0</text>
+<text x="240" y="54.5" class="ct clab">Cost</text>
+<g class="cb"><title>Cost: 23.7</title><rect x="250.0" y="42" width="146.9" height="17" rx="3" class="cs1"/></g>
+<text x="402.9" y="56" class="ct cval">23.7</text>
+<text x="240" y="84.5" class="ct clab">Not knowing what to learn</text>
+<g class="cb"><title>Not knowing what to learn: 23.1</title><rect x="250.0" y="72" width="143.2" height="17" rx="3" class="cs1"/></g>
+<text x="399.2" y="86" class="ct cval">23.1</text>
+<text x="240" y="114.5" class="ct clab">Not trusting the programs</text>
+<g class="cb"><title>Not trusting the programs: 9.9</title><rect x="250.0" y="102" width="61.4" height="17" rx="3" class="cs1"/></g>
+<text x="317.4" y="116" class="ct cval">9.9</text>
+<text x="240" y="144.5" class="ct clab">Don&#x27;t really need retraining</text>
+<g class="cb"><title>Don&#x27;t really need retraining: 6.0</title><rect x="250.0" y="132" width="37.2" height="17" rx="3" class="cs1"/></g>
+<text x="293.2" y="146" class="ct cval">6.0</text>
+<text x="240" y="174.5" class="ct clab">Other</text>
+<g class="cb"><title>Other: 1.4</title><rect x="250.0" y="162" width="8.7" height="17" rx="3" class="cs1"/></g>
+<text x="264.7" y="176" class="ct cval">1.4</text>
+</svg><figcaption><strong>Table 6. Biggest barrier to AI retraining, among workers who see a need</strong> (<code>retrain_barrier</code>; unweighted n ≈ 4,738; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Barrier</th><th>%</th></tr></thead><tbody><tr><td>Time away from work</td><td>36.0</td></tr><tr><td>Cost</td><td>23.7</td></tr><tr><td>Not knowing what to learn</td><td>23.1</td></tr><tr><td>Not trusting the programs</td><td>9.9</td></tr><tr><td>Don't really need retraining</td><td>6.0</td></tr><tr><td>Other</td><td>1.4</td></tr></tbody></table></div></details></figure>
+<figure class="tbl"><div class="tw"><table><thead><tr><th>Item</th><th>Distribution</th></tr></thead><tbody><tr><td><strong>Knows where to get training</strong> (<code>retrain_know</code>; n ≈ 5,765)</td><td>Yes 46.0 · No 36.0 · Not sure 18.1</td></tr><tr><td><strong>Time willing to invest</strong> (<code>retrain_time</code>; n ≈ 5,767)</td><td>A day 17.0 · A week 40.7 · A month 20.0 · A quarter+ 8.6 · Would not invest 13.7</td></tr><tr><td><strong>Preferred mode</strong> (<code>retrain_mode</code>; n ≈ 5,097)</td><td>Hybrid 34.6 · Online 32.9 · In person 26.2 · No preference 5.1 · Not sure 1.2</td></tr></tbody></table></div><figcaption><strong>Table 7. Retraining logistics</strong> (weighted %; conditional bases as noted).</figcaption></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 8. Support for government AI job-retraining programs (policy_retrain; all adults; unweighted n ≈ 21,579; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly support</text>
+<g class="cb"><title>Strongly support: 35.2</title><rect x="250.0" y="12" width="218.2" height="17" rx="3" class="cs1"/></g>
+<text x="474.2" y="26" class="ct cval">35.2</text>
+<text x="240" y="54.5" class="ct clab">Support</text>
+<g class="cb"><title>Support: 29.3</title><rect x="250.0" y="42" width="181.7" height="17" rx="3" class="cs1"/></g>
+<text x="437.7" y="56" class="ct cval">29.3</text>
+<text x="240" y="84.5" class="ct clab">Neutral</text>
+<g class="cb"><title>Neutral: 22.3</title><rect x="250.0" y="72" width="138.3" height="17" rx="3" class="cs1"/></g>
+<text x="394.3" y="86" class="ct cval">22.3</text>
+<text x="240" y="114.5" class="ct clab">Oppose</text>
+<g class="cb"><title>Oppose: 6.3</title><rect x="250.0" y="102" width="39.1" height="17" rx="3" class="cs1"/></g>
+<text x="295.1" y="116" class="ct cval">6.3</text>
+<text x="240" y="144.5" class="ct clab">Strongly oppose</text>
+<g class="cb"><title>Strongly oppose: 6.9</title><rect x="250.0" y="132" width="42.8" height="17" rx="3" class="cs1"/></g>
+<text x="298.8" y="146" class="ct cval">6.9</text>
+</svg><figcaption><strong>Table 8. Support for government AI job-retraining programs</strong> (<code>policy_retrain</code>; all adults; unweighted n ≈ 21,579; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly support</td><td>35.2</td></tr><tr><td>Support</td><td>29.3</td></tr><tr><td>Neutral</td><td>22.3</td></tr><tr><td>Oppose</td><td>6.3</td></tr><tr><td>Strongly oppose</td><td>6.9</td></tr></tbody></table></div></details></figure>
+<p><em>Support (strongly + support) = 64.5%; oppose = 13.2%. Weighted means by 3-point party (1 = strongly oppose … 5 = strongly support): Democrat 3.84, Independent 3.70, Republican 3.85 — but the 3-point "Independent" mean conceals the split shown in Table 8b.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 351" width="100%" height="351" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 8b. Support for AI-retraining policy, by 7-point party identification (weighted % supporting; all adults). Support = &quot;strongly support&quot; + &quot;support.&quot;">
+<line x1="250.0" y1="24" x2="250.0" y2="321" class="cg"/>
+<text x="250.0" y="337" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="321" class="cg"/>
+<text x="405.0" y="337" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="321" class="cg"/>
+<text x="560.0" y="337" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="321" class="cg"/>
+<text x="715.0" y="337" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="321" class="cg"/>
+<text x="870.0" y="337" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Gov&#x27;t retraining programs</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="487.0" y="15" class="ct clg">Lifelong Learning Accounts</text>
+<text x="240" y="48.0" class="ct clab">Strong Republican</text>
+<g class="cb"><title>Strong Republican — Gov&#x27;t retraining programs: 69</title><rect x="250.0" y="30" width="534.8" height="13" rx="3" class="cs1"/></g>
+<text x="790.8" y="40" class="ct cval">69</text>
+<g class="cb"><title>Strong Republican — Lifelong Learning Accounts: 60</title><rect x="250.0" y="45" width="465.0" height="13" rx="3" class="cs2"/></g>
+<text x="721.0" y="55" class="ct cval">60</text>
+<text x="240" y="89.0" class="ct clab">Republican</text>
+<g class="cb"><title>Republican — Gov&#x27;t retraining programs: 67</title><rect x="250.0" y="71" width="519.2" height="13" rx="3" class="cs1"/></g>
+<text x="775.2" y="81" class="ct cval">67</text>
+<g class="cb"><title>Republican — Lifelong Learning Accounts: 53</title><rect x="250.0" y="86" width="410.8" height="13" rx="3" class="cs2"/></g>
+<text x="666.8" y="96" class="ct cval">53</text>
+<text x="240" y="130.0" class="ct clab">Lean Republican</text>
+<g class="cb"><title>Lean Republican — Gov&#x27;t retraining programs: 69</title><rect x="250.0" y="112" width="534.8" height="13" rx="3" class="cs1"/></g>
+<text x="790.8" y="122" class="ct cval">69</text>
+<g class="cb"><title>Lean Republican — Lifelong Learning Accounts: 56</title><rect x="250.0" y="127" width="434.0" height="13" rx="3" class="cs2"/></g>
+<text x="690.0" y="137" class="ct cval">56</text>
+<text x="240" y="171.0" class="ct clab">Independent (pure)</text>
+<g class="cb"><title>Independent (pure) — Gov&#x27;t retraining programs: 49</title><rect x="250.0" y="153" width="379.8" height="13" rx="3" class="cs1"/></g>
+<text x="635.8" y="163" class="ct cval">49</text>
+<g class="cb"><title>Independent (pure) — Lifelong Learning Accounts: 37</title><rect x="250.0" y="168" width="286.8" height="13" rx="3" class="cs2"/></g>
+<text x="542.8" y="178" class="ct cval">37</text>
+<text x="240" y="212.0" class="ct clab">Lean Democrat</text>
+<g class="cb"><title>Lean Democrat — Gov&#x27;t retraining programs: 70</title><rect x="250.0" y="194" width="542.5" height="13" rx="3" class="cs1"/></g>
+<text x="798.5" y="204" class="ct cval">70</text>
+<g class="cb"><title>Lean Democrat — Lifelong Learning Accounts: 58</title><rect x="250.0" y="209" width="449.5" height="13" rx="3" class="cs2"/></g>
+<text x="705.5" y="219" class="ct cval">58</text>
+<text x="240" y="253.0" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat — Gov&#x27;t retraining programs: 64</title><rect x="250.0" y="235" width="496.0" height="13" rx="3" class="cs1"/></g>
+<text x="752.0" y="245" class="ct cval">64</text>
+<g class="cb"><title>Democrat — Lifelong Learning Accounts: 53</title><rect x="250.0" y="250" width="410.8" height="13" rx="3" class="cs2"/></g>
+<text x="666.8" y="260" class="ct cval">53</text>
+<text x="240" y="294.0" class="ct clab">Strong Democrat</text>
+<g class="cb"><title>Strong Democrat — Gov&#x27;t retraining programs: 68</title><rect x="250.0" y="276" width="527.0" height="13" rx="3" class="cs1"/></g>
+<text x="783.0" y="286" class="ct cval">68</text>
+<g class="cb"><title>Strong Democrat — Lifelong Learning Accounts: 56</title><rect x="250.0" y="291" width="434.0" height="13" rx="3" class="cs2"/></g>
+<text x="690.0" y="301" class="ct cval">56</text>
+</svg><figcaption><strong>Table 8b. Support for AI-retraining policy, by 7-point party identification</strong> (weighted % supporting; all adults). Support = "strongly support" + "support."</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Party (7-point)</th><th>Gov't retraining programs</th><th>Lifelong Learning Accounts</th></tr></thead><tbody><tr><td>Strong Republican</td><td>69</td><td>60</td></tr><tr><td>Republican</td><td>67</td><td>53</td></tr><tr><td>Lean Republican</td><td>69</td><td>56</td></tr><tr><td>Independent (pure)</td><td>49</td><td>37</td></tr><tr><td>Lean Democrat</td><td>70</td><td>58</td></tr><tr><td>Democrat</td><td>64</td><td>53</td></tr><tr><td>Strong Democrat</td><td>68</td><td>56</td></tr></tbody></table></div></details></figure>
+<p><em>Every partisan group — left, right, strong, and leaning — clusters at 53–70%; pure independents are the lone trough (49% and 37%), a gap the 3-point measure hides by averaging pure independents together with the party-leaning independents who resemble partisans. The pure-independent shortfall is disengagement, not opposition: only ~15% (retraining) and ~10% (LILAs) of pure independents are opposed, the rest sitting at "neutral" or "not sure" (both the highest of any group).</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 9. Support for portable &quot;Lifelong Learning Accounts&quot; (policy_lilas; all adults; unweighted n ≈ 23,450; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly support</text>
+<g class="cb"><title>Strongly support: 21.7</title><rect x="250.0" y="12" width="134.5" height="17" rx="3" class="cs1"/></g>
+<text x="390.5" y="26" class="ct cval">21.7</text>
+<text x="240" y="54.5" class="ct clab">Support</text>
+<g class="cb"><title>Support: 31.0</title><rect x="250.0" y="42" width="192.2" height="17" rx="3" class="cs1"/></g>
+<text x="448.2" y="56" class="ct cval">31.0</text>
+<text x="240" y="84.5" class="ct clab">Neutral</text>
+<g class="cb"><title>Neutral: 27.3</title><rect x="250.0" y="72" width="169.3" height="17" rx="3" class="cs1"/></g>
+<text x="425.3" y="86" class="ct cval">27.3</text>
+<text x="240" y="114.5" class="ct clab">Oppose</text>
+<g class="cb"><title>Oppose: 5.6</title><rect x="250.0" y="102" width="34.7" height="17" rx="3" class="cs1"/></g>
+<text x="290.7" y="116" class="ct cval">5.6</text>
+<text x="240" y="144.5" class="ct clab">Strongly oppose</text>
+<g class="cb"><title>Strongly oppose: 4.6</title><rect x="250.0" y="132" width="28.5" height="17" rx="3" class="cs1"/></g>
+<text x="284.5" y="146" class="ct cval">4.6</text>
+<text x="240" y="174.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 9.9</title><rect x="250.0" y="162" width="61.4" height="17" rx="3" class="cs1"/></g>
+<text x="317.4" y="176" class="ct cval">9.9</text>
+</svg><figcaption><strong>Table 9. Support for portable "Lifelong Learning Accounts"</strong> (<code>policy_lilas</code>; all adults; unweighted n ≈ 23,450; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly support</td><td>21.7</td></tr><tr><td>Support</td><td>31.0</td></tr><tr><td>Neutral</td><td>27.3</td></tr><tr><td>Oppose</td><td>5.6</td></tr><tr><td>Strongly oppose</td><td>4.6</td></tr><tr><td>Not sure</td><td>9.9</td></tr></tbody></table></div></details></figure>
+<p><em>Support (strongly + support) = 52.6%; oppose = 10.2%. Weighted means by 3-point party (1 = strongly support … 5 = strongly oppose): Democrat 2.62, Independent 2.89, Republican 2.58 — lower = more supportive.</em></p>
+<hr/>
+<h2 id="appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</h2>
+<ul><li><strong><code>ai_train</code></strong> <em>(select all)</em> — "Has your employer provided any AI training or resources?" (Yes, formal training (workshops, courses, seminars); Yes, informal training (email guides, tips, optional links); No, they have not provided any training; Not sure)</li><li><strong><code>ai_train_more</code></strong> — "How useful would more employer AI training be?" (Extremely useful; Somewhat useful; Not very useful; Not at all useful)</li><li><strong><code>ai_upskill_pay</code></strong> <em>(select all)</em> — "Who do you believe should pay for upskilling, reskilling, and lifelong learning programs that help workers who are at risk of losing their jobs because of new technology, automation, robots or Artificial Intelligence?" (Employers; Workers themselves; State and federal government; Colleges and universities; Unions or industry trade associations; Technology companies; Other)</li><li><strong><code>retrain_need</code></strong> <em>(employed)</em> — "Do you feel you need training or retraining on AI for your work?" (Yes, definitely; Yes, probably; No; Not sure)</li><li><strong><code>retrain_know</code></strong> <em>(conditional)</em> — "Do you know where to get that training?" (Yes; No; Not sure)</li><li><strong><code>retrain_time</code></strong> <em>(conditional)</em> — "How much time would you be willing to invest in AI training?" (A day; A week; A month; A quarter or longer; Would not invest time)</li><li><strong><code>retrain_mode</code></strong> <em>(conditional)</em> — "Would you prefer training online or in person?" (Online; In person; Hybrid; No preference; Not sure)</li><li><strong><code>retrain_barrier</code></strong> <em>(conditional)</em> — "What is the biggest barrier to getting AI retraining?" (Cost; Time away from work; Not knowing what to learn; Not trusting the programs; Don't need retraining; Other)</li><li><strong><code>policy_retrain</code></strong> <em>(all adults)</em> — "Do you support or oppose government job-retraining programs for workers affected by AI or automation?" (Strongly support → Strongly oppose; Not sure)</li><li><strong><code>policy_lilas</code></strong> <em>(all adults)</em> — support for "Portable Lifelong Learning Accounts" that workers could use for training throughout their careers (Strongly support → Strongly oppose; Not sure)</li></ul>
+
+    <div class="foot">
+      <div class="nav"><a href="06-degrees-and-hiring.html"><span>Previous</span>Do Degrees Still Matter in the Age of AI?</a><a href="08-ai-governance-policy.html" style="text-align:right"><span>Next</span>Rein In the Titans, Cushion the Workers: Where Americans Stand on AI Policy</a></div>
+      <p>AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>
