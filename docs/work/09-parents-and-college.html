@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Doubling Down on the Diploma: Why AI Is Making Parents More Likely to Send Their Kids to College — AI@Work</title>
+<meta name="description" content="Contrary to the fear that AI is making college obsolete, American parents are, on balance, more likely to send their kids to college because of AI — not less. The pull is strongest"/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#2a78d6; --acct:#1c5cab; --soft:#eaf2fd;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@Work Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#ai-is-pushing-parents-toward-college-not-away">AI is pushing parents toward college, not away</a><a href="#the-more-educated-the-parent-the-stronger-the-pull">The more educated the parent, the stronger the pull</a><a href="#the-most-committed-partisans-on-both-sides-move-most">The most committed partisans — on both sides — move most</a><a href="#parents-want-ai-in-the-classroom-too">Parents want AI in the classroom, too</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@Work</div><h1>Doubling Down on the Diploma: Why AI Is Making Parents <em>More</em> Likely to Send Their Kids to College</h1><p class="dek"><em>Contrary to the fear that AI is making college obsolete, American parents are, on balance, more likely to send their kids to college because of AI — not less. The pull is strongest among the most educated parents — and among the most committed partisans of both parties, not one.</em></p><p class="srcline">Source: AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement, fielded June 21–July 13, 2026 (interim extract; data collection ongoing). The college-decision items (<code>parent_view</code>, <code>parent_curric</code>) were asked of parents (unweighted n ≈ 7,005–7,008); the family-size item (<code>children_count</code>) of a broader group of parents (n ≈ 10,928). All figures are weighted estimates, weighted to U.S. Census population targets, and are self-reports — what respondents say about their own expectations and experience, not audited behaviour.</p><p class="pos"><em>Series position: Report 9 of the AI@Work series (see the series index) — a household bookend. The shift toward college is a generational/engagement story — the most committed partisans of <em>both</em> parties, not one side — echoing the party pattern in the lead and policy reports.</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on the AI@Work survey (CHIP50 Wave 38.6), a survey of <strong>23,462 U.S. adults</strong> (weighted n = 23,485) fielded June 21–July 13, 2026. All percentages are <strong>weighted to U.S. Census population targets</strong> and are population-representative; unweighted respondent counts are reported as a reliability guide only.</p>
+<p><strong>These are interim estimates.</strong> Wave 38.6 launched June 21, 2026 and data collection is ongoing; the figures in this report reflect responses received through July 13, 2026 and will be revised in a later release.</p>
+<p><strong>Universe and bases.</strong> This report describes <strong>parents.</strong> The college-decision question (<code>parent_view</code>) and the AI-in-the-curriculum question (<code>parent_curric</code>) were asked of parents responding to the college block (unweighted n ≈ 7,005–7,008); the number-of-children item (<code>children_count</code>) was asked of a broader parent base (n ≈ 10,928). Each figure states its own base. With ~7,000 responses on the core items, breakdowns by education and party are reliable and are reported; finer cross-tabs are not.</p>
+<p><strong>A gap in this extract.</strong> The instrument's follow-up items that ask parents <em>why</em> AI made them more or less likely to send their kids to college (<code>parent_view_neg</code>, <code>parent_view_pos</code>) are <strong>not available in the released data</strong>, so this report can document the <em>direction and size</em> of the shift and who it falls on, but not the reasons parents give for it. That "why" is the natural next addition when those items are surfaced.</p>
+<p><strong>Coding.</strong> <code>parent_view</code> is coded 1 = much more likely … 5 = much less likely (3 = no change) — direction confirmed against the data (the "more likely" share rises steeply with the parent's own education, coherent only under this direction). <code>parent_curric</code> is coded 4 = a lot … 1 = not at all. Labels are mapped from the authoritative Wave 38.6 codebook (these items are not in the machine-readable wording registry).</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>AI is pushing parents toward college, not away.</strong> On balance, AI makes parents <em>more</em> likely to send their kids to college: 27% say more likely versus 12% less likely — a net +15, the opposite of the "AI makes college pointless" narrative.</li><li><strong>But most see no change.</strong> A 62% majority of parents say AI hasn't changed their college plans either way; the net-positive shift is happening at the margins, not as a wholesale swing.</li><li><strong>Education deepens the effect.</strong> 46% of parents with a graduate degree say AI makes them more likely to send their kids to college, versus about 17% of parents with less than a high-school education — the most educated parents are doubling down hardest.</li><li><strong>A both-ends partisan pattern.</strong> The parents most moved toward college are the strongest partisans of <em>both</em> parties — Strong Republicans (42% more likely, net +30) and Strong Democrats (33%, net +22) — while pure independents barely move (14%, net +2). Political intensity, not party direction, tracks the shift, and it holds after controls for education and income.</li><li><strong>Parents want AI in the classroom, too.</strong> 58% of parents say it matters at least somewhat — 23% "a lot" — that their child's future college integrates AI into its teaching.</li><li><strong>Parents diverge from the ambivalent public.</strong> Where the general public leans mildly negative on whether a bachelor's degree is still worth it (net −8 in this survey), parents lean positive about sending their own kids — closer to the hiring managers who still value the degree than to the doubting public.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>One of the loudest anxieties about artificial intelligence is that it will make a college degree a bad investment — that if AI can write the essays and pass the exams, the credential is worth less and young people should think twice before enrolling. If that fear were reshaping family decisions, parents would be the first place to see it. They are not. Asked directly whether AI has changed how they think about sending their kids to college, American parents move, on balance, <em>toward</em> college, not away from it.</p>
+<p>This runs with, not against, the broader evidence that parents remain committed to higher education even amid rising skepticism about its cost and value. A June 2025 Gallup–Lumina Foundation survey found that 40% of parents want their child to attend a four-year college — the single most common preference — and 60% hope for some form of college, even as confidence in higher education's return has slipped nationally<sup class="fnref" id="fnref-gallup-lumina-2025"><a href="#fn-gallup-lumina-2025">1</a></sup>. Wave 38.6 adds the AI-specific dimension: not just whether parents value college, but whether AI in particular is changing their calculus — and, if so, for whom. The answer is that AI is nudging parents toward the diploma rather than away from it, most strongly among the most educated, and that a majority of parents also want the colleges their children attend to teach AI directly.</p>
+<hr/>
+<h2 id="ai-is-pushing-parents-toward-college-not-away">AI is pushing parents toward college, not away</h2>
+<p class="lede"><strong>On balance, AI makes parents more likely to send their kids to college — the reverse of the popular narrative.</strong></p>
+<p>Asked whether AI has made them more or less likely to send their kids to college, parents lean positive. <strong>27% say AI makes them more likely</strong> (13% "much more," 14% "somewhat more"), while just <strong>12% say less likely</strong> (8% somewhat, 4% much less). The largest group by far — <strong>62%</strong> — says AI has made no difference to their plans. The balance of opinion, in other words, tilts about 15 points toward <em>more</em> college, not less: for every parent AI has scared away from the diploma, more than two say it has pushed them toward it.</p>
+<p>That is a striking rebuttal to the idea that AI is quietly emptying the college pipeline. Whatever parents make of AI's effect on essays or entry-level jobs, it is not, on net, leading them to steer their own children away from higher education. If anything, the uncertainty AI introduces appears to make a credential feel more worth having, not less — a hedge in an economy whose rules are being rewritten. The shift is concentrated at the margins rather than sweeping, but its <em>direction</em> is unambiguous and the opposite of what the "college is dead" framing would predict.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. Has AI made you more or less likely to send your kids to college? (parent_view; parents; unweighted n ≈ 7,008). AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more likely</text>
+<g class="cb"><title>Much more likely: 13.0</title><rect x="250.0" y="12" width="80.6" height="17" rx="3" class="cs1"/></g>
+<text x="336.6" y="26" class="ct cval">13.0</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more likely</text>
+<g class="cb"><title>Somewhat more likely: 13.7</title><rect x="250.0" y="42" width="84.9" height="17" rx="3" class="cs1"/></g>
+<text x="340.9" y="56" class="ct cval">13.7</text>
+<text x="240" y="84.5" class="ct clab">No change</text>
+<g class="cb"><title>No change: 61.5</title><rect x="250.0" y="72" width="381.3" height="17" rx="3" class="cs1"/></g>
+<text x="637.3" y="86" class="ct cval">61.5</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less likely</text>
+<g class="cb"><title>Somewhat less likely: 7.8</title><rect x="250.0" y="102" width="48.4" height="17" rx="3" class="cs1"/></g>
+<text x="304.4" y="116" class="ct cval">7.8</text>
+<text x="240" y="144.5" class="ct clab">Much less likely</text>
+<g class="cb"><title>Much less likely: 4.0</title><rect x="250.0" y="132" width="24.8" height="17" rx="3" class="cs1"/></g>
+<text x="280.8" y="146" class="ct cval">4.0</text>
+</svg><figcaption><em>Figure 1. Has AI made you more or less likely to send your kids to college? (<code>parent_view</code>; parents; unweighted n ≈ 7,008). AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Much more likely</td><td>13.0</td></tr><tr><td>Somewhat more likely</td><td>13.7</td></tr><tr><td>No change</td><td>61.5</td></tr><tr><td>Somewhat less likely</td><td>7.8</td></tr><tr><td>Much less likely</td><td>4.0</td></tr></tbody></table></div></details></figure>
+<blockquote><strong>Comparative context.</strong> This aligns with the internal logic of the rest of this survey series. The general public, asked in the same wave whether AI makes a bachelor's degree more or less valuable, leans mildly <em>negative</em> (a net −8). Yet the two groups with the most at stake move the other way: <strong>hiring managers</strong> say a degree is <em>more</em> valuable in the AI era (net +24), and <strong>parents</strong> say AI makes them <em>more</em> likely to send their kids (net +15). The people actually investing in or hiring on the strength of degrees are more bullish on them than the abstract public — a pattern worth keeping in view whenever "the value of college" is debated.</blockquote>
+<hr/>
+<h2 id="the-more-educated-the-parent-the-stronger-the-pull">The more educated the parent, the stronger the pull</h2>
+<p class="lede"><strong>The instinct to double down on college in the age of AI rises steeply with the parent's own education.</strong></p>
+<p>The net-positive shift is not evenly spread; it is concentrated among the most educated parents. The share saying AI makes them <em>more</em> likely to send their kids to college climbs from <strong>17% among parents with less than a high-school education, to 20% of high-school graduates, 19% with some college, 28% of college graduates, and 46% of parents with a graduate degree.</strong> Among graduate-degree parents, in other words, nearly half say AI has strengthened their commitment to college — and only 7% say it has weakened it, the lowest of any education group.</p>
+<p>This is the same divide that runs through AI itself: the more educated are the heaviest AI users and, it turns out, the most convinced their kids should be credentialed for the world AI is making. It suggests the college-going gap between more- and less-educated families may <em>widen</em> rather than narrow in the AI era, as the parents already most oriented toward higher education become even more so. Less-educated parents are not turning against college — a majority in every group report no change — but they are markedly less likely to say AI has actively pushed them toward it.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 344" width="100%" height="344" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Share of parents saying AI makes them more likely (vs. less likely) to send their kids to college, by parent&#x27;s education (parent_view collapsed). Base: parents; unweighted n ≈ 7,008. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="314" class="cg"/>
+<text x="250.0" y="330" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="314" class="cg"/>
+<text x="405.0" y="330" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="314" class="cg"/>
+<text x="560.0" y="330" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="314" class="cg"/>
+<text x="715.0" y="330" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="314" class="cg"/>
+<text x="870.0" y="330" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More likely</text>
+<rect x="368.4" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="383.4" y="15" class="ct clg">No change</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less likely</text>
+<text x="240" y="55.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less — More likely: 16.9</title><rect x="250.0" y="30" width="131.0" height="13" rx="3" class="cs1"/></g>
+<text x="387.0" y="40" class="ct cval">16.9</text>
+<g class="cb"><title>Some high school or less — No change: 67.9</title><rect x="250.0" y="45" width="526.2" height="13" rx="3" class="cs2"/></g>
+<text x="782.2" y="55" class="ct cval">67.9</text>
+<g class="cb"><title>Some high school or less — Less likely: 15.2</title><rect x="250.0" y="60" width="117.8" height="13" rx="3" class="cs3"/></g>
+<text x="373.8" y="70" class="ct cval">15.2</text>
+<text x="240" y="111.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate — More likely: 20.0</title><rect x="250.0" y="86" width="155.0" height="13" rx="3" class="cs1"/></g>
+<text x="411.0" y="96" class="ct cval">20.0</text>
+<g class="cb"><title>High-school graduate — No change: 67.0</title><rect x="250.0" y="101" width="519.2" height="13" rx="3" class="cs2"/></g>
+<text x="775.2" y="111" class="ct cval">67.0</text>
+<g class="cb"><title>High-school graduate — Less likely: 13.0</title><rect x="250.0" y="116" width="100.8" height="13" rx="3" class="cs3"/></g>
+<text x="356.8" y="126" class="ct cval">13.0</text>
+<text x="240" y="167.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college — More likely: 19.3</title><rect x="250.0" y="142" width="149.6" height="13" rx="3" class="cs1"/></g>
+<text x="405.6" y="152" class="ct cval">19.3</text>
+<g class="cb"><title>Some college — No change: 68.0</title><rect x="250.0" y="157" width="527.0" height="13" rx="3" class="cs2"/></g>
+<text x="783.0" y="167" class="ct cval">68.0</text>
+<g class="cb"><title>Some college — Less likely: 12.7</title><rect x="250.0" y="172" width="98.4" height="13" rx="3" class="cs3"/></g>
+<text x="354.4" y="182" class="ct cval">12.7</text>
+<text x="240" y="223.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree — More likely: 27.9</title><rect x="250.0" y="198" width="216.2" height="13" rx="3" class="cs1"/></g>
+<text x="472.2" y="208" class="ct cval">27.9</text>
+<g class="cb"><title>College degree — No change: 59.4</title><rect x="250.0" y="213" width="460.3" height="13" rx="3" class="cs2"/></g>
+<text x="716.3" y="223" class="ct cval">59.4</text>
+<g class="cb"><title>College degree — Less likely: 12.7</title><rect x="250.0" y="228" width="98.4" height="13" rx="3" class="cs3"/></g>
+<text x="354.4" y="238" class="ct cval">12.7</text>
+<text x="240" y="279.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree — More likely: 46.2</title><rect x="250.0" y="254" width="358.0" height="13" rx="3" class="cs1"/></g>
+<text x="614.0" y="264" class="ct cval">46.2</text>
+<g class="cb"><title>Graduate degree — No change: 46.9</title><rect x="250.0" y="269" width="363.5" height="13" rx="3" class="cs2"/></g>
+<text x="619.5" y="279" class="ct cval">46.9</text>
+<g class="cb"><title>Graduate degree — Less likely: 6.9</title><rect x="250.0" y="284" width="53.5" height="13" rx="3" class="cs3"/></g>
+<text x="309.5" y="294" class="ct cval">6.9</text>
+</svg><figcaption><em>Figure 2. Share of parents saying AI makes them more likely (vs. less likely) to send their kids to college, by parent's education (<code>parent_view</code> collapsed). Base: parents; unweighted n ≈ 7,008. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Education</th><th>More likely</th><th>No change</th><th>Less likely</th></tr></thead><tbody><tr><td>Some high school or less</td><td>16.9</td><td>67.9</td><td>15.2</td></tr><tr><td>High-school graduate</td><td>20.0</td><td>67.0</td><td>13.0</td></tr><tr><td>Some college</td><td>19.3</td><td>68.0</td><td>12.7</td></tr><tr><td>College degree</td><td>27.9</td><td>59.4</td><td>12.7</td></tr><tr><td>Graduate degree</td><td>46.2</td><td>46.9</td><td>6.9</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="the-most-committed-partisans-on-both-sides-move-most">The most committed partisans — on both sides — move most</h2>
+<p class="lede"><strong>The pull toward college is strongest among the most committed partisans of <em>both</em> parties; the disengaged middle barely moves — a pattern the usual three-way party split conceals.</strong></p>
+<p>On a simple Republican/independent/Democrat split, this looks like a one-sided Republican story: Republican parents appear the most moved toward college (35% more likely, net +24) and independents the least (17%, net +5). But the full seven-point scale shows something more interesting — it is the <strong>strength</strong> of partisanship, not its direction, that predicts who says AI has pushed them toward college. Strong Republicans are the most moved (42% more likely, net +30), but <strong>Strong Democrats are a close second (33% more likely, net +22)</strong> — while every group in between moves far less, and <strong>pure independents move least of all (14% more likely, net +2).</strong> The leaners and weak partisans of both parties (net +7 to +11) cluster together in that modest middle; the two committed poles tower over them.</p>
+<p>This both-ends pattern survives controls. In a weighted model of the college-decision scale that adjusts for the parent's education, income, age, and gender, Strong Democrats are statistically indistinguishable from Strong Republicans — the two most pro-college groups — while every other group, and pure independents most of all, is significantly less likely to say AI has moved them toward college. The effect is therefore not an artifact of strong partisans being more educated (education adds its own, independent pull); political engagement on both sides tracks the shift on its own.</p>
+<p>Why the strongest partisans of opposite parties would land in the same place is worth sitting with. It is not that they are simply more volatile: the strongest partisans are no more likely than anyone else to say AI made them <em>less</em> likely to send their kids to college (Strong Republicans 12%, Strong Democrats 11%, both in line with the sample) — their movement runs specifically <em>toward</em> college, not scattered in both directions. The disengaged middle, by contrast, overwhelmingly reports no change (pure independents 74% "no change," the highest of any group). The most plausible reading is engagement: the parents paying closest attention to politics — and, likely, to the AI debate running through it — are the ones translating that attention into a firmer bet on the diploma, whichever party they follow. The earlier "Republican surprise" was real but incomplete: the surprise is not that Republicans favor college, but that the most committed partisans of <em>both</em> sides respond to AI the same way.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 456" width="100%" height="456" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Effect of AI on the college decision, by 7-point party identification (parent_view). Base: parents; unweighted n ≈ 7,004. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="426" class="cg"/>
+<text x="250.0" y="442" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="426" class="cg"/>
+<text x="405.0" y="442" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="426" class="cg"/>
+<text x="560.0" y="442" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="426" class="cg"/>
+<text x="715.0" y="442" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="426" class="cg"/>
+<text x="870.0" y="442" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More likely</text>
+<rect x="368.4" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="383.4" y="15" class="ct clg">No change</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less likely</text>
+<text x="240" y="55.5" class="ct clab">Strong Republican</text>
+<g class="cb"><title>Strong Republican — More likely: 42.0</title><rect x="250.0" y="30" width="325.5" height="13" rx="3" class="cs1"/></g>
+<text x="581.5" y="40" class="ct cval">42.0</text>
+<g class="cb"><title>Strong Republican — No change: 45.8</title><rect x="250.0" y="45" width="355.0" height="13" rx="3" class="cs2"/></g>
+<text x="611.0" y="55" class="ct cval">45.8</text>
+<g class="cb"><title>Strong Republican — Less likely: 12.1</title><rect x="250.0" y="60" width="93.8" height="13" rx="3" class="cs3"/></g>
+<text x="349.8" y="70" class="ct cval">12.1</text>
+<text x="240" y="111.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican — More likely: 21.2</title><rect x="250.0" y="86" width="164.3" height="13" rx="3" class="cs1"/></g>
+<text x="420.3" y="96" class="ct cval">21.2</text>
+<g class="cb"><title>Republican — No change: 68.2</title><rect x="250.0" y="101" width="528.6" height="13" rx="3" class="cs2"/></g>
+<text x="784.6" y="111" class="ct cval">68.2</text>
+<g class="cb"><title>Republican — Less likely: 10.6</title><rect x="250.0" y="116" width="82.1" height="13" rx="3" class="cs3"/></g>
+<text x="338.1" y="126" class="ct cval">10.6</text>
+<text x="240" y="167.5" class="ct clab">Lean Republican</text>
+<g class="cb"><title>Lean Republican — More likely: 19.4</title><rect x="250.0" y="142" width="150.4" height="13" rx="3" class="cs1"/></g>
+<text x="406.4" y="152" class="ct cval">19.4</text>
+<g class="cb"><title>Lean Republican — No change: 69.9</title><rect x="250.0" y="157" width="541.7" height="13" rx="3" class="cs2"/></g>
+<text x="797.7" y="167" class="ct cval">69.9</text>
+<g class="cb"><title>Lean Republican — Less likely: 10.7</title><rect x="250.0" y="172" width="82.9" height="13" rx="3" class="cs3"/></g>
+<text x="338.9" y="182" class="ct cval">10.7</text>
+<text x="240" y="223.5" class="ct clab">Independent (pure)</text>
+<g class="cb"><title>Independent (pure) — More likely: 14.1</title><rect x="250.0" y="198" width="109.3" height="13" rx="3" class="cs1"/></g>
+<text x="365.3" y="208" class="ct cval">14.1</text>
+<g class="cb"><title>Independent (pure) — No change: 73.5</title><rect x="250.0" y="213" width="569.6" height="13" rx="3" class="cs2"/></g>
+<text x="825.6" y="223" class="ct cval">73.5</text>
+<g class="cb"><title>Independent (pure) — Less likely: 12.4</title><rect x="250.0" y="228" width="96.1" height="13" rx="3" class="cs3"/></g>
+<text x="352.1" y="238" class="ct cval">12.4</text>
+<text x="240" y="279.5" class="ct clab">Lean Democrat</text>
+<g class="cb"><title>Lean Democrat — More likely: 22.6</title><rect x="250.0" y="254" width="175.1" height="13" rx="3" class="cs1"/></g>
+<text x="431.1" y="264" class="ct cval">22.6</text>
+<g class="cb"><title>Lean Democrat — No change: 61.8</title><rect x="250.0" y="269" width="479.0" height="13" rx="3" class="cs2"/></g>
+<text x="735.0" y="279" class="ct cval">61.8</text>
+<g class="cb"><title>Lean Democrat — Less likely: 15.6</title><rect x="250.0" y="284" width="120.9" height="13" rx="3" class="cs3"/></g>
+<text x="376.9" y="294" class="ct cval">15.6</text>
+<text x="240" y="335.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat — More likely: 19.6</title><rect x="250.0" y="310" width="151.9" height="13" rx="3" class="cs1"/></g>
+<text x="407.9" y="320" class="ct cval">19.6</text>
+<g class="cb"><title>Democrat — No change: 69.9</title><rect x="250.0" y="325" width="541.7" height="13" rx="3" class="cs2"/></g>
+<text x="797.7" y="335" class="ct cval">69.9</text>
+<g class="cb"><title>Democrat — Less likely: 10.5</title><rect x="250.0" y="340" width="81.4" height="13" rx="3" class="cs3"/></g>
+<text x="337.4" y="350" class="ct cval">10.5</text>
+<text x="240" y="391.5" class="ct clab">Strong Democrat</text>
+<g class="cb"><title>Strong Democrat — More likely: 32.5</title><rect x="250.0" y="366" width="251.9" height="13" rx="3" class="cs1"/></g>
+<text x="507.9" y="376" class="ct cval">32.5</text>
+<g class="cb"><title>Strong Democrat — No change: 56.8</title><rect x="250.0" y="381" width="440.2" height="13" rx="3" class="cs2"/></g>
+<text x="696.2" y="391" class="ct cval">56.8</text>
+<g class="cb"><title>Strong Democrat — Less likely: 10.7</title><rect x="250.0" y="396" width="82.9" height="13" rx="3" class="cs3"/></g>
+<text x="338.9" y="406" class="ct cval">10.7</text>
+</svg><figcaption><em>Figure 3. Effect of AI on the college decision, by 7-point party identification (<code>parent_view</code>). Base: parents; unweighted n ≈ 7,004. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Party (7-point)</th><th>More likely</th><th>No change</th><th>Less likely</th><th>Net (more − less)</th></tr></thead><tbody><tr><td>Strong Republican</td><td>42.0</td><td>45.8</td><td>12.1</td><td>+29.9</td></tr><tr><td>Republican</td><td>21.2</td><td>68.2</td><td>10.6</td><td>+10.6</td></tr><tr><td>Lean Republican</td><td>19.4</td><td>69.9</td><td>10.7</td><td>+8.7</td></tr><tr><td>Independent (pure)</td><td>14.1</td><td>73.5</td><td>12.4</td><td>+1.7</td></tr><tr><td>Lean Democrat</td><td>22.6</td><td>61.8</td><td>15.6</td><td>+7.0</td></tr><tr><td>Democrat</td><td>19.6</td><td>69.9</td><td>10.5</td><td>+9.0</td></tr><tr><td>Strong Democrat</td><td>32.5</td><td>56.8</td><td>10.7</td><td>+21.8</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="parents-want-ai-in-the-classroom-too">Parents want AI in the classroom, too</h2>
+<p class="lede"><strong>A majority of parents want the colleges their kids attend to teach AI — though it is not yet a make-or-break priority.</strong></p>
+<p>Wanting to send kids to college in the AI era raises a second question: should college itself change? Parents, on balance, say yes. Asked how much it matters that their child's future college integrates AI into its curriculum, <strong>58% say it matters at least somewhat — 23% "a lot" and 36% "somewhat"</strong> — while 42% say "not so much" (22%) or "not at all" (20%). So a clear majority of parents want AI in the classroom their tuition will pay for, but the intensity is moderate: fewer than a quarter treat it as a top priority, and a substantial minority shrug at it.</p>
+<p>Read alongside the college-going finding, this completes a coherent parental stance: AI makes college feel <em>more</em> necessary, and parents would like that college to prepare their children for AI directly rather than ignore it. It is not a demand for a wholesale reinvention of higher education, but it is a clear signal to colleges that AI fluency is becoming part of what families expect a degree to deliver — a market expectation that will grow as the AI-committed, more-educated parents identified above send their children through the system.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 4. How much it matters that a child&#x27;s college integrates AI into its curriculum (parent_curric; parents; unweighted n ≈ 7,005). Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">A lot</text>
+<g class="cb"><title>A lot: 22.7</title><rect x="250.0" y="12" width="140.7" height="17" rx="3" class="cs1"/></g>
+<text x="396.7" y="26" class="ct cval">22.7</text>
+<text x="240" y="54.5" class="ct clab">Somewhat</text>
+<g class="cb"><title>Somewhat: 35.6</title><rect x="250.0" y="42" width="220.7" height="17" rx="3" class="cs1"/></g>
+<text x="476.7" y="56" class="ct cval">35.6</text>
+<text x="240" y="84.5" class="ct clab">Not so much</text>
+<g class="cb"><title>Not so much: 21.5</title><rect x="250.0" y="72" width="133.3" height="17" rx="3" class="cs1"/></g>
+<text x="389.3" y="86" class="ct cval">21.5</text>
+<text x="240" y="114.5" class="ct clab">Not at all</text>
+<g class="cb"><title>Not at all: 20.2</title><rect x="250.0" y="102" width="125.2" height="17" rx="3" class="cs1"/></g>
+<text x="381.2" y="116" class="ct cval">20.2</text>
+</svg><figcaption><em>Figure 4. How much it matters that a child's college integrates AI into its curriculum (<code>parent_curric</code>; parents; unweighted n ≈ 7,005). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 4 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>A lot</td><td>22.7</td></tr><tr><td>Somewhat</td><td>35.6</td></tr><tr><td>Not so much</td><td>21.5</td></tr><tr><td>Not at all</td><td>20.2</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>The fear that AI is turning families away from college is not borne out by what parents say. On balance, AI makes American parents <em>more</em> likely to send their kids to college, not less — a net shift of about 15 points toward the diploma — and the effect is strongest among the most educated parents, who are doubling down hardest on a credential for the AI age. It is also strongest among the most committed partisans of <em>both</em> parties — Strong Republicans and Strong Democrats alike, who are equally moved once education and income are accounted for — while the disengaged middle barely shifts. And a majority of parents want the colleges their children attend to teach AI, not avoid it.</p>
+<p>The dominant note, to be fair, is stability: most parents say AI has changed nothing about their college plans. But where it has moved them, it has moved them toward higher education, not away — and it has done so most among the families already most likely to enroll, hinting that AI may widen rather than close the college-going divide. For colleges, the message from parents is twofold and consistent: they still believe in the degree, perhaps more than ever, and they increasingly expect it to come with AI built in. What remains unmeasured here — the reasons parents give for these shifts — is the piece worth capturing next.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data source.</strong> AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement. Total unweighted n = 23,462; weighted n = 23,485. Fielded June 21–July 13, 2026, with an oversample of students and adults 18–22; it is nonetheless a broad adult sample. Estimates are weighted to U.S. Census population targets. Data collection was ongoing at the time of this extract — figures reflect responses through July 13, 2026 and are preliminary.</p>
+<p><strong>Measures and bases.</strong> <code>parent_view</code> ("Has AI made you more or less likely to send your kids to college?"; 5-point, much more likely → much less likely, with no change at the center) and <code>parent_curric</code> ("How much does it matter that your child's college integrates AI?"; a lot → not at all) were asked of parents responding to the college block (unweighted n ≈ 7,005–7,008). <code>children_count</code> (number of children) was asked of a broader parent base (n ≈ 10,928); it is used only to characterize the sample and is not central. Breakdowns are by education (<code>education_cat</code>) and by the 7-point party scale (<code>party7</code>), both with adequate cell sizes on the ~7,000 base; no finer cross-tabs are reported. Party is shown on the 7-point scale because the 3-point measure hides the central finding — that the two <em>strong</em>-partisan poles behave alike (see the partisan section).</p>
+<p><strong>Coding and direction checks.</strong> <code>parent_view</code> is coded 1 = much more likely, 2 = somewhat more, 3 = no change, 4 = somewhat less, 5 = much less likely — <strong>direction confirmed in-data</strong>: the "more likely" (1–2) share rises monotonically with the parent's education (17% among parents with less than high school to 46% among graduate-degree parents), which is coherent only if low codes mean "more likely." <code>parent_curric</code> (4 = a lot … 1 = not at all) is a labeled category set reported per the codebook. <code>children_count</code> values are read as the number of children; the codebook lists 0–10 while the parent data runs 1–10+, consistent with the item being asked of parents (no zero-child respondents), so values are treated as counts.</p>
+<p><strong>Estimation.</strong> Cross-tabulations are weighted shares. The education and party patterns are primarily descriptive weighted breakdowns. The both-ends partisan pattern is additionally confirmed with one weighted OLS of the 1–5 college-decision scale on <code>party7</code>, education, income, age, and gender (n = 6,988; R² = 0.08; Table 3b): relative to Strong Republicans, Strong Democrats are not significantly different while every other group is significantly less moved toward college — establishing that the pattern is not a composition effect of education. "More likely" and "less likely" are the sums of the two adjacent categories on each side of "no change." Cells with unweighted n &lt; 10 are suppressed.</p>
+<p><strong>A framing note.</strong> <code>parent_view</code> measures the <em>change</em> in a parent's inclination that they attribute to AI, not their baseline preference for college. Comparisons to baseline-preference surveys (e.g., Gallup–Lumina's four-year-college preference) are therefore contrasts between different quantities and are flagged as such in the text.</p>
+<p><strong>Reproducibility.</strong> Figures map to Appendix B tables; values copied verbatim from the underlying tabulations. External benchmark fetched and verified from EdSource's report on the Gallup–Lumina survey (see the footnote at the end of Appendix B).</p>
+<hr/>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1. Has AI made you more or less likely to send your kids to college? (parent_view; parents; unweighted n ≈ 7,008; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more likely</text>
+<g class="cb"><title>Much more likely: 13.0</title><rect x="250.0" y="12" width="80.6" height="17" rx="3" class="cs1"/></g>
+<text x="336.6" y="26" class="ct cval">13.0</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more likely</text>
+<g class="cb"><title>Somewhat more likely: 13.7</title><rect x="250.0" y="42" width="84.9" height="17" rx="3" class="cs1"/></g>
+<text x="340.9" y="56" class="ct cval">13.7</text>
+<text x="240" y="84.5" class="ct clab">No change</text>
+<g class="cb"><title>No change: 61.5</title><rect x="250.0" y="72" width="381.3" height="17" rx="3" class="cs1"/></g>
+<text x="637.3" y="86" class="ct cval">61.5</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less likely</text>
+<g class="cb"><title>Somewhat less likely: 7.8</title><rect x="250.0" y="102" width="48.4" height="17" rx="3" class="cs1"/></g>
+<text x="304.4" y="116" class="ct cval">7.8</text>
+<text x="240" y="144.5" class="ct clab">Much less likely</text>
+<g class="cb"><title>Much less likely: 4.0</title><rect x="250.0" y="132" width="24.8" height="17" rx="3" class="cs1"/></g>
+<text x="280.8" y="146" class="ct cval">4.0</text>
+</svg><figcaption><strong>Table 1. Has AI made you more or less likely to send your kids to college?</strong> (<code>parent_view</code>; parents; unweighted n ≈ 7,008; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Much more likely</td><td>13.0</td></tr><tr><td>Somewhat more likely</td><td>13.7</td></tr><tr><td>No change</td><td>61.5</td></tr><tr><td>Somewhat less likely</td><td>7.8</td></tr><tr><td>Much less likely</td><td>4.0</td></tr></tbody></table></div></details></figure>
+<p><em>More likely (much + somewhat) = 26.7%; less likely = 11.8%; net = +14.9.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 344" width="100%" height="344" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Effect of AI on the college decision, by parent&#x27;s education (parent_view; weighted %; parents).">
+<line x1="250.0" y1="24" x2="250.0" y2="314" class="cg"/>
+<text x="250.0" y="330" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="314" class="cg"/>
+<text x="405.0" y="330" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="314" class="cg"/>
+<text x="560.0" y="330" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="314" class="cg"/>
+<text x="715.0" y="330" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="314" class="cg"/>
+<text x="870.0" y="330" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More likely</text>
+<rect x="368.4" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="383.4" y="15" class="ct clg">No change</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less likely</text>
+<text x="240" y="55.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less — More likely: 16.9</title><rect x="250.0" y="30" width="131.0" height="13" rx="3" class="cs1"/></g>
+<text x="387.0" y="40" class="ct cval">16.9</text>
+<g class="cb"><title>Some high school or less — No change: 67.9</title><rect x="250.0" y="45" width="526.2" height="13" rx="3" class="cs2"/></g>
+<text x="782.2" y="55" class="ct cval">67.9</text>
+<g class="cb"><title>Some high school or less — Less likely: 15.2</title><rect x="250.0" y="60" width="117.8" height="13" rx="3" class="cs3"/></g>
+<text x="373.8" y="70" class="ct cval">15.2</text>
+<text x="240" y="111.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate — More likely: 20.0</title><rect x="250.0" y="86" width="155.0" height="13" rx="3" class="cs1"/></g>
+<text x="411.0" y="96" class="ct cval">20.0</text>
+<g class="cb"><title>High-school graduate — No change: 67.0</title><rect x="250.0" y="101" width="519.2" height="13" rx="3" class="cs2"/></g>
+<text x="775.2" y="111" class="ct cval">67.0</text>
+<g class="cb"><title>High-school graduate — Less likely: 13.0</title><rect x="250.0" y="116" width="100.8" height="13" rx="3" class="cs3"/></g>
+<text x="356.8" y="126" class="ct cval">13.0</text>
+<text x="240" y="167.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college — More likely: 19.3</title><rect x="250.0" y="142" width="149.6" height="13" rx="3" class="cs1"/></g>
+<text x="405.6" y="152" class="ct cval">19.3</text>
+<g class="cb"><title>Some college — No change: 68.0</title><rect x="250.0" y="157" width="527.0" height="13" rx="3" class="cs2"/></g>
+<text x="783.0" y="167" class="ct cval">68.0</text>
+<g class="cb"><title>Some college — Less likely: 12.7</title><rect x="250.0" y="172" width="98.4" height="13" rx="3" class="cs3"/></g>
+<text x="354.4" y="182" class="ct cval">12.7</text>
+<text x="240" y="223.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree — More likely: 27.9</title><rect x="250.0" y="198" width="216.2" height="13" rx="3" class="cs1"/></g>
+<text x="472.2" y="208" class="ct cval">27.9</text>
+<g class="cb"><title>College degree — No change: 59.4</title><rect x="250.0" y="213" width="460.3" height="13" rx="3" class="cs2"/></g>
+<text x="716.3" y="223" class="ct cval">59.4</text>
+<g class="cb"><title>College degree — Less likely: 12.7</title><rect x="250.0" y="228" width="98.4" height="13" rx="3" class="cs3"/></g>
+<text x="354.4" y="238" class="ct cval">12.7</text>
+<text x="240" y="279.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree — More likely: 46.2</title><rect x="250.0" y="254" width="358.0" height="13" rx="3" class="cs1"/></g>
+<text x="614.0" y="264" class="ct cval">46.2</text>
+<g class="cb"><title>Graduate degree — No change: 46.9</title><rect x="250.0" y="269" width="363.5" height="13" rx="3" class="cs2"/></g>
+<text x="619.5" y="279" class="ct cval">46.9</text>
+<g class="cb"><title>Graduate degree — Less likely: 6.9</title><rect x="250.0" y="284" width="53.5" height="13" rx="3" class="cs3"/></g>
+<text x="309.5" y="294" class="ct cval">6.9</text>
+</svg><figcaption><strong>Table 2. Effect of AI on the college decision, by parent's education</strong> (<code>parent_view</code>; weighted %; parents).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Education</th><th>More likely</th><th>No change</th><th>Less likely</th></tr></thead><tbody><tr><td>Some high school or less</td><td>16.9</td><td>67.9</td><td>15.2</td></tr><tr><td>High-school graduate</td><td>20.0</td><td>67.0</td><td>13.0</td></tr><tr><td>Some college</td><td>19.3</td><td>68.0</td><td>12.7</td></tr><tr><td>College degree</td><td>27.9</td><td>59.4</td><td>12.7</td></tr><tr><td>Graduate degree</td><td>46.2</td><td>46.9</td><td>6.9</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 456" width="100%" height="456" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. Effect of AI on the college decision, by 7-point party identification (parent_view; weighted %; parents).">
+<line x1="250.0" y1="24" x2="250.0" y2="426" class="cg"/>
+<text x="250.0" y="442" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="426" class="cg"/>
+<text x="405.0" y="442" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="426" class="cg"/>
+<text x="560.0" y="442" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="426" class="cg"/>
+<text x="715.0" y="442" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="426" class="cg"/>
+<text x="870.0" y="442" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More likely</text>
+<rect x="368.4" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="383.4" y="15" class="ct clg">No change</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less likely</text>
+<text x="240" y="55.5" class="ct clab">Strong Republican</text>
+<g class="cb"><title>Strong Republican — More likely: 42.0</title><rect x="250.0" y="30" width="325.5" height="13" rx="3" class="cs1"/></g>
+<text x="581.5" y="40" class="ct cval">42.0</text>
+<g class="cb"><title>Strong Republican — No change: 45.8</title><rect x="250.0" y="45" width="355.0" height="13" rx="3" class="cs2"/></g>
+<text x="611.0" y="55" class="ct cval">45.8</text>
+<g class="cb"><title>Strong Republican — Less likely: 12.1</title><rect x="250.0" y="60" width="93.8" height="13" rx="3" class="cs3"/></g>
+<text x="349.8" y="70" class="ct cval">12.1</text>
+<text x="240" y="111.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican — More likely: 21.2</title><rect x="250.0" y="86" width="164.3" height="13" rx="3" class="cs1"/></g>
+<text x="420.3" y="96" class="ct cval">21.2</text>
+<g class="cb"><title>Republican — No change: 68.2</title><rect x="250.0" y="101" width="528.6" height="13" rx="3" class="cs2"/></g>
+<text x="784.6" y="111" class="ct cval">68.2</text>
+<g class="cb"><title>Republican — Less likely: 10.6</title><rect x="250.0" y="116" width="82.1" height="13" rx="3" class="cs3"/></g>
+<text x="338.1" y="126" class="ct cval">10.6</text>
+<text x="240" y="167.5" class="ct clab">Lean Republican</text>
+<g class="cb"><title>Lean Republican — More likely: 19.4</title><rect x="250.0" y="142" width="150.4" height="13" rx="3" class="cs1"/></g>
+<text x="406.4" y="152" class="ct cval">19.4</text>
+<g class="cb"><title>Lean Republican — No change: 69.9</title><rect x="250.0" y="157" width="541.7" height="13" rx="3" class="cs2"/></g>
+<text x="797.7" y="167" class="ct cval">69.9</text>
+<g class="cb"><title>Lean Republican — Less likely: 10.7</title><rect x="250.0" y="172" width="82.9" height="13" rx="3" class="cs3"/></g>
+<text x="338.9" y="182" class="ct cval">10.7</text>
+<text x="240" y="223.5" class="ct clab">Independent (pure)</text>
+<g class="cb"><title>Independent (pure) — More likely: 14.1</title><rect x="250.0" y="198" width="109.3" height="13" rx="3" class="cs1"/></g>
+<text x="365.3" y="208" class="ct cval">14.1</text>
+<g class="cb"><title>Independent (pure) — No change: 73.5</title><rect x="250.0" y="213" width="569.6" height="13" rx="3" class="cs2"/></g>
+<text x="825.6" y="223" class="ct cval">73.5</text>
+<g class="cb"><title>Independent (pure) — Less likely: 12.4</title><rect x="250.0" y="228" width="96.1" height="13" rx="3" class="cs3"/></g>
+<text x="352.1" y="238" class="ct cval">12.4</text>
+<text x="240" y="279.5" class="ct clab">Lean Democrat</text>
+<g class="cb"><title>Lean Democrat — More likely: 22.6</title><rect x="250.0" y="254" width="175.1" height="13" rx="3" class="cs1"/></g>
+<text x="431.1" y="264" class="ct cval">22.6</text>
+<g class="cb"><title>Lean Democrat — No change: 61.8</title><rect x="250.0" y="269" width="479.0" height="13" rx="3" class="cs2"/></g>
+<text x="735.0" y="279" class="ct cval">61.8</text>
+<g class="cb"><title>Lean Democrat — Less likely: 15.6</title><rect x="250.0" y="284" width="120.9" height="13" rx="3" class="cs3"/></g>
+<text x="376.9" y="294" class="ct cval">15.6</text>
+<text x="240" y="335.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat — More likely: 19.6</title><rect x="250.0" y="310" width="151.9" height="13" rx="3" class="cs1"/></g>
+<text x="407.9" y="320" class="ct cval">19.6</text>
+<g class="cb"><title>Democrat — No change: 69.9</title><rect x="250.0" y="325" width="541.7" height="13" rx="3" class="cs2"/></g>
+<text x="797.7" y="335" class="ct cval">69.9</text>
+<g class="cb"><title>Democrat — Less likely: 10.5</title><rect x="250.0" y="340" width="81.4" height="13" rx="3" class="cs3"/></g>
+<text x="337.4" y="350" class="ct cval">10.5</text>
+<text x="240" y="391.5" class="ct clab">Strong Democrat</text>
+<g class="cb"><title>Strong Democrat — More likely: 32.5</title><rect x="250.0" y="366" width="251.9" height="13" rx="3" class="cs1"/></g>
+<text x="507.9" y="376" class="ct cval">32.5</text>
+<g class="cb"><title>Strong Democrat — No change: 56.8</title><rect x="250.0" y="381" width="440.2" height="13" rx="3" class="cs2"/></g>
+<text x="696.2" y="391" class="ct cval">56.8</text>
+<g class="cb"><title>Strong Democrat — Less likely: 10.7</title><rect x="250.0" y="396" width="82.9" height="13" rx="3" class="cs3"/></g>
+<text x="338.9" y="406" class="ct cval">10.7</text>
+</svg><figcaption><strong>Table 3. Effect of AI on the college decision, by 7-point party identification</strong> (<code>parent_view</code>; weighted %; parents).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Party (7-point)</th><th>More likely</th><th>No change</th><th>Less likely</th><th>Net (more − less)</th></tr></thead><tbody><tr><td>Strong Republican</td><td>42.0</td><td>45.8</td><td>12.1</td><td>+29.9</td></tr><tr><td>Republican</td><td>21.2</td><td>68.2</td><td>10.6</td><td>+10.6</td></tr><tr><td>Lean Republican</td><td>19.4</td><td>69.9</td><td>10.7</td><td>+8.7</td></tr><tr><td>Independent (pure)</td><td>14.1</td><td>73.5</td><td>12.4</td><td>+1.7</td></tr><tr><td>Lean Democrat</td><td>22.6</td><td>61.8</td><td>15.6</td><td>+7.0</td></tr><tr><td>Democrat</td><td>19.6</td><td>69.9</td><td>10.5</td><td>+9.0</td></tr><tr><td>Strong Democrat</td><td>32.5</td><td>56.8</td><td>10.7</td><td>+21.8</td></tr></tbody></table></div></details></figure>
+<p><em>For comparison, the 3-point measure reads Republican +23.5, Democrat +17.0, Independent/Other +4.6 net — which looks like a one-sided Republican effect only because it merges the towering Strong-Republican group with weaker Republicans and buries the nearly-as-strong Strong-Democrat pole inside the Democratic average. Rows may not sum to exactly 100 due to rounding.</em></p>
+<figure class="tbl"><div class="tw"><table><thead><tr><th>Party (vs. Strong Republican)</th><th>Coefficient</th><th>Sig.</th></tr></thead><tbody><tr><td>Republican</td><td>+0.23</td><td>*</td></tr><tr><td>Lean Republican</td><td>+0.22</td><td>*</td></tr><tr><td>Independent (pure)</td><td>+0.26</td><td>*</td></tr><tr><td>Lean Democrat</td><td>+0.24</td><td>*</td></tr><tr><td>Democrat</td><td>+0.20</td><td>*</td></tr><tr><td>Strong Democrat</td><td>+0.03</td><td>ns</td></tr></tbody></table></div><figcaption><strong>Table 3b. College-decision scale by party, adjusted</strong> (<code>parent_view</code>, 1 = much more likely … 5 = much less likely; weighted OLS coefficients vs. Strong Republican; controls for education, income, age, gender; n = 6,988; R² = 0.08). Positive = <em>less</em> likely to be moved toward college than Strong Republicans.</figcaption></figure>
+<p><em>Only Strong Democrats are statistically indistinguishable from Strong Republicans; every other group is significantly less moved toward college, with pure independents the largest gap. Graduate-degree parents are independently more moved (coefficient −0.33), confirming education and partisan intensity act separately.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 4. How much it matters that a child&#x27;s college integrates AI (parent_curric; parents; unweighted n ≈ 7,005; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">A lot</text>
+<g class="cb"><title>A lot: 22.7</title><rect x="250.0" y="12" width="140.7" height="17" rx="3" class="cs1"/></g>
+<text x="396.7" y="26" class="ct cval">22.7</text>
+<text x="240" y="54.5" class="ct clab">Somewhat</text>
+<g class="cb"><title>Somewhat: 35.6</title><rect x="250.0" y="42" width="220.7" height="17" rx="3" class="cs1"/></g>
+<text x="476.7" y="56" class="ct cval">35.6</text>
+<text x="240" y="84.5" class="ct clab">Not so much</text>
+<g class="cb"><title>Not so much: 21.5</title><rect x="250.0" y="72" width="133.3" height="17" rx="3" class="cs1"/></g>
+<text x="389.3" y="86" class="ct cval">21.5</text>
+<text x="240" y="114.5" class="ct clab">Not at all</text>
+<g class="cb"><title>Not at all: 20.2</title><rect x="250.0" y="102" width="125.2" height="17" rx="3" class="cs1"/></g>
+<text x="381.2" y="116" class="ct cval">20.2</text>
+</svg><figcaption><strong>Table 4. How much it matters that a child's college integrates AI</strong> (<code>parent_curric</code>; parents; unweighted n ≈ 7,005; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>A lot</td><td>22.7</td></tr><tr><td>Somewhat</td><td>35.6</td></tr><tr><td>Not so much</td><td>21.5</td></tr><tr><td>Not at all</td><td>20.2</td></tr></tbody></table></div></details></figure>
+<p><em>At least somewhat (a lot + somewhat) = 58.3%.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 5. Number of children (children_count; parents; unweighted n ≈ 10,928; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">1</text>
+<g class="cb"><title>1: 31.7</title><rect x="250.0" y="12" width="196.5" height="17" rx="3" class="cs1"/></g>
+<text x="452.5" y="26" class="ct cval">31.7</text>
+<text x="240" y="54.5" class="ct clab">2</text>
+<g class="cb"><title>2: 36.0</title><rect x="250.0" y="42" width="223.2" height="17" rx="3" class="cs1"/></g>
+<text x="479.2" y="56" class="ct cval">36.0</text>
+<text x="240" y="84.5" class="ct clab">3</text>
+<g class="cb"><title>3: 18.8</title><rect x="250.0" y="72" width="116.6" height="17" rx="3" class="cs1"/></g>
+<text x="372.6" y="86" class="ct cval">18.8</text>
+<text x="240" y="114.5" class="ct clab">4</text>
+<g class="cb"><title>4: 7.7</title><rect x="250.0" y="102" width="47.7" height="17" rx="3" class="cs1"/></g>
+<text x="303.7" y="116" class="ct cval">7.7</text>
+<text x="240" y="144.5" class="ct clab">5</text>
+<g class="cb"><title>5: 3.3</title><rect x="250.0" y="132" width="20.5" height="17" rx="3" class="cs1"/></g>
+<text x="276.5" y="146" class="ct cval">3.3</text>
+<text x="240" y="174.5" class="ct clab">6 or more</text>
+<g class="cb"><title>6 or more: 2.6</title><rect x="250.0" y="162" width="16.1" height="17" rx="3" class="cs1"/></g>
+<text x="272.1" y="176" class="ct cval">2.6</text>
+</svg><figcaption><strong>Table 5. Number of children</strong> (<code>children_count</code>; parents; unweighted n ≈ 10,928; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Children</th><th>%</th></tr></thead><tbody><tr><td>1</td><td>31.7</td></tr><tr><td>2</td><td>36.0</td></tr><tr><td>3</td><td>18.8</td></tr><tr><td>4</td><td>7.7</td></tr><tr><td>5</td><td>3.3</td></tr><tr><td>6 or more</td><td>2.6</td></tr></tbody></table></div></details></figure>
+<p><em>Most parents in the sample have one or two children (≈68%).</em></p>
+
+<hr/>
+<h2 id="appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</h2>
+<ul><li><strong><code>parent_view</code></strong> <em>(parents)</em> — "Has the rise of AI made you more or less likely to send your child(ren) to college?" (Much more likely; Somewhat more likely; No change; Somewhat less likely; Much less likely)</li><li><strong><code>parent_curric</code></strong> <em>(parents)</em> — "How much does it matter to you that the college your child attends integrates AI into its curriculum?" (A lot; Somewhat; Not so much; Not at all)</li><li><strong><code>children_count</code></strong> <em>(parents)</em> — number of children.</li><li><em>Not available in this extract:</em> <code>parent_view_neg</code> / <code>parent_view_pos</code> (reasons parents give for being more or less likely to send their children to college), <code>parent_stance</code>, <code>children_edu</code>.</li></ul>
+<section class="fnotes"><h2>Notes and sources</h2><ol><li id="fn-gallup-lumina-2025">EdSource, "Despite skepticism, parents still prioritize four-year college for their kids" (2025; reporting a June 2025 Gallup–Lumina Foundation survey): 40% of parents want their child to attend a four-year college, 60% hope for college overall; 53% of Democrats vs. 27% of Republicans prefer sending a child directly to a four-year college. <a href="https://edsource.org/2025/four-year-college-top-choice/738163" target="_blank" rel="noopener">https://edsource.org/2025/four-year-college-top-choice/738163</a> <a href="#fnref-gallup-lumina-2025" aria-label="back to text">↩</a></li></ol></section>
+    <div class="foot">
+      <div class="nav"><a href="08-ai-governance-policy.html"><span>Previous</span>Rein In the Titans, Cushion the Workers: Where Americans Stand on AI Policy</a><a href="10-small-business-owners.html" style="text-align:right"><span>Next</span>Main Street&#x27;s AI Bet: Small-Business Owners Are Buying In Faster Than They Can Staff or See It</a></div>
+      <p>AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>

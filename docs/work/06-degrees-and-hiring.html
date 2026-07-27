@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Do Degrees Still Matter in the Age of AI? — AI@Work</title>
+<meta name="description" content="The public worries that AI is devaluing the college degree — but the people who actually do the hiring don&#x27;t buy it. They still value degrees, reward technical majors, and increasi"/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#2a78d6; --acct:#1c5cab; --soft:#eaf2fd;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@Work Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#the-public-is-uneasy-and-the-higher-the-degree-the-safer-it-">The public is uneasy — and the higher the degree, the safer it feels</a><a href="#but-the-people-who-hire-still-value-the-degree">But the people who hire still value the degree</a><a href="#technical-majors-gain-the-humanities-slip">Technical majors gain, the humanities slip</a><a href="#inside-the-hiring-process-ai-screening-and-a-premium-on-ai-f">Inside the hiring process: AI screening and a premium on AI fluency</a><a href="#how-ai-is-already-changing-hiring">How AI is already changing hiring</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@Work</div><h1>Do Degrees Still Matter in the Age of AI?</h1><p class="dek"><em>The public worries that AI is devaluing the college degree — but the people who actually do the hiring don't buy it. They still value degrees, reward technical majors, and increasingly screen résumés with AI — and about half now say the technology has changed how they hire.</em></p><p class="srcline">Source: AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), fielded June 21–July 13, 2026 (interim extract; data collection ongoing). Degree-value and degree-field items were asked of the full sample (unweighted n ≈ 23,400); hiring-practice items were asked only of respondents with hiring authority (unweighted n ≈ 5,100–5,250); the two "at your level" workforce items were asked of all workers (unweighted n ≈ 12,400). All figures are weighted estimates, weighted to U.S. Census population targets.</p><p class="pos"><em>Series position: Report 6 of the AI@Work series (see the series index) — the labor-market consequence, and the demand-side mechanism behind the entry-level fear in the job-loss report (report 5).</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on the AI@Work survey (CHIP50 Wave 38.6), a survey of <strong>23,462 U.S. adults</strong> (weighted n = 23,485) fielded June 21–July 13, 2026 to boost statistical power on artificial-intelligence questions. All percentages are <strong>weighted to U.S. Census population targets</strong> and are population-representative; unweighted respondent counts are reported as a reliability guide only.</p>
+<p><strong>These are interim estimates.</strong> The AI@Work survey launched June 21, 2026 and data collection is ongoing; the figures in this report reflect responses received through July 13, 2026 and will be revised in a later release.</p>
+<p>The report has <strong>two bases.</strong> Questions about the value of degrees and of specific majors (<code>ai_deg</code>, <code>ai_deg_masters</code>, <code>ai_deg_phd</code>, <code>ai_degree_fields</code>) were asked of the full adult sample (unweighted n ≈ 23,400). Questions about hiring <em>practices</em> (<code>ai_deg_val_hire</code>, <code>ai_resume</code>, <code>ai_college_signal</code>, <code>ai_literacy_how</code>) were asked only of respondents who report authority to hire or significantly influence hiring — an analytic base of roughly <strong>5,100–5,250</strong>. Those subsample figures are weighted with the general Census weights and should be read as describing the subpopulation of workers with hiring authority, not a separately-calibrated employer frame. Each figure states its base.</p>
+<p>A measurement note: the degree-value items use a "Much more valuable → Much less valuable" scale (plus "Not sure"). Coding direction (1 = much more valuable) was confirmed against the data — graduate-degree holders are the most likely to see degrees as still valuable, which is only coherent under this direction.</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>The public is uneasy about degrees; hiring managers aren't.</strong> 32% of Americans think AI makes a bachelor's degree <em>less</em> valuable (23% say more) — but among workers who actually hire, only 15% say less, while 39% say <em>more</em>.</li><li><strong>The higher the degree, the safer it feels.</strong> Public opinion tilts negative on a bachelor's (net −8 points more-vs-less) but positive on a PhD (net +3) — advanced degrees are seen as more AI-resilient.</li><li><strong>Degree anxiety is a class-and-engagement divide.</strong> Only graduate-degree holders are net-positive on the college degree's AI-era value (+15); every less-educated group is net-negative, and the least-educated are the most unsure (29%). By party it isn't left-vs-right — the strongest partisans of <em>both</em> sides defend the degree most, while leaners and pure independents are the most skeptical or unsure.</li><li><strong>Technical majors gain, the humanities slip.</strong> Engineering and computer science are the majors most seen as gaining value from AI (42–44% say "more valuable"), while political science, philosophy, and economics are seen, on balance, as losing ground.</li><li><strong>AI is already reading résumés.</strong> 57% of hiring managers use AI tools to screen or skim résumés at least somewhat — including 18% who use them "a lot."</li><li><strong>AI fluency is rewarded, not penalized.</strong> 42% of hiring managers say they'd be <em>more</em> likely to hire someone who used AI for all their writing or coding; only 21% would be less likely (38% say it wouldn't matter).</li><li><strong>AI-skill assessment is still ad hoc.</strong> A third of hiring managers (34%) don't formally assess AI skills at all; those who do mostly just ask about prior use (36%) or set a hands-on task (31%).</li><li><strong>AI has already changed hiring for half of managers.</strong> 49% of hiring managers say AI has changed how they make hiring decisions (14% "a lot") — and the shift tracks their own AI use: 13% among managers who never use AI at work, rising to 76% among those who use it most.</li><li><strong>The entry-level bar is rising.</strong> Among managers whose hiring has changed, 27% are hiring <em>fewer</em> entry-level workers because of AI and another 29% expect more advanced work from them; only 7% are hiring more. Across all workers, 37% say AI has raised the skills expected at their level.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>Few anxieties about artificial intelligence are as widely felt as the fear that it will hollow out the value of a college education — that if a chatbot can write the essay, pass the exam, and draft the code, the credential that certified those skills is worth less. That worry is real in the public mind. But it is worth separating what people fear in the abstract from what the people who make hiring decisions actually do.</p>
+<p>The AI@Work survey measures both. It asks the full public whether AI makes college, master's, and doctoral degrees more or less valuable, and which fields of study will gain or lose; and it asks the subset of workers with hiring authority how they now view degrees, whether they screen résumés with AI, and how they react to candidates who lean on AI. The gap between the two is the story: the public is ambivalent and mildly pessimistic about the degree, while hiring managers — the people whose opinions translate into offers — remain markedly more confident in it. AI is changing hiring, but not, so far, by making the diploma obsolete.</p>
+<hr/>
+<h2 id="the-public-is-uneasy-and-the-higher-the-degree-the-safer-it-">The public is uneasy — and the higher the degree, the safer it feels</h2>
+<p class="lede"><strong>Americans lean slightly toward thinking AI devalues a college degree — but they see advanced degrees as more protected.</strong></p>
+<p>Asked whether the rise of AI makes a college degree more or less valuable for the future, the public splits without a clear majority: 23% say more valuable, 31% say neither more nor less, 32% say less valuable, and 15% aren't sure. The modest tilt toward "less valuable" is the source of the popular narrative — but it is a tilt, not a verdict, and nearly half of Americans are neutral or unsure.</p>
+<p>That unease eases as the degree gets more advanced. A bachelor's degree draws a net −8 points (23% more valuable minus 32% less); a master's is close to even (net −4); and a doctorate actually turns positive (27% more valuable vs. 23% less, net +3). Americans, in other words, see specialized, higher-level credentials as more resistant to AI than a general undergraduate degree.</p>
+<p>Opinion also divides sharply by the respondent's own education — and in a revealing way. <strong>Graduate-degree holders are the only group that is net-positive on the college degree's AI-era value (+15 points more-vs-less), while every less-educated group is net-negative</strong>, from −7 among college graduates to −11 to −15 among those with some college or a high-school education. The least-educated are also the most uncertain: 29% of those with less than a high-school education say they are "not sure," versus 9% of graduate-degree holders (Table 1a). The pattern reads as self-interest as much as forecast — the people holding the most advanced credentials are the most convinced those credentials will hold their value, while those furthest from a degree are the most doubtful or unsure. This is a <em>socioeconomic</em> divide in opinion, keyed to the respondent's own place in the education system: on degree value, education sorts the attitude, not just the behavior.</p>
+<p>Party divides it too, but not along the usual line. On the 7-point party scale, degree optimism is not a left-versus-right story: the <strong>most positive groups are the strongest partisans of <em>both</em> sides</strong> — Strong Republicans (net +1) and Strong Democrats (net −3) — while the most skeptical are the party <em>leaners</em> (Lean Republicans −18, Lean Democrats −19) and the most <em>uncertain</em> are pure independents (25% "not sure," the highest of any group; Table 1b). The same engagement-shaped pattern runs through the AI@Work parents-and-college report, where the most committed partisans of both parties are the ones AI has most moved toward college — suggesting political <em>engagement</em>, more than ideology, structures how people tie AI to the value of higher education. (These are descriptive weighted breakdowns, not modeled effects.)</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 232" width="100%" height="232" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. Is a degree more or less valuable because of AI? — bachelor&#x27;s, master&#x27;s, and doctorate. Base: full sample; unweighted n ≈ 23,400. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="202" class="cg"/>
+<text x="250.0" y="218" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="202" class="cg"/>
+<text x="405.0" y="218" class="ct ctick" data-chrome="1">10</text>
+<line x1="560.0" y1="24" x2="560.0" y2="202" class="cg"/>
+<text x="560.0" y="218" class="ct ctick" data-chrome="1">20</text>
+<line x1="715.0" y1="24" x2="715.0" y2="202" class="cg"/>
+<text x="715.0" y="218" class="ct ctick" data-chrome="1">30</text>
+<line x1="870.0" y1="24" x2="870.0" y2="202" class="cg"/>
+<text x="870.0" y="218" class="ct ctick" data-chrome="1">40</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More valuable</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">Neither</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less valuable</text>
+<text x="240" y="55.5" class="ct clab">Bachelor&#x27;s (ai_deg)</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — More valuable: 23.2</title><rect x="250.0" y="30" width="359.6" height="13" rx="3" class="cs1"/></g>
+<text x="615.6" y="40" class="ct cval">23.2</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — Neither: 30.5</title><rect x="250.0" y="45" width="472.8" height="13" rx="3" class="cs2"/></g>
+<text x="728.8" y="55" class="ct cval">30.5</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — Less valuable: 31.6</title><rect x="250.0" y="60" width="489.8" height="13" rx="3" class="cs3"/></g>
+<text x="745.8" y="70" class="ct cval">31.6</text>
+<text x="240" y="111.5" class="ct clab">Master&#x27;s (ai_deg_masters)</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — More valuable: 24.5</title><rect x="250.0" y="86" width="379.8" height="13" rx="3" class="cs1"/></g>
+<text x="635.8" y="96" class="ct cval">24.5</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — Neither: 31.5</title><rect x="250.0" y="101" width="488.2" height="13" rx="3" class="cs2"/></g>
+<text x="744.2" y="111" class="ct cval">31.5</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — Less valuable: 28.7</title><rect x="250.0" y="116" width="444.9" height="13" rx="3" class="cs3"/></g>
+<text x="700.9" y="126" class="ct cval">28.7</text>
+<text x="240" y="167.5" class="ct clab">Doctorate (ai_deg_phd)</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — More valuable: 26.6</title><rect x="250.0" y="142" width="412.3" height="13" rx="3" class="cs1"/></g>
+<text x="668.3" y="152" class="ct cval">26.6</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — Neither: 34.1</title><rect x="250.0" y="157" width="528.6" height="13" rx="3" class="cs2"/></g>
+<text x="784.6" y="167" class="ct cval">34.1</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — Less valuable: 23.4</title><rect x="250.0" y="172" width="362.7" height="13" rx="3" class="cs3"/></g>
+<text x="618.7" y="182" class="ct cval">23.4</text>
+</svg><figcaption><em>Figure 1. Is a degree more or less valuable because of AI? — bachelor's, master's, and doctorate. Base: full sample; unweighted n ≈ 23,400. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Degree</th><th>More valuable</th><th>Neither</th><th>Less valuable</th><th>Not sure</th></tr></thead><tbody><tr><td>Bachelor's (<code>ai_deg</code>)</td><td>23.2</td><td>30.5</td><td>31.6</td><td>14.7</td></tr><tr><td>Master's (<code>ai_deg_masters</code>)</td><td>24.5</td><td>31.5</td><td>28.7</td><td>15.3</td></tr><tr><td>Doctorate (<code>ai_deg_phd</code>)</td><td>26.6</td><td>34.1</td><td>23.4</td><td>15.9</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="but-the-people-who-hire-still-value-the-degree">But the people who hire still value the degree</h2>
+<p class="lede"><strong>Among workers with hiring authority, the "AI kills the degree" story finds little support.</strong></p>
+<p>Where the public leans mildly negative, hiring managers lean firmly positive. Asked how they view the value of a college degree when evaluating entry-level candidates after the rise of AI, <strong>39% say it is <em>more</em> valuable, 40% say about the same, and only 15% say less</strong> (6% aren't sure). That is a net +24 points toward "more valuable," against the public's net −8 on a bachelor's — a roughly 30-point gap in outlook between the general public and the people who actually extend job offers. Far from discarding the diploma, the workers doing the hiring appear to treat it as a more meaningful signal, not a less meaningful one, in an AI-saturated applicant pool.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Value of a college degree for entry-level candidates, given AI: general public vs. workers with hiring authority. Bases: public n ≈ 23,400; hiring authority n ≈ 5,247. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more valuable</text>
+<g class="cb"><title>Much more valuable: 18.4</title><rect x="250.0" y="12" width="114.1" height="17" rx="3" class="cs1"/></g>
+<text x="370.1" y="26" class="ct cval">18.4</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more valuable</text>
+<g class="cb"><title>Somewhat more valuable: 20.9</title><rect x="250.0" y="42" width="129.6" height="17" rx="3" class="cs1"/></g>
+<text x="385.6" y="56" class="ct cval">20.9</text>
+<text x="240" y="84.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 39.6</title><rect x="250.0" y="72" width="245.5" height="17" rx="3" class="cs1"/></g>
+<text x="501.5" y="86" class="ct cval">39.6</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less valuable</text>
+<g class="cb"><title>Somewhat less valuable: 10.8</title><rect x="250.0" y="102" width="67.0" height="17" rx="3" class="cs1"/></g>
+<text x="323.0" y="116" class="ct cval">10.8</text>
+<text x="240" y="144.5" class="ct clab">Much less valuable</text>
+<g class="cb"><title>Much less valuable: 4.6</title><rect x="250.0" y="132" width="28.5" height="17" rx="3" class="cs1"/></g>
+<text x="284.5" y="146" class="ct cval">4.6</text>
+<text x="240" y="174.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 5.7</title><rect x="250.0" y="162" width="35.3" height="17" rx="3" class="cs1"/></g>
+<text x="291.3" y="176" class="ct cval">5.7</text>
+</svg><figcaption><em>Figure 2. Value of a college degree for entry-level candidates, given AI: general public vs. workers with hiring authority. Bases: public n ≈ 23,400; hiring authority n ≈ 5,247. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Much more valuable</td><td>18.4</td></tr><tr><td>Somewhat more valuable</td><td>20.9</td></tr><tr><td>About the same</td><td>39.6</td></tr><tr><td>Somewhat less valuable</td><td>10.8</td></tr><tr><td>Much less valuable</td><td>4.6</td></tr><tr><td>Not sure</td><td>5.7</td></tr></tbody></table></div></details></figure>
+<h3 id="comparative-context">Comparative Context</h3>
+<p>That hiring managers hold the line on the degree while the public wavers is consistent with a labor market in which employers, facing larger and increasingly AI-assisted applicant pools, lean on verifiable signals to sort candidates — a pattern visible both in the screening behavior documented later in this report and in external hiring surveys (see <em>How AI is already changing hiring</em>).</p>
+<hr/>
+<h2 id="technical-majors-gain-the-humanities-slip">Technical majors gain, the humanities slip</h2>
+<p class="lede"><strong>Asked which fields of study AI will make more or less valuable, Americans reward the technical and lab sciences and mark down the humanities and social sciences.</strong></p>
+<p>The pattern is consistent and intuitive. Engineering (42% "more valuable" vs. 26% "less") and computer science (44% vs. 29%) are seen as the biggest winners, with biology also net positive. Math and communication come out roughly even. The fields seen as losing ground are the humanities and social sciences: political science (22% more vs. 30% less), philosophy (23% vs. 30%), economics (26% vs. 32%), and English (27% vs. 29%). For every field, though, the most common answer is usually "no change" (40–48% for the non-technical majors), so this is a story of relative tilt rather than wholesale devaluation — Americans think AI raises the premium on building things and working with data, and modestly lowers it on writing and argument.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 568" width="100%" height="568" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Will each undergraduate major become more or less valuable due to AI?. Base: full sample; unweighted n ≈ 23,400. Note: multiple fields rated by each respondent. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="538" class="cg"/>
+<text x="250.0" y="554" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="538" class="cg"/>
+<text x="374.0" y="554" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="538" class="cg"/>
+<text x="498.0" y="554" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="538" class="cg"/>
+<text x="622.0" y="554" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="538" class="cg"/>
+<text x="746.0" y="554" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="538" class="cg"/>
+<text x="870.0" y="554" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More</text>
+<rect x="316.6" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="331.6" y="15" class="ct clg">No change</text>
+<rect x="420.20000000000005" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="435.20000000000005" y="15" class="ct clg">Less</text>
+<text x="240" y="55.5" class="ct clab">Engineering</text>
+<g class="cb"><title>Engineering — More: 42.3</title><rect x="250.0" y="30" width="524.5" height="13" rx="3" class="cs1"/></g>
+<text x="780.5" y="40" class="ct cval">42.3</text>
+<g class="cb"><title>Engineering — No change: 32.1</title><rect x="250.0" y="45" width="398.0" height="13" rx="3" class="cs2"/></g>
+<text x="654.0" y="55" class="ct cval">32.1</text>
+<g class="cb"><title>Engineering — Less: 25.5</title><rect x="250.0" y="60" width="316.2" height="13" rx="3" class="cs3"/></g>
+<text x="572.2" y="70" class="ct cval">25.5</text>
+<text x="240" y="111.5" class="ct clab">Computer Science</text>
+<g class="cb"><title>Computer Science — More: 43.5</title><rect x="250.0" y="86" width="539.4" height="13" rx="3" class="cs1"/></g>
+<text x="795.4" y="96" class="ct cval">43.5</text>
+<g class="cb"><title>Computer Science — No change: 27.9</title><rect x="250.0" y="101" width="346.0" height="13" rx="3" class="cs2"/></g>
+<text x="602.0" y="111" class="ct cval">27.9</text>
+<g class="cb"><title>Computer Science — Less: 28.6</title><rect x="250.0" y="116" width="354.6" height="13" rx="3" class="cs3"/></g>
+<text x="610.6" y="126" class="ct cval">28.6</text>
+<text x="240" y="167.5" class="ct clab">Biology</text>
+<g class="cb"><title>Biology — More: 32.6</title><rect x="250.0" y="142" width="404.2" height="13" rx="3" class="cs1"/></g>
+<text x="660.2" y="152" class="ct cval">32.6</text>
+<g class="cb"><title>Biology — No change: 41.4</title><rect x="250.0" y="157" width="513.4" height="13" rx="3" class="cs2"/></g>
+<text x="769.4" y="167" class="ct cval">41.4</text>
+<g class="cb"><title>Biology — Less: 25.9</title><rect x="250.0" y="172" width="321.2" height="13" rx="3" class="cs3"/></g>
+<text x="577.2" y="182" class="ct cval">25.9</text>
+<text x="240" y="223.5" class="ct clab">Math</text>
+<g class="cb"><title>Math — More: 33.1</title><rect x="250.0" y="198" width="410.4" height="13" rx="3" class="cs1"/></g>
+<text x="666.4" y="208" class="ct cval">33.1</text>
+<g class="cb"><title>Math — No change: 34.5</title><rect x="250.0" y="213" width="427.8" height="13" rx="3" class="cs2"/></g>
+<text x="683.8" y="223" class="ct cval">34.5</text>
+<g class="cb"><title>Math — Less: 32.3</title><rect x="250.0" y="228" width="400.5" height="13" rx="3" class="cs3"/></g>
+<text x="656.5" y="238" class="ct cval">32.3</text>
+<text x="240" y="279.5" class="ct clab">Communication</text>
+<g class="cb"><title>Communication — More: 31.5</title><rect x="250.0" y="254" width="390.6" height="13" rx="3" class="cs1"/></g>
+<text x="646.6" y="264" class="ct cval">31.5</text>
+<g class="cb"><title>Communication — No change: 37.6</title><rect x="250.0" y="269" width="466.2" height="13" rx="3" class="cs2"/></g>
+<text x="722.2" y="279" class="ct cval">37.6</text>
+<g class="cb"><title>Communication — Less: 30.9</title><rect x="250.0" y="284" width="383.2" height="13" rx="3" class="cs3"/></g>
+<text x="639.2" y="294" class="ct cval">30.9</text>
+<text x="240" y="335.5" class="ct clab">English</text>
+<g class="cb"><title>English — More: 27.2</title><rect x="250.0" y="310" width="337.3" height="13" rx="3" class="cs1"/></g>
+<text x="593.3" y="320" class="ct cval">27.2</text>
+<g class="cb"><title>English — No change: 43.4</title><rect x="250.0" y="325" width="538.2" height="13" rx="3" class="cs2"/></g>
+<text x="794.2" y="335" class="ct cval">43.4</text>
+<g class="cb"><title>English — Less: 29.4</title><rect x="250.0" y="340" width="364.6" height="13" rx="3" class="cs3"/></g>
+<text x="620.6" y="350" class="ct cval">29.4</text>
+<text x="240" y="391.5" class="ct clab">Economics</text>
+<g class="cb"><title>Economics — More: 26.1</title><rect x="250.0" y="366" width="323.6" height="13" rx="3" class="cs1"/></g>
+<text x="579.6" y="376" class="ct cval">26.1</text>
+<g class="cb"><title>Economics — No change: 42.2</title><rect x="250.0" y="381" width="523.3" height="13" rx="3" class="cs2"/></g>
+<text x="779.3" y="391" class="ct cval">42.2</text>
+<g class="cb"><title>Economics — Less: 31.8</title><rect x="250.0" y="396" width="394.3" height="13" rx="3" class="cs3"/></g>
+<text x="650.3" y="406" class="ct cval">31.8</text>
+<text x="240" y="447.5" class="ct clab">Political Science</text>
+<g class="cb"><title>Political Science — More: 22.1</title><rect x="250.0" y="422" width="274.0" height="13" rx="3" class="cs1"/></g>
+<text x="530.0" y="432" class="ct cval">22.1</text>
+<g class="cb"><title>Political Science — No change: 48.4</title><rect x="250.0" y="437" width="600.2" height="13" rx="3" class="cs2"/></g>
+<text x="856.2" y="447" class="ct cval">48.4</text>
+<g class="cb"><title>Political Science — Less: 29.5</title><rect x="250.0" y="452" width="365.8" height="13" rx="3" class="cs3"/></g>
+<text x="621.8" y="462" class="ct cval">29.5</text>
+<text x="240" y="503.5" class="ct clab">Philosophy</text>
+<g class="cb"><title>Philosophy — More: 22.7</title><rect x="250.0" y="478" width="281.5" height="13" rx="3" class="cs1"/></g>
+<text x="537.5" y="488" class="ct cval">22.7</text>
+<g class="cb"><title>Philosophy — No change: 47.0</title><rect x="250.0" y="493" width="582.8" height="13" rx="3" class="cs2"/></g>
+<text x="838.8" y="503" class="ct cval">47.0</text>
+<g class="cb"><title>Philosophy — Less: 30.3</title><rect x="250.0" y="508" width="375.7" height="13" rx="3" class="cs3"/></g>
+<text x="631.7" y="518" class="ct cval">30.3</text>
+</svg><figcaption><em>Figure 3. Will each undergraduate major become more or less valuable due to AI?. Base: full sample; unweighted n ≈ 23,400. Note: multiple fields rated by each respondent. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Major</th><th>More</th><th>No change</th><th>Less</th><th>Net</th></tr></thead><tbody><tr><td>Engineering</td><td>42.3</td><td>32.1</td><td>25.5</td><td>+16.8</td></tr><tr><td>Computer Science</td><td>43.5</td><td>27.9</td><td>28.6</td><td>+14.9</td></tr><tr><td>Biology</td><td>32.6</td><td>41.4</td><td>25.9</td><td>+6.7</td></tr><tr><td>Math</td><td>33.1</td><td>34.5</td><td>32.3</td><td>+0.8</td></tr><tr><td>Communication</td><td>31.5</td><td>37.6</td><td>30.9</td><td>+0.6</td></tr><tr><td>English</td><td>27.2</td><td>43.4</td><td>29.4</td><td>−2.2</td></tr><tr><td>Economics</td><td>26.1</td><td>42.2</td><td>31.8</td><td>−5.7</td></tr><tr><td>Political Science</td><td>22.1</td><td>48.4</td><td>29.5</td><td>−7.4</td></tr><tr><td>Philosophy</td><td>22.7</td><td>47.0</td><td>30.3</td><td>−7.6</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="inside-the-hiring-process-ai-screening-and-a-premium-on-ai-f">Inside the hiring process: AI screening and a premium on AI fluency</h2>
+<p class="lede"><strong>Hiring managers are already routing applicants through AI — and, if anything, they reward candidates who use it.</strong></p>
+<p>Two things are happening at once. First, AI has entered the screening pipeline: <strong>57% of hiring managers say they use AI-based tools to screen or skim résumés at least somewhat, including 18% who do so "a lot"</strong>; the remaining 43% use it not much or not at all. Second, hiring managers lean <em>toward</em> rewarding an applicant's own AI use: asked how they'd react to a candidate who had used AI for <em>all</em> of their writing or coding, <strong>42% say they'd be more likely to hire that person</strong> (14% "definitely" more), while just 21% would be less likely and 38% say it wouldn't matter. Far from treating heavy AI use as a red flag, a plurality of hiring managers read AI fluency as a skill, not a shortcut — a hint that the entry-level premium is shifting toward candidates who can wield the tools.</p>
+<p>Assessment of AI skills, meanwhile, remains improvised. A third of hiring managers (34%) say they don't formally assess AI skills at all. Among those who do, the most common methods are simply asking candidates about their prior AI use (36%) and setting hands-on tasks or exercises (31%), followed by portfolios (26%), credentials or certifications (23%), and informal judgment in interviews (17%). Formal, standardized evaluation of AI ability is still the exception.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 4. How hiring managers assess AI skills (select-all, multiple responses allowed). Base: hiring authority; unweighted n ≈ 5,250. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="226" class="cg"/>
+<text x="405.0" y="242" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="226" class="cg"/>
+<text x="560.0" y="242" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="226" class="cg"/>
+<text x="715.0" y="242" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Ask candidates about prior AI use</text>
+<g class="cb"><title>Ask candidates about prior AI use: 35.9</title><rect x="250.0" y="12" width="222.6" height="17" rx="3" class="cs1"/></g>
+<text x="478.6" y="26" class="ct cval">35.9</text>
+<text x="240" y="54.5" class="ct clab">We do not assess AI skills</text>
+<g class="cb"><title>We do not assess AI skills: 34.2</title><rect x="250.0" y="42" width="212.0" height="17" rx="3" class="cs1"/></g>
+<text x="468.0" y="56" class="ct cval">34.2</text>
+<text x="240" y="84.5" class="ct clab">Hands-on tasks or exercises</text>
+<g class="cb"><title>Hands-on tasks or exercises: 31.1</title><rect x="250.0" y="72" width="192.8" height="17" rx="3" class="cs1"/></g>
+<text x="448.8" y="86" class="ct cval">31.1</text>
+<text x="240" y="114.5" class="ct clab">Portfolio or work samples</text>
+<g class="cb"><title>Portfolio or work samples: 26.2</title><rect x="250.0" y="102" width="162.4" height="17" rx="3" class="cs1"/></g>
+<text x="418.4" y="116" class="ct cval">26.2</text>
+<text x="240" y="144.5" class="ct clab">Credentials or certifications</text>
+<g class="cb"><title>Credentials or certifications: 23.4</title><rect x="250.0" y="132" width="145.1" height="17" rx="3" class="cs1"/></g>
+<text x="401.1" y="146" class="ct cval">23.4</text>
+<text x="240" y="174.5" class="ct clab">Informal judgment during interviews</text>
+<g class="cb"><title>Informal judgment during interviews: 17.2</title><rect x="250.0" y="162" width="106.6" height="17" rx="3" class="cs1"/></g>
+<text x="362.6" y="176" class="ct cval">17.2</text>
+<text x="240" y="204.5" class="ct clab">Other</text>
+<g class="cb"><title>Other: 0.9</title><rect x="250.0" y="192" width="5.6" height="17" rx="3" class="cs1"/></g>
+<text x="261.6" y="206" class="ct cval">0.9</text>
+</svg><figcaption><em>Figure 4. How hiring managers assess AI skills (select-all, multiple responses allowed). Base: hiring authority; unweighted n ≈ 5,250. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 6 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Method</th><th>%</th></tr></thead><tbody><tr><td>Ask candidates about prior AI use</td><td>35.9</td></tr><tr><td>We do not assess AI skills</td><td>34.2</td></tr><tr><td>Hands-on tasks or exercises</td><td>31.1</td></tr><tr><td>Portfolio or work samples</td><td>26.2</td></tr><tr><td>Credentials or certifications</td><td>23.4</td></tr><tr><td>Informal judgment during interviews</td><td>17.2</td></tr><tr><td>Other</td><td>0.9</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="how-ai-is-already-changing-hiring">How AI is already changing hiring</h2>
+<p class="lede"><strong>Roughly half of hiring managers say AI has already changed how they make hiring decisions — and the change is concentrated among the managers who use the technology themselves.</strong></p>
+<p>This is not just a matter of attitude. Asked directly whether AI has changed how they make hiring decisions, <strong>49% of hiring managers say yes — 14% "a lot" and 35% "somewhat"</strong> — while 51% say not much or not at all. And the shift maps almost entirely onto the manager's own engagement with AI: among hiring managers who never use AI in their own work, only <strong>13%</strong> say AI has changed how they hire; among those who use it most frequently, <strong>76%</strong> do. The people remaking hiring are the people already living inside the tools.</p>
+<p>Where hiring has changed, the pressure lands hardest on the entry level. Among the managers who report a change (an analytic base of roughly 2,560), <strong>27% say they are hiring <em>fewer</em> entry-level workers because of AI</strong>, and another <strong>29% are keeping the same number but expecting more advanced, higher-level work from them</strong> — so a majority are either shrinking the entry rung or raising the bar to stand on it. Just 37% report no real change in their entry-level strategy, and only 7% are hiring <em>more</em> entry-level workers. Whether this reflects genuine substitution of AI for junior tasks or simply higher expectations, the entry-level opening is getting narrower where AI has taken hold.</p>
+<p>The market for AI skills, meanwhile, is still loosely defined. Asked about competition for AI-capable candidates, <strong>44% of hiring managers say they don't specifically look for AI skills at all</strong>; among those who do, 27% find such candidates hard to find and 29% find them easy. Combined with the ad-hoc assessment picture above, the impression is of a hiring system that has changed its <em>behavior</em> faster than it has settled on what, exactly, it is screening for.</p>
+<p>The squeeze is visible from the workforce side too, not just from managers. Across <em>all</em> workers — a broader base than the hiring subsample — <strong>37% say AI has raised the skills or experience expected at their level</strong> (12% "much higher," 24% "somewhat higher"), while 52% report no change. On job openings, workers are more circumspect: <strong>16% say AI has reduced the number of openings at their level</strong>, 9% say it has increased them, and the plurality (41%) haven't noticed a change, with another 24% saying openings are about the same. The perception of a rising skill bar is thus considerably more widespread than the perception of outright job loss — consistent with the report's broader theme that AI is reshaping the <em>terms</em> of entry-level work more than it is erasing the jobs outright.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 5. Has AI changed how you make hiring decisions? — by the manager&#x27;s own frequency of AI use at work. Base: hiring authority; unweighted n ≈ 5,242. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Yes, a lot</text>
+<g class="cb"><title>Yes, a lot: 13.7</title><rect x="250.0" y="12" width="84.9" height="17" rx="3" class="cs1"/></g>
+<text x="340.9" y="26" class="ct cval">13.7</text>
+<text x="240" y="54.5" class="ct clab">Yes, somewhat</text>
+<g class="cb"><title>Yes, somewhat: 35.1</title><rect x="250.0" y="42" width="217.6" height="17" rx="3" class="cs1"/></g>
+<text x="473.6" y="56" class="ct cval">35.1</text>
+<text x="240" y="84.5" class="ct clab">Not much</text>
+<g class="cb"><title>Not much: 25.3</title><rect x="250.0" y="72" width="156.9" height="17" rx="3" class="cs1"/></g>
+<text x="412.9" y="86" class="ct cval">25.3</text>
+<text x="240" y="114.5" class="ct clab">Not at all</text>
+<g class="cb"><title>Not at all: 26.0</title><rect x="250.0" y="102" width="161.2" height="17" rx="3" class="cs1"/></g>
+<text x="417.2" y="116" class="ct cval">26.0</text>
+</svg><figcaption><em>Figure 5. Has AI changed how you make hiring decisions? — by the manager's own frequency of AI use at work. Base: hiring authority; unweighted n ≈ 5,242. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 7 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Yes, a lot</td><td>13.7</td></tr><tr><td>Yes, somewhat</td><td>35.1</td></tr><tr><td>Not much</td><td>25.3</td></tr><tr><td>Not at all</td><td>26.0</td></tr></tbody></table></div></details></figure>
+<h3 id="comparative-context">Comparative Context</h3>
+<p>External hiring surveys corroborate the screening story. A January–February 2025 Resume Genius survey of 1,000 U.S. hiring managers found <strong>48% use AI to screen résumés before a human review</strong> — squarely in line with the 57% of surveyed hiring managers who report using AI to screen or skim résumés at least somewhat (the survey's item uses a broader "at least somewhat" threshold). A separate October 2024 Insight Global survey of 1,005 hiring managers found that 99% now use AI somewhere in the hiring process. The direction is unambiguous across independent samples: AI has moved from the margins into the everyday machinery of hiring.</p>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>The fear that AI is quietly cancelling the college degree is, on this evidence, more a public anxiety than a hiring reality. Americans as a whole are ambivalent and mildly pessimistic about what AI does to the value of a bachelor's, though they see advanced degrees and technical majors as more protected. The workers who actually make hiring decisions are more confident still: a plurality say a degree is <em>more</em> valuable in the AI era, not less, and only a small minority say less. What is changing is the mechanics around the credential — AI now helps read the résumés, candidates who use AI fluently are, if anything, rewarded for it, and about half of managers say the technology has already altered how they hire — rather than the standing of the credential itself. The sharper edge is at the entry level: where AI has taken hold, managers are more likely to shrink the junior rung or raise what they expect from it, and a third of all workers already sense a higher skills bar at their own level.</p>
+<p>For students and workers weighing what to study, the signal is less "abandon the degree" than "the premium is shifting." Technical and quantitative fields are seen as gaining, the humanities and social sciences as modestly slipping, and — across the board — the ability to use AI well is becoming something employers look for, even if few yet know how to measure it.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data source.</strong> AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). Total unweighted n = 23,462; weighted n = 23,485. Fielded June 21–July 13, 2026, with an oversample of students and adults 18–22; it is nonetheless a broad adult sample. Data collection was ongoing at the time of this extract — figures reflect responses through July 13, 2026 and are preliminary. Estimates are weighted to U.S. Census population targets.</p>
+<p><strong>Bases.</strong> The report uses three bases. (1) Degree-value items (<code>ai_deg</code>, <code>ai_deg_masters</code>, <code>ai_deg_phd</code>) and the degree-field battery (<code>ai_degree_fields</code>, nine majors) were asked of the full sample (unweighted n ≈ 23,400). (2) Hiring-practice items (<code>ai_deg_val_hire</code>, <code>ai_resume</code>, <code>ai_college_signal</code>, <code>ai_literacy_how</code>, <code>hiring_decisions</code>, <code>hiring_compete</code>) were asked only of respondents with authority to hire or significantly influence hiring (unweighted n ≈ 5,100–5,250); the entry-level follow-up <code>hiring_change</code> was asked only of that subgroup whose hiring had changed (unweighted n ≈ 2,557). (3) The two "at your level" workforce items (<code>indr_level_quantity</code>, <code>indr_level_quality</code>) were asked of all workers (unweighted n ≈ 12,400). Subsample estimates use the general Census weights and describe each subpopulation descriptively, not as a separately-calibrated frame. Every figure and table states its base.</p>
+<p><strong>Coding.</strong> The degree-value items are coded 1 = much more valuable … 5 = much less valuable, 6 = not sure — direction confirmed against the data (the weighted mean falls monotonically as education rises, i.e., more-educated respondents see degrees as more valuable). The degree-field battery is coded 1 = more valuable, 2 = no change, 3 = less valuable (verified against the questionnaire). <code>ai_college_signal</code> runs 5 = definitely encourage … 1 = definitely discourage and <code>ai_resume</code> 4 = a lot … 1 = not at all (0 = not sure) — both directions confirmed against the questionnaire codebook and the data (each rises monotonically with the manager's own AI-use frequency); <code>ai_literacy_how</code> is select-all (1 = selected). The hiring-behavior items are coded per the authoritative codebook: <code>hiring_decisions</code> 4 = yes a lot … 1 = not at all (<strong>direction confirmed</strong> — its weighted mean rises monotonically with the manager's own AI-use frequency, from 1.54 among non-users to 2.96 among daily users); <code>indr_level_quality</code> 1 = much higher AI skills expected … 3 = no change, 4 = not sure (<strong>direction confirmed</strong> — the "much higher" share rises from 3% among worker-non-users to 34% among daily users). <code>hiring_change</code> (1 = fewer entry-level; 2 = same #, same expectations; 3 = same #, more advanced work expected; 4 = more entry-level), <code>hiring_compete</code> (1 = hard to find AI-skilled; 2 = easy; 3 = don't specifically look), and <code>indr_level_quantity</code> (1 = fewer openings; 2 = about the same; 3 = more; 4 = not noticed; 5 = not sure) are nominal category sets, not magnitude scales, and carry no direction-reversal risk; they are reported categorically per the codebook.</p>
+<p><strong>Estimation.</strong> Cross-tabulations are weighted shares; no regression is reported (this is a topline descriptive report). The manager-AI-use gradients cited for <code>hiring_decisions</code> and <code>indr_level_quality</code> are descriptive weighted breakdowns by <code>ai_work</code> frequency, not modeled effects. this report adds descriptive breakdowns of the college-degree-value item (<code>ai_deg</code>) by <code>education_cat</code> and by the 7-point party scale (<code>party7</code>) — Tables 1a and 1b; party is shown on the 7-point scale because the divide is an engagement gradient (leaners and pure independents most skeptical/unsure) that the 3-point measure flattens. Select-all items are not summed. Cells with unweighted n &lt; 10 are suppressed.</p>
+<p><strong>Reproducibility.</strong> Figures map to Appendix B tables; values copied verbatim from the underlying tabulations. Wording and skip logic sourced from the Qualtrics instrument via the project's authoritative AI@Work survey codebook. External comparison figures in <em>How AI is already changing hiring</em> were fetched and verified from the cited hiring surveys (see Appendix C).</p>
+<hr/>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 232" width="100%" height="232" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1. Is a degree more or less valuable because of AI? (weighted %; full sample; n ≈ 23,400).">
+<line x1="250.0" y1="24" x2="250.0" y2="202" class="cg"/>
+<text x="250.0" y="218" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="202" class="cg"/>
+<text x="405.0" y="218" class="ct ctick" data-chrome="1">10</text>
+<line x1="560.0" y1="24" x2="560.0" y2="202" class="cg"/>
+<text x="560.0" y="218" class="ct ctick" data-chrome="1">20</text>
+<line x1="715.0" y1="24" x2="715.0" y2="202" class="cg"/>
+<text x="715.0" y="218" class="ct ctick" data-chrome="1">30</text>
+<line x1="870.0" y1="24" x2="870.0" y2="202" class="cg"/>
+<text x="870.0" y="218" class="ct ctick" data-chrome="1">40</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More valuable</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">Neither</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less valuable</text>
+<text x="240" y="55.5" class="ct clab">Bachelor&#x27;s (ai_deg)</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — More valuable: 23.2</title><rect x="250.0" y="30" width="359.6" height="13" rx="3" class="cs1"/></g>
+<text x="615.6" y="40" class="ct cval">23.2</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — Neither: 30.5</title><rect x="250.0" y="45" width="472.8" height="13" rx="3" class="cs2"/></g>
+<text x="728.8" y="55" class="ct cval">30.5</text>
+<g class="cb"><title>Bachelor&#x27;s (ai_deg) — Less valuable: 31.6</title><rect x="250.0" y="60" width="489.8" height="13" rx="3" class="cs3"/></g>
+<text x="745.8" y="70" class="ct cval">31.6</text>
+<text x="240" y="111.5" class="ct clab">Master&#x27;s (ai_deg_masters)</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — More valuable: 24.5</title><rect x="250.0" y="86" width="379.8" height="13" rx="3" class="cs1"/></g>
+<text x="635.8" y="96" class="ct cval">24.5</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — Neither: 31.5</title><rect x="250.0" y="101" width="488.2" height="13" rx="3" class="cs2"/></g>
+<text x="744.2" y="111" class="ct cval">31.5</text>
+<g class="cb"><title>Master&#x27;s (ai_deg_masters) — Less valuable: 28.7</title><rect x="250.0" y="116" width="444.9" height="13" rx="3" class="cs3"/></g>
+<text x="700.9" y="126" class="ct cval">28.7</text>
+<text x="240" y="167.5" class="ct clab">Doctorate (ai_deg_phd)</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — More valuable: 26.6</title><rect x="250.0" y="142" width="412.3" height="13" rx="3" class="cs1"/></g>
+<text x="668.3" y="152" class="ct cval">26.6</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — Neither: 34.1</title><rect x="250.0" y="157" width="528.6" height="13" rx="3" class="cs2"/></g>
+<text x="784.6" y="167" class="ct cval">34.1</text>
+<g class="cb"><title>Doctorate (ai_deg_phd) — Less valuable: 23.4</title><rect x="250.0" y="172" width="362.7" height="13" rx="3" class="cs3"/></g>
+<text x="618.7" y="182" class="ct cval">23.4</text>
+</svg><figcaption><strong>Table 1. Is a degree more or less valuable because of AI?</strong> (weighted %; full sample; n ≈ 23,400).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Degree</th><th>More valuable</th><th>Neither</th><th>Less valuable</th><th>Not sure</th></tr></thead><tbody><tr><td>Bachelor's (<code>ai_deg</code>)</td><td>23.2</td><td>30.5</td><td>31.6</td><td>14.7</td></tr><tr><td>Master's (<code>ai_deg_masters</code>)</td><td>24.5</td><td>31.5</td><td>28.7</td><td>15.3</td></tr><tr><td>Doctorate (<code>ai_deg_phd</code>)</td><td>26.6</td><td>34.1</td><td>23.4</td><td>15.9</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 344" width="100%" height="344" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1a. Value of a college degree because of AI, by education (ai_deg; full sample; weighted %). Net = more − less.">
+<line x1="250.0" y1="24" x2="250.0" y2="314" class="cg"/>
+<text x="250.0" y="330" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="314" class="cg"/>
+<text x="405.0" y="330" class="ct ctick" data-chrome="1">10</text>
+<line x1="560.0" y1="24" x2="560.0" y2="314" class="cg"/>
+<text x="560.0" y="330" class="ct ctick" data-chrome="1">20</text>
+<line x1="715.0" y1="24" x2="715.0" y2="314" class="cg"/>
+<text x="715.0" y="330" class="ct ctick" data-chrome="1">30</text>
+<line x1="870.0" y1="24" x2="870.0" y2="314" class="cg"/>
+<text x="870.0" y="330" class="ct ctick" data-chrome="1">40</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More valuable</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">Neither</text>
+<rect x="472.0" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="487.0" y="15" class="ct clg">Less valuable</text>
+<text x="240" y="55.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree — More valuable: 37</title><rect x="250.0" y="30" width="573.5" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="40" class="ct cval">37</text>
+<g class="cb"><title>Graduate degree — Neither: 32</title><rect x="250.0" y="45" width="496.0" height="13" rx="3" class="cs2"/></g>
+<text x="752.0" y="55" class="ct cval">32</text>
+<g class="cb"><title>Graduate degree — Less valuable: 22</title><rect x="250.0" y="60" width="341.0" height="13" rx="3" class="cs3"/></g>
+<text x="597.0" y="70" class="ct cval">22</text>
+<text x="240" y="111.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree — More valuable: 26</title><rect x="250.0" y="86" width="403.0" height="13" rx="3" class="cs1"/></g>
+<text x="659.0" y="96" class="ct cval">26</text>
+<g class="cb"><title>College degree — Neither: 31</title><rect x="250.0" y="101" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="111" class="ct cval">31</text>
+<g class="cb"><title>College degree — Less valuable: 33</title><rect x="250.0" y="116" width="511.5" height="13" rx="3" class="cs3"/></g>
+<text x="767.5" y="126" class="ct cval">33</text>
+<text x="240" y="167.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college — More valuable: 21</title><rect x="250.0" y="142" width="325.5" height="13" rx="3" class="cs1"/></g>
+<text x="581.5" y="152" class="ct cval">21</text>
+<g class="cb"><title>Some college — Neither: 31</title><rect x="250.0" y="157" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="167" class="ct cval">31</text>
+<g class="cb"><title>Some college — Less valuable: 35</title><rect x="250.0" y="172" width="542.5" height="13" rx="3" class="cs3"/></g>
+<text x="798.5" y="182" class="ct cval">35</text>
+<text x="240" y="223.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate — More valuable: 20</title><rect x="250.0" y="198" width="310.0" height="13" rx="3" class="cs1"/></g>
+<text x="566.0" y="208" class="ct cval">20</text>
+<g class="cb"><title>High-school graduate — Neither: 30</title><rect x="250.0" y="213" width="465.0" height="13" rx="3" class="cs2"/></g>
+<text x="721.0" y="223" class="ct cval">30</text>
+<g class="cb"><title>High-school graduate — Less valuable: 31</title><rect x="250.0" y="228" width="480.5" height="13" rx="3" class="cs3"/></g>
+<text x="736.5" y="238" class="ct cval">31</text>
+<text x="240" y="279.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less — More valuable: 17</title><rect x="250.0" y="254" width="263.5" height="13" rx="3" class="cs1"/></g>
+<text x="519.5" y="264" class="ct cval">17</text>
+<g class="cb"><title>Some high school or less — Neither: 25</title><rect x="250.0" y="269" width="387.5" height="13" rx="3" class="cs2"/></g>
+<text x="643.5" y="279" class="ct cval">25</text>
+<g class="cb"><title>Some high school or less — Less valuable: 30</title><rect x="250.0" y="284" width="465.0" height="13" rx="3" class="cs3"/></g>
+<text x="721.0" y="294" class="ct cval">30</text>
+</svg><figcaption><strong>Table 1a. Value of a college degree because of AI, by education</strong> (<code>ai_deg</code>; full sample; weighted %). Net = more − less.</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Education</th><th>More valuable</th><th>Neither</th><th>Less valuable</th><th>Not sure</th><th>Net</th></tr></thead><tbody><tr><td>Graduate degree</td><td>37</td><td>32</td><td>22</td><td>9</td><td>+15</td></tr><tr><td>College degree</td><td>26</td><td>31</td><td>33</td><td>10</td><td>−7</td></tr><tr><td>Some college</td><td>21</td><td>31</td><td>35</td><td>13</td><td>−15</td></tr><tr><td>High-school graduate</td><td>20</td><td>30</td><td>31</td><td>19</td><td>−11</td></tr><tr><td>Some high school or less</td><td>17</td><td>25</td><td>30</td><td>29</td><td>−13</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 456" width="100%" height="456" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1b. Value of a college degree because of AI, by 7-point party identification (ai_deg; full sample; weighted %). Net = more − less.">
+<line x1="250.0" y1="24" x2="250.0" y2="426" class="cg"/>
+<text x="250.0" y="442" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="426" class="cg"/>
+<text x="405.0" y="442" class="ct ctick" data-chrome="1">10</text>
+<line x1="560.0" y1="24" x2="560.0" y2="426" class="cg"/>
+<text x="560.0" y="442" class="ct ctick" data-chrome="1">20</text>
+<line x1="715.0" y1="24" x2="715.0" y2="426" class="cg"/>
+<text x="715.0" y="442" class="ct ctick" data-chrome="1">30</text>
+<line x1="870.0" y1="24" x2="870.0" y2="426" class="cg"/>
+<text x="870.0" y="442" class="ct ctick" data-chrome="1">40</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More valuable</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">Less valuable</text>
+<rect x="516.4" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="531.4" y="15" class="ct clg">Not sure</text>
+<text x="240" y="55.5" class="ct clab">Strong Republican</text>
+<g class="cb"><title>Strong Republican — More valuable: 32</title><rect x="250.0" y="30" width="496.0" height="13" rx="3" class="cs1"/></g>
+<text x="752.0" y="40" class="ct cval">32</text>
+<g class="cb"><title>Strong Republican — Less valuable: 31</title><rect x="250.0" y="45" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="55" class="ct cval">31</text>
+<g class="cb"><title>Strong Republican — Not sure: 10</title><rect x="250.0" y="60" width="155.0" height="13" rx="3" class="cs3"/></g>
+<text x="411.0" y="70" class="ct cval">10</text>
+<text x="240" y="111.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican — More valuable: 22</title><rect x="250.0" y="86" width="341.0" height="13" rx="3" class="cs1"/></g>
+<text x="597.0" y="96" class="ct cval">22</text>
+<g class="cb"><title>Republican — Less valuable: 31</title><rect x="250.0" y="101" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="111" class="ct cval">31</text>
+<g class="cb"><title>Republican — Not sure: 13</title><rect x="250.0" y="116" width="201.5" height="13" rx="3" class="cs3"/></g>
+<text x="457.5" y="126" class="ct cval">13</text>
+<text x="240" y="167.5" class="ct clab">Lean Republican</text>
+<g class="cb"><title>Lean Republican — More valuable: 20</title><rect x="250.0" y="142" width="310.0" height="13" rx="3" class="cs1"/></g>
+<text x="566.0" y="152" class="ct cval">20</text>
+<g class="cb"><title>Lean Republican — Less valuable: 37</title><rect x="250.0" y="157" width="573.5" height="13" rx="3" class="cs2"/></g>
+<text x="829.5" y="167" class="ct cval">37</text>
+<g class="cb"><title>Lean Republican — Not sure: 12</title><rect x="250.0" y="172" width="186.0" height="13" rx="3" class="cs3"/></g>
+<text x="442.0" y="182" class="ct cval">12</text>
+<text x="240" y="223.5" class="ct clab">Independent (pure)</text>
+<g class="cb"><title>Independent (pure) — More valuable: 16</title><rect x="250.0" y="198" width="248.0" height="13" rx="3" class="cs1"/></g>
+<text x="504.0" y="208" class="ct cval">16</text>
+<g class="cb"><title>Independent (pure) — Less valuable: 29</title><rect x="250.0" y="213" width="449.5" height="13" rx="3" class="cs2"/></g>
+<text x="705.5" y="223" class="ct cval">29</text>
+<g class="cb"><title>Independent (pure) — Not sure: 25</title><rect x="250.0" y="228" width="387.5" height="13" rx="3" class="cs3"/></g>
+<text x="643.5" y="238" class="ct cval">25</text>
+<text x="240" y="279.5" class="ct clab">Lean Democrat</text>
+<g class="cb"><title>Lean Democrat — More valuable: 20</title><rect x="250.0" y="254" width="310.0" height="13" rx="3" class="cs1"/></g>
+<text x="566.0" y="264" class="ct cval">20</text>
+<g class="cb"><title>Lean Democrat — Less valuable: 38</title><rect x="250.0" y="269" width="589.0" height="13" rx="3" class="cs2"/></g>
+<text x="845.0" y="279" class="ct cval">38</text>
+<g class="cb"><title>Lean Democrat — Not sure: 12</title><rect x="250.0" y="284" width="186.0" height="13" rx="3" class="cs3"/></g>
+<text x="442.0" y="294" class="ct cval">12</text>
+<text x="240" y="335.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat — More valuable: 22</title><rect x="250.0" y="310" width="341.0" height="13" rx="3" class="cs1"/></g>
+<text x="597.0" y="320" class="ct cval">22</text>
+<g class="cb"><title>Democrat — Less valuable: 33</title><rect x="250.0" y="325" width="511.5" height="13" rx="3" class="cs2"/></g>
+<text x="767.5" y="335" class="ct cval">33</text>
+<g class="cb"><title>Democrat — Not sure: 13</title><rect x="250.0" y="340" width="201.5" height="13" rx="3" class="cs3"/></g>
+<text x="457.5" y="350" class="ct cval">13</text>
+<text x="240" y="391.5" class="ct clab">Strong Democrat</text>
+<g class="cb"><title>Strong Democrat — More valuable: 26</title><rect x="250.0" y="366" width="403.0" height="13" rx="3" class="cs1"/></g>
+<text x="659.0" y="376" class="ct cval">26</text>
+<g class="cb"><title>Strong Democrat — Less valuable: 30</title><rect x="250.0" y="381" width="465.0" height="13" rx="3" class="cs2"/></g>
+<text x="721.0" y="391" class="ct cval">30</text>
+<g class="cb"><title>Strong Democrat — Not sure: 13</title><rect x="250.0" y="396" width="201.5" height="13" rx="3" class="cs3"/></g>
+<text x="457.5" y="406" class="ct cval">13</text>
+</svg><figcaption><strong>Table 1b. Value of a college degree because of AI, by 7-point party identification</strong> (<code>ai_deg</code>; full sample; weighted %). Net = more − less.</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Party (7-point)</th><th>More valuable</th><th>Less valuable</th><th>Not sure</th><th>Net</th></tr></thead><tbody><tr><td>Strong Republican</td><td>32</td><td>31</td><td>10</td><td>+1</td></tr><tr><td>Republican</td><td>22</td><td>31</td><td>13</td><td>−9</td></tr><tr><td>Lean Republican</td><td>20</td><td>37</td><td>12</td><td>−18</td></tr><tr><td>Independent (pure)</td><td>16</td><td>29</td><td>25</td><td>−13</td></tr><tr><td>Lean Democrat</td><td>20</td><td>38</td><td>12</td><td>−19</td></tr><tr><td>Democrat</td><td>22</td><td>33</td><td>13</td><td>−11</td></tr><tr><td>Strong Democrat</td><td>26</td><td>30</td><td>13</td><td>−3</td></tr></tbody></table></div></details></figure>
+<p><em>The 3-point party measure collapses this into a near-flat "everyone's slightly negative"; the 7-point scale shows it is the leaners and pure independents, not either party's base, who are most skeptical or unsure — an engagement gradient, not an ideological one.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 226" width="100%" height="226" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Value of a college degree for entry-level candidates (ai_deg_val_hire; hiring authority; n ≈ 5,247; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="196" class="cg"/>
+<text x="250.0" y="212" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="196" class="cg"/>
+<text x="405.0" y="212" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="196" class="cg"/>
+<text x="560.0" y="212" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="196" class="cg"/>
+<text x="715.0" y="212" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="196" class="cg"/>
+<text x="870.0" y="212" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much more valuable</text>
+<g class="cb"><title>Much more valuable: 18.4</title><rect x="250.0" y="12" width="114.1" height="17" rx="3" class="cs1"/></g>
+<text x="370.1" y="26" class="ct cval">18.4</text>
+<text x="240" y="54.5" class="ct clab">Somewhat more valuable</text>
+<g class="cb"><title>Somewhat more valuable: 20.9</title><rect x="250.0" y="42" width="129.6" height="17" rx="3" class="cs1"/></g>
+<text x="385.6" y="56" class="ct cval">20.9</text>
+<text x="240" y="84.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 39.6</title><rect x="250.0" y="72" width="245.5" height="17" rx="3" class="cs1"/></g>
+<text x="501.5" y="86" class="ct cval">39.6</text>
+<text x="240" y="114.5" class="ct clab">Somewhat less valuable</text>
+<g class="cb"><title>Somewhat less valuable: 10.8</title><rect x="250.0" y="102" width="67.0" height="17" rx="3" class="cs1"/></g>
+<text x="323.0" y="116" class="ct cval">10.8</text>
+<text x="240" y="144.5" class="ct clab">Much less valuable</text>
+<g class="cb"><title>Much less valuable: 4.6</title><rect x="250.0" y="132" width="28.5" height="17" rx="3" class="cs1"/></g>
+<text x="284.5" y="146" class="ct cval">4.6</text>
+<text x="240" y="174.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 5.7</title><rect x="250.0" y="162" width="35.3" height="17" rx="3" class="cs1"/></g>
+<text x="291.3" y="176" class="ct cval">5.7</text>
+</svg><figcaption><strong>Table 2. Value of a college degree for entry-level candidates</strong> (<code>ai_deg_val_hire</code>; hiring authority; n ≈ 5,247; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Much more valuable</td><td>18.4</td></tr><tr><td>Somewhat more valuable</td><td>20.9</td></tr><tr><td>About the same</td><td>39.6</td></tr><tr><td>Somewhat less valuable</td><td>10.8</td></tr><tr><td>Much less valuable</td><td>4.6</td></tr><tr><td>Not sure</td><td>5.7</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 568" width="100%" height="568" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. Which majors will be more or less valuable due to AI? (ai_degree_fields; full sample; n ≈ 23,400; weighted %= more − less).">
+<line x1="250.0" y1="24" x2="250.0" y2="538" class="cg"/>
+<text x="250.0" y="554" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="24" x2="374.0" y2="538" class="cg"/>
+<text x="374.0" y="554" class="ct ctick" data-chrome="1">10</text>
+<line x1="498.0" y1="24" x2="498.0" y2="538" class="cg"/>
+<text x="498.0" y="554" class="ct ctick" data-chrome="1">20</text>
+<line x1="622.0" y1="24" x2="622.0" y2="538" class="cg"/>
+<text x="622.0" y="554" class="ct ctick" data-chrome="1">30</text>
+<line x1="746.0" y1="24" x2="746.0" y2="538" class="cg"/>
+<text x="746.0" y="554" class="ct ctick" data-chrome="1">40</text>
+<line x1="870.0" y1="24" x2="870.0" y2="538" class="cg"/>
+<text x="870.0" y="554" class="ct ctick" data-chrome="1">50</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">More</text>
+<rect x="316.6" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="331.6" y="15" class="ct clg">No change</text>
+<rect x="420.20000000000005" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="435.20000000000005" y="15" class="ct clg">Less</text>
+<text x="240" y="55.5" class="ct clab">Engineering</text>
+<g class="cb"><title>Engineering — More: 42.3</title><rect x="250.0" y="30" width="524.5" height="13" rx="3" class="cs1"/></g>
+<text x="780.5" y="40" class="ct cval">42.3</text>
+<g class="cb"><title>Engineering — No change: 32.1</title><rect x="250.0" y="45" width="398.0" height="13" rx="3" class="cs2"/></g>
+<text x="654.0" y="55" class="ct cval">32.1</text>
+<g class="cb"><title>Engineering — Less: 25.5</title><rect x="250.0" y="60" width="316.2" height="13" rx="3" class="cs3"/></g>
+<text x="572.2" y="70" class="ct cval">25.5</text>
+<text x="240" y="111.5" class="ct clab">Computer Science</text>
+<g class="cb"><title>Computer Science — More: 43.5</title><rect x="250.0" y="86" width="539.4" height="13" rx="3" class="cs1"/></g>
+<text x="795.4" y="96" class="ct cval">43.5</text>
+<g class="cb"><title>Computer Science — No change: 27.9</title><rect x="250.0" y="101" width="346.0" height="13" rx="3" class="cs2"/></g>
+<text x="602.0" y="111" class="ct cval">27.9</text>
+<g class="cb"><title>Computer Science — Less: 28.6</title><rect x="250.0" y="116" width="354.6" height="13" rx="3" class="cs3"/></g>
+<text x="610.6" y="126" class="ct cval">28.6</text>
+<text x="240" y="167.5" class="ct clab">Biology</text>
+<g class="cb"><title>Biology — More: 32.6</title><rect x="250.0" y="142" width="404.2" height="13" rx="3" class="cs1"/></g>
+<text x="660.2" y="152" class="ct cval">32.6</text>
+<g class="cb"><title>Biology — No change: 41.4</title><rect x="250.0" y="157" width="513.4" height="13" rx="3" class="cs2"/></g>
+<text x="769.4" y="167" class="ct cval">41.4</text>
+<g class="cb"><title>Biology — Less: 25.9</title><rect x="250.0" y="172" width="321.2" height="13" rx="3" class="cs3"/></g>
+<text x="577.2" y="182" class="ct cval">25.9</text>
+<text x="240" y="223.5" class="ct clab">Math</text>
+<g class="cb"><title>Math — More: 33.1</title><rect x="250.0" y="198" width="410.4" height="13" rx="3" class="cs1"/></g>
+<text x="666.4" y="208" class="ct cval">33.1</text>
+<g class="cb"><title>Math — No change: 34.5</title><rect x="250.0" y="213" width="427.8" height="13" rx="3" class="cs2"/></g>
+<text x="683.8" y="223" class="ct cval">34.5</text>
+<g class="cb"><title>Math — Less: 32.3</title><rect x="250.0" y="228" width="400.5" height="13" rx="3" class="cs3"/></g>
+<text x="656.5" y="238" class="ct cval">32.3</text>
+<text x="240" y="279.5" class="ct clab">Communication</text>
+<g class="cb"><title>Communication — More: 31.5</title><rect x="250.0" y="254" width="390.6" height="13" rx="3" class="cs1"/></g>
+<text x="646.6" y="264" class="ct cval">31.5</text>
+<g class="cb"><title>Communication — No change: 37.6</title><rect x="250.0" y="269" width="466.2" height="13" rx="3" class="cs2"/></g>
+<text x="722.2" y="279" class="ct cval">37.6</text>
+<g class="cb"><title>Communication — Less: 30.9</title><rect x="250.0" y="284" width="383.2" height="13" rx="3" class="cs3"/></g>
+<text x="639.2" y="294" class="ct cval">30.9</text>
+<text x="240" y="335.5" class="ct clab">English</text>
+<g class="cb"><title>English — More: 27.2</title><rect x="250.0" y="310" width="337.3" height="13" rx="3" class="cs1"/></g>
+<text x="593.3" y="320" class="ct cval">27.2</text>
+<g class="cb"><title>English — No change: 43.4</title><rect x="250.0" y="325" width="538.2" height="13" rx="3" class="cs2"/></g>
+<text x="794.2" y="335" class="ct cval">43.4</text>
+<g class="cb"><title>English — Less: 29.4</title><rect x="250.0" y="340" width="364.6" height="13" rx="3" class="cs3"/></g>
+<text x="620.6" y="350" class="ct cval">29.4</text>
+<text x="240" y="391.5" class="ct clab">Economics</text>
+<g class="cb"><title>Economics — More: 26.1</title><rect x="250.0" y="366" width="323.6" height="13" rx="3" class="cs1"/></g>
+<text x="579.6" y="376" class="ct cval">26.1</text>
+<g class="cb"><title>Economics — No change: 42.2</title><rect x="250.0" y="381" width="523.3" height="13" rx="3" class="cs2"/></g>
+<text x="779.3" y="391" class="ct cval">42.2</text>
+<g class="cb"><title>Economics — Less: 31.8</title><rect x="250.0" y="396" width="394.3" height="13" rx="3" class="cs3"/></g>
+<text x="650.3" y="406" class="ct cval">31.8</text>
+<text x="240" y="447.5" class="ct clab">Political Science</text>
+<g class="cb"><title>Political Science — More: 22.1</title><rect x="250.0" y="422" width="274.0" height="13" rx="3" class="cs1"/></g>
+<text x="530.0" y="432" class="ct cval">22.1</text>
+<g class="cb"><title>Political Science — No change: 48.4</title><rect x="250.0" y="437" width="600.2" height="13" rx="3" class="cs2"/></g>
+<text x="856.2" y="447" class="ct cval">48.4</text>
+<g class="cb"><title>Political Science — Less: 29.5</title><rect x="250.0" y="452" width="365.8" height="13" rx="3" class="cs3"/></g>
+<text x="621.8" y="462" class="ct cval">29.5</text>
+<text x="240" y="503.5" class="ct clab">Philosophy</text>
+<g class="cb"><title>Philosophy — More: 22.7</title><rect x="250.0" y="478" width="281.5" height="13" rx="3" class="cs1"/></g>
+<text x="537.5" y="488" class="ct cval">22.7</text>
+<g class="cb"><title>Philosophy — No change: 47.0</title><rect x="250.0" y="493" width="582.8" height="13" rx="3" class="cs2"/></g>
+<text x="838.8" y="503" class="ct cval">47.0</text>
+<g class="cb"><title>Philosophy — Less: 30.3</title><rect x="250.0" y="508" width="375.7" height="13" rx="3" class="cs3"/></g>
+<text x="631.7" y="518" class="ct cval">30.3</text>
+</svg><figcaption><strong>Table 3. Which majors will be more or less valuable due to AI?</strong> (<code>ai_degree_fields</code>; full sample; n ≈ 23,400; weighted %= more − less).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Major</th><th>More</th><th>No change</th><th>Less</th><th>Net</th></tr></thead><tbody><tr><td>Engineering</td><td>42.3</td><td>32.1</td><td>25.5</td><td>+16.8</td></tr><tr><td>Computer Science</td><td>43.5</td><td>27.9</td><td>28.6</td><td>+14.9</td></tr><tr><td>Biology</td><td>32.6</td><td>41.4</td><td>25.9</td><td>+6.7</td></tr><tr><td>Math</td><td>33.1</td><td>34.5</td><td>32.3</td><td>+0.8</td></tr><tr><td>Communication</td><td>31.5</td><td>37.6</td><td>30.9</td><td>+0.6</td></tr><tr><td>English</td><td>27.2</td><td>43.4</td><td>29.4</td><td>−2.2</td></tr><tr><td>Economics</td><td>26.1</td><td>42.2</td><td>31.8</td><td>−5.7</td></tr><tr><td>Political Science</td><td>22.1</td><td>48.4</td><td>29.5</td><td>−7.4</td></tr><tr><td>Philosophy</td><td>22.7</td><td>47.0</td><td>30.3</td><td>−7.6</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 4. Use of AI to screen or skim résumés (ai_resume; hiring authority; n ≈ 5,106; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">A lot</text>
+<g class="cb"><title>A lot: 18.1</title><rect x="250.0" y="12" width="112.2" height="17" rx="3" class="cs1"/></g>
+<text x="368.2" y="26" class="ct cval">18.1</text>
+<text x="240" y="54.5" class="ct clab">Some</text>
+<g class="cb"><title>Some: 39.0</title><rect x="250.0" y="42" width="241.8" height="17" rx="3" class="cs1"/></g>
+<text x="497.8" y="56" class="ct cval">39.0</text>
+<text x="240" y="84.5" class="ct clab">Not much</text>
+<g class="cb"><title>Not much: 16.2</title><rect x="250.0" y="72" width="100.4" height="17" rx="3" class="cs1"/></g>
+<text x="356.4" y="86" class="ct cval">16.2</text>
+<text x="240" y="114.5" class="ct clab">Not at all</text>
+<g class="cb"><title>Not at all: 26.7</title><rect x="250.0" y="102" width="165.5" height="17" rx="3" class="cs1"/></g>
+<text x="421.5" y="116" class="ct cval">26.7</text>
+</svg><figcaption><strong>Table 4. Use of AI to screen or skim résumés</strong> (<code>ai_resume</code>; hiring authority; n ≈ 5,106; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>A lot</td><td>18.1</td></tr><tr><td>Some</td><td>39.0</td></tr><tr><td>Not much</td><td>16.2</td></tr><tr><td>Not at all</td><td>26.7</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 5. Reaction to a candidate who used AI for all writing/coding (ai_college_signal; hiring authority; n ≈ 5,240; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Definitely encourage hiring</text>
+<g class="cb"><title>Definitely encourage hiring: 14.4</title><rect x="250.0" y="12" width="89.3" height="17" rx="3" class="cs1"/></g>
+<text x="345.3" y="26" class="ct cval">14.4</text>
+<text x="240" y="54.5" class="ct clab">Probably encourage</text>
+<g class="cb"><title>Probably encourage: 27.2</title><rect x="250.0" y="42" width="168.6" height="17" rx="3" class="cs1"/></g>
+<text x="424.6" y="56" class="ct cval">27.2</text>
+<text x="240" y="84.5" class="ct clab">Neither</text>
+<g class="cb"><title>Neither: 37.8</title><rect x="250.0" y="72" width="234.4" height="17" rx="3" class="cs1"/></g>
+<text x="490.4" y="86" class="ct cval">37.8</text>
+<text x="240" y="114.5" class="ct clab">Probably discourage</text>
+<g class="cb"><title>Probably discourage: 15.1</title><rect x="250.0" y="102" width="93.6" height="17" rx="3" class="cs1"/></g>
+<text x="349.6" y="116" class="ct cval">15.1</text>
+<text x="240" y="144.5" class="ct clab">Definitely discourage</text>
+<g class="cb"><title>Definitely discourage: 5.6</title><rect x="250.0" y="132" width="34.7" height="17" rx="3" class="cs1"/></g>
+<text x="290.7" y="146" class="ct cval">5.6</text>
+</svg><figcaption><strong>Table 5. Reaction to a candidate who used AI for all writing/coding</strong> (<code>ai_college_signal</code>; hiring authority; n ≈ 5,240; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Definitely encourage hiring</td><td>14.4</td></tr><tr><td>Probably encourage</td><td>27.2</td></tr><tr><td>Neither</td><td>37.8</td></tr><tr><td>Probably discourage</td><td>15.1</td></tr><tr><td>Definitely discourage</td><td>5.6</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 256" width="100%" height="256" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 6. How hiring managers assess AI skills (ai_literacy_how; hiring authority; n ≈ 5,250; select-all; weighted % selecting — do not sum).">
+<line x1="250.0" y1="6" x2="250.0" y2="226" class="cg"/>
+<text x="250.0" y="242" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="226" class="cg"/>
+<text x="405.0" y="242" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="226" class="cg"/>
+<text x="560.0" y="242" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="226" class="cg"/>
+<text x="715.0" y="242" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="226" class="cg"/>
+<text x="870.0" y="242" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Ask candidates about prior AI use</text>
+<g class="cb"><title>Ask candidates about prior AI use: 35.9</title><rect x="250.0" y="12" width="222.6" height="17" rx="3" class="cs1"/></g>
+<text x="478.6" y="26" class="ct cval">35.9</text>
+<text x="240" y="54.5" class="ct clab">We do not assess AI skills</text>
+<g class="cb"><title>We do not assess AI skills: 34.2</title><rect x="250.0" y="42" width="212.0" height="17" rx="3" class="cs1"/></g>
+<text x="468.0" y="56" class="ct cval">34.2</text>
+<text x="240" y="84.5" class="ct clab">Hands-on tasks or exercises</text>
+<g class="cb"><title>Hands-on tasks or exercises: 31.1</title><rect x="250.0" y="72" width="192.8" height="17" rx="3" class="cs1"/></g>
+<text x="448.8" y="86" class="ct cval">31.1</text>
+<text x="240" y="114.5" class="ct clab">Portfolio or work samples</text>
+<g class="cb"><title>Portfolio or work samples: 26.2</title><rect x="250.0" y="102" width="162.4" height="17" rx="3" class="cs1"/></g>
+<text x="418.4" y="116" class="ct cval">26.2</text>
+<text x="240" y="144.5" class="ct clab">Credentials or certifications</text>
+<g class="cb"><title>Credentials or certifications: 23.4</title><rect x="250.0" y="132" width="145.1" height="17" rx="3" class="cs1"/></g>
+<text x="401.1" y="146" class="ct cval">23.4</text>
+<text x="240" y="174.5" class="ct clab">Informal judgment during interviews</text>
+<g class="cb"><title>Informal judgment during interviews: 17.2</title><rect x="250.0" y="162" width="106.6" height="17" rx="3" class="cs1"/></g>
+<text x="362.6" y="176" class="ct cval">17.2</text>
+<text x="240" y="204.5" class="ct clab">Other</text>
+<g class="cb"><title>Other: 0.9</title><rect x="250.0" y="192" width="5.6" height="17" rx="3" class="cs1"/></g>
+<text x="261.6" y="206" class="ct cval">0.9</text>
+</svg><figcaption><strong>Table 6. How hiring managers assess AI skills</strong> (<code>ai_literacy_how</code>; hiring authority; n ≈ 5,250; select-all; weighted % selecting — do not sum).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Method</th><th>%</th></tr></thead><tbody><tr><td>Ask candidates about prior AI use</td><td>35.9</td></tr><tr><td>We do not assess AI skills</td><td>34.2</td></tr><tr><td>Hands-on tasks or exercises</td><td>31.1</td></tr><tr><td>Portfolio or work samples</td><td>26.2</td></tr><tr><td>Credentials or certifications</td><td>23.4</td></tr><tr><td>Informal judgment during interviews</td><td>17.2</td></tr><tr><td>Other</td><td>0.9</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 7. Has AI changed how you make hiring decisions? (hiring_decisions; hiring authority; n ≈ 5,242; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Yes, a lot</text>
+<g class="cb"><title>Yes, a lot: 13.7</title><rect x="250.0" y="12" width="84.9" height="17" rx="3" class="cs1"/></g>
+<text x="340.9" y="26" class="ct cval">13.7</text>
+<text x="240" y="54.5" class="ct clab">Yes, somewhat</text>
+<g class="cb"><title>Yes, somewhat: 35.1</title><rect x="250.0" y="42" width="217.6" height="17" rx="3" class="cs1"/></g>
+<text x="473.6" y="56" class="ct cval">35.1</text>
+<text x="240" y="84.5" class="ct clab">Not much</text>
+<g class="cb"><title>Not much: 25.3</title><rect x="250.0" y="72" width="156.9" height="17" rx="3" class="cs1"/></g>
+<text x="412.9" y="86" class="ct cval">25.3</text>
+<text x="240" y="114.5" class="ct clab">Not at all</text>
+<g class="cb"><title>Not at all: 26.0</title><rect x="250.0" y="102" width="161.2" height="17" rx="3" class="cs1"/></g>
+<text x="417.2" y="116" class="ct cval">26.0</text>
+</svg><figcaption><strong>Table 7. Has AI changed how you make hiring decisions?</strong> (<code>hiring_decisions</code>; hiring authority; n ≈ 5,242; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Yes, a lot</td><td>13.7</td></tr><tr><td>Yes, somewhat</td><td>35.1</td></tr><tr><td>Not much</td><td>25.3</td></tr><tr><td>Not at all</td><td>26.0</td></tr></tbody></table></div></details></figure>
+<p><em>Changed (a lot + somewhat) = 48.8%. Gradient by manager's own AI-use frequency (<code>ai_work</code>): % who say hiring changed rises from 12.6% among managers who never use AI at work to 76.3% among the most frequent users.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 8. Entry-level hiring strategy, among managers whose hiring changed (hiring_change; hiring authority who report a change; n ≈ 2,557; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Fewer entry-level roles because of AI</text>
+<g class="cb"><title>Fewer entry-level roles because of AI: 26.6</title><rect x="250.0" y="12" width="164.9" height="17" rx="3" class="cs1"/></g>
+<text x="420.9" y="26" class="ct cval">26.6</text>
+<text x="240" y="54.5" class="ct clab">Same number, same expectations</text>
+<g class="cb"><title>Same number, same expectations: 37.1</title><rect x="250.0" y="42" width="230.0" height="17" rx="3" class="cs1"/></g>
+<text x="486.0" y="56" class="ct cval">37.1</text>
+<text x="240" y="84.5" class="ct clab">Same number, but expect more advanced work</text>
+<g class="cb"><title>Same number, but expect more advanced work: 29.0</title><rect x="250.0" y="72" width="179.8" height="17" rx="3" class="cs1"/></g>
+<text x="435.8" y="86" class="ct cval">29.0</text>
+<text x="240" y="114.5" class="ct clab">More entry-level roles because of AI</text>
+<g class="cb"><title>More entry-level roles because of AI: 7.3</title><rect x="250.0" y="102" width="45.3" height="17" rx="3" class="cs1"/></g>
+<text x="301.3" y="116" class="ct cval">7.3</text>
+</svg><figcaption><strong>Table 8. Entry-level hiring strategy, among managers whose hiring changed</strong> (<code>hiring_change</code>; hiring authority who report a change; n ≈ 2,557; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Fewer entry-level roles because of AI</td><td>26.6</td></tr><tr><td>Same number, same expectations</td><td>37.1</td></tr><tr><td>Same number, but expect more advanced work</td><td>29.0</td></tr><tr><td>More entry-level roles because of AI</td><td>7.3</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 136" width="100%" height="136" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 9. Market for AI-skilled candidates (hiring_compete; hiring authority; n ≈ 5,241; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="106" class="cg"/>
+<text x="250.0" y="122" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="106" class="cg"/>
+<text x="405.0" y="122" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="106" class="cg"/>
+<text x="560.0" y="122" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="106" class="cg"/>
+<text x="715.0" y="122" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="106" class="cg"/>
+<text x="870.0" y="122" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Do not specifically look for AI skills</text>
+<g class="cb"><title>Do not specifically look for AI skills: 44.2</title><rect x="250.0" y="12" width="274.0" height="17" rx="3" class="cs1"/></g>
+<text x="530.0" y="26" class="ct cval">44.2</text>
+<text x="240" y="54.5" class="ct clab">Easy to find AI-skilled candidates</text>
+<g class="cb"><title>Easy to find AI-skilled candidates: 28.8</title><rect x="250.0" y="42" width="178.6" height="17" rx="3" class="cs1"/></g>
+<text x="434.6" y="56" class="ct cval">28.8</text>
+<text x="240" y="84.5" class="ct clab">Hard to find AI-skilled candidates</text>
+<g class="cb"><title>Hard to find AI-skilled candidates: 27.0</title><rect x="250.0" y="72" width="167.4" height="17" rx="3" class="cs1"/></g>
+<text x="423.4" y="86" class="ct cval">27.0</text>
+</svg><figcaption><strong>Table 9. Market for AI-skilled candidates</strong> (<code>hiring_compete</code>; hiring authority; n ≈ 5,241; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Do not specifically look for AI skills</td><td>44.2</td></tr><tr><td>Easy to find AI-skilled candidates</td><td>28.8</td></tr><tr><td>Hard to find AI-skilled candidates</td><td>27.0</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 10. Has AI changed the number of job openings at your level? (indr_level_quantity; all workers; n ≈ 12,413; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Fewer openings</text>
+<g class="cb"><title>Fewer openings: 15.8</title><rect x="250.0" y="12" width="98.0" height="17" rx="3" class="cs1"/></g>
+<text x="354.0" y="26" class="ct cval">15.8</text>
+<text x="240" y="54.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 24.3</title><rect x="250.0" y="42" width="150.7" height="17" rx="3" class="cs1"/></g>
+<text x="406.7" y="56" class="ct cval">24.3</text>
+<text x="240" y="84.5" class="ct clab">More openings</text>
+<g class="cb"><title>More openings: 8.6</title><rect x="250.0" y="72" width="53.3" height="17" rx="3" class="cs1"/></g>
+<text x="309.3" y="86" class="ct cval">8.6</text>
+<text x="240" y="114.5" class="ct clab">Have not noticed a change</text>
+<g class="cb"><title>Have not noticed a change: 40.5</title><rect x="250.0" y="102" width="251.1" height="17" rx="3" class="cs1"/></g>
+<text x="507.1" y="116" class="ct cval">40.5</text>
+<text x="240" y="144.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 10.8</title><rect x="250.0" y="132" width="67.0" height="17" rx="3" class="cs1"/></g>
+<text x="323.0" y="146" class="ct cval">10.8</text>
+</svg><figcaption><strong>Table 10. Has AI changed the number of job openings at your level?</strong> (<code>indr_level_quantity</code>; all workers; n ≈ 12,413; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Fewer openings</td><td>15.8</td></tr><tr><td>About the same</td><td>24.3</td></tr><tr><td>More openings</td><td>8.6</td></tr><tr><td>Have not noticed a change</td><td>40.5</td></tr><tr><td>Not sure</td><td>10.8</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 11. Has AI changed the skills/experience expected at your level? (indr_level_quality; all workers; n ≈ 12,396; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Much higher AI skills expected</text>
+<g class="cb"><title>Much higher AI skills expected: 12.2</title><rect x="250.0" y="12" width="75.6" height="17" rx="3" class="cs1"/></g>
+<text x="331.6" y="26" class="ct cval">12.2</text>
+<text x="240" y="54.5" class="ct clab">Somewhat higher</text>
+<g class="cb"><title>Somewhat higher: 24.3</title><rect x="250.0" y="42" width="150.7" height="17" rx="3" class="cs1"/></g>
+<text x="406.7" y="56" class="ct cval">24.3</text>
+<text x="240" y="84.5" class="ct clab">Have not noticed a change</text>
+<g class="cb"><title>Have not noticed a change: 51.6</title><rect x="250.0" y="72" width="319.9" height="17" rx="3" class="cs1"/></g>
+<text x="575.9" y="86" class="ct cval">51.6</text>
+<text x="240" y="114.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 11.9</title><rect x="250.0" y="102" width="73.8" height="17" rx="3" class="cs1"/></g>
+<text x="329.8" y="116" class="ct cval">11.9</text>
+</svg><figcaption><strong>Table 11. Has AI changed the skills/experience expected at your level?</strong> (<code>indr_level_quality</code>; all workers; n ≈ 12,396; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Much higher AI skills expected</td><td>12.2</td></tr><tr><td>Somewhat higher</td><td>24.3</td></tr><tr><td>Have not noticed a change</td><td>51.6</td></tr><tr><td>Not sure</td><td>11.9</td></tr></tbody></table></div></details></figure>
+<p><em>Higher skills expected (much + somewhat) = 36.5%.</em></p>
+<hr/>
+<h2 id="appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</h2>
+<ul><li><strong><code>ai_deg</code> / <code>ai_deg_masters</code> / <code>ai_deg_phd</code></strong> — "In your opinion, does the recent rise of AI make a <strong>college degree</strong> / <strong>master's degree</strong> / <strong>doctoral degree (Ph.D.)</strong> more or less valuable for success in the future?" (Much more valuable; Somewhat more valuable; Neither more nor less valuable; Somewhat less valuable; Much less valuable; Not sure)</li><li><strong><code>ai_degree_fields</code></strong> — "Now thinking about specific degree fields, do you think the following undergraduate degrees will be more or less valuable due to AI?" (More valuable; No change; Less valuable) — Economics, Math, Computer Science, Political Science, Communication, English, Philosophy, Engineering, Biology</li><li><strong><code>ai_deg_val_hire</code></strong> <em>(hiring authority)</em> — "After the recent rise of AI, how do you view the value of a college degree when evaluating entry-level candidates?" (Much more valuable → Much less valuable; Not sure)</li><li><strong><code>ai_resume</code></strong> <em>(hiring authority)</em> — "To what extent do you use AI-based tools to screen or skim resumes/CVs during the hiring process? (e.g., AI tools that summarize, rank, or extract information from resumes)" (A lot; Some; Not much; Not at all; Not sure)</li><li><strong><code>ai_college_signal</code></strong> <em>(hiring authority)</em> — "If you knew that a candidate had used AI to assist with all of their writing or coding assignments, how would this affect your decision to hire this person?" (Definitely encourage → Definitely discourage hiring)</li><li><strong><code>ai_literacy_how</code></strong> <em>(hiring authority; select all)</em> — "When hiring for entry-level roles, how do you typically assess AI skills?" (We do not assess AI skills; By asking candidates about their prior AI use; Through hands-on tasks or exercises; Portfolio or work samples; Credentials or certifications; Informal judgment during interviews; Other)</li><li><strong><code>hiring_decisions</code></strong> <em>(hiring authority)</em> — "Has AI changed how you make hiring decisions?" (Yes, a lot; Yes, somewhat; Not much; Not at all)</li><li><strong><code>hiring_change</code></strong> <em>(hiring authority whose hiring changed)</em> — entry-level hiring strategy under AI (Fewer entry-level roles because of AI; Same number, same expectations; Same number, but expect more/higher-level work with AI; More entry-level roles because of AI)</li><li><strong><code>hiring_compete</code></strong> <em>(hiring authority)</em> — market for AI-skilled candidates (Hard to find AI-skilled candidates; Easy to find; Do not specifically look for AI skills)</li><li><strong><code>indr_level_quantity</code></strong> <em>(all workers)</em> — "Has AI affected the number of job openings at your level?" (Fewer; About the same; More; Have not noticed a change; Not sure)</li><li><strong><code>indr_level_quality</code></strong> <em>(all workers)</em> — "Has AI changed the skills or experience expected at your level?" (Much higher AI skills; Somewhat higher; Have not noticed a change; Not sure)</li></ul>
+<p class="lede"><strong>External sources cited (Comparative Context, <em>How AI is already changing hiring</em>):</strong></p>
+<ul><li>Resume Genius, <em>AI's Impact on Hiring 2025</em> (survey of 1,000 U.S. hiring managers, Jan 8–Feb 14 2025): 48% use AI to screen résumés before human review. <a href="https://resumegenius.com/blog/job-hunting/ai-impact-on-hiring" target="_blank" rel="noopener">https://resumegenius.com/blog/job-hunting/ai-impact-on-hiring</a></li><li>Insight Global, <em>2025 AI in Hiring Report</em> (survey of 1,005 hiring managers, Oct 17–22 2024): 99% use AI somewhere in the hiring process. <a href="https://insightglobal.com/2025-ai-in-hiring-report/" target="_blank" rel="noopener">https://insightglobal.com/2025-ai-in-hiring-report/</a></li></ul>
+
+    <div class="foot">
+      <div class="nav"><a href="05-ai-job-loss-anxiety.html"><span>Previous</span>Whose Job Is Next? How Workers See AI and Job Loss</a><a href="07-reskilling.html" style="text-align:right"><span>Next</span>The AI Training Gap — and Who Should Pay to Close It</a></div>
+      <p>AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>
