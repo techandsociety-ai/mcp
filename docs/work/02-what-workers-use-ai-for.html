@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>What Workers Actually Use AI For — AI@Work</title>
+<meta name="description" content="Among workers who use AI on the job, the most common uses are troubleshooting problems and brainstorming — not writing code, which is the least common of nine tasks. AI at work is "/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#2a78d6; --acct:#1c5cab; --soft:#eaf2fd;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@Work Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#ai-at-work-is-a-thinking-aid-not-a-coding-tool">AI at work is a thinking aid, not a coding tool</a><a href="#the-knowledge-work-tasks-split-by-education-the-everyday-one">The knowledge-work tasks split by education; the everyday ones don't</a><a href="#the-occupation-divide-data-jobs-drive-code-and-analysis-trou">The occupation divide: data jobs drive code and analysis; troubleshooting is universal</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@Work</div><h1>What Workers Actually Use AI For</h1><p class="dek"><em>Among workers who use AI on the job, the most common uses are troubleshooting problems and brainstorming — not writing code, which is the <em>least</em> common of nine tasks. AI at work is a broad thinking aid, and the tasks that divide sharply by education are writing and analysis.</em></p><p class="srcline">Source: AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement, fielded June 21–July 13, 2026 (interim extract; data collection ongoing). The task battery was analyzed among employed respondents who use AI for work (unweighted n ≈ 6,700). All figures are weighted estimates, weighted to U.S. Census population targets, and are self-reports — what workers say about their own AI use, not audited behaviour.</p><p class="pos"><em>Series position: Report 2 of the AI@Work series (see the series index) — the task-level decomposition of the <em>use</em> side established in the lead report. The socioeconomic divide here lives specifically in knowledge-work tasks (writing, summarizing, analysis), not everyday cognition; and the universal, low-visibility uses (troubleshooting, brainstorming) are the likeliest content of the undisclosed AI use documented in the shadow-AI report (report 4).</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on the AI@Work survey (CHIP50 Wave 38.6), a survey of <strong>23,462 U.S. adults</strong> (weighted n = 23,485) fielded June 21–July 13, 2026. All percentages are <strong>weighted to U.S. Census population targets</strong> and are population-representative; unweighted respondent counts are reported as a reliability guide only.</p>
+<p><strong>These are interim estimates.</strong> Wave 38.6 launched June 21, 2026 and data collection is ongoing; the figures in this report reflect responses received through July 13, 2026 and will be revised in a later release.</p>
+<p>The report analyzes the "AI task" battery (<code>ai_use_closed_1</code>, nine professional tasks) among <strong>employed respondents who use AI for their work</strong> (<code>ai_work</code> ≠ "Never"; unweighted n ≈ 6,700). The battery's stem asks how often the respondent uses AI tools for each purpose generally, not strictly at work; because the nine items are professional and knowledge-work tasks, and because the base is restricted to workers who use AI on the job, the results are read here as those workers' task profile. Two notes on measurement: the battery is coded <strong>1 = Not at all … 4 = A lot</strong> (reverse of its on-screen order), confirmed against the data; and "some or a lot" throughout means the top two response categories combined.</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>AI is a problem-solver first.</strong> Among workers who use AI on the job, the two most common uses are troubleshooting technical issues (74% use it for this at least sometimes) and brainstorming or problem-solving (72%) — ahead of every content-writing task.</li><li><strong>Coding is the <em>least</em> common use.</strong> Just 50% of AI-using workers use it for writing or fixing computer code — the lowest of the nine tasks — puncturing the assumption that workplace AI is mainly a developer's tool.</li><li><strong>Writing and analysis are core.</strong> Two-thirds use AI for drafting emails (66%), summarizing documents (66%), and data analysis (66%); 60% use it for reports and essays and for math.</li><li><strong>A meaningful minority lean on it heavily.</strong> About 30% use AI "a lot" for troubleshooting and for brainstorming, and roughly a quarter do so for summarizing (28%) and data analysis (26%).</li><li><strong>The education divide is in knowledge production, not everyday help.</strong> Workers with a graduate degree use AI far more than high-school-educated workers for reports (70% vs. 54%), summarizing (75% vs. 59%), and emails (74% vs. 61%) — but the two groups use it almost equally for troubleshooting, math, and brainstorming.</li><li><strong>AI is broad, not single-purpose.</strong> For eight of the nine tasks, a majority of AI-using workers reach for it at least sometimes — only writing code falls below half — so the tool is a general-purpose cognitive assistant, not a one-function utility.</li><li><strong>Data jobs drive the technical uses.</strong> Workers in data or analytical roles use AI for coding (59% vs. 47%) and data analysis (75% vs. 62%) far more than manual-labor workers — but troubleshooting is used about equally (78% vs. 74%), the one use that reaches every kind of job.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>When people picture AI "at work," they often picture a coder with a copilot. The reality among American workers is both broader and more ordinary. Asked how often they use AI tools across a range of professional tasks, workers who use AI on the job describe a general-purpose cognitive assistant — one they turn to first for figuring things out and thinking through problems, and only secondarily for producing polished text, and least of all for software.</p>
+<p>This report maps that task profile using Wave 38.6, restricted to employed respondents who use AI for their work. It shows which tasks are common and which are niche, how intensively workers rely on AI for each, and where the biggest gaps open up by education. The headline is a useful corrective: the most common workplace uses of AI are troubleshooting and brainstorming, writing code is the rarest, and the tasks that most separate the more- from the less-educated are exactly the knowledge-production tasks — writing, summarizing, and analysis — rather than the everyday problem-solving that nearly everyone uses AI for.</p>
+<hr/>
+<h2 id="ai-at-work-is-a-thinking-aid-not-a-coding-tool">AI at work is a thinking aid, not a coding tool</h2>
+<p class="lede"><strong>The most common workplace uses of AI are open-ended cognitive help — troubleshooting and brainstorming — while writing code is the least common of the nine tasks measured.</strong></p>
+<p>Among workers who use AI on the job, troubleshooting technical issues is the single most common application: 74% use AI for it at least sometimes, and 30% "a lot." Close behind is brainstorming or problem-solving (72% at least sometimes, 30% "a lot"). Only then come the content and analysis tasks — drafting and editing emails (66%), summarizing long documents or notes (66%), and data analysis (66%), followed by math or numeric calculation (60%) and writing reports, essays, or papers (60%). Transcribing or taking meeting notes (53%) and, at the bottom, writing or fixing computer code (50%) are the least common.</p>
+<p>The coding result is the one most worth underscoring. Despite the popular image of workplace AI as primarily a programming aid, it is the rarest of the nine uses, and a third of AI-using workers (33%) never use it for code at all. What the pattern describes instead is a tool people reach for to <em>understand and unblock</em> — to fix the printer, debug a spreadsheet, think through an approach — as much as to <em>produce</em>. AI's foothold at work is cognitive before it is generative.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 568" width="100%" height="568" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. How often workers use AI for each task. Base: employed AI-using workers; unweighted n ≈ 6,700. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="538" class="cg"/>
+<text x="250.0" y="554" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="538" class="cg"/>
+<text x="405.0" y="554" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="538" class="cg"/>
+<text x="560.0" y="554" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="538" class="cg"/>
+<text x="715.0" y="554" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="538" class="cg"/>
+<text x="870.0" y="554" class="ct ctick" data-chrome="1">80</text>
+<line x1="257.8" y1="24" x2="257.8" y2="538" class="cref"/>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Some or a lot</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">A lot</text>
+<rect x="457.2" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="472.2" y="15" class="ct clg">Not at all</text>
+<text x="240" y="55.5" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Some or a lot: 74</title><rect x="257.8" y="30" width="565.8" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="40" class="ct cval">74</text>
+<g class="cb"><title>Troubleshooting technical issues — A lot: 30</title><rect x="257.8" y="45" width="224.8" height="13" rx="3" class="cs2"/></g>
+<text x="488.5" y="55" class="ct cval">30</text>
+<g class="cb"><title>Troubleshooting technical issues — Not at all: 12</title><rect x="257.8" y="60" width="85.2" height="13" rx="3" class="cs3"/></g>
+<text x="349.0" y="70" class="ct cval">12</text>
+<text x="240" y="111.5" class="ct clab">Brainstorming / problem-solving</text>
+<g class="cb"><title>Brainstorming / problem-solving — Some or a lot: 72</title><rect x="257.8" y="86" width="550.2" height="13" rx="3" class="cs1"/></g>
+<text x="814.0" y="96" class="ct cval">72</text>
+<g class="cb"><title>Brainstorming / problem-solving — A lot: 30</title><rect x="257.8" y="101" width="224.8" height="13" rx="3" class="cs2"/></g>
+<text x="488.5" y="111" class="ct cval">30</text>
+<g class="cb"><title>Brainstorming / problem-solving — Not at all: 13</title><rect x="257.8" y="116" width="93.0" height="13" rx="3" class="cs3"/></g>
+<text x="356.8" y="126" class="ct cval">13</text>
+<text x="240" y="167.5" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Some or a lot: 66</title><rect x="257.8" y="142" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="152" class="ct cval">66</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — A lot: 22</title><rect x="257.8" y="157" width="162.8" height="13" rx="3" class="cs2"/></g>
+<text x="426.5" y="167" class="ct cval">22</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Not at all: 15</title><rect x="257.8" y="172" width="108.5" height="13" rx="3" class="cs3"/></g>
+<text x="372.2" y="182" class="ct cval">15</text>
+<text x="240" y="223.5" class="ct clab">Summarizing documents / notes</text>
+<g class="cb"><title>Summarizing documents / notes — Some or a lot: 66</title><rect x="257.8" y="198" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="208" class="ct cval">66</text>
+<g class="cb"><title>Summarizing documents / notes — A lot: 28</title><rect x="257.8" y="213" width="209.2" height="13" rx="3" class="cs2"/></g>
+<text x="473.0" y="223" class="ct cval">28</text>
+<g class="cb"><title>Summarizing documents / notes — Not at all: 17</title><rect x="257.8" y="228" width="124.0" height="13" rx="3" class="cs3"/></g>
+<text x="387.8" y="238" class="ct cval">17</text>
+<text x="240" y="279.5" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Some or a lot: 66</title><rect x="257.8" y="254" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="264" class="ct cval">66</text>
+<g class="cb"><title>Data analysis — A lot: 26</title><rect x="257.8" y="269" width="193.8" height="13" rx="3" class="cs2"/></g>
+<text x="457.5" y="279" class="ct cval">26</text>
+<g class="cb"><title>Data analysis — Not at all: 17</title><rect x="257.8" y="284" width="124.0" height="13" rx="3" class="cs3"/></g>
+<text x="387.8" y="294" class="ct cval">17</text>
+<text x="240" y="335.5" class="ct clab">Math / numeric calculation</text>
+<g class="cb"><title>Math / numeric calculation — Some or a lot: 60</title><rect x="257.8" y="310" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="721.0" y="320" class="ct cval">60</text>
+<g class="cb"><title>Math / numeric calculation — A lot: 22</title><rect x="257.8" y="325" width="162.8" height="13" rx="3" class="cs2"/></g>
+<text x="426.5" y="335" class="ct cval">22</text>
+<g class="cb"><title>Math / numeric calculation — Not at all: 20</title><rect x="257.8" y="340" width="147.2" height="13" rx="3" class="cs3"/></g>
+<text x="411.0" y="350" class="ct cval">20</text>
+<text x="240" y="391.5" class="ct clab">Writing / editing reports, essays, papers</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Some or a lot: 60</title><rect x="257.8" y="366" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="721.0" y="376" class="ct cval">60</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — A lot: 21</title><rect x="257.8" y="381" width="155.0" height="13" rx="3" class="cs2"/></g>
+<text x="418.8" y="391" class="ct cval">21</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Not at all: 21</title><rect x="257.8" y="396" width="155.0" height="13" rx="3" class="cs3"/></g>
+<text x="418.8" y="406" class="ct cval">21</text>
+<text x="240" y="447.5" class="ct clab">Transcribing / meeting notes</text>
+<g class="cb"><title>Transcribing / meeting notes — Some or a lot: 53</title><rect x="257.8" y="422" width="403.0" height="13" rx="3" class="cs1"/></g>
+<text x="666.8" y="432" class="ct cval">53</text>
+<g class="cb"><title>Transcribing / meeting notes — A lot: 19</title><rect x="257.8" y="437" width="139.5" height="13" rx="3" class="cs2"/></g>
+<text x="403.2" y="447" class="ct cval">19</text>
+<g class="cb"><title>Transcribing / meeting notes — Not at all: 28</title><rect x="257.8" y="452" width="209.2" height="13" rx="3" class="cs3"/></g>
+<text x="473.0" y="462" class="ct cval">28</text>
+<text x="240" y="503.5" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Some or a lot: 50</title><rect x="257.8" y="478" width="379.8" height="13" rx="3" class="cs1"/></g>
+<text x="643.5" y="488" class="ct cval">50</text>
+<g class="cb"><title>Writing / fixing computer code — A lot: 20</title><rect x="257.8" y="493" width="147.2" height="13" rx="3" class="cs2"/></g>
+<text x="411.0" y="503" class="ct cval">20</text>
+<g class="cb"><title>Writing / fixing computer code — Not at all: 33</title><rect x="257.8" y="508" width="248.0" height="13" rx="3" class="cs3"/></g>
+<text x="511.8" y="518" class="ct cval">33</text>
+</svg><figcaption><em>Figure 1. How often workers use AI for each task. Base: employed AI-using workers; unweighted n ≈ 6,700. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Some or a lot</th><th>A lot</th><th>Not at all</th></tr></thead><tbody><tr><td>Troubleshooting technical issues</td><td>74</td><td>30</td><td>12</td></tr><tr><td>Brainstorming / problem-solving</td><td>72</td><td>30</td><td>13</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>66</td><td>22</td><td>15</td></tr><tr><td>Summarizing documents / notes</td><td>66</td><td>28</td><td>17</td></tr><tr><td>Data analysis</td><td>66</td><td>26</td><td>17</td></tr><tr><td>Math / numeric calculation</td><td>60</td><td>22</td><td>20</td></tr><tr><td>Writing / editing reports, essays, papers</td><td>60</td><td>21</td><td>21</td></tr><tr><td>Transcribing / meeting notes</td><td>53</td><td>19</td><td>28</td></tr><tr><td>Writing / fixing computer code</td><td>50</td><td>20</td><td>33</td></tr></tbody></table></div></details></figure>
+<blockquote><strong>Comparative context.</strong> The ordering matches independent national surveys: Pew found that among workers who have used AI chatbots at work, researching or finding information (57%) and editing written content (52%) ranked at the top while "help with analyzing data or writing computer code" sat near the bottom at 27%; Ipsos found the same shape among AI users, with looking up information or getting recommendations first at 80% and data analysis or programming lowest at 37%; and Quinnipiac put research first at 51%, with data analysis at 27%<sup class="fnref" id="fnref-pew-tasks-2025"><a href="#fn-pew-tasks-2025">1</a></sup><sup class="fnref" id="fnref-ipsos-ai-2026"><a href="#fn-ipsos-ai-2026">2</a></sup><sup class="fnref" id="fnref-quinnipiac-ai-2026"><a href="#fn-quinnipiac-ai-2026">3</a></sup>. Note that Pew and Ipsos each bundle data analysis together with coding in a single item, whereas the battery here separates them — and they diverge, at 66% for data analysis against 50% for code. One estimate does not line up: Pew put "coming up with new ideas" at 35% among AI-using workers, well below the 72% for brainstorming or problem-solving here, a gap best read as differing question wording and differing bases rather than either survey being wrong.</blockquote>
+<hr/>
+<h2 id="the-knowledge-work-tasks-split-by-education-the-everyday-one">The knowledge-work tasks split by education; the everyday ones don't</h2>
+<p class="lede"><strong>More-educated workers use AI much more for writing and analysis — but AI's use for troubleshooting, math, and brainstorming is broadly shared.</strong></p>
+<p>Where the education gap is large, it is concentrated in knowledge-production tasks. Workers with a graduate degree are far more likely than high-school-educated workers to use AI for summarizing documents (75% vs. 59%, a 16-point gap), writing reports and essays (70% vs. 54%, +16), drafting emails (74% vs. 61%, +13), and data analysis (74% vs. 62%, +12). These are the tasks of the credentialed desk job, and AI adoption for them tracks education closely.</p>
+<p>For other tasks, the divide nearly disappears. Troubleshooting technical issues is used almost identically across the education spectrum (77% of graduate-degree holders vs. 75% of high-school graduates, a 3-point gap); math or numeric calculation is if anything slightly <em>more</em> common among the less-educated (62% vs. 63%); and brainstorming shows only a modest gap (77% vs. 69%). In other words, AI's role as an everyday problem-solving and figuring-things-out aid is broadly shared across the workforce, while its role as a writing-and-analysis productivity tool is concentrated among the more educated — the same knowledge-work divide that runs through AI adoption overall (the socioeconomic divide is an education gap in <em>behavior</em>), but visible here at the level of specific tasks.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 433" width="100%" height="433" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Use of AI for each task (share &quot;some or a lot&quot;), graduate-degree vs. high-school-graduate workers. Base: employed AI-using workers; unweighted n ≈ 6,700. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="403" class="cg"/>
+<text x="250.0" y="419" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="403" class="cg"/>
+<text x="405.0" y="419" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="403" class="cg"/>
+<text x="560.0" y="419" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="403" class="cg"/>
+<text x="715.0" y="419" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="403" class="cg"/>
+<text x="870.0" y="419" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Graduate degree</text>
+<rect x="398.0" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="413.0" y="15" class="ct clg">High-school graduate</text>
+<text x="240" y="48.0" class="ct clab">Writing / editing reports, essays, papers</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Graduate degree: 70</title><rect x="250.0" y="30" width="542.5" height="13" rx="3" class="cs1"/></g>
+<text x="798.5" y="40" class="ct cval">70</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — High-school graduate: 54</title><rect x="250.0" y="45" width="418.5" height="13" rx="3" class="cs2"/></g>
+<text x="674.5" y="55" class="ct cval">54</text>
+<text x="240" y="89.0" class="ct clab">Summarizing documents / notes</text>
+<g class="cb"><title>Summarizing documents / notes — Graduate degree: 75</title><rect x="250.0" y="71" width="581.2" height="13" rx="3" class="cs1"/></g>
+<text x="837.2" y="81" class="ct cval">75</text>
+<g class="cb"><title>Summarizing documents / notes — High-school graduate: 59</title><rect x="250.0" y="86" width="457.2" height="13" rx="3" class="cs2"/></g>
+<text x="713.2" y="96" class="ct cval">59</text>
+<text x="240" y="130.0" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Graduate degree: 74</title><rect x="250.0" y="112" width="573.5" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="122" class="ct cval">74</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — High-school graduate: 61</title><rect x="250.0" y="127" width="472.8" height="13" rx="3" class="cs2"/></g>
+<text x="728.8" y="137" class="ct cval">61</text>
+<text x="240" y="171.0" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Graduate degree: 74</title><rect x="250.0" y="153" width="573.5" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="163" class="ct cval">74</text>
+<g class="cb"><title>Data analysis — High-school graduate: 62</title><rect x="250.0" y="168" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="178" class="ct cval">62</text>
+<text x="240" y="212.0" class="ct clab">Transcribing / meeting notes</text>
+<g class="cb"><title>Transcribing / meeting notes — Graduate degree: 61</title><rect x="250.0" y="194" width="472.8" height="13" rx="3" class="cs1"/></g>
+<text x="728.8" y="204" class="ct cval">61</text>
+<g class="cb"><title>Transcribing / meeting notes — High-school graduate: 52</title><rect x="250.0" y="209" width="403.0" height="13" rx="3" class="cs2"/></g>
+<text x="659.0" y="219" class="ct cval">52</text>
+<text x="240" y="253.0" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Graduate degree: 58</title><rect x="250.0" y="235" width="449.5" height="13" rx="3" class="cs1"/></g>
+<text x="705.5" y="245" class="ct cval">58</text>
+<g class="cb"><title>Writing / fixing computer code — High-school graduate: 49</title><rect x="250.0" y="250" width="379.8" height="13" rx="3" class="cs2"/></g>
+<text x="635.8" y="260" class="ct cval">49</text>
+<text x="240" y="294.0" class="ct clab">Brainstorming / problem-solving</text>
+<g class="cb"><title>Brainstorming / problem-solving — Graduate degree: 77</title><rect x="250.0" y="276" width="596.8" height="13" rx="3" class="cs1"/></g>
+<text x="852.8" y="286" class="ct cval">77</text>
+<g class="cb"><title>Brainstorming / problem-solving — High-school graduate: 69</title><rect x="250.0" y="291" width="534.8" height="13" rx="3" class="cs2"/></g>
+<text x="790.8" y="301" class="ct cval">69</text>
+<text x="240" y="335.0" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Graduate degree: 77</title><rect x="250.0" y="317" width="596.8" height="13" rx="3" class="cs1"/></g>
+<text x="852.8" y="327" class="ct cval">77</text>
+<g class="cb"><title>Troubleshooting technical issues — High-school graduate: 75</title><rect x="250.0" y="332" width="581.2" height="13" rx="3" class="cs2"/></g>
+<text x="837.2" y="342" class="ct cval">75</text>
+<text x="240" y="376.0" class="ct clab">Math / numeric calculation</text>
+<g class="cb"><title>Math / numeric calculation — Graduate degree: 62</title><rect x="250.0" y="358" width="480.5" height="13" rx="3" class="cs1"/></g>
+<text x="736.5" y="368" class="ct cval">62</text>
+<g class="cb"><title>Math / numeric calculation — High-school graduate: 63</title><rect x="250.0" y="373" width="488.2" height="13" rx="3" class="cs2"/></g>
+<text x="744.2" y="383" class="ct cval">63</text>
+</svg><figcaption><em>Figure 2. Use of AI for each task (share "some or a lot"), graduate-degree vs. high-school-graduate workers. Base: employed AI-using workers; unweighted n ≈ 6,700. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Graduate degree</th><th>High-school graduate</th><th>Gap</th></tr></thead><tbody><tr><td>Writing / editing reports, essays, papers</td><td>70</td><td>54</td><td>+16</td></tr><tr><td>Summarizing documents / notes</td><td>75</td><td>59</td><td>+16</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>74</td><td>61</td><td>+13</td></tr><tr><td>Data analysis</td><td>74</td><td>62</td><td>+12</td></tr><tr><td>Transcribing / meeting notes</td><td>61</td><td>52</td><td>+10</td></tr><tr><td>Writing / fixing computer code</td><td>58</td><td>49</td><td>+9</td></tr><tr><td>Brainstorming / problem-solving</td><td>77</td><td>69</td><td>+8</td></tr><tr><td>Troubleshooting technical issues</td><td>77</td><td>75</td><td>+3</td></tr><tr><td>Math / numeric calculation</td><td>62</td><td>63</td><td>−1</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="the-occupation-divide-data-jobs-drive-code-and-analysis-trou">The occupation divide: data jobs drive code and analysis; troubleshooting is universal</h2>
+<p class="lede"><strong>Whether a worker uses AI for the more technical tasks depends heavily on the kind of job they do — but troubleshooting is used across the board.</strong></p>
+<p>Comparing workers whose jobs involve data processing or analysis with those who do manual or physical labor sharpens the picture. Data and analytical workers use AI far more for the technical tasks: 75% use it for data analysis (versus 62% of manual-labor workers) and 59% for writing or fixing code (versus 47%) — the two tasks where occupation matters most. They also lead on drafting emails (73% vs. 62%). This is the mechanism behind the report's code and data-analysis numbers: those uses are concentrated in analytical desk jobs rather than spread evenly across the workforce. (These two job types are the poles of a non-exclusive <code>work_context</code> variable, so a large middle — managers, client-facing, and other roles — sits between them; the contrast marks the ends of a spectrum, not a clean binary.)</p>
+<p>Troubleshooting is the exception that proves the rule. Manual-labor workers use AI to troubleshoot technical issues almost exactly as often as everyone else — 74%, essentially the workforce average and only a few points below data workers' 78%. AI's role as a universal fix-it and figure-it-out aid reaches blue-collar and white-collar workers alike; it is the writing, analysis, and coding uses that concentrate among knowledge workers.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 288" width="100%" height="288" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. AI use for selected tasks (share &quot;some or a lot&quot;), workers in data/analysis jobs vs. manual-labor jobs. Base: employed AI-using workers; unweighted n ≈ 6,700. Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="258" class="cg"/>
+<text x="250.0" y="274" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="258" class="cg"/>
+<text x="405.0" y="274" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="258" class="cg"/>
+<text x="560.0" y="274" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="258" class="cg"/>
+<text x="715.0" y="274" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="258" class="cg"/>
+<text x="870.0" y="274" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Data/analysis job</text>
+<rect x="412.8" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="427.8" y="15" class="ct clg">Manual-labor job</text>
+<rect x="568.2" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="583.2" y="15" class="ct clg">All workers</text>
+<text x="240" y="55.5" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Data/analysis job: 75</title><rect x="250.0" y="30" width="581.2" height="13" rx="3" class="cs1"/></g>
+<text x="837.2" y="40" class="ct cval">75</text>
+<g class="cb"><title>Data analysis — Manual-labor job: 62</title><rect x="250.0" y="45" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="55" class="ct cval">62</text>
+<g class="cb"><title>Data analysis — All workers: 66</title><rect x="250.0" y="60" width="511.5" height="13" rx="3" class="cs3"/></g>
+<text x="767.5" y="70" class="ct cval">66</text>
+<text x="240" y="111.5" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Data/analysis job: 59</title><rect x="250.0" y="86" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="713.2" y="96" class="ct cval">59</text>
+<g class="cb"><title>Writing / fixing computer code — Manual-labor job: 47</title><rect x="250.0" y="101" width="364.2" height="13" rx="3" class="cs2"/></g>
+<text x="620.2" y="111" class="ct cval">47</text>
+<g class="cb"><title>Writing / fixing computer code — All workers: 50</title><rect x="250.0" y="116" width="387.5" height="13" rx="3" class="cs3"/></g>
+<text x="643.5" y="126" class="ct cval">50</text>
+<text x="240" y="167.5" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Data/analysis job: 73</title><rect x="250.0" y="142" width="565.8" height="13" rx="3" class="cs1"/></g>
+<text x="821.8" y="152" class="ct cval">73</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Manual-labor job: 62</title><rect x="250.0" y="157" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="167" class="ct cval">62</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — All workers: 66</title><rect x="250.0" y="172" width="511.5" height="13" rx="3" class="cs3"/></g>
+<text x="767.5" y="182" class="ct cval">66</text>
+<text x="240" y="223.5" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Data/analysis job: 78</title><rect x="250.0" y="198" width="604.5" height="13" rx="3" class="cs1"/></g>
+<text x="860.5" y="208" class="ct cval">78</text>
+<g class="cb"><title>Troubleshooting technical issues — Manual-labor job: 74</title><rect x="250.0" y="213" width="573.5" height="13" rx="3" class="cs2"/></g>
+<text x="829.5" y="223" class="ct cval">74</text>
+<g class="cb"><title>Troubleshooting technical issues — All workers: 74</title><rect x="250.0" y="228" width="573.5" height="13" rx="3" class="cs3"/></g>
+<text x="829.5" y="238" class="ct cval">74</text>
+</svg><figcaption><em>Figure 3. AI use for selected tasks (share "some or a lot"), workers in data/analysis jobs vs. manual-labor jobs. Base: employed AI-using workers; unweighted n ≈ 6,700. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Data/analysis job</th><th>Manual-labor job</th><th>All workers</th></tr></thead><tbody><tr><td>Data analysis</td><td>75</td><td>62</td><td>66</td></tr><tr><td>Writing / fixing computer code</td><td>59</td><td>47</td><td>50</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>73</td><td>62</td><td>66</td></tr><tr><td>Troubleshooting technical issues</td><td>78</td><td>74</td><td>74</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>The everyday reality of AI at work is less dramatic, and more interesting, than the coding-copilot image suggests. Workers who use AI reach for it first to troubleshoot and to brainstorm — to think, unblock, and understand — and only then to write and analyze; coding is the rarest use, not the defining one. That makes workplace AI look less like a specialist tool bolted onto technical jobs and more like a general-purpose assistant spreading across the ordinary cognitive work of many jobs at once.</p>
+<p>The education pattern sharpens the point. The tasks that separate more- and less-educated workers are precisely the ones tied to formal knowledge production — writing reports, summarizing, analysis — while the more universal uses, like troubleshooting and calculation, are shared across the workforce. As AI use deepens, the tasks to watch are these knowledge-work applications, where adoption is both highest and most unequal.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data source.</strong> AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), the AI/employment supplement. Total unweighted n = 23,462; weighted n = 23,485. Fielded June 21–July 13, 2026. Data collection was ongoing at the time of this extract — figures reflect responses through July 13, 2026 and are preliminary. Estimates are weighted to U.S. Census population targets.</p>
+<p><strong>Measure and base.</strong> The task battery <code>ai_use_closed_1</code> (nine items) asks "How often do you use AI tools for the following purposes?" It is fielded to respondents who have used AI tools at all. This report restricts the base to <strong>employed respondents who use AI for their work</strong> (<code>ai_work</code> ∈ {tried once/twice … several times a day}, i.e., ≠ "Never"), applied as a data filter; unweighted n ≈ 6,700 (item bases vary slightly with non-response). The battery's stem is not work-specific, but the base restriction and the professional nature of the items support reading the results as these workers' at-work task profile.</p>
+<p><strong>Coding.</strong> The battery is coded <strong>1 = Not at all, 2 = Not much, 3 = Some, 4 = A lot</strong> — the reverse of the on-screen display order — confirmed against the data (the "not at all" share is highest for the rarest task, code-writing, which is only coherent under this direction). "Some or a lot" denotes categories 3 + 4; "a lot" is category 4.</p>
+<p><strong>Estimation.</strong> Weighted shares within each task, overall and by education. Overall worker figures are computed by aggregating the weighted response counts across education groups (the education breakdown was the vehicle for applying the <code>ai_work</code> filter, because the derived work-use indicator could not be used directly as a grouping variable in this tool). No regression is reported. Cells with unweighted n &lt; 10 are suppressed; the "Some High School or Less" group is thin on several items (unweighted n ≈ 80–100) and is used only in the aggregate, not reported as a standalone column.</p>
+<p><strong>Reproducibility.</strong> Figures map to Appendix B tables; values are copied verbatim from the underlying tabulations. Wording and coding sourced from the Qualtrics instrument via the project's Wave 38.6 verified-updates crosswalk.</p>
+<hr/>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 568" width="100%" height="568" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1. How often AI-using workers use AI for each task (weighted %; employed AI-using workers; unweighted n ≈ 6,700&quot;some or a lot&quot;).">
+<line x1="250.0" y1="24" x2="250.0" y2="538" class="cg"/>
+<text x="250.0" y="554" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="538" class="cg"/>
+<text x="405.0" y="554" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="538" class="cg"/>
+<text x="560.0" y="554" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="538" class="cg"/>
+<text x="715.0" y="554" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="538" class="cg"/>
+<text x="870.0" y="554" class="ct ctick" data-chrome="1">80</text>
+<line x1="257.8" y1="24" x2="257.8" y2="538" class="cref"/>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Some or a lot</text>
+<rect x="383.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="398.2" y="15" class="ct clg">A lot</text>
+<rect x="457.2" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="472.2" y="15" class="ct clg">Not at all</text>
+<text x="240" y="55.5" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Some or a lot: 74</title><rect x="257.8" y="30" width="565.8" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="40" class="ct cval">74</text>
+<g class="cb"><title>Troubleshooting technical issues — A lot: 30</title><rect x="257.8" y="45" width="224.8" height="13" rx="3" class="cs2"/></g>
+<text x="488.5" y="55" class="ct cval">30</text>
+<g class="cb"><title>Troubleshooting technical issues — Not at all: 12</title><rect x="257.8" y="60" width="85.2" height="13" rx="3" class="cs3"/></g>
+<text x="349.0" y="70" class="ct cval">12</text>
+<text x="240" y="111.5" class="ct clab">Brainstorming / problem-solving</text>
+<g class="cb"><title>Brainstorming / problem-solving — Some or a lot: 72</title><rect x="257.8" y="86" width="550.2" height="13" rx="3" class="cs1"/></g>
+<text x="814.0" y="96" class="ct cval">72</text>
+<g class="cb"><title>Brainstorming / problem-solving — A lot: 30</title><rect x="257.8" y="101" width="224.8" height="13" rx="3" class="cs2"/></g>
+<text x="488.5" y="111" class="ct cval">30</text>
+<g class="cb"><title>Brainstorming / problem-solving — Not at all: 13</title><rect x="257.8" y="116" width="93.0" height="13" rx="3" class="cs3"/></g>
+<text x="356.8" y="126" class="ct cval">13</text>
+<text x="240" y="167.5" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Some or a lot: 66</title><rect x="257.8" y="142" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="152" class="ct cval">66</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — A lot: 22</title><rect x="257.8" y="157" width="162.8" height="13" rx="3" class="cs2"/></g>
+<text x="426.5" y="167" class="ct cval">22</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Not at all: 15</title><rect x="257.8" y="172" width="108.5" height="13" rx="3" class="cs3"/></g>
+<text x="372.2" y="182" class="ct cval">15</text>
+<text x="240" y="223.5" class="ct clab">Summarizing documents / notes</text>
+<g class="cb"><title>Summarizing documents / notes — Some or a lot: 66</title><rect x="257.8" y="198" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="208" class="ct cval">66</text>
+<g class="cb"><title>Summarizing documents / notes — A lot: 28</title><rect x="257.8" y="213" width="209.2" height="13" rx="3" class="cs2"/></g>
+<text x="473.0" y="223" class="ct cval">28</text>
+<g class="cb"><title>Summarizing documents / notes — Not at all: 17</title><rect x="257.8" y="228" width="124.0" height="13" rx="3" class="cs3"/></g>
+<text x="387.8" y="238" class="ct cval">17</text>
+<text x="240" y="279.5" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Some or a lot: 66</title><rect x="257.8" y="254" width="503.8" height="13" rx="3" class="cs1"/></g>
+<text x="767.5" y="264" class="ct cval">66</text>
+<g class="cb"><title>Data analysis — A lot: 26</title><rect x="257.8" y="269" width="193.8" height="13" rx="3" class="cs2"/></g>
+<text x="457.5" y="279" class="ct cval">26</text>
+<g class="cb"><title>Data analysis — Not at all: 17</title><rect x="257.8" y="284" width="124.0" height="13" rx="3" class="cs3"/></g>
+<text x="387.8" y="294" class="ct cval">17</text>
+<text x="240" y="335.5" class="ct clab">Math / numeric calculation</text>
+<g class="cb"><title>Math / numeric calculation — Some or a lot: 60</title><rect x="257.8" y="310" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="721.0" y="320" class="ct cval">60</text>
+<g class="cb"><title>Math / numeric calculation — A lot: 22</title><rect x="257.8" y="325" width="162.8" height="13" rx="3" class="cs2"/></g>
+<text x="426.5" y="335" class="ct cval">22</text>
+<g class="cb"><title>Math / numeric calculation — Not at all: 20</title><rect x="257.8" y="340" width="147.2" height="13" rx="3" class="cs3"/></g>
+<text x="411.0" y="350" class="ct cval">20</text>
+<text x="240" y="391.5" class="ct clab">Writing / editing reports, essays, papers</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Some or a lot: 60</title><rect x="257.8" y="366" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="721.0" y="376" class="ct cval">60</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — A lot: 21</title><rect x="257.8" y="381" width="155.0" height="13" rx="3" class="cs2"/></g>
+<text x="418.8" y="391" class="ct cval">21</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Not at all: 21</title><rect x="257.8" y="396" width="155.0" height="13" rx="3" class="cs3"/></g>
+<text x="418.8" y="406" class="ct cval">21</text>
+<text x="240" y="447.5" class="ct clab">Transcribing / meeting notes</text>
+<g class="cb"><title>Transcribing / meeting notes — Some or a lot: 53</title><rect x="257.8" y="422" width="403.0" height="13" rx="3" class="cs1"/></g>
+<text x="666.8" y="432" class="ct cval">53</text>
+<g class="cb"><title>Transcribing / meeting notes — A lot: 19</title><rect x="257.8" y="437" width="139.5" height="13" rx="3" class="cs2"/></g>
+<text x="403.2" y="447" class="ct cval">19</text>
+<g class="cb"><title>Transcribing / meeting notes — Not at all: 28</title><rect x="257.8" y="452" width="209.2" height="13" rx="3" class="cs3"/></g>
+<text x="473.0" y="462" class="ct cval">28</text>
+<text x="240" y="503.5" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Some or a lot: 50</title><rect x="257.8" y="478" width="379.8" height="13" rx="3" class="cs1"/></g>
+<text x="643.5" y="488" class="ct cval">50</text>
+<g class="cb"><title>Writing / fixing computer code — A lot: 20</title><rect x="257.8" y="493" width="147.2" height="13" rx="3" class="cs2"/></g>
+<text x="411.0" y="503" class="ct cval">20</text>
+<g class="cb"><title>Writing / fixing computer code — Not at all: 33</title><rect x="257.8" y="508" width="248.0" height="13" rx="3" class="cs3"/></g>
+<text x="511.8" y="518" class="ct cval">33</text>
+</svg><figcaption><strong>Table 1. How often AI-using workers use AI for each task</strong> (weighted %; employed AI-using workers; unweighted n ≈ 6,700"some or a lot").</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Some or a lot</th><th>A lot</th><th>Not at all</th></tr></thead><tbody><tr><td>Troubleshooting technical issues</td><td>74</td><td>30</td><td>12</td></tr><tr><td>Brainstorming / problem-solving</td><td>72</td><td>30</td><td>13</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>66</td><td>22</td><td>15</td></tr><tr><td>Summarizing documents / notes</td><td>66</td><td>28</td><td>17</td></tr><tr><td>Data analysis</td><td>66</td><td>26</td><td>17</td></tr><tr><td>Math / numeric calculation</td><td>60</td><td>22</td><td>20</td></tr><tr><td>Writing / editing reports, essays, papers</td><td>60</td><td>21</td><td>21</td></tr><tr><td>Transcribing / meeting notes</td><td>53</td><td>19</td><td>28</td></tr><tr><td>Writing / fixing computer code</td><td>50</td><td>20</td><td>33</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 433" width="100%" height="433" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Use of AI for each task by education (weighted % &quot;some or a lot&quot;; employed AI-using workers-minus-high-school gap).">
+<line x1="250.0" y1="24" x2="250.0" y2="403" class="cg"/>
+<text x="250.0" y="419" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="403" class="cg"/>
+<text x="405.0" y="419" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="403" class="cg"/>
+<text x="560.0" y="419" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="403" class="cg"/>
+<text x="715.0" y="419" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="403" class="cg"/>
+<text x="870.0" y="419" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Graduate degree</text>
+<rect x="398.0" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="413.0" y="15" class="ct clg">High-school graduate</text>
+<text x="240" y="48.0" class="ct clab">Writing / editing reports, essays, papers</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — Graduate degree: 70</title><rect x="250.0" y="30" width="542.5" height="13" rx="3" class="cs1"/></g>
+<text x="798.5" y="40" class="ct cval">70</text>
+<g class="cb"><title>Writing / editing reports, essays, papers — High-school graduate: 54</title><rect x="250.0" y="45" width="418.5" height="13" rx="3" class="cs2"/></g>
+<text x="674.5" y="55" class="ct cval">54</text>
+<text x="240" y="89.0" class="ct clab">Summarizing documents / notes</text>
+<g class="cb"><title>Summarizing documents / notes — Graduate degree: 75</title><rect x="250.0" y="71" width="581.2" height="13" rx="3" class="cs1"/></g>
+<text x="837.2" y="81" class="ct cval">75</text>
+<g class="cb"><title>Summarizing documents / notes — High-school graduate: 59</title><rect x="250.0" y="86" width="457.2" height="13" rx="3" class="cs2"/></g>
+<text x="713.2" y="96" class="ct cval">59</text>
+<text x="240" y="130.0" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Graduate degree: 74</title><rect x="250.0" y="112" width="573.5" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="122" class="ct cval">74</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — High-school graduate: 61</title><rect x="250.0" y="127" width="472.8" height="13" rx="3" class="cs2"/></g>
+<text x="728.8" y="137" class="ct cval">61</text>
+<text x="240" y="171.0" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Graduate degree: 74</title><rect x="250.0" y="153" width="573.5" height="13" rx="3" class="cs1"/></g>
+<text x="829.5" y="163" class="ct cval">74</text>
+<g class="cb"><title>Data analysis — High-school graduate: 62</title><rect x="250.0" y="168" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="178" class="ct cval">62</text>
+<text x="240" y="212.0" class="ct clab">Transcribing / meeting notes</text>
+<g class="cb"><title>Transcribing / meeting notes — Graduate degree: 61</title><rect x="250.0" y="194" width="472.8" height="13" rx="3" class="cs1"/></g>
+<text x="728.8" y="204" class="ct cval">61</text>
+<g class="cb"><title>Transcribing / meeting notes — High-school graduate: 52</title><rect x="250.0" y="209" width="403.0" height="13" rx="3" class="cs2"/></g>
+<text x="659.0" y="219" class="ct cval">52</text>
+<text x="240" y="253.0" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Graduate degree: 58</title><rect x="250.0" y="235" width="449.5" height="13" rx="3" class="cs1"/></g>
+<text x="705.5" y="245" class="ct cval">58</text>
+<g class="cb"><title>Writing / fixing computer code — High-school graduate: 49</title><rect x="250.0" y="250" width="379.8" height="13" rx="3" class="cs2"/></g>
+<text x="635.8" y="260" class="ct cval">49</text>
+<text x="240" y="294.0" class="ct clab">Brainstorming / problem-solving</text>
+<g class="cb"><title>Brainstorming / problem-solving — Graduate degree: 77</title><rect x="250.0" y="276" width="596.8" height="13" rx="3" class="cs1"/></g>
+<text x="852.8" y="286" class="ct cval">77</text>
+<g class="cb"><title>Brainstorming / problem-solving — High-school graduate: 69</title><rect x="250.0" y="291" width="534.8" height="13" rx="3" class="cs2"/></g>
+<text x="790.8" y="301" class="ct cval">69</text>
+<text x="240" y="335.0" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Graduate degree: 77</title><rect x="250.0" y="317" width="596.8" height="13" rx="3" class="cs1"/></g>
+<text x="852.8" y="327" class="ct cval">77</text>
+<g class="cb"><title>Troubleshooting technical issues — High-school graduate: 75</title><rect x="250.0" y="332" width="581.2" height="13" rx="3" class="cs2"/></g>
+<text x="837.2" y="342" class="ct cval">75</text>
+<text x="240" y="376.0" class="ct clab">Math / numeric calculation</text>
+<g class="cb"><title>Math / numeric calculation — Graduate degree: 62</title><rect x="250.0" y="358" width="480.5" height="13" rx="3" class="cs1"/></g>
+<text x="736.5" y="368" class="ct cval">62</text>
+<g class="cb"><title>Math / numeric calculation — High-school graduate: 63</title><rect x="250.0" y="373" width="488.2" height="13" rx="3" class="cs2"/></g>
+<text x="744.2" y="383" class="ct cval">63</text>
+</svg><figcaption><strong>Table 2. Use of AI for each task by education</strong> (weighted % "some or a lot"; employed AI-using workers-minus-high-school gap).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Graduate degree</th><th>High-school graduate</th><th>Gap</th></tr></thead><tbody><tr><td>Writing / editing reports, essays, papers</td><td>70</td><td>54</td><td>+16</td></tr><tr><td>Summarizing documents / notes</td><td>75</td><td>59</td><td>+16</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>74</td><td>61</td><td>+13</td></tr><tr><td>Data analysis</td><td>74</td><td>62</td><td>+12</td></tr><tr><td>Transcribing / meeting notes</td><td>61</td><td>52</td><td>+10</td></tr><tr><td>Writing / fixing computer code</td><td>58</td><td>49</td><td>+9</td></tr><tr><td>Brainstorming / problem-solving</td><td>77</td><td>69</td><td>+8</td></tr><tr><td>Troubleshooting technical issues</td><td>77</td><td>75</td><td>+3</td></tr><tr><td>Math / numeric calculation</td><td>62</td><td>63</td><td>−1</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 288" width="100%" height="288" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. AI use for selected tasks, by job type (weighted % &quot;some or a lot&quot;; employed AI-using workers). Job types are non-exclusive work_context characteristics.">
+<line x1="250.0" y1="24" x2="250.0" y2="258" class="cg"/>
+<text x="250.0" y="274" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="258" class="cg"/>
+<text x="405.0" y="274" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="258" class="cg"/>
+<text x="560.0" y="274" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="258" class="cg"/>
+<text x="715.0" y="274" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="258" class="cg"/>
+<text x="870.0" y="274" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Data/analysis job</text>
+<rect x="412.8" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="427.8" y="15" class="ct clg">Manual-labor job</text>
+<rect x="568.2" y="6" width="10" height="10" rx="2" class="cs3"/>
+<text x="583.2" y="15" class="ct clg">All workers</text>
+<text x="240" y="55.5" class="ct clab">Data analysis</text>
+<g class="cb"><title>Data analysis — Data/analysis job: 75</title><rect x="250.0" y="30" width="581.2" height="13" rx="3" class="cs1"/></g>
+<text x="837.2" y="40" class="ct cval">75</text>
+<g class="cb"><title>Data analysis — Manual-labor job: 62</title><rect x="250.0" y="45" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="55" class="ct cval">62</text>
+<g class="cb"><title>Data analysis — All workers: 66</title><rect x="250.0" y="60" width="511.5" height="13" rx="3" class="cs3"/></g>
+<text x="767.5" y="70" class="ct cval">66</text>
+<text x="240" y="111.5" class="ct clab">Writing / fixing computer code</text>
+<g class="cb"><title>Writing / fixing computer code — Data/analysis job: 59</title><rect x="250.0" y="86" width="457.2" height="13" rx="3" class="cs1"/></g>
+<text x="713.2" y="96" class="ct cval">59</text>
+<g class="cb"><title>Writing / fixing computer code — Manual-labor job: 47</title><rect x="250.0" y="101" width="364.2" height="13" rx="3" class="cs2"/></g>
+<text x="620.2" y="111" class="ct cval">47</text>
+<g class="cb"><title>Writing / fixing computer code — All workers: 50</title><rect x="250.0" y="116" width="387.5" height="13" rx="3" class="cs3"/></g>
+<text x="643.5" y="126" class="ct cval">50</text>
+<text x="240" y="167.5" class="ct clab">Writing / editing emails &amp; letters</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Data/analysis job: 73</title><rect x="250.0" y="142" width="565.8" height="13" rx="3" class="cs1"/></g>
+<text x="821.8" y="152" class="ct cval">73</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — Manual-labor job: 62</title><rect x="250.0" y="157" width="480.5" height="13" rx="3" class="cs2"/></g>
+<text x="736.5" y="167" class="ct cval">62</text>
+<g class="cb"><title>Writing / editing emails &amp; letters — All workers: 66</title><rect x="250.0" y="172" width="511.5" height="13" rx="3" class="cs3"/></g>
+<text x="767.5" y="182" class="ct cval">66</text>
+<text x="240" y="223.5" class="ct clab">Troubleshooting technical issues</text>
+<g class="cb"><title>Troubleshooting technical issues — Data/analysis job: 78</title><rect x="250.0" y="198" width="604.5" height="13" rx="3" class="cs1"/></g>
+<text x="860.5" y="208" class="ct cval">78</text>
+<g class="cb"><title>Troubleshooting technical issues — Manual-labor job: 74</title><rect x="250.0" y="213" width="573.5" height="13" rx="3" class="cs2"/></g>
+<text x="829.5" y="223" class="ct cval">74</text>
+<g class="cb"><title>Troubleshooting technical issues — All workers: 74</title><rect x="250.0" y="228" width="573.5" height="13" rx="3" class="cs3"/></g>
+<text x="829.5" y="238" class="ct cval">74</text>
+</svg><figcaption><strong>Table 3. AI use for selected tasks, by job type</strong> (weighted % "some or a lot"; employed AI-using workers). Job types are non-exclusive <code>work_context</code> characteristics.</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Task</th><th>Data/analysis job</th><th>Manual-labor job</th><th>All workers</th></tr></thead><tbody><tr><td>Data analysis</td><td>75</td><td>62</td><td>66</td></tr><tr><td>Writing / fixing computer code</td><td>59</td><td>47</td><td>50</td></tr><tr><td>Writing / editing emails &amp; letters</td><td>73</td><td>62</td><td>66</td></tr><tr><td>Troubleshooting technical issues</td><td>78</td><td>74</td><td>74</td></tr></tbody></table></div></details></figure>
+
+
+
+<hr/>
+<h2 id="appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</h2>
+<ul><li><strong><code>ai_use_closed_1</code></strong> — "How often do you use AI tools for the following purposes?" (A lot / Some / Not much / Not at all — stored 1 = Not at all … 4 = A lot). Items: Writing or editing emails and letters; Writing or editing professional reports, essays, academic papers; Summarizing long documents, articles, or meeting notes; Brainstorming ideas or problem-solving; Data analysis; Math or any numeric calculation; Writing or fixing computer code; Transcribing or taking notes during meetings; Troubleshooting technical issues (e.g., "how do I fix my phone, printer, TV etc.").</li><li><strong><code>ai_work</code></strong> <em>(base restriction)</em> — "How often do you use AI for your work?" (Never; I tried once or twice; About once a month; About once a week; Multiple times a week; Once or twice a day; Several times a day). This report includes all responses except "Never."</li></ul>
+<section class="fnotes"><h2>Notes and sources</h2><ol><li id="fn-pew-tasks-2025">Pew Research Center, "Workers' experience with AI chatbots in their jobs" (February 25, 2025; fielded October 7–13, 2024 among 5,273 employed U.S. adults): among workers who have used AI chatbots at work, 57% use them for researching or finding information, 52% for editing written content, 47% for drafting reports or documents, 40% for summarizing information, 35% for coming up with new ideas, 27% for help with analyzing data or writing computer code, and 21% for creating or editing images or videos; 55% of workers say they rarely or never use AI chatbots at work and 29% have not heard of them. <a href="https://www.pewresearch.org/social-trends/2025/02/25/workers-experience-with-ai-chatbots-in-their-jobs/" target="_blank" rel="noopener">https://www.pewresearch.org/social-trends/2025/02/25/workers-experience-with-ai-chatbots-in-their-jobs/</a> <a href="#fnref-pew-tasks-2025" aria-label="back to text">↩</a></li><li id="fn-ipsos-ai-2026">Ipsos, "Half of Americans report using AI services, with information and productivity leading use cases" (April 13, 2026; fielded March 3–6, 2026 among 2,021 U.S. adults 18+): among AI users, 80% use AI for looking up information or getting recommendations, 59% for writing or editing, 55% for advice or learning, 53% for brainstorming, 44% for image creation, and 37% for data analysis or programming (the lowest-ranked use); among employed AI users, 51% use AI at least partly for work purposes. <a href="https://www.ipsos.com/en-us/half-americans-report-using-ai-services-information-and-productivity-leading-use-cases" target="_blank" rel="noopener">https://www.ipsos.com/en-us/half-americans-report-using-ai-services-information-and-productivity-leading-use-cases</a> <a href="#fnref-ipsos-ai-2026" aria-label="back to text">↩</a></li><li id="fn-quinnipiac-ai-2026">Quinnipiac University Poll, "The Age Of Artificial Intelligence" (released March 30, 2026; fielded March 19–23, 2026 among 1,397 U.S. adults, margin of error ±3.3 points, including 800 employed adults, ±4.3): 51% use AI for research (up from 37% in April 2025), 28% for writing, 27% for work or school projects, and 27% for data analysis; college graduates 60% vs. non-graduates 46% for research; adults earning over $200k 72% research and 57% writing; Gen Z 63% research vs. 18% among the Silent Generation; men 33% vs. women 21% for data analysis. <a href="https://poll.qu.edu/poll-release?releaseid=3955" target="_blank" rel="noopener">https://poll.qu.edu/poll-release?releaseid=3955</a> <a href="#fnref-quinnipiac-ai-2026" aria-label="back to text">↩</a></li></ol></section>
+    <div class="foot">
+      <div class="nav"><a href="01-ai-use-at-work.html"><span>Previous</span>Who Uses AI at Work: Adoption Across the American Workforce</a><a href="03-ai-productivity.html" style="text-align:right"><span>Next</span>Faster, But Not Freer: How American Workers Experience AI and Productivity</a></div>
+      <p>AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>

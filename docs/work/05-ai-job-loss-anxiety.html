@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en" >
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Whose Job Is Next? How Workers See AI and Job Loss — AI@Work</title>
+<meta name="description" content="A near-majority of workers expect AI to eventually cost people in their line of work their jobs — but far fewer fear for their own job. The anxiety is highest among the young and a"/>
+<meta name="color-scheme" content="light dark"/>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --acc:#2a78d6; --acct:#1c5cab; --soft:#eaf2fd;
+  --bg:#fbfbf9; --surface:#ffffff; --ink:#14140f; --ink2:#4a4a44; --muted:#7d7c74;
+  --rule:#e4e3dc; --rule2:#efeee8; --grid:#e8e7e0;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --maxw:790px;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])){
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+ }
+}
+:root[data-theme=dark]{
+  --acc:#3987e5; --acct:#3987e5; --soft:#12233a;
+  --bg:#101010; --surface:#17171a; --ink:#f4f3ee; --ink2:#c3c2b7; --muted:#8e8d85;
+  --rule:#2b2b28; --rule2:#232320; --grid:#2c2c2a;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17.5px/1.68 var(--serif);font-kerning:normal}
+a{color:var(--acct);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:hover{text-decoration-thickness:.13em}
+code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  background:var(--rule2);padding:.1em .38em;border-radius:4px;color:var(--ink2)}
+
+/* ---------- masthead ---------- */
+.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--rule)}
+.topin{max-width:1220px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.mark{display:flex;align-items:center;gap:9px;font:600 14px/1 var(--sans);
+  letter-spacing:-.01em;color:var(--ink);text-decoration:none;flex:none}
+.mark .dot{width:9px;height:9px;border-radius:50%;background:var(--acc);flex:none}
+.crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tools{display:flex;gap:6px;flex:none}
+.btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
+  border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
+.btn:hover{border-color:var(--muted);color:var(--ink)}
+.prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 26px;display:grid;
+  grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+.side{position:sticky;top:84px;padding:46px 0 60px;max-height:calc(100vh - 92px);
+  overflow-y:auto;font:400 13px/1.45 var(--sans);scrollbar-width:thin}
+.side h4{font:600 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px}
+.side a{display:block;color:var(--ink2);text-decoration:none;padding:5px 0 5px 12px;
+  border-left:2px solid var(--rule2);margin-left:-2px}
+.side a:hover{color:var(--ink);border-left-color:var(--muted)}
+.side a.on{color:var(--acct);border-left-color:var(--acc);font-weight:600}
+main{max-width:var(--maxw);padding:46px 0 96px;min-width:0}
+
+/* ---------- title block ---------- */
+.hero{border-bottom:1px solid var(--rule);padding-bottom:30px;margin-bottom:34px}
+.badge{display:inline-flex;align-items:center;gap:7px;font:600 10.5px/1 var(--sans);
+  letter-spacing:.11em;text-transform:uppercase;color:var(--acct);
+  background:var(--soft);border-radius:999px;padding:7px 13px;margin-bottom:20px}
+h1{font:650 clamp(31px,4.4vw,45px)/1.11 var(--sans);letter-spacing:-.023em;
+  margin:0 0 18px;color:var(--ink);text-wrap:balance}
+.dek{font:400 20px/1.5 var(--serif);color:var(--ink2);margin:0 0 22px;text-wrap:pretty}
+.srcline{font:400 13.5px/1.6 var(--sans);color:var(--muted);margin:0;
+  padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:9px}
+.srcline a{color:var(--acct)}
+.pos{font:400 13px/1.55 var(--sans);color:var(--muted);margin:14px 0 0;font-style:italic}
+.internal{background:#fff4f4;border:1px solid #f0c9c9;color:#8c2b2b;border-radius:9px;
+  padding:12px 15px;font:600 13px/1.5 var(--sans);margin:0 0 22px}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme=light])) .internal{
+  background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}}
+:root[data-theme=dark] .internal{background:#2a1616;border-color:#5b2b2b;color:#f0a9a9}
+
+/* ---------- prose ---------- */
+h2{font:640 27px/1.24 var(--sans);letter-spacing:-.018em;margin:58px 0 6px;
+  color:var(--ink);text-wrap:balance;padding-top:6px}
+h2::before{content:"";display:block;width:34px;height:3px;border-radius:2px;
+  background:var(--acc);margin-bottom:15px}
+h3{font:640 19.5px/1.3 var(--sans);letter-spacing:-.012em;margin:38px 0 4px;color:var(--ink)}
+h4{font:600 16px/1.35 var(--sans);margin:28px 0 4px;color:var(--ink2)}
+p{margin:0 0 17px;text-wrap:pretty}
+p.lede{font:400 18.5px/1.55 var(--sans);color:var(--acct);margin:20px 0 20px;
+  padding-left:16px;border-left:3px solid var(--acc);text-wrap:pretty}
+p.lede strong{color:var(--acct);font-weight:640}
+ul,ol{margin:0 0 20px;padding-left:1.25em}
+li{margin:0 0 9px}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:44px 0}
+strong{font-weight:640;color:var(--ink)}
+em{font-style:italic}
+
+blockquote{margin:26px 0;padding:18px 22px;background:var(--soft);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  font:400 16px/1.6 var(--sans);color:var(--ink2)}
+blockquote strong{color:var(--acct)}
+
+/* key takeaways */
+.kt{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:8px 26px 20px;margin:26px 0 40px}
+.kt ul{list-style:none;padding:0;margin:0}
+.kt li{position:relative;padding-left:24px;margin:16px 0;font:400 16.5px/1.6 var(--sans);
+  color:var(--ink2)}
+.kt li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;
+  border-radius:50%;background:var(--acc)}
+.kt li strong{color:var(--ink);font-weight:650}
+
+/* ---------- figures & charts ---------- */
+figure{margin:30px 0 34px}
+figure.chart{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:20px 20px 14px}
+figure.asset{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:18px;overflow-x:auto}
+figure.asset svg,figure.asset img{max-width:100%;height:auto;display:block;margin:0 auto}
+figcaption{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--rule2)}
+figcaption b,figcaption strong{color:var(--ink2);font-weight:640}
+figure.tbl{background:var(--surface);border:1px solid var(--rule);border-radius:14px;
+  padding:6px 8px 14px}
+figure.tbl figcaption{padding:0 12px;margin-top:8px}
+.tnote{font:400 13.6px/1.65 var(--sans);color:var(--ink2);margin:22px 0 26px;
+  padding-left:16px;border-left:2px solid var(--rule)}
+.figspec{font:400 13.2px/1.6 var(--sans);color:var(--muted);margin:26px 0 30px;
+  padding:13px 16px;border:1px dashed var(--rule);border-radius:10px;background:var(--surface)}
+figcaption .drawn{display:block;margin-top:6px;font-size:12px;color:var(--muted);
+  font-style:italic}
+svg.cv.tilemap .tl{font-size:12.5px;font-weight:700;text-anchor:middle}
+svg.cv.tilemap .tv{font-size:12px;text-anchor:middle;font-variant-numeric:tabular-nums}
+svg.cv.tilemap .tempty{fill:var(--rule2)}
+.figspec .tag{display:inline-block;font:700 9.5px/1 var(--sans);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--acct);background:var(--soft);
+  padding:5px 8px;border-radius:5px;margin-right:9px;vertical-align:1px}
+
+svg.cv{display:block;overflow:visible;font-family:var(--sans)}
+svg.cv .cg{stroke:var(--grid);stroke-width:1}
+svg.cv .cref{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+svg.cv .ct{font-size:11.5px;fill:var(--ink2)}
+svg.cv .ctick{fill:var(--muted);font-size:10.5px;text-anchor:middle}
+svg.cv .clab{text-anchor:end;fill:var(--ink2);font-size:12px}
+svg.cv .cgrp{font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.04em;
+  text-transform:uppercase}
+svg.cv .cval{font-size:11.5px;font-weight:600;fill:var(--ink);font-variant-numeric:tabular-nums}
+svg.cv .cgap{font-size:11px;fill:var(--muted);font-style:italic}
+svg.cv .clg{font-size:11.5px;fill:var(--ink2)}
+svg.cv .cs1{fill:var(--s1)} svg.cv .cs2{fill:var(--s2)} svg.cv .cs3{fill:var(--s3)}
+svg.cv .cb{transition:opacity .12s} svg.cv .cb:hover{opacity:.72;cursor:default}
+
+details.datatbl{margin-top:14px;border-top:1px solid var(--rule2);padding-top:10px}
+details.datatbl summary{font:500 12.5px/1 var(--sans);color:var(--muted);cursor:pointer;
+  list-style:none;padding:4px 0}
+details.datatbl summary::-webkit-details-marker{display:none}
+details.datatbl summary::before{content:"▸ ";color:var(--acc)}
+details.datatbl[open] summary::before{content:"▾ "}
+details.datatbl summary:hover{color:var(--ink)}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;margin:14px 0 8px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font:400 13.6px/1.5 var(--sans);
+  font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:640;color:var(--ink);padding:9px 12px;
+  border-bottom:1.5px solid var(--rule);white-space:nowrap;font-size:12.5px;
+  letter-spacing:.01em;position:sticky;top:0;background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--rule2);color:var(--ink2);vertical-align:top}
+td:not(:first-child){white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.grp td{font-weight:700;color:var(--ink);background:var(--rule2);font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:7px 12px}
+main>.tw{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:4px 6px}
+
+/* ---------- footnotes ---------- */
+sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acct);
+  padding:0 1px}
+.fnotes{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.fnotes h2{font-size:15px;margin:0 0 14px}
+.fnotes h2::before{display:none}
+.fnotes ol{font:400 13.4px/1.62 var(--sans);color:var(--muted);padding-left:1.4em}
+.fnotes li{margin:0 0 11px}
+.fnotes a{color:var(--acct);word-break:break-word}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:26px 0 0;
+  font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+.foot a{color:var(--acct)}
+.nav{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.nav a{font:600 13.5px/1.4 var(--sans);text-decoration:none;border:1px solid var(--rule);
+  border-radius:9px;padding:11px 15px;color:var(--ink2);max-width:47%}
+.nav a:hover{border-color:var(--acc);color:var(--acct)}
+.nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side.collapsed nav{display:none}
+  main{padding-top:30px}
+}
+@media(max-width:560px){
+  body{font-size:16.5px}
+  .topin,.wrap{padding-left:16px;padding-right:16px}
+  figure.chart{padding:12px 10px 10px}
+}
+@media print{
+  .top,.side,.tools,details.datatbl summary{display:none}
+  details.datatbl{display:block}details.datatbl[open],details.datatbl:not([open]){display:block}
+  .wrap{display:block;max-width:none;padding:0}
+  main{max-width:none;padding:0}
+  body{font-size:10.5pt;background:#fff}
+  h2{page-break-after:avoid}figure,table{page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="../index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">The AI@Work Series</div>
+    <div class="tools">
+      <button class="btn" id="tg" aria-label="Toggle contents">Contents</button>
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </div>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="wrap">
+  <aside class="side"><h4>Contents</h4><nav><a href="#cover-memo">Cover Memo</a><a href="#key-takeaways">Key Takeaways</a><a href="#introduction">Introduction</a><a href="#a-near-majority-expect-ai-to-take-jobs-like-theirs-eventuall">A near-majority expect AI to take jobs like theirs — eventually</a><a href="#fear-for-the-field-not-for-the-self">Fear for the field, not for the self</a><a href="#the-young-fear-displacement-most">The young fear displacement most</a><a href="#the-entry-level-squeeze-is-already-visible">The entry-level squeeze is already visible</a><a href="#ai-anxiety-is-white-collar">AI anxiety is white-collar</a><a href="#who-holds-the-edge-the-younger-worker-advantage">Who holds the edge: the younger-worker advantage</a><a href="#conclusion">Conclusion</a><a href="#appendix-a-methods">Appendix A — Methods</a><a href="#appendix-b-data-tables">Appendix B — Data tables</a><a href="#appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</a></nav></aside>
+  <main>
+<div class="hero"><div class="badge">AI@Work</div><h1>Whose Job Is Next? How Workers See AI and Job Loss</h1><p class="dek"><em>A near-majority of workers expect AI to eventually cost people in their line of work their jobs — but far fewer fear for their own job. The anxiety is highest among the young and among white-collar, data-heavy workers, inverting the usual story of who automation threatens. And for the youngest workers it is not only a fear of the future: they are also the most likely to say AI has already thinned the openings at their level — a squeeze hiring managers themselves confirm.</em></p><p class="srcline">Source: AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project), fielded June 21–July 13, 2026 (interim extract; data collection ongoing). Job-loss and own-job-outlook items were asked of employed respondents (unweighted n ≈ 12,390); the openings-at-your-level item was asked of all workers (unweighted n ≈ 12,410) and the entry-level hiring-change item of hiring managers whose hiring had changed (unweighted n ≈ 2,560); the younger-worker-advantage item was asked of all adults (unweighted n ≈ 23,430). All figures are weighted estimates, weighted to U.S. Census population targets.</p><p class="pos"><em>Series position: Report 5 of the AI@Work series (see the series index) — the fear channel. Worry about displacement is one of the few outcomes where party is a simple left–right gradient (party3 suffices). It sets up the engagement-vs-fear question the policy reports (7–8) address, and pairs with degrees/hiring (report 6) on the entry-level squeeze.</em></p></div><h2 id="cover-memo">Cover Memo</h2>
+<p>This report draws on the AI@Work survey (CHIP50 Wave 38.6), a survey of <strong>23,462 U.S. adults</strong> (weighted n = 23,485) fielded June 21–July 13, 2026. All percentages are <strong>weighted to U.S. Census population targets</strong> and are population-representative; unweighted respondent counts are reported as a reliability guide only.</p>
+<p><strong>These are interim estimates.</strong> The AI@Work survey launched June 21, 2026 and data collection is ongoing; the figures in this report reflect responses received through July 13, 2026 and will be revised in a later release.</p>
+<p>The report has <strong>several bases.</strong> The job-loss items (<code>ai_loss_current</code>, <code>ai_loss_ultimate</code>), the own-job outlook item (<code>ai_work_imp</code>), and the openings-at-your-level item (<code>indr_level_quantity</code>) were asked of employed respondents / all workers (unweighted n ≈ 12,390–12,410). The entry-level hiring-change item (<code>hiring_change</code>) was asked only of hiring managers who report that AI has changed how they hire (unweighted n ≈ 2,557) — a small, conditional base, read as indicative. The item on whether AI advantages younger workers (<code>ai_advantage</code>) was asked of all adults (unweighted n ≈ 23,430). Each figure states its base. The <code>ai_advantage</code> scale (1 = strongly agree … 5 = strongly disagree) was confirmed against the data — agreement rises with age, the pattern one would expect if older workers, who feel disadvantaged, agree most. <code>indr_level_quantity</code> and <code>hiring_change</code> are labeled category sets (not magnitude scales) and carry no direction-reversal risk.</p>
+<h2 id="key-takeaways">Key Takeaways</h2><div class="kt"><ul><li><strong>A near-majority expect eventual displacement.</strong> 47% of workers think AI will <em>eventually</em> cause people in their line of work to lose their jobs; 33% think it already is happening.</li><li><strong>But few fear for their own job.</strong> Only 17% expect AI to have an "only negative" impact on their own job over the next five years — workers are markedly more worried about their occupation than about themselves.</li><li><strong>The young are the most afraid.</strong> Workers under 30 are far more likely to expect eventual displacement (52–64%) than those over 40 (~45%, falling to 32% among workers in their 70s) — a gap that survives controls, even though young workers use AI the most.</li><li><strong>And the squeeze is already visible to them.</strong> 20% of workers in their 20s say AI has <em>already</em> reduced the number of job openings at their level, versus 9% of workers 61–70 and 5% of those 71–80 — the same age gradient as the fear. Hiring managers confirm it from the other side: among those whose hiring has changed because of AI, 27% are hiring fewer entry-level workers.</li><li><strong>AI anxiety is white-collar.</strong> Workers in data and analytical jobs are the <em>most</em> likely to fear displacement (50%) and manual-labor workers the <em>least</em> (44%) — inverting the classic automation story. Education makes no difference at all.</li><li><strong>Most think AI favors the young.</strong> 49% of adults agree AI gives younger workers an advantage over older or longer-tenured ones (20% disagree); older workers, who feel it directly, agree the most.</li><li><strong>The affluent feel safe.</strong> Workers in the highest income bracket are the least likely to expect eventual displacement (35% vs. ~47% overall), echoing national findings that upper-income workers worry least.</li></ul></div>
+<hr/>
+<h2 id="introduction">Introduction</h2>
+<p>The fear that AI will take people's jobs is one of the defining anxieties of the moment, and American workers feel it — but not uniformly, and not always about themselves. National surveys have found workers more worried than hopeful about AI at work: a Pew Research Center survey in late 2024 found 52% of employed adults worried about future AI use in the workplace versus 36% hopeful, and 32% expecting AI to lead to fewer job opportunities for them personally in the long run (<a href="https://www.pewresearch.org/social-trends/2025/02/25/u-s-workers-are-more-worried-than-hopeful-about-future-ai-use-in-the-workplace/" target="_blank" rel="noopener">Pew Research Center</a>).</p>
+<p>The AI@Work survey lets us look more closely at the shape of that fear — how it differs between the present and the future, between one's occupation and one's own job, and across the workforce. What emerges is a picture with two surprises. First, workers worry more about their line of work than about their own position: a near-majority expect AI to eventually displace people who do what they do, while only a small minority expect it to be purely bad for their own job. Second, the anxiety does not fall where the automation-fear of past decades did. It is highest not among the least-educated or manual workers, but among the young and among white-collar, data-centric workers — the people closest to what today's AI actually does.</p>
+<hr/>
+<h2 id="a-near-majority-expect-ai-to-take-jobs-like-theirs-eventuall">A near-majority expect AI to take jobs like theirs — eventually</h2>
+<p class="lede"><strong>Workers see AI's threat to their occupation growing from a present minority to a near-majority in the future.</strong></p>
+<p>Asked whether AI is <em>currently</em> causing people who do work like theirs to lose their jobs, 33% of workers say yes. Asked whether it <em>eventually</em> will, that figure jumps to 47% — a near-majority. The 14-point gap between "now" and "eventually" is the core of workplace AI anxiety: a large share of workers who don't yet see displacement in their field nonetheless expect it to come. Only about half of workers (53%) reject the idea that AI will eventually take jobs like theirs.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 146" width="100%" height="146" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 1. Share of workers who think AI is causing / will eventually cause people in their line of work to lose jobs (currently vs. eventually). Base: employed respondents; unweighted n ≈ 12,390. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="116" class="cg"/>
+<text x="250.0" y="132" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="116" class="cg"/>
+<text x="405.0" y="132" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="116" class="cg"/>
+<text x="560.0" y="132" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="116" class="cg"/>
+<text x="715.0" y="132" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="116" class="cg"/>
+<text x="870.0" y="132" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Yes</text>
+<rect x="309.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="324.2" y="15" class="ct clg">No</text>
+<text x="240" y="48.0" class="ct clab">Currently (ai_loss_current)</text>
+<g class="cb"><title>Currently (ai_loss_current) — Yes: 33</title><rect x="250.0" y="30" width="255.8" height="13" rx="3" class="cs1"/></g>
+<text x="511.8" y="40" class="ct cval">33</text>
+<g class="cb"><title>Currently (ai_loss_current) — No: 67</title><rect x="250.0" y="45" width="519.2" height="13" rx="3" class="cs2"/></g>
+<text x="775.2" y="55" class="ct cval">67</text>
+<text x="240" y="89.0" class="ct clab">Eventually (ai_loss_ultimate)</text>
+<g class="cb"><title>Eventually (ai_loss_ultimate) — Yes: 47</title><rect x="250.0" y="71" width="364.2" height="13" rx="3" class="cs1"/></g>
+<text x="620.2" y="81" class="ct cval">47</text>
+<g class="cb"><title>Eventually (ai_loss_ultimate) — No: 53</title><rect x="250.0" y="86" width="410.8" height="13" rx="3" class="cs2"/></g>
+<text x="666.8" y="96" class="ct cval">53</text>
+</svg><figcaption><em>Figure 1. Share of workers who think AI is causing / will eventually cause people in their line of work to lose jobs (currently vs. eventually). Base: employed respondents; unweighted n ≈ 12,390. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 1 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th></th><th>Yes</th><th>No</th></tr></thead><tbody><tr><td>Currently (<code>ai_loss_current</code>)</td><td>33</td><td>67</td></tr><tr><td>Eventually (<code>ai_loss_ultimate</code>)</td><td>47</td><td>53</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="fear-for-the-field-not-for-the-self">Fear for the field, not for the self</h2>
+<p class="lede"><strong>Workers are far more pessimistic about their occupation than about their own job.</strong></p>
+<p>The same workers who worry that AI will thin the ranks of their profession are much more sanguine about their own position. Asked about AI's likely impact on their <em>own</em> job over the next five years, just 17% expect it to be "only negative." The rest divide between "both positive and negative" (46%), "no impact" (21%), and "only positive" (17%). So while 47% expect eventual job loss in their line of work, only about a third that many expect AI to be purely bad for them personally.</p>
+<p>This "not my job" gap is familiar from other domains of risk perception, and it matters for how AI anxiety will play out: workers may support cushioning policies for their occupation while remaining personally optimistic, or may be underestimating their own exposure. Either way, the fear is pitched at the level of the field, not the individual.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 2. Expected impact of AI on one&#x27;s own job over the next five years. Base: employed respondents; unweighted n ≈ 12,400. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Both positive and negative</text>
+<g class="cb"><title>Both positive and negative: 46</title><rect x="250.0" y="12" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="26" class="ct cval">46</text>
+<text x="240" y="54.5" class="ct clab">No impact</text>
+<g class="cb"><title>No impact: 21</title><rect x="250.0" y="42" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="56" class="ct cval">21</text>
+<text x="240" y="84.5" class="ct clab">Only positive</text>
+<g class="cb"><title>Only positive: 17</title><rect x="250.0" y="72" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="86" class="ct cval">17</text>
+<text x="240" y="114.5" class="ct clab">Only negative</text>
+<g class="cb"><title>Only negative: 17</title><rect x="250.0" y="102" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="116" class="ct cval">17</text>
+</svg><figcaption><em>Figure 2. Expected impact of AI on one's own job over the next five years. Base: employed respondents; unweighted n ≈ 12,400. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 2 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Both positive and negative</td><td>46</td></tr><tr><td>No impact</td><td>21</td></tr><tr><td>Only positive</td><td>17</td></tr><tr><td>Only negative</td><td>17</td></tr></tbody></table></div></details></figure>
+<h3 id="comparative-context">Comparative Context</h3>
+<p>The pattern is consistent with Pew's finding that 32% of workers expect fewer personal job opportunities from AI in the long run — a personal-level figure well below the survey's 47% occupation-level expectation, exactly the field-versus-self gap this section describes (<a href="https://www.pewresearch.org/social-trends/2025/02/25/u-s-workers-are-more-worried-than-hopeful-about-future-ai-use-in-the-workplace/" target="_blank" rel="noopener">Pew Research Center</a>).</p>
+<hr/>
+<h2 id="the-young-fear-displacement-most">The young fear displacement most</h2>
+<p class="lede"><strong>Younger workers — the heaviest users of AI — are also the most convinced it will take jobs like theirs.</strong></p>
+<p>Expectation of eventual displacement falls steadily with age. Nearly two-thirds of workers aged 18–20 (64%) and a majority of those 21–30 (52%) think AI will eventually cost people in their line of work their jobs, versus about 45% of workers in their 30s, 40s, and 50s, and just 32% of those in their 70s. The pattern holds in a regression controlling for education, income, gender, party, community type, and job type: the youngest workers have roughly twice the odds of expecting displacement as workers in their late 30s. The same gradient appears for present-day job loss (40% of the under-30s see it happening now, versus a quarter of older workers).</p>
+<p>This is the report's central irony. The workers most fluent in AI, who use it most on the job and whom others see as <em>advantaged</em> by it, are also the most worried it will displace them. Both can be true at once: young workers are closer to the entry-level and routine tasks that today's AI most readily absorbs, even as they are the quickest to adopt it.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 466" width="100%" height="466" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Share expecting eventual displacement in their line of work, by age group. Base: employed respondents; unweighted n ≈ 12,390. Cells for workers 80+ (unweighted n = 21) shown with caution. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="436" class="cg"/>
+<text x="250.0" y="452" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="436" class="cg"/>
+<text x="405.0" y="452" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="436" class="cg"/>
+<text x="560.0" y="452" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="436" class="cg"/>
+<text x="715.0" y="452" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="436" class="cg"/>
+<text x="870.0" y="452" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Age</text>
+<text x="240" y="54.5" class="ct clab">18–20</text>
+<g class="cb"><title>18–20: 64</title><rect x="250.0" y="42" width="396.8" height="17" rx="3" class="cs1"/></g>
+<text x="652.8" y="56" class="ct cval">64</text>
+<text x="240" y="84.5" class="ct clab">21–30</text>
+<g class="cb"><title>21–30: 52</title><rect x="250.0" y="72" width="322.4" height="17" rx="3" class="cs1"/></g>
+<text x="578.4" y="86" class="ct cval">52</text>
+<text x="240" y="114.5" class="ct clab">31–40</text>
+<g class="cb"><title>31–40: 45</title><rect x="250.0" y="102" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="116" class="ct cval">45</text>
+<text x="240" y="144.5" class="ct clab">41–50</text>
+<g class="cb"><title>41–50: 45</title><rect x="250.0" y="132" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="146" class="ct cval">45</text>
+<text x="240" y="174.5" class="ct clab">51–60</text>
+<g class="cb"><title>51–60: 45</title><rect x="250.0" y="162" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="176" class="ct cval">45</text>
+<text x="240" y="204.5" class="ct clab">61–70</text>
+<g class="cb"><title>61–70: 40</title><rect x="250.0" y="192" width="248.0" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="206" class="ct cval">40</text>
+<text x="240" y="234.5" class="ct clab">71–80</text>
+<g class="cb"><title>71–80: 32</title><rect x="250.0" y="222" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="236" class="ct cval">32</text>
+<text x="8" y="272" class="ct cgrp">Education</text>
+<text x="240" y="294.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree: 46</title><rect x="250.0" y="282" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="296" class="ct cval">46</text>
+<text x="240" y="324.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree: 47</title><rect x="250.0" y="312" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="326" class="ct cval">47</text>
+<text x="240" y="354.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college: 47</title><rect x="250.0" y="342" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="356" class="ct cval">47</text>
+<text x="240" y="384.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate: 47</title><rect x="250.0" y="372" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="386" class="ct cval">47</text>
+<text x="240" y="414.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less: 46</title><rect x="250.0" y="402" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="416" class="ct cval">46</text>
+</svg><svg class="cv" viewBox="0 0 948 436" width="100%" height="436" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 3. Share expecting eventual displacement in their line of work, by age group. Base: employed respondents; unweighted n ≈ 12,390. Cells for workers 80+ (unweighted n = 21) shown with caution. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="406" class="cg"/>
+<text x="250.0" y="422" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="406" class="cg"/>
+<text x="405.0" y="422" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="406" class="cg"/>
+<text x="560.0" y="422" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="406" class="cg"/>
+<text x="715.0" y="422" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="406" class="cg"/>
+<text x="870.0" y="422" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Job type</text>
+<text x="240" y="54.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 50</title><rect x="250.0" y="42" width="310.0" height="17" rx="3" class="cs1"/></g>
+<text x="566.0" y="56" class="ct cval">50</text>
+<text x="240" y="84.5" class="ct clab">(not a data job)</text>
+<g class="cb"><title>(not a data job): 46</title><rect x="250.0" y="72" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="86" class="ct cval">46</text>
+<text x="240" y="114.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 44</title><rect x="250.0" y="102" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="116" class="ct cval">44</text>
+<text x="240" y="144.5" class="ct clab">(not a manual job)</text>
+<g class="cb"><title>(not a manual job): 49</title><rect x="250.0" y="132" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="146" class="ct cval">49</text>
+<text x="8" y="182" class="ct cgrp">Party</text>
+<text x="240" y="204.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat: 49</title><rect x="250.0" y="192" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="206" class="ct cval">49</text>
+<text x="240" y="234.5" class="ct clab">Independent</text>
+<g class="cb"><title>Independent: 47</title><rect x="250.0" y="222" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="236" class="ct cval">47</text>
+<text x="240" y="264.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican: 44</title><rect x="250.0" y="252" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="266" class="ct cval">44</text>
+<text x="8" y="302" class="ct cgrp">Income</text>
+<text x="240" y="324.5" class="ct clab">Lowest bracket</text>
+<g class="cb"><title>Lowest bracket: 48</title><rect x="250.0" y="312" width="297.6" height="17" rx="3" class="cs1"/></g>
+<text x="553.6" y="326" class="ct cval">48</text>
+<text x="240" y="354.5" class="ct clab">~$10–25k</text>
+<text x="256" y="356" class="ct cgap">52–54</text>
+<text x="240" y="384.5" class="ct clab">Highest bracket ($200k+)</text>
+<g class="cb"><title>Highest bracket ($200k+): 35</title><rect x="250.0" y="372" width="217.0" height="17" rx="3" class="cs1"/></g>
+<text x="473.0" y="386" class="ct cval">35</text>
+</svg><figcaption><em>Figure 3. Share expecting eventual displacement in their line of work, by age group. Base: employed respondents; unweighted n ≈ 12,390. Cells for workers 80+ (unweighted n = 21) shown with caution. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Group</th><th>%</th><th>Group</th><th>%</th></tr></thead><tbody><tr><td><strong>Age</strong></td><td></td><td><strong>Job type</strong></td><td></td></tr><tr><td>18–20</td><td>64</td><td>Data / analysis job</td><td>50</td></tr><tr><td>21–30</td><td>52</td><td>(not a data job)</td><td>46</td></tr><tr><td>31–40</td><td>45</td><td>Manual-labor job</td><td>44</td></tr><tr><td>41–50</td><td>45</td><td>(not a manual job)</td><td>49</td></tr><tr><td>51–60</td><td>45</td><td><strong>Party</strong></td><td></td></tr><tr><td>61–70</td><td>40</td><td>Democrat</td><td>49</td></tr><tr><td>71–80</td><td>32</td><td>Independent</td><td>47</td></tr><tr><td><strong>Education</strong></td><td></td><td>Republican</td><td>44</td></tr><tr><td>Graduate degree</td><td>46</td><td><strong>Income</strong></td><td></td></tr><tr><td>College degree</td><td>47</td><td>Lowest bracket</td><td>48</td></tr><tr><td>Some college</td><td>47</td><td>~$10–25k</td><td>52–54</td></tr><tr><td>High-school graduate</td><td>47</td><td>Highest bracket ($200k+)</td><td>35</td></tr><tr><td>Some high school or less</td><td>46</td><td></td><td></td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="the-entry-level-squeeze-is-already-visible">The entry-level squeeze is already visible</h2>
+<p class="lede"><strong>For younger workers, the fear is not only about the future — they are the most likely to say AI has already narrowed the openings at their level, and hiring managers report doing exactly that.</strong></p>
+<p>The displacement question asks workers to look ahead. A companion item asks what they see <em>now</em>: whether AI has changed the number of job openings at their own level. Across all workers, 16% say AI has already reduced the openings at their level, 9% say it has increased them, 24% say about the same, and the plurality — 41% — have not noticed a change (11% aren't sure). At the aggregate level, then, most workers do not yet perceive a hiring effect. But the aggregate hides a sharp age gradient that mirrors the fear almost exactly.</p>
+<p>The workers who see the squeeze are the young. <strong>20% of workers in their 20s and 18% of those aged 18–20 say AI has already reduced openings at their level, versus 12% of workers in their 50s, 9% of those 61–70, and just 5% of those 71–80.</strong> The mirror image is "haven't noticed a change," which climbs from 31% of workers in their 20s to 59% of those 61–70 and 67% of those in their 70s. Older, more established workers sitting at senior levels see little churn in the openings around them; younger workers, clustered at the entry level, are watching the door narrow in real time. This is the concrete, present-tense counterpart to the forward-looking fear documented above — and it falls on the same shoulders.</p>
+<p>Hiring managers describe the same thing from the other side of the table. Among managers who say AI has changed how they hire, <strong>27% report hiring <em>fewer</em> entry-level workers because of AI</strong>, and another 29% are keeping the number flat while expecting more advanced work from new hires; only 7% are hiring more (companion AI@Work hiring analysis, <code>hiring_change</code>; hiring managers whose hiring changed, n ≈ 2,557). Perception and practice line up: young workers feel the entry rung thinning, and the people doing the hiring say they are thinning it. That convergence is the mechanism beneath this report's central irony — the workers most fluent in AI are also the ones standing where its labor-market effect is landing first.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 351" width="100%" height="351" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 4. Share of workers who say AI has already reduced the number of job openings at their level, by age group. Base: all workers; unweighted n ≈ 12,410. Cells for workers 80+ (unweighted n = 1 in the &quot;fewer&quot; category) suppressed. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.">
+<line x1="250.0" y1="24" x2="250.0" y2="321" class="cg"/>
+<text x="250.0" y="337" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="321" class="cg"/>
+<text x="405.0" y="337" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="321" class="cg"/>
+<text x="560.0" y="337" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="321" class="cg"/>
+<text x="715.0" y="337" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="321" class="cg"/>
+<text x="870.0" y="337" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Fewer openings</text>
+<rect x="390.6" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="405.6" y="15" class="ct clg">Not noticed a change</text>
+<text x="240" y="48.0" class="ct clab">18–20</text>
+<g class="cb"><title>18–20 — Fewer openings: 18.3</title><rect x="250.0" y="30" width="141.8" height="13" rx="3" class="cs1"/></g>
+<text x="397.8" y="40" class="ct cval">18.3</text>
+<g class="cb"><title>18–20 — Not noticed a change: 39.6</title><rect x="250.0" y="45" width="306.9" height="13" rx="3" class="cs2"/></g>
+<text x="562.9" y="55" class="ct cval">39.6</text>
+<text x="240" y="89.0" class="ct clab">21–30</text>
+<g class="cb"><title>21–30 — Fewer openings: 20.3</title><rect x="250.0" y="71" width="157.3" height="13" rx="3" class="cs1"/></g>
+<text x="413.3" y="81" class="ct cval">20.3</text>
+<g class="cb"><title>21–30 — Not noticed a change: 30.8</title><rect x="250.0" y="86" width="238.7" height="13" rx="3" class="cs2"/></g>
+<text x="494.7" y="96" class="ct cval">30.8</text>
+<text x="240" y="130.0" class="ct clab">31–40</text>
+<g class="cb"><title>31–40 — Fewer openings: 17.4</title><rect x="250.0" y="112" width="134.9" height="13" rx="3" class="cs1"/></g>
+<text x="390.9" y="122" class="ct cval">17.4</text>
+<g class="cb"><title>31–40 — Not noticed a change: 35.9</title><rect x="250.0" y="127" width="278.2" height="13" rx="3" class="cs2"/></g>
+<text x="534.2" y="137" class="ct cval">35.9</text>
+<text x="240" y="171.0" class="ct clab">41–50</text>
+<g class="cb"><title>41–50 — Fewer openings: 15.7</title><rect x="250.0" y="153" width="121.7" height="13" rx="3" class="cs1"/></g>
+<text x="377.7" y="163" class="ct cval">15.7</text>
+<g class="cb"><title>41–50 — Not noticed a change: 40.1</title><rect x="250.0" y="168" width="310.8" height="13" rx="3" class="cs2"/></g>
+<text x="566.8" y="178" class="ct cval">40.1</text>
+<text x="240" y="212.0" class="ct clab">51–60</text>
+<g class="cb"><title>51–60 — Fewer openings: 11.5</title><rect x="250.0" y="194" width="89.1" height="13" rx="3" class="cs1"/></g>
+<text x="345.1" y="204" class="ct cval">11.5</text>
+<g class="cb"><title>51–60 — Not noticed a change: 48.8</title><rect x="250.0" y="209" width="378.2" height="13" rx="3" class="cs2"/></g>
+<text x="634.2" y="219" class="ct cval">48.8</text>
+<text x="240" y="253.0" class="ct clab">61–70</text>
+<g class="cb"><title>61–70 — Fewer openings: 8.6</title><rect x="250.0" y="235" width="66.6" height="13" rx="3" class="cs1"/></g>
+<text x="322.6" y="245" class="ct cval">8.6</text>
+<g class="cb"><title>61–70 — Not noticed a change: 58.7</title><rect x="250.0" y="250" width="454.9" height="13" rx="3" class="cs2"/></g>
+<text x="710.9" y="260" class="ct cval">58.7</text>
+<text x="240" y="294.0" class="ct clab">71–80</text>
+<g class="cb"><title>71–80 — Fewer openings: 5.0</title><rect x="250.0" y="276" width="38.8" height="13" rx="3" class="cs1"/></g>
+<text x="294.8" y="286" class="ct cval">5.0</text>
+<g class="cb"><title>71–80 — Not noticed a change: 67.3</title><rect x="250.0" y="291" width="521.6" height="13" rx="3" class="cs2"/></g>
+<text x="777.6" y="301" class="ct cval">67.3</text>
+</svg><figcaption><em>Figure 4. Share of workers who say AI has already reduced the number of job openings at their level, by age group. Base: all workers; unweighted n ≈ 12,410. Cells for workers 80+ (unweighted n = 1 in the "fewer" category) suppressed. AI@Work survey (CHIP50 Wave 38.6), fielded June 21–July 13, 2026 (interim). Weighted estimates.</em><br/><span class="drawn">Drawn from Table 7 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Age</th><th>Fewer openings</th><th>Not noticed a change</th></tr></thead><tbody><tr><td>18–20</td><td>18.3</td><td>39.6</td></tr><tr><td>21–30</td><td>20.3</td><td>30.8</td></tr><tr><td>31–40</td><td>17.4</td><td>35.9</td></tr><tr><td>41–50</td><td>15.7</td><td>40.1</td></tr><tr><td>51–60</td><td>11.5</td><td>48.8</td></tr><tr><td>61–70</td><td>8.6</td><td>58.7</td></tr><tr><td>71–80</td><td>5.0</td><td>67.3</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="ai-anxiety-is-white-collar">AI anxiety is white-collar</h2>
+<p class="lede"><strong>Unlike the automation fears of past decades, AI displacement anxiety is concentrated among knowledge workers, not manual laborers.</strong></p>
+<p>Whose job people think AI will take depends on the kind of work they do — and the answer inverts the familiar story. Workers whose jobs involve data processing or analysis are the <em>most</em> likely to expect eventual displacement (50%), while workers who do manual or physical labor are the <em>least</em> likely (44%). Both differences survive controls: relative to otherwise-similar workers, those in data/analytical roles have meaningfully higher odds of expecting displacement, and manual workers meaningfully lower odds. The reason is intuitive once stated — today's AI automates cognitive and desk work far more readily than physical labor, and workers appear to understand this about their own jobs.</p>
+<p>Education, strikingly, makes no difference at all: displacement fear is essentially identical among workers with a graduate degree (46%), a bachelor's (47%), and a high-school education (47%). This sets AI anxiety apart from AI <em>adoption</em>, which is sharply stratified by education and income. The people most likely to <em>use</em> AI — the educated, the data-centric — are, if anything, more likely to <em>fear</em> it, not less. AI displacement anxiety is broadly democratic across the workforce, tilted toward the young and the white-collar rather than toward the disadvantaged.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 436" width="100%" height="436" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 5. Share expecting eventual displacement, by job type (data/analysis job vs. manual-labor job) and by education. Base: employed respondents; unweighted n ≈ 12,390. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="406" class="cg"/>
+<text x="250.0" y="422" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="406" class="cg"/>
+<text x="405.0" y="422" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="406" class="cg"/>
+<text x="560.0" y="422" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="406" class="cg"/>
+<text x="715.0" y="422" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="406" class="cg"/>
+<text x="870.0" y="422" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Job type</text>
+<text x="240" y="54.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 50</title><rect x="250.0" y="42" width="310.0" height="17" rx="3" class="cs1"/></g>
+<text x="566.0" y="56" class="ct cval">50</text>
+<text x="240" y="84.5" class="ct clab">(not a data job)</text>
+<g class="cb"><title>(not a data job): 46</title><rect x="250.0" y="72" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="86" class="ct cval">46</text>
+<text x="240" y="114.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 44</title><rect x="250.0" y="102" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="116" class="ct cval">44</text>
+<text x="240" y="144.5" class="ct clab">(not a manual job)</text>
+<g class="cb"><title>(not a manual job): 49</title><rect x="250.0" y="132" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="146" class="ct cval">49</text>
+<text x="8" y="182" class="ct cgrp">Party</text>
+<text x="240" y="204.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat: 49</title><rect x="250.0" y="192" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="206" class="ct cval">49</text>
+<text x="240" y="234.5" class="ct clab">Independent</text>
+<g class="cb"><title>Independent: 47</title><rect x="250.0" y="222" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="236" class="ct cval">47</text>
+<text x="240" y="264.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican: 44</title><rect x="250.0" y="252" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="266" class="ct cval">44</text>
+<text x="8" y="302" class="ct cgrp">Income</text>
+<text x="240" y="324.5" class="ct clab">Lowest bracket</text>
+<g class="cb"><title>Lowest bracket: 48</title><rect x="250.0" y="312" width="297.6" height="17" rx="3" class="cs1"/></g>
+<text x="553.6" y="326" class="ct cval">48</text>
+<text x="240" y="354.5" class="ct clab">~$10–25k</text>
+<text x="256" y="356" class="ct cgap">52–54</text>
+<text x="240" y="384.5" class="ct clab">Highest bracket ($200k+)</text>
+<g class="cb"><title>Highest bracket ($200k+): 35</title><rect x="250.0" y="372" width="217.0" height="17" rx="3" class="cs1"/></g>
+<text x="473.0" y="386" class="ct cval">35</text>
+</svg><figcaption><em>Figure 5. Share expecting eventual displacement, by job type (data/analysis job vs. manual-labor job) and by education. Base: employed respondents; unweighted n ≈ 12,390. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 3 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Group</th><th>%</th></tr></thead><tbody><tr class="grp"><td colspan="2"><strong>Job type</strong></td></tr><tr><td>Data / analysis job</td><td>50</td></tr><tr><td>(not a data job)</td><td>46</td></tr><tr><td>Manual-labor job</td><td>44</td></tr><tr><td>(not a manual job)</td><td>49</td></tr><tr class="grp"><td colspan="2"><strong>Party</strong></td></tr><tr><td>Democrat</td><td>49</td></tr><tr><td>Independent</td><td>47</td></tr><tr><td>Republican</td><td>44</td></tr><tr class="grp"><td colspan="2"><strong>Income</strong></td></tr><tr><td>Lowest bracket</td><td>48</td></tr><tr><td>~$10–25k</td><td>52–54</td></tr><tr><td>Highest bracket ($200k+)</td><td>35</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="who-holds-the-edge-the-younger-worker-advantage">Who holds the edge: the younger-worker advantage</h2>
+<p class="lede"><strong>A plurality of Americans think AI advantages younger workers — and older workers, who feel it most, agree the most.</strong></p>
+<p>Beyond who fears losing work, there is the question of who AI helps and hurts within a workplace. Asked whether "AI gives younger workers an advantage over older or longer-tenured workers," 49% of adults agree (17% strongly), 32% are neutral, and 20% disagree. Agreement rises steadily with age: older adults — the ones who would be on the losing end of such an advantage — are the most likely to endorse the statement, while the youngest are closer to neutral.</p>
+<p>Set against the displacement findings, this completes a nuanced picture of generational AI politics. Older workers believe AI tilts the workplace toward the young; younger workers, for their part, are the most afraid of being displaced by it. These are not contradictory so much as two sides of a churning entry-level labor market — one where AI fluency is a young worker's asset and the automatable, entry-level task is a young worker's exposure.</p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Figure 6. Agreement that AI gives younger workers an advantage over older/longer-tenured workers, overall and by age. Base: all adults; unweighted n ≈ 23,430. Weighted estimates.">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly agree</text>
+<g class="cb"><title>Strongly agree: 17</title><rect x="250.0" y="12" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="26" class="ct cval">17</text>
+<text x="240" y="54.5" class="ct clab">Somewhat agree</text>
+<g class="cb"><title>Somewhat agree: 32</title><rect x="250.0" y="42" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="56" class="ct cval">32</text>
+<text x="240" y="84.5" class="ct clab">Neither</text>
+<g class="cb"><title>Neither: 32</title><rect x="250.0" y="72" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="86" class="ct cval">32</text>
+<text x="240" y="114.5" class="ct clab">Somewhat disagree</text>
+<g class="cb"><title>Somewhat disagree: 10</title><rect x="250.0" y="102" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="116" class="ct cval">10</text>
+<text x="240" y="144.5" class="ct clab">Strongly disagree</text>
+<g class="cb"><title>Strongly disagree: 10</title><rect x="250.0" y="132" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="146" class="ct cval">10</text>
+</svg><figcaption><em>Figure 6. Agreement that AI gives younger workers an advantage over older/longer-tenured workers, overall and by age. Base: all adults; unweighted n ≈ 23,430. Weighted estimates.</em><br/><span class="drawn">Drawn from Table 5 in this report; no value has been recomputed.</span></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly agree</td><td>17</td></tr><tr><td>Somewhat agree</td><td>32</td></tr><tr><td>Neither</td><td>32</td></tr><tr><td>Somewhat disagree</td><td>10</td></tr><tr><td>Strongly disagree</td><td>10</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>American workers are not panicking about AI, but they are bracing for it. A near-majority expect it to eventually cost people in their line of work their jobs, even as most remain personally optimistic about their own position — a field-versus-self gap that will shape how the politics of AI and work unfold. The anxiety is broadly shared, but where it concentrates upends the old automation narrative: it is highest among the young, who use AI most, and among white-collar, data-centric workers, whose cognitive tasks are exactly what today's systems do best. Education, the great divider of AI <em>use</em>, does nothing to divide AI <em>fear</em>.</p>
+<p>That combination — the people closest to AI being the most worried about it — is the finding to carry forward, and it is no longer only a matter of expectation. Younger workers are already the most likely to say the openings at their level have thinned, and the managers who hire them report cutting entry-level roles for exactly that reason; perception and practice have begun to meet. As the data collection for this wave continues and the technology advances, the workers to watch are not only the manual laborers of the automation imagination but the young analysts, writers, and coders who have adopted AI fastest and expect it, sooner than anyone, to come for jobs like theirs.</p>
+<hr/>
+<h2 id="appendix-a-methods">Appendix A — Methods</h2>
+<p><strong>Data source.</strong> AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). Total unweighted n = 23,462; weighted n = 23,485. Fielded June 21–July 13, 2026. Data collection was ongoing at the time of this extract — figures reflect responses through July 13, 2026 and are preliminary. Estimates are weighted to U.S. Census population targets.</p>
+<p><strong>Measures and bases.</strong> <code>ai_loss_current</code> and <code>ai_loss_ultimate</code> ("Do you think AI is currently / will eventually cause people who do work like yours to lose their jobs?"; Yes/No) and <code>ai_work_imp</code> (impact of AI on one's own job in the next five years; only positive / both / only negative / no impact) were asked of employed respondents (unweighted n ≈ 12,390–12,400). <code>indr_level_quantity</code> ("Has AI affected the number of job openings at your level?"; fewer / about the same / more / not noticed a change / not sure) was asked of all workers (unweighted n ≈ 12,413). <code>hiring_change</code> (entry-level hiring strategy under AI) was asked only of hiring managers who report that AI changed how they hire (unweighted n ≈ 2,557). <code>ai_advantage</code> ("AI gives younger workers an advantage over older or longer-tenured workers"; 5-point agree–disagree) was asked of all adults (unweighted n ≈ 23,430).</p>
+<p><strong>Coding.</strong> <code>ai_advantage</code> is coded 1 = strongly agree … 5 = strongly disagree, confirmed against the data (the weighted mean falls monotonically with age — older respondents agree more, coherent only under this direction). <code>indr_level_quantity</code> (1 = fewer, 2 = about the same, 3 = more, 4 = not noticed a change, 5 = not sure) and <code>hiring_change</code> (1 = fewer entry-level, 2 = same #/same expectations, 3 = same #/more advanced work, 4 = more entry-level) are labeled category sets reported per the authoritative codebook; they are nominal, not magnitude scales, so they carry no direction-reversal risk and are reported categorically. Two binary indicators were derived for analysis: <code>loss_current_bin</code> and <code>loss_ultimate_bin</code> (1 = Yes).</p>
+<p><strong>Estimation.</strong> Cross-tabulations are weighted shares. One weighted logistic regression (survey-weighted GLM, logit; n = 12,396; McFadden pseudo-R² = 0.016) models expecting eventual displacement on age, education, gender, income, party, community type, and two job-type indicators (manual labor; data/analysis). The very low pseudo-R² is itself a finding: displacement fear is broadly shared rather than concentrated in any one group. A difference is called independent only where the coefficient is significant at p &lt;.05; raw crosstab gaps are descriptive. Cells with unweighted n &lt; 10 are suppressed or flagged (workers 80+, unweighted n = 21).</p>
+<p><strong>Reproducibility.</strong> Figures map to Appendix B tables; values copied verbatim from the underlying tabulations. Wording and coding sourced from the Qualtrics instrument via the project's AI@Work survey verified-updates crosswalk.</p>
+<hr/>
+<h2 id="appendix-b-data-tables">Appendix B — Data tables</h2>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 146" width="100%" height="146" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 1. Will AI cause job loss in your line of work? (weighted %; employed respondents; n ≈ 12,390).">
+<line x1="250.0" y1="24" x2="250.0" y2="116" class="cg"/>
+<text x="250.0" y="132" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="116" class="cg"/>
+<text x="405.0" y="132" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="116" class="cg"/>
+<text x="560.0" y="132" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="116" class="cg"/>
+<text x="715.0" y="132" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="116" class="cg"/>
+<text x="870.0" y="132" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Yes</text>
+<rect x="309.2" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="324.2" y="15" class="ct clg">No</text>
+<text x="240" y="48.0" class="ct clab">Currently (ai_loss_current)</text>
+<g class="cb"><title>Currently (ai_loss_current) — Yes: 33</title><rect x="250.0" y="30" width="255.8" height="13" rx="3" class="cs1"/></g>
+<text x="511.8" y="40" class="ct cval">33</text>
+<g class="cb"><title>Currently (ai_loss_current) — No: 67</title><rect x="250.0" y="45" width="519.2" height="13" rx="3" class="cs2"/></g>
+<text x="775.2" y="55" class="ct cval">67</text>
+<text x="240" y="89.0" class="ct clab">Eventually (ai_loss_ultimate)</text>
+<g class="cb"><title>Eventually (ai_loss_ultimate) — Yes: 47</title><rect x="250.0" y="71" width="364.2" height="13" rx="3" class="cs1"/></g>
+<text x="620.2" y="81" class="ct cval">47</text>
+<g class="cb"><title>Eventually (ai_loss_ultimate) — No: 53</title><rect x="250.0" y="86" width="410.8" height="13" rx="3" class="cs2"/></g>
+<text x="666.8" y="96" class="ct cval">53</text>
+</svg><figcaption><strong>Table 1. Will AI cause job loss in your line of work?</strong> (weighted %; employed respondents; n ≈ 12,390).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th></th><th>Yes</th><th>No</th></tr></thead><tbody><tr><td>Currently (<code>ai_loss_current</code>)</td><td>33</td><td>67</td></tr><tr><td>Eventually (<code>ai_loss_ultimate</code>)</td><td>47</td><td>53</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 2. Expected impact of AI on your own job, next 5 years (ai_work_imp; employed; n ≈ 12,400; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Both positive and negative</text>
+<g class="cb"><title>Both positive and negative: 46</title><rect x="250.0" y="12" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="26" class="ct cval">46</text>
+<text x="240" y="54.5" class="ct clab">No impact</text>
+<g class="cb"><title>No impact: 21</title><rect x="250.0" y="42" width="130.2" height="17" rx="3" class="cs1"/></g>
+<text x="386.2" y="56" class="ct cval">21</text>
+<text x="240" y="84.5" class="ct clab">Only positive</text>
+<g class="cb"><title>Only positive: 17</title><rect x="250.0" y="72" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="86" class="ct cval">17</text>
+<text x="240" y="114.5" class="ct clab">Only negative</text>
+<g class="cb"><title>Only negative: 17</title><rect x="250.0" y="102" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="116" class="ct cval">17</text>
+</svg><figcaption><strong>Table 2. Expected impact of AI on your own job, next 5 years</strong> (<code>ai_work_imp</code>; employed; n ≈ 12,400; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Both positive and negative</td><td>46</td></tr><tr><td>No impact</td><td>21</td></tr><tr><td>Only positive</td><td>17</td></tr><tr><td>Only negative</td><td>17</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 466" width="100%" height="466" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. Expect eventual displacement in their line of work, by group (weighted % &quot;yes&quot;; employed respondents).">
+<line x1="250.0" y1="6" x2="250.0" y2="436" class="cg"/>
+<text x="250.0" y="452" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="436" class="cg"/>
+<text x="405.0" y="452" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="436" class="cg"/>
+<text x="560.0" y="452" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="436" class="cg"/>
+<text x="715.0" y="452" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="436" class="cg"/>
+<text x="870.0" y="452" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Age</text>
+<text x="240" y="54.5" class="ct clab">18–20</text>
+<g class="cb"><title>18–20: 64</title><rect x="250.0" y="42" width="396.8" height="17" rx="3" class="cs1"/></g>
+<text x="652.8" y="56" class="ct cval">64</text>
+<text x="240" y="84.5" class="ct clab">21–30</text>
+<g class="cb"><title>21–30: 52</title><rect x="250.0" y="72" width="322.4" height="17" rx="3" class="cs1"/></g>
+<text x="578.4" y="86" class="ct cval">52</text>
+<text x="240" y="114.5" class="ct clab">31–40</text>
+<g class="cb"><title>31–40: 45</title><rect x="250.0" y="102" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="116" class="ct cval">45</text>
+<text x="240" y="144.5" class="ct clab">41–50</text>
+<g class="cb"><title>41–50: 45</title><rect x="250.0" y="132" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="146" class="ct cval">45</text>
+<text x="240" y="174.5" class="ct clab">51–60</text>
+<g class="cb"><title>51–60: 45</title><rect x="250.0" y="162" width="279.0" height="17" rx="3" class="cs1"/></g>
+<text x="535.0" y="176" class="ct cval">45</text>
+<text x="240" y="204.5" class="ct clab">61–70</text>
+<g class="cb"><title>61–70: 40</title><rect x="250.0" y="192" width="248.0" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="206" class="ct cval">40</text>
+<text x="240" y="234.5" class="ct clab">71–80</text>
+<g class="cb"><title>71–80: 32</title><rect x="250.0" y="222" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="236" class="ct cval">32</text>
+<text x="8" y="272" class="ct cgrp">Education</text>
+<text x="240" y="294.5" class="ct clab">Graduate degree</text>
+<g class="cb"><title>Graduate degree: 46</title><rect x="250.0" y="282" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="296" class="ct cval">46</text>
+<text x="240" y="324.5" class="ct clab">College degree</text>
+<g class="cb"><title>College degree: 47</title><rect x="250.0" y="312" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="326" class="ct cval">47</text>
+<text x="240" y="354.5" class="ct clab">Some college</text>
+<g class="cb"><title>Some college: 47</title><rect x="250.0" y="342" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="356" class="ct cval">47</text>
+<text x="240" y="384.5" class="ct clab">High-school graduate</text>
+<g class="cb"><title>High-school graduate: 47</title><rect x="250.0" y="372" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="386" class="ct cval">47</text>
+<text x="240" y="414.5" class="ct clab">Some high school or less</text>
+<g class="cb"><title>Some high school or less: 46</title><rect x="250.0" y="402" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="416" class="ct cval">46</text>
+</svg><svg class="cv" viewBox="0 0 948 436" width="100%" height="436" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 3. Expect eventual displacement in their line of work, by group (weighted % &quot;yes&quot;; employed respondents).">
+<line x1="250.0" y1="6" x2="250.0" y2="406" class="cg"/>
+<text x="250.0" y="422" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="406" class="cg"/>
+<text x="405.0" y="422" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="406" class="cg"/>
+<text x="560.0" y="422" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="406" class="cg"/>
+<text x="715.0" y="422" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="406" class="cg"/>
+<text x="870.0" y="422" class="ct ctick" data-chrome="1">100%</text>
+<text x="8" y="32" class="ct cgrp">Job type</text>
+<text x="240" y="54.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 50</title><rect x="250.0" y="42" width="310.0" height="17" rx="3" class="cs1"/></g>
+<text x="566.0" y="56" class="ct cval">50</text>
+<text x="240" y="84.5" class="ct clab">(not a data job)</text>
+<g class="cb"><title>(not a data job): 46</title><rect x="250.0" y="72" width="285.2" height="17" rx="3" class="cs1"/></g>
+<text x="541.2" y="86" class="ct cval">46</text>
+<text x="240" y="114.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 44</title><rect x="250.0" y="102" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="116" class="ct cval">44</text>
+<text x="240" y="144.5" class="ct clab">(not a manual job)</text>
+<g class="cb"><title>(not a manual job): 49</title><rect x="250.0" y="132" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="146" class="ct cval">49</text>
+<text x="8" y="182" class="ct cgrp">Party</text>
+<text x="240" y="204.5" class="ct clab">Democrat</text>
+<g class="cb"><title>Democrat: 49</title><rect x="250.0" y="192" width="303.8" height="17" rx="3" class="cs1"/></g>
+<text x="559.8" y="206" class="ct cval">49</text>
+<text x="240" y="234.5" class="ct clab">Independent</text>
+<g class="cb"><title>Independent: 47</title><rect x="250.0" y="222" width="291.4" height="17" rx="3" class="cs1"/></g>
+<text x="547.4" y="236" class="ct cval">47</text>
+<text x="240" y="264.5" class="ct clab">Republican</text>
+<g class="cb"><title>Republican: 44</title><rect x="250.0" y="252" width="272.8" height="17" rx="3" class="cs1"/></g>
+<text x="528.8" y="266" class="ct cval">44</text>
+<text x="8" y="302" class="ct cgrp">Income</text>
+<text x="240" y="324.5" class="ct clab">Lowest bracket</text>
+<g class="cb"><title>Lowest bracket: 48</title><rect x="250.0" y="312" width="297.6" height="17" rx="3" class="cs1"/></g>
+<text x="553.6" y="326" class="ct cval">48</text>
+<text x="240" y="354.5" class="ct clab">~$10–25k</text>
+<text x="256" y="356" class="ct cgap">52–54</text>
+<text x="240" y="384.5" class="ct clab">Highest bracket ($200k+)</text>
+<g class="cb"><title>Highest bracket ($200k+): 35</title><rect x="250.0" y="372" width="217.0" height="17" rx="3" class="cs1"/></g>
+<text x="473.0" y="386" class="ct cval">35</text>
+</svg><figcaption><strong>Table 3. Expect eventual displacement in their line of work, by group</strong> (weighted % "yes"; employed respondents).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Group</th><th>%</th><th>Group</th><th>%</th></tr></thead><tbody><tr><td><strong>Age</strong></td><td></td><td><strong>Job type</strong></td><td></td></tr><tr><td>18–20</td><td>64</td><td>Data / analysis job</td><td>50</td></tr><tr><td>21–30</td><td>52</td><td>(not a data job)</td><td>46</td></tr><tr><td>31–40</td><td>45</td><td>Manual-labor job</td><td>44</td></tr><tr><td>41–50</td><td>45</td><td>(not a manual job)</td><td>49</td></tr><tr><td>51–60</td><td>45</td><td><strong>Party</strong></td><td></td></tr><tr><td>61–70</td><td>40</td><td>Democrat</td><td>49</td></tr><tr><td>71–80</td><td>32</td><td>Independent</td><td>47</td></tr><tr><td><strong>Education</strong></td><td></td><td>Republican</td><td>44</td></tr><tr><td>Graduate degree</td><td>46</td><td><strong>Income</strong></td><td></td></tr><tr><td>College degree</td><td>47</td><td>Lowest bracket</td><td>48</td></tr><tr><td>Some college</td><td>47</td><td>~$10–25k</td><td>52–54</td></tr><tr><td>High-school graduate</td><td>47</td><td>Highest bracket ($200k+)</td><td>35</td></tr><tr><td>Some high school or less</td><td>46</td><td></td><td></td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 346" width="100%" height="346" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 4. Logistic regression — expects eventual displacement (loss_ultimate_bin; weighted; odds ratios; * p &amp;lt;.05; n = 12,396; McFadden R² = 0.016).">
+<line x1="250.0" y1="6" x2="250.0" y2="316" class="cg"/>
+<text x="250.0" y="332" class="ct ctick" data-chrome="1">0</text>
+<line x1="374.0" y1="6" x2="374.0" y2="316" class="cg"/>
+<text x="374.0" y="332" class="ct ctick" data-chrome="1">0.5</text>
+<line x1="498.0" y1="6" x2="498.0" y2="316" class="cg"/>
+<text x="498.0" y="332" class="ct ctick" data-chrome="1">1</text>
+<line x1="622.0" y1="6" x2="622.0" y2="316" class="cg"/>
+<text x="622.0" y="332" class="ct ctick" data-chrome="1">1.5</text>
+<line x1="746.0" y1="6" x2="746.0" y2="316" class="cg"/>
+<text x="746.0" y="332" class="ct ctick" data-chrome="1">2</text>
+<line x1="870.0" y1="6" x2="870.0" y2="316" class="cg"/>
+<text x="870.0" y="332" class="ct ctick" data-chrome="1">2.5</text>
+<line x1="498.0" y1="6" x2="498.0" y2="316" class="cref"/>
+<text x="240" y="24.5" class="ct clab">Age 18–20 (vs. 31–40)</text>
+<g class="cb"><title>Age 18–20 (vs. 31–40): 2.19*</title><rect x="498.0" y="12" width="295.1" height="17" rx="3" class="cs1"/></g>
+<text x="799.1" y="26" class="ct cval">2.19*</text>
+<text x="240" y="54.5" class="ct clab">Age 21–30 (vs. 31–40)</text>
+<g class="cb"><title>Age 21–30 (vs. 31–40): 1.34*</title><rect x="498.0" y="42" width="84.3" height="17" rx="3" class="cs1"/></g>
+<text x="588.3" y="56" class="ct cval">1.34*</text>
+<text x="240" y="84.5" class="ct clab">Age 61–70 (vs. 31–40)</text>
+<g class="cb"><title>Age 61–70 (vs. 31–40): 0.84*</title><rect x="458.3" y="72" width="39.7" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="86" class="ct cval">0.84*</text>
+<text x="240" y="114.5" class="ct clab">Age 71–80 (vs. 31–40)</text>
+<g class="cb"><title>Age 71–80 (vs. 31–40): 0.58*</title><rect x="393.8" y="102" width="104.2" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="116" class="ct cval">0.58*</text>
+<text x="240" y="144.5" class="ct clab">Data / analysis job</text>
+<g class="cb"><title>Data / analysis job: 1.18*</title><rect x="498.0" y="132" width="44.6" height="17" rx="3" class="cs1"/></g>
+<text x="548.6" y="146" class="ct cval">1.18*</text>
+<text x="240" y="174.5" class="ct clab">Manual-labor job</text>
+<g class="cb"><title>Manual-labor job: 0.81*</title><rect x="450.9" y="162" width="47.1" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="176" class="ct cval">0.81*</text>
+<text x="240" y="204.5" class="ct clab">Democrat (vs. Republican)</text>
+<g class="cb"><title>Democrat (vs. Republican): 1.17*</title><rect x="498.0" y="192" width="42.2" height="17" rx="3" class="cs1"/></g>
+<text x="546.2" y="206" class="ct cval">1.17*</text>
+<text x="240" y="234.5" class="ct clab">Independent (vs. Republican)</text>
+<g class="cb"><title>Independent (vs. Republican): 1.11*</title><rect x="498.0" y="222" width="27.3" height="17" rx="3" class="cs1"/></g>
+<text x="531.3" y="236" class="ct cval">1.11*</text>
+<text x="240" y="264.5" class="ct clab">Highest income bracket (vs. lowest)</text>
+<g class="cb"><title>Highest income bracket (vs. lowest): 0.55*</title><rect x="386.4" y="252" width="111.6" height="17" rx="3" class="cs1"/></g>
+<text x="504.0" y="266" class="ct cval">0.55*</text>
+<text x="240" y="294.5" class="ct clab">Education, gender, community type</text>
+<text x="256" y="296" class="ct cgap">n.s.</text>
+</svg><figcaption><strong>Table 4. Logistic regression — expects eventual displacement</strong> (<code>loss_ultimate_bin</code>; weighted; odds ratios; * p &lt;.05; n = 12,396; McFadden R² = 0.016).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Predictor (ref)</th><th>OR</th></tr></thead><tbody><tr><td>Age 18–20 (vs. 31–40)</td><td>2.19*</td></tr><tr><td>Age 21–30 (vs. 31–40)</td><td>1.34*</td></tr><tr><td>Age 61–70 (vs. 31–40)</td><td>0.84*</td></tr><tr><td>Age 71–80 (vs. 31–40)</td><td>0.58*</td></tr><tr><td>Data / analysis job</td><td>1.18*</td></tr><tr><td>Manual-labor job</td><td>0.81*</td></tr><tr><td>Democrat (vs. Republican)</td><td>1.17*</td></tr><tr><td>Independent (vs. Republican)</td><td>1.11*</td></tr><tr><td>Highest income bracket (vs. lowest)</td><td>0.55*</td></tr><tr><td>Education, gender, community type</td><td>n.s.</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 5. &quot;AI gives younger workers an advantage over older/longer-tenured workers&quot; (ai_advantage; all adults; n ≈ 23,430; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Strongly agree</text>
+<g class="cb"><title>Strongly agree: 17</title><rect x="250.0" y="12" width="105.4" height="17" rx="3" class="cs1"/></g>
+<text x="361.4" y="26" class="ct cval">17</text>
+<text x="240" y="54.5" class="ct clab">Somewhat agree</text>
+<g class="cb"><title>Somewhat agree: 32</title><rect x="250.0" y="42" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="56" class="ct cval">32</text>
+<text x="240" y="84.5" class="ct clab">Neither</text>
+<g class="cb"><title>Neither: 32</title><rect x="250.0" y="72" width="198.4" height="17" rx="3" class="cs1"/></g>
+<text x="454.4" y="86" class="ct cval">32</text>
+<text x="240" y="114.5" class="ct clab">Somewhat disagree</text>
+<g class="cb"><title>Somewhat disagree: 10</title><rect x="250.0" y="102" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="116" class="ct cval">10</text>
+<text x="240" y="144.5" class="ct clab">Strongly disagree</text>
+<g class="cb"><title>Strongly disagree: 10</title><rect x="250.0" y="132" width="62.0" height="17" rx="3" class="cs1"/></g>
+<text x="318.0" y="146" class="ct cval">10</text>
+</svg><figcaption><strong>Table 5. "AI gives younger workers an advantage over older/longer-tenured workers"</strong> (<code>ai_advantage</code>; all adults; n ≈ 23,430; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Strongly agree</td><td>17</td></tr><tr><td>Somewhat agree</td><td>32</td></tr><tr><td>Neither</td><td>32</td></tr><tr><td>Somewhat disagree</td><td>10</td></tr><tr><td>Strongly disagree</td><td>10</td></tr></tbody></table></div></details></figure>
+<p><em>Agreement rises with age: the weighted mean moves from 3.08 (near neutral) among workers 18–20 to about 2.5 (leaning agree) among workers 60 and older.</em></p>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 196" width="100%" height="196" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 6. Has AI changed the number of job openings at your level? (indr_level_quantity; all workers; unweighted n ≈ 12,413; weighted %).">
+<line x1="250.0" y1="6" x2="250.0" y2="166" class="cg"/>
+<text x="250.0" y="182" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="166" class="cg"/>
+<text x="405.0" y="182" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="166" class="cg"/>
+<text x="560.0" y="182" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="166" class="cg"/>
+<text x="715.0" y="182" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="166" class="cg"/>
+<text x="870.0" y="182" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Fewer openings</text>
+<g class="cb"><title>Fewer openings: 15.8</title><rect x="250.0" y="12" width="98.0" height="17" rx="3" class="cs1"/></g>
+<text x="354.0" y="26" class="ct cval">15.8</text>
+<text x="240" y="54.5" class="ct clab">About the same</text>
+<g class="cb"><title>About the same: 24.3</title><rect x="250.0" y="42" width="150.7" height="17" rx="3" class="cs1"/></g>
+<text x="406.7" y="56" class="ct cval">24.3</text>
+<text x="240" y="84.5" class="ct clab">More openings</text>
+<g class="cb"><title>More openings: 8.6</title><rect x="250.0" y="72" width="53.3" height="17" rx="3" class="cs1"/></g>
+<text x="309.3" y="86" class="ct cval">8.6</text>
+<text x="240" y="114.5" class="ct clab">Have not noticed a change</text>
+<g class="cb"><title>Have not noticed a change: 40.5</title><rect x="250.0" y="102" width="251.1" height="17" rx="3" class="cs1"/></g>
+<text x="507.1" y="116" class="ct cval">40.5</text>
+<text x="240" y="144.5" class="ct clab">Not sure</text>
+<g class="cb"><title>Not sure: 10.8</title><rect x="250.0" y="132" width="67.0" height="17" rx="3" class="cs1"/></g>
+<text x="323.0" y="146" class="ct cval">10.8</text>
+</svg><figcaption><strong>Table 6. Has AI changed the number of job openings at your level?</strong> (<code>indr_level_quantity</code>; all workers; unweighted n ≈ 12,413; weighted %).</figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Fewer openings</td><td>15.8</td></tr><tr><td>About the same</td><td>24.3</td></tr><tr><td>More openings</td><td>8.6</td></tr><tr><td>Have not noticed a change</td><td>40.5</td></tr><tr><td>Not sure</td><td>10.8</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 351" width="100%" height="351" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 7. Share saying AI has reduced openings at their level, by age (indr_level_quantity = &quot;fewer&quot;; weighted %; all workers). &quot;Have not noticed a change&quot; shown for contrast.">
+<line x1="250.0" y1="24" x2="250.0" y2="321" class="cg"/>
+<text x="250.0" y="337" class="ct ctick" data-chrome="1">0</text>
+<line x1="405.0" y1="24" x2="405.0" y2="321" class="cg"/>
+<text x="405.0" y="337" class="ct ctick" data-chrome="1">20</text>
+<line x1="560.0" y1="24" x2="560.0" y2="321" class="cg"/>
+<text x="560.0" y="337" class="ct ctick" data-chrome="1">40</text>
+<line x1="715.0" y1="24" x2="715.0" y2="321" class="cg"/>
+<text x="715.0" y="337" class="ct ctick" data-chrome="1">60</text>
+<line x1="870.0" y1="24" x2="870.0" y2="321" class="cg"/>
+<text x="870.0" y="337" class="ct ctick" data-chrome="1">80</text>
+<rect x="250" y="6" width="10" height="10" rx="2" class="cs1"/>
+<text x="265" y="15" class="ct clg">Fewer openings</text>
+<rect x="390.6" y="6" width="10" height="10" rx="2" class="cs2"/>
+<text x="405.6" y="15" class="ct clg">Not noticed a change</text>
+<text x="240" y="48.0" class="ct clab">18–20</text>
+<g class="cb"><title>18–20 — Fewer openings: 18.3</title><rect x="250.0" y="30" width="141.8" height="13" rx="3" class="cs1"/></g>
+<text x="397.8" y="40" class="ct cval">18.3</text>
+<g class="cb"><title>18–20 — Not noticed a change: 39.6</title><rect x="250.0" y="45" width="306.9" height="13" rx="3" class="cs2"/></g>
+<text x="562.9" y="55" class="ct cval">39.6</text>
+<text x="240" y="89.0" class="ct clab">21–30</text>
+<g class="cb"><title>21–30 — Fewer openings: 20.3</title><rect x="250.0" y="71" width="157.3" height="13" rx="3" class="cs1"/></g>
+<text x="413.3" y="81" class="ct cval">20.3</text>
+<g class="cb"><title>21–30 — Not noticed a change: 30.8</title><rect x="250.0" y="86" width="238.7" height="13" rx="3" class="cs2"/></g>
+<text x="494.7" y="96" class="ct cval">30.8</text>
+<text x="240" y="130.0" class="ct clab">31–40</text>
+<g class="cb"><title>31–40 — Fewer openings: 17.4</title><rect x="250.0" y="112" width="134.9" height="13" rx="3" class="cs1"/></g>
+<text x="390.9" y="122" class="ct cval">17.4</text>
+<g class="cb"><title>31–40 — Not noticed a change: 35.9</title><rect x="250.0" y="127" width="278.2" height="13" rx="3" class="cs2"/></g>
+<text x="534.2" y="137" class="ct cval">35.9</text>
+<text x="240" y="171.0" class="ct clab">41–50</text>
+<g class="cb"><title>41–50 — Fewer openings: 15.7</title><rect x="250.0" y="153" width="121.7" height="13" rx="3" class="cs1"/></g>
+<text x="377.7" y="163" class="ct cval">15.7</text>
+<g class="cb"><title>41–50 — Not noticed a change: 40.1</title><rect x="250.0" y="168" width="310.8" height="13" rx="3" class="cs2"/></g>
+<text x="566.8" y="178" class="ct cval">40.1</text>
+<text x="240" y="212.0" class="ct clab">51–60</text>
+<g class="cb"><title>51–60 — Fewer openings: 11.5</title><rect x="250.0" y="194" width="89.1" height="13" rx="3" class="cs1"/></g>
+<text x="345.1" y="204" class="ct cval">11.5</text>
+<g class="cb"><title>51–60 — Not noticed a change: 48.8</title><rect x="250.0" y="209" width="378.2" height="13" rx="3" class="cs2"/></g>
+<text x="634.2" y="219" class="ct cval">48.8</text>
+<text x="240" y="253.0" class="ct clab">61–70</text>
+<g class="cb"><title>61–70 — Fewer openings: 8.6</title><rect x="250.0" y="235" width="66.6" height="13" rx="3" class="cs1"/></g>
+<text x="322.6" y="245" class="ct cval">8.6</text>
+<g class="cb"><title>61–70 — Not noticed a change: 58.7</title><rect x="250.0" y="250" width="454.9" height="13" rx="3" class="cs2"/></g>
+<text x="710.9" y="260" class="ct cval">58.7</text>
+<text x="240" y="294.0" class="ct clab">71–80</text>
+<g class="cb"><title>71–80 — Fewer openings: 5.0</title><rect x="250.0" y="276" width="38.8" height="13" rx="3" class="cs1"/></g>
+<text x="294.8" y="286" class="ct cval">5.0</text>
+<g class="cb"><title>71–80 — Not noticed a change: 67.3</title><rect x="250.0" y="291" width="521.6" height="13" rx="3" class="cs2"/></g>
+<text x="777.6" y="301" class="ct cval">67.3</text>
+</svg><figcaption><strong>Table 7. Share saying AI has reduced openings at their level, by age</strong> (<code>indr_level_quantity</code> = "fewer"; weighted %; all workers). <em>"Have not noticed a change" shown for contrast.</em></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Age</th><th>Fewer openings</th><th>Not noticed a change</th></tr></thead><tbody><tr><td>18–20</td><td>18.3</td><td>39.6</td></tr><tr><td>21–30</td><td>20.3</td><td>30.8</td></tr><tr><td>31–40</td><td>17.4</td><td>35.9</td></tr><tr><td>41–50</td><td>15.7</td><td>40.1</td></tr><tr><td>51–60</td><td>11.5</td><td>48.8</td></tr><tr><td>61–70</td><td>8.6</td><td>58.7</td></tr><tr><td>71–80</td><td>5.0</td><td>67.3</td></tr></tbody></table></div></details></figure>
+<figure class="chart"><svg class="cv" viewBox="0 0 948 166" width="100%" height="166" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="Table 8. Entry-level hiring strategy, among hiring managers whose hiring changed because of AI (hiring_change; unweighted n ≈ 2,557; weighted %). Companion AI@Work hiring analysis; small conditional base.">
+<line x1="250.0" y1="6" x2="250.0" y2="136" class="cg"/>
+<text x="250.0" y="152" class="ct ctick" data-chrome="1">0%</text>
+<line x1="405.0" y1="6" x2="405.0" y2="136" class="cg"/>
+<text x="405.0" y="152" class="ct ctick" data-chrome="1">25%</text>
+<line x1="560.0" y1="6" x2="560.0" y2="136" class="cg"/>
+<text x="560.0" y="152" class="ct ctick" data-chrome="1">50%</text>
+<line x1="715.0" y1="6" x2="715.0" y2="136" class="cg"/>
+<text x="715.0" y="152" class="ct ctick" data-chrome="1">75%</text>
+<line x1="870.0" y1="6" x2="870.0" y2="136" class="cg"/>
+<text x="870.0" y="152" class="ct ctick" data-chrome="1">100%</text>
+<text x="240" y="24.5" class="ct clab">Fewer entry-level roles because of AI</text>
+<g class="cb"><title>Fewer entry-level roles because of AI: 26.6</title><rect x="250.0" y="12" width="164.9" height="17" rx="3" class="cs1"/></g>
+<text x="420.9" y="26" class="ct cval">26.6</text>
+<text x="240" y="54.5" class="ct clab">Same number, same expectations</text>
+<g class="cb"><title>Same number, same expectations: 37.1</title><rect x="250.0" y="42" width="230.0" height="17" rx="3" class="cs1"/></g>
+<text x="486.0" y="56" class="ct cval">37.1</text>
+<text x="240" y="84.5" class="ct clab">Same number, but expect more advanced work</text>
+<g class="cb"><title>Same number, but expect more advanced work: 29.0</title><rect x="250.0" y="72" width="179.8" height="17" rx="3" class="cs1"/></g>
+<text x="435.8" y="86" class="ct cval">29.0</text>
+<text x="240" y="114.5" class="ct clab">More entry-level roles because of AI</text>
+<g class="cb"><title>More entry-level roles because of AI: 7.3</title><rect x="250.0" y="102" width="45.3" height="17" rx="3" class="cs1"/></g>
+<text x="301.3" y="116" class="ct cval">7.3</text>
+</svg><figcaption><strong>Table 8. Entry-level hiring strategy, among hiring managers whose hiring changed because of AI</strong> (<code>hiring_change</code>; unweighted n ≈ 2,557; weighted %). <em>Companion AI@Work hiring analysis; small conditional base.</em></figcaption><details class="datatbl"><summary>Show the data table</summary><div class="tw"><table><thead><tr><th>Response</th><th>%</th></tr></thead><tbody><tr><td>Fewer entry-level roles because of AI</td><td>26.6</td></tr><tr><td>Same number, same expectations</td><td>37.1</td></tr><tr><td>Same number, but expect more advanced work</td><td>29.0</td></tr><tr><td>More entry-level roles because of AI</td><td>7.3</td></tr></tbody></table></div></details></figure>
+<hr/>
+<h2 id="appendix-c-question-wording-verbatim">Appendix C — Question wording (verbatim)</h2>
+<ul><li><strong><code>ai_loss_current</code></strong> — "Do you think that AI is <strong>currently</strong> causing people who do work like yours to lose their jobs?" (Yes; No)</li><li><strong><code>ai_loss_ultimate</code></strong> — "Do you think AI will <strong>eventually</strong> cause people who do work like yours to lose their jobs?" (Yes; No)</li><li><strong><code>ai_work_imp</code></strong> — "In your opinion, what would be the impact of AI tools like ChatGPT <strong>on your own job</strong> in the next 5 years?" (Only positive impact; Both positive and negative impact; Only negative impact; No impact)</li><li><strong><code>ai_advantage</code></strong> — "How much do you agree or disagree with the following statement: AI gives younger workers an advantage over older or longer-tenured workers." (Strongly agree; Somewhat agree; Neither agree nor disagree; Somewhat disagree; Strongly disagree)</li><li><strong><code>indr_level_quantity</code></strong> <em>(all workers)</em> — "Has AI affected the number of job openings at your level?" (Fewer; About the same; More; Have not noticed a change; Not sure)</li><li><strong><code>hiring_change</code></strong> <em>(hiring managers whose hiring changed)</em> — entry-level hiring strategy under AI (Fewer entry-level roles because of AI; Same number, same expectations; Same number, but expect more/higher-level work with AI; More entry-level roles because of AI)</li></ul>
+
+    <div class="foot">
+      <div class="nav"><a href="04-shadow-ai.html"><span>Previous</span>Don&#x27;t Ask, Don&#x27;t Tell: How American Workers Really Use AI on the Job</a><a href="06-degrees-and-hiring.html" style="text-align:right"><span>Next</span>Do Degrees Still Matter in the Age of AI?</a></div>
+      <p>AI@Work survey — CHIP50 Wave 38.6 (Civic Health and Institutions Project / COVID States Project). All figures are weighted estimates.</p>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+ var r=document.documentElement, k='chip50-theme', s=null;
+ try{s=localStorage.getItem(k)}catch(e){}
+ if(s)r.setAttribute('data-theme',s);
+ var b=document.getElementById('tt');
+ if(b)b.onclick=function(){
+   var cur=r.getAttribute('data-theme');
+   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+   var nx=cur==='dark'?'light':'dark';
+   r.setAttribute('data-theme',nx);
+   try{localStorage.setItem(k,nx)}catch(e){}
+ };
+ var p=document.getElementById('pg');
+ if(p)addEventListener('scroll',function(){
+   var h=document.body.scrollHeight-innerHeight;
+   p.style.width=(h>0?(scrollY/h*100):0)+'%';
+ },{passive:true});
+ var links=[].slice.call(document.querySelectorAll('.side a')),
+     heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+ if(links.length&&'IntersectionObserver' in window){
+   var io=new IntersectionObserver(function(es){
+     es.forEach(function(e){
+       if(!e.isIntersecting)return;
+       var i=heads.indexOf(e.target); if(i<0)return;
+       links.forEach(function(a){a.classList.remove('on')});
+       links[i].classList.add('on');
+     });
+   },{rootMargin:'-80px 0px -70% 0px'});
+   heads.forEach(function(h){if(h)io.observe(h)});
+ }
+ var tg=document.getElementById('tg');
+ if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+})();
+</script>
+</body>
+</html>
