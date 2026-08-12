@@ -37,7 +37,8 @@ jobs:
       # gets crawled. Production is unaffected: no robots.txt is written there.
       - name: Add noindex robots.txt (staging only)
         if: github.repository != 'techandsociety-ai/techandsociety-ai.github.io'
-        run: printf 'User-agent: *\nDisallow: /\n' > docs/robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > docs/robots.txt
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
