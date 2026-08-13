@@ -49,6 +49,17 @@ code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 .btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
   border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
 .btn:hover{border-color:var(--muted);color:var(--ink)}
+/* Theme toggle: icon shows the mode a click switches TO (moon in light, sun in dark) */
+#tt{padding:6px;display:flex;align-items:center}
+#tt svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;display:block}
+#tt .sun{display:none}
+@media (prefers-color-scheme:dark){
+ :root:where(:not([data-theme=light])) #tt .sun{display:block}
+ :root:where(:not([data-theme=light])) #tt .moon{display:none}
+}
+:root[data-theme=dark] #tt .sun{display:block}
+:root[data-theme=dark] #tt .moon{display:none}
 .prog{height:2px;background:var(--acc);width:0;transition:width .1s linear}
 
 /* ---------- layout ---------- */

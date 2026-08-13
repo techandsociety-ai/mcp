@@ -5,13 +5,17 @@
  try{s=localStorage.getItem(k)}catch(e){}
  if(s)r.setAttribute('data-theme',s);
  var b=document.getElementById('tt');
- if(b)b.onclick=function(){
-   var cur=r.getAttribute('data-theme');
-   if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-   var nx=cur==='dark'?'light':'dark';
-   r.setAttribute('data-theme',nx);
-   try{localStorage.setItem(k,nx)}catch(e){}
- };
+ if(b){
+   /* sun/moon (Feather, MIT); CSS shows the one matching the mode you'd switch to */
+   b.innerHTML='<svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+   b.onclick=function(){
+     var cur=r.getAttribute('data-theme');
+     if(!cur)cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+     var nx=cur==='dark'?'light':'dark';
+     r.setAttribute('data-theme',nx);
+     try{localStorage.setItem(k,nx)}catch(e){}
+   };
+ }
  var p=document.getElementById('pg');
  if(p)addEventListener('scroll',function(){
    var h=document.body.scrollHeight-innerHeight;
