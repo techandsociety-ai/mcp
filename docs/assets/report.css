@@ -45,6 +45,8 @@ code{font:500 .87em/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   background:var(--acc);margin-right:9px;vertical-align:middle;position:relative;top:-1px}
 .crumb{font:500 13px/1.35 var(--sans);color:var(--muted);flex:1;min-width:0;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+a.crumb{text-decoration:none}
+a.crumb:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .tools{display:flex;gap:6px;flex:none;align-self:center}
 .btn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:transparent;
   border:1px solid var(--rule);border-radius:7px;padding:7px 10px;cursor:pointer}
