@@ -189,6 +189,13 @@ sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acc
 .nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
   text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 
+/* Contents toggle: on wide screens it hides the sidebar column and lets the
+   text column recenter; on narrow screens it collapses the inline TOC. */
+@media(min-width:1001px){
+  .side.collapsed{display:none}
+  .wrap:has(.side.collapsed){grid-template-columns:minmax(0,1fr)}
+  .wrap:has(.side.collapsed) main{margin:0 auto}
+}
 @media(max-width:1000px){
   .wrap{grid-template-columns:1fr;gap:0}
   .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
