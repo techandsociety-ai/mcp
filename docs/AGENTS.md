@@ -20,6 +20,8 @@ build step, no framework. It is **not** a single file; the tree is:
 - `test-status/` — machine-generated test dashboard, overwritten by CI from the
   `mcp-server` repo. **Never hand-edit it**; changes will be clobbered by the
   next bot commit.
+- `assets/` — the shared report design system (`report.css`, `report.js`) and
+  extracted chart images (`img/<page>/`)
 - `CNAME`, `chip50.png`, `_config.yml` — Pages plumbing and shared logo
 
 ## The MCP server
@@ -44,14 +46,29 @@ This site only documents it.
 
 ## Design status
 
-- `index.html` and `mcp.html` share the chip50.org-family look: Montserrat
+- The two brand pages have **different** looks. `index.html`: dark navy
+  (`#091525`) with teal `#2DC4B6` accent, Cormorant Garamond display + Inter /
+  Inter Tight. `mcp.html`: light chip50.org-family look — Montserrat
   (headings), Barlow (body), Barlow Condensed (labels), navy `#1c3461` /
-  accent `#2d5fa6`. Google Fonts is the only external dependency.
-- The report pages (`report-*.html`, `work/`, `school/`) were generated
-  one-off and do **not** share a stylesheet or design system yet. A unified
-  report design is in progress — don't propagate the existing per-page styles
-  to new pages, and don't treat any single report page as the canonical style
-  reference.
+  accent `#2d5fa6`. Google Fonts is the only external dependency on either.
+- **All report pages** (`report-*.html`, `work/`, `school/`) share one design
+  system: `assets/report.css` + `assets/report.js`. Warm-paper light/dark
+  theme (system serif/sans stacks, no webfonts), sticky masthead with scroll
+  progress, sidebar TOC with scroll-spy, and inline-SVG charts using the
+  `svg.cv` class vocabulary (`.cs1/.cs2/.cs3` map to the series-color tokens).
+  Per-family accents come from a body class — `series-work` (blue),
+  `series-school` (amber), `series-standalone` (teal) — defined in the token
+  block at the bottom of `report.css`. **A rebrand or new family is a token
+  edit in that one file**; never reintroduce per-page inline styles.
+  The dark-mode toggle persists via the `localStorage` key `chip50-theme` —
+  don't rename it.
+- New report pages: copy the skeleton of any `work/` entry (masthead → sidebar
+  TOC → hero → prose → foot), link the shared assets with the correct relative
+  path, and set the family body class.
+- Known debt: chart images on the five standalone reports are extracted PNGs
+  under `assets/img/` (restyle to `svg.cv` opportunistically), and
+  `work/01`/`work/13` embed matplotlib SVGs that ignore the design tokens
+  (wrong colors in dark mode until re-rendered).
 - `index.html` and `mcp.html` carry a client-side password gate (SHA-256 check,
   `sessionStorage` session). The report pages are not gated.
 
