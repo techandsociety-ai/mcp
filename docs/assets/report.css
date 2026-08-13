@@ -203,17 +203,41 @@ sup.fnref a{text-decoration:none;font-weight:700;font-size:.78em;color:var(--acc
 .nav span{display:block;font:500 10.5px/1 var(--sans);letter-spacing:.09em;
   text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 
-/* Contents toggle: on wide screens it hides the sidebar column and lets the
-   text column recenter; on narrow screens it collapses the inline TOC. */
+/* Contents toggle (.tocbtn, injected by report.js): on wide screens a chevron
+   in a sticky rail left of the report — collapsing tucks the TOC away, the
+   prose recenters at its readable measure, and figures/tables break out toward
+   the 948px width the charts are actually drawn at. On narrow screens it is
+   the "Contents" disclosure row itself, collapsed by default. */
+.tocbtn{display:flex;align-items:center;cursor:pointer;color:var(--muted);
+  background:transparent}
+.tocbtn svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;
+  stroke-linejoin:round;transition:transform .15s}
+.tocbtn:hover{color:var(--ink)}
 @media(min-width:1001px){
-  .side.collapsed{display:none}
-  .wrap:has(.side.collapsed){grid-template-columns:minmax(0,1fr)}
+  .tocbtn{width:26px;height:26px;justify-content:center;padding:0;margin:0 0 18px;
+    border:1px solid var(--rule);border-radius:7px}
+  .tocbtn:hover{border-color:var(--muted)}
+  .tocbtn svg{width:15px;height:15px}
+  .tocbtn span{display:none}
+  .side.collapsed h4,.side.collapsed nav{display:none}
+  .side.collapsed .tocbtn svg{transform:rotate(180deg)}
+  .wrap:has(.side.collapsed){grid-template-columns:26px minmax(0,1fr)}
   .wrap:has(.side.collapsed) main{margin:0 auto}
+  .wrap:has(.side.collapsed) :is(figure.chart,figure.asset,figure.tbl,main>.tw){
+    width:min(988px,100vw - 146px);
+    margin-inline:calc((var(--maxw) - min(988px,100vw - 146px))/2)}
 }
 @media(max-width:1000px){
   .wrap{grid-template-columns:1fr;gap:0}
-  .side{position:static;max-height:none;padding:22px 0 0;border-bottom:1px solid var(--rule)}
+  .side{position:static;max-height:none;padding:16px 0 0;border-bottom:1px solid var(--rule)}
+  .side h4{display:none}
+  .tocbtn{width:100%;gap:8px;padding:6px 0 16px;border:0;
+    font:600 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;
+    color:var(--ink2)}
+  .tocbtn svg{width:14px;height:14px;transform:rotate(-90deg)}
+  .side.collapsed .tocbtn svg{transform:rotate(180deg)}
   .side.collapsed nav{display:none}
+  .side nav{padding-bottom:14px}
   main{padding-top:30px}
 }
 @media(max-width:560px){

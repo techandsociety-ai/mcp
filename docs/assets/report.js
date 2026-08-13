@@ -1,5 +1,5 @@
 /* Shared report page behavior: theme toggle (localStorage key chip50-theme),
-   scroll progress bar, TOC scroll-spy, sidebar collapse. */
+   scroll progress bar, TOC scroll-spy, sidebar collapse (key chip50-toc). */
 (function(){
  var r=document.documentElement, k='chip50-theme', s=null;
  try{s=localStorage.getItem(k)}catch(e){}
@@ -34,6 +34,25 @@
    },{rootMargin:'-80px 0px -70% 0px'});
    heads.forEach(function(h){if(h)io.observe(h)});
  }
- var tg=document.getElementById('tg');
- if(tg)tg.onclick=function(){document.querySelector('.side').classList.toggle('collapsed')};
+ var side=document.querySelector('.side');
+ if(side){
+   var tk='chip50-toc', tg=document.createElement('button');
+   tg.className='tocbtn';
+   tg.setAttribute('aria-label','Toggle contents');
+   tg.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg><span>Contents</span>';
+   side.insertBefore(tg,side.firstChild);
+   var t=null; try{t=localStorage.getItem(tk)}catch(e){}
+   /* phones start collapsed (the full TOC would push the article below the
+      fold); desktop remembers the reader's last choice */
+   if(matchMedia('(max-width:1000px)').matches||t==='closed')
+     side.classList.add('collapsed');
+   var up=function(){tg.setAttribute('aria-expanded',String(!side.classList.contains('collapsed')))};
+   up();
+   tg.onclick=function(){
+     var c=side.classList.toggle('collapsed');
+     if(!matchMedia('(max-width:1000px)').matches)
+       try{localStorage.setItem(tk,c?'closed':'open')}catch(e){}
+     up();
+   };
+ }
 })();
