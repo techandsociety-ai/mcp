@@ -1,86 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" >
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Social Media Intensity and Depression — CHIP50 — Interactive Heatmap (CHIP50 Wave 35)</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Social Media Intensity and Depression — Interactive Heatmap — CHIP50</title>
+<meta name="description" content="Interactive platform-by-frequency heatmap of depression (PHQ-9) and suicidal ideation among U.S. adults, raw and age-standardized. CHIP50 Wave 35."/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="stylesheet" href="assets/report.css"/>
 <style>
-  :root{ --ink:#1a1a1a; --mut:#6b6b6b; --line:#e5e5e5; --bg:#ffffff; --accent:#b2182b; }
-  *{box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-       color:var(--ink);background:var(--bg);margin:0;padding:28px 30px 60px;line-height:1.5;}
-  .wrap{max-width:1080px;margin:0 auto;}
-  h1{font-size:22px;font-weight:700;margin:0 0 4px;letter-spacing:-.2px}
-  .dek{font-size:14.5px;color:var(--mut);margin:0 0 2px;max-width:820px}
-  .src{font-size:12px;color:var(--mut);margin:8px 0 22px;font-style:italic}
-  .controls{display:flex;flex-wrap:wrap;gap:26px;margin-bottom:8px;align-items:flex-end}
-  .grp{display:flex;flex-direction:column;gap:6px}
-  .grp .lab{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
-  .btns{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .btns button{appearance:none;border:0;background:#fff;color:var(--ink);
-       padding:9px 15px;font-size:13.5px;font-weight:600;cursor:pointer;border-right:1px solid var(--line)}
-  .btns button:last-child{border-right:0}
-  .btns button.on{background:var(--ink);color:#fff}
-  .btns button:not(.on):hover{background:#f4f4f4}
-  table{border-collapse:collapse;margin-top:22px;width:100%}
-  th.corner{text-align:left;vertical-align:bottom;font-size:12px;color:var(--mut);padding:0 10px 8px 0;font-weight:600}
-  th.col{font-size:11.5px;font-weight:600;color:var(--ink);text-align:center;padding:0 3px 9px;line-height:1.25;vertical-align:bottom}
-  th.freqnum{display:block;font-size:15px;font-weight:800;color:var(--accent);margin-bottom:3px;line-height:1}
-  .freqlab{display:block;white-space:pre-line;line-height:1.25;font-weight:600}
-  th.rl{text-align:right;font-size:13px;font-weight:600;padding:0 12px 0 0;white-space:nowrap}
-  td.cell{width:120px;height:44px;text-align:center;font-size:13.5px;font-weight:600;
-          border:2px solid #fff;border-radius:4px;cursor:default;position:relative;transition:transform .08s}
-  td.cell:hover{transform:scale(1.06);z-index:5;box-shadow:0 2px 10px rgba(0,0,0,.18)}
-  .axis-note{text-align:center;font-size:11.5px;color:var(--mut);padding-top:6px}
-  .scaleRow{display:flex;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
-  .scaleBar{height:14px;width:260px;border-radius:3px;border:1px solid var(--line)}
-  .scaleLab{font-size:12px;color:var(--mut)}
-  .foot{font-size:12px;color:var(--mut);margin-top:26px;max-width:900px;line-height:1.55}
-  .foot b{color:var(--ink)}
-  #tip{position:fixed;pointer-events:none;background:#1a1a1a;color:#fff;font-size:12px;
-       padding:8px 10px;border-radius:6px;opacity:0;transition:opacity .1s;max-width:240px;z-index:50;line-height:1.4}
+  /* Heatmap app styles, namespaced under .hm so report.css generics
+     (.wrap grid, .foot, sticky th) don't restyle the widget. */
+  .hm{max-width:1080px;margin:0 auto;padding:34px 26px 70px}
+  .hm .controls{display:flex;flex-wrap:wrap;gap:26px;margin-bottom:8px;align-items:flex-end}
+  .hm .grp{display:flex;flex-direction:column;gap:6px}
+  .hm .grp .lab{font:700 12px/1 var(--sans);color:var(--muted)}
+  .hm .btns{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+  .hm .btns button{appearance:none;border:0;background:var(--surface);color:var(--ink);
+       padding:9px 15px;font:600 13.5px/1.4 var(--sans);cursor:pointer;border-right:1px solid var(--rule)}
+  .hm .btns button:last-child{border-right:0}
+  .hm .btns button.on{background:var(--ink);color:var(--bg)}
+  .hm .btns button:not(.on):hover{background:var(--rule2)}
+  .hm table{border-collapse:collapse;margin-top:22px;width:100%;font-family:var(--sans)}
+  .hm th{position:static;background:transparent;border:0}
+  .hm th.corner{text-align:left;vertical-align:bottom;font-size:12px;color:var(--muted);padding:0 10px 8px 0;font-weight:600}
+  .hm th.col{font-size:11.5px;font-weight:600;color:var(--ink);text-align:center;padding:0 3px 9px;line-height:1.25;vertical-align:bottom;white-space:normal}
+  .hm .freqnum{display:block;font-size:15px;font-weight:800;color:var(--acct);margin-bottom:3px;line-height:1}
+  .hm .freqlab{display:block;white-space:pre-line;line-height:1.25;font-weight:600}
+  .hm th.rl{text-align:right;font-size:13px;font-weight:600;padding:0 12px 0 0;white-space:nowrap}
+  .hm td.cell{width:120px;height:44px;text-align:center;font-size:13.5px;font-weight:600;
+          border:2px solid var(--bg);border-radius:4px;cursor:default;position:relative;transition:transform .08s}
+  .hm td.cell:hover{transform:scale(1.06);z-index:5;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  .hm .axis-note{text-align:center;font:400 11.5px/1.4 var(--sans);color:var(--muted);padding-top:6px}
+  .hm .scaleRow{display:flex;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .hm .scaleBar{height:14px;width:260px;border-radius:3px;border:1px solid var(--rule)}
+  .hm .scaleLab{font:400 12px/1.4 var(--sans);color:var(--muted)}
+  .hm .hm-notes{font:400 13px/1.6 var(--sans);color:var(--muted);margin-top:26px;max-width:900px}
+  .hm .hm-notes b{color:var(--ink)}
+  #tip{position:fixed;pointer-events:none;background:#1a1a1a;color:#fff;font:400 12px/1.4 var(--sans);
+       padding:8px 10px;border-radius:6px;opacity:0;transition:opacity .1s;max-width:240px;z-index:50}
   #tip .h{font-weight:700;margin-bottom:2px}
-  .metric-title{font-size:13.5px;font-weight:700;margin:20px 0 0}
-
-.chip50-header{background:#091525;border-bottom:2px solid #2DC4B6;padding:14px 0;position:sticky;top:0;z-index:100;}
-.chip50-header-inner{max-width:960px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;}
-.chip50-brand{display:flex;align-items:center;gap:12px;}
-.chip50-brand-text{line-height:1.1;}
-.chip50-l1{font-family:'Inter',system-ui,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#7A8FA8;}
-.chip50-l2{font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#2DC4B6;}
-.chip50-draft-badge{font-family:'Inter',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#BF4E2C;border:1.5px solid #BF4E2C;padding:3px 10px;border-radius:2px;}
-.chip50-draft-watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:120px;font-weight:900;font-family:'Inter',system-ui,sans-serif;letter-spacing:0.1em;color:rgba(191,78,44,0.07);pointer-events:none;z-index:1000;user-select:none;white-space:nowrap;}
-
+  .hm .metric-title{font:700 13.5px/1.4 var(--sans);margin:20px 0 0;color:var(--ink)}
+  .hm .hero{border-bottom:1px solid var(--rule);padding-bottom:26px;margin-bottom:26px}
+  .hm .backrow{border-top:1px solid var(--rule);margin-top:44px;padding-top:22px;
+       font:400 12.8px/1.65 var(--sans);color:var(--muted)}
+  .hm .backrow a{color:var(--acct)}
 </style>
 </head>
-<body>
-<div class="chip50-header">
-  <div class="chip50-header-inner">
-    <div class="chip50-brand">
-      <svg width="28" height="28" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="5" cy="5" r="2.2" fill="#2DC4B6"/>
-        <circle cx="25" cy="8" r="1.6" fill="#EDAA1B"/>
-        <circle cx="15" cy="25" r="2" fill="#2DC4B6"/>
-        <circle cx="23" cy="21" r="1.3" fill="#BF4E2C"/>
-        <circle cx="7" cy="22" r="1.4" fill="#7B6BA8"/>
-        <line x1="5" y1="5" x2="25" y2="8" stroke="#2DC4B6" stroke-width="0.7" stroke-opacity="0.5"/>
-        <line x1="25" y1="8" x2="23" y2="21" stroke="#192E4A" stroke-width="0.7" stroke-opacity="0.9"/>
-        <line x1="23" y1="21" x2="15" y2="25" stroke="#2DC4B6" stroke-width="0.7" stroke-opacity="0.5"/>
-        <line x1="5" y1="5" x2="15" y2="25" stroke="#192E4A" stroke-width="0.5" stroke-opacity="0.3" stroke-dasharray="2,2"/>
-      </svg>
-      <div class="chip50-brand-text">
-        <div class="chip50-l1">Observatory of American Life</div>
-        <div class="chip50-l2">CHIP50</div>
-      </div>
+<body class="series-standalone">
+<header class="top">
+  <div class="topin">
+    <a class="mark" href="index.html"><span class="dot"></span>Tech &amp; Society</a>
+    <div class="crumb">CHIP50 Reports &middot; Interactive</div>
+    <div class="tools">
+      <button class="btn" id="tt" aria-label="Toggle dark mode">Theme</button>
     </div>
-    <div class="chip50-draft-badge">DRAFT</div>
   </div>
-</div>
-<div class="chip50-draft-watermark">DRAFT</div>
-<div class="wrap">
-  <h1>Does heavier social media use track depression?</h1>
-  <p class="dek">A platform-by-frequency view of mental-health severity among U.S. adults. Toggle between overall depression (PHQ-9) and the suicidal-ideation item, and between raw means and age-standardized means, to see how much of the "heavy-use" pattern is really about who uses each platform most.</p>
-  <p class="src">Source: CHIP50 (Civic Health and Institutions Project / COVID States Project), Wave 35. All figures are weighted estimates. Frequency-scale wording matches the fielded Wave 35 instrument. Age-standardized to each platform's user population using age (8-category) as the control.</p>
+  <div class="prog" id="pg"></div>
+</header>
+<div class="hm">
+  <div class="hero">
+    <h1>Does heavier social media use track depression?</h1>
+    <p class="dek">A platform-by-frequency view of mental-health severity among U.S. adults. Toggle between overall depression (PHQ-9) and the suicidal-ideation item, and between raw means and age-standardized means, to see how much of the "heavy-use" pattern is really about who uses each platform most.</p>
+    <p class="srcline">Source: CHIP50 (Civic Health and Institutions Project / COVID States Project), Wave 35. All figures are weighted estimates. Frequency-scale wording matches the fielded Wave 35 instrument. Age-standardized to each platform's user population using age (8-category) as the control. Companion report: <a href="report-depression.html">Social Media Use and Depression</a>.</p>
+    <p class="pos">If this topic is affecting you personally, support is available — in the U.S. you can call or text 988 (the Suicide &amp; Crisis Lifeline) at any time.</p>
+  </div>
 
   <div class="controls">
     <div class="grp">
@@ -110,11 +93,13 @@
     <span class="scaleLab" style="margin-left:10px">darker = higher symptom level</span>
   </div>
 
-  <p class="foot">
+  <p class="hm-notes">
     <b>How to read it.</b> Each cell is the weighted mean symptom score among adults who report a given platform at a given frequency. Rows are platforms; columns are usage frequency from occasional (left) to most of the day (right). Color is scaled within each outcome, so the Raw/Age-standardized toggle is directly comparable.<br><br>
     <b>Why age-standardize.</b> Heavy users of most platforms skew young, and younger adults report more depression regardless of screen time. The <b>Raw</b> view therefore mixes a frequency effect with an age-composition effect. The <b>Age-standardized</b> view holds age constant (age-8 categories) and re-centers each platform to its own overall user mean, isolating the within-age gradient. Where the two views differ, the raw pattern was partly about <i>who</i> uses the platform, not the intensity itself.<br><br>
     <b>The recurring signal.</b> Across nearly every platform, the jump concentrates in the <b>heaviest</b> category ("most of the day"); the gradient across the lighter categories is shallow or non-monotonic, and often flattens further after age-standardization. Estimates for smaller cells (e.g., Threads, high-frequency LinkedIn) carry more uncertainty.
   </p>
+
+  <div class="backrow"><a href="index.html">&larr; All reports</a> &middot; CHIP50 Wave 35 (Civic Health and Institutions Project / COVID States Project). Weighted estimates; associations are cross-sectional, not causal.</div>
 </div>
 
 <div id="tip"></div>
@@ -196,5 +181,6 @@ bind("oc",v=>outcome=v);
 bind("adj",v=>adj=v);
 render();
 </script>
+<script src="assets/report.js"></script>
 </body>
 </html>
