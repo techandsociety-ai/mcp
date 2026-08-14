@@ -523,75 +523,6 @@ nav {
 }
 
 /* ═══════════════════════════════════════════════
-   HOW IT WORKS
-═══════════════════════════════════════════════ */
-.how {
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 96px 40px;
-}
-.how-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 88px;
-  align-items: start;
-}
-.how-intro .section-tag { margin-bottom: 28px; }
-.how-intro h2 {
-  font-family: var(--font-serif);
-  font-weight: 300;
-  font-size: clamp(32px, 4vw, 54px);
-  line-height: 1.12;
-  color: var(--cream);
-  margin-bottom: 20px;
-}
-.how-intro p {
-  font-size: 14.5px; line-height: 1.75;
-  color: var(--cream-dim);
-  margin-bottom: 32px;
-}
-.how-steps { display: flex; flex-direction: column; }
-.how-step {
-  display: flex; gap: 22px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--border);
-}
-.how-step:first-child { padding-top: 0; }
-.how-step:last-child { border-bottom: none; padding-bottom: 0; }
-.snum {
-  font-family: var(--font-tight);
-  font-size: 11.5px; font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--teal);
-  min-width: 28px; padding-top: 4px;
-}
-.step-title {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: 21px; line-height: 1.2;
-  color: var(--cream);
-  margin-bottom: 7px;
-}
-.step-desc {
-  font-size: 13.5px; line-height: 1.65;
-  color: var(--cream-dim);
-}
-.tool-chips {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  margin-top: 12px;
-}
-.tc {
-  font-family: 'SF Mono', 'Fira Code', monospace;
-  font-size: 11.5px;
-  color: var(--cream-dim);
-  padding: 3px 9px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-}
-
-/* ═══════════════════════════════════════════════
    STATS
 ═══════════════════════════════════════════════ */
 .data { padding: 96px 40px; }
@@ -697,24 +628,51 @@ nav {
   color: var(--cream-dim);
   margin-bottom: 14px;
 }
-.connect-steps { display: flex; flex-direction: column; gap: 0; }
-.connect-step {
-  display: flex; gap: 18px;
-  padding: 22px 0;
+.url-label {
+  font-family: var(--font-tight);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+.url-row { display: flex; gap: 8px; align-items: stretch; }
+.url-row .url-box {
+  flex: 1; margin-top: 0;
+  display: flex; align-items: center;
+  font-size: 13px;
+}
+.copy-btn {
+  flex-shrink: 0; width: 42px;
+  border: 1px solid var(--teal-dim);
+  background: transparent;
+  color: var(--teal);
+  border-radius: 2px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.copy-btn:hover, .copy-btn.ok { background: var(--teal-glow); border-color: var(--teal); }
+.copy-btn svg {
+  width: 15px; height: 15px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.client-list {
+  list-style: none;
+  display: flex; flex-direction: column;
+  margin: 18px 0;
+}
+.client-list li {
+  padding: 13px 0;
   border-bottom: 1px solid var(--border);
-}
-.connect-step:last-child { border-bottom: none; }
-.cstep-body {}
-.cstep-title {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--cream);
-  margin-bottom: 4px;
-}
-.cstep-desc {
   font-size: 13.5px; line-height: 1.6;
   color: var(--cream-dim);
+}
+.client-list li:last-child { border-bottom: none; }
+.client-list strong {
+  display: block;
+  font-weight: 600; font-size: 14px;
+  color: var(--cream);
+  margin-bottom: 2px;
 }
 .url-box {
   margin-top: 10px;
@@ -821,11 +779,10 @@ footer {
 ═══════════════════════════════════════════════ */
 @media (max-width: 960px) {
   .featured-card,
-  .how-grid,
   .connect-grid { grid-template-columns: 1fr; }
   .feat-viz { min-height: 280px; border-right: none; border-bottom: 1px solid var(--border); }
   .feat-content { padding: 40px 36px; }
-  .how-grid, .connect-grid { gap: 52px; }
+  .connect-grid { gap: 52px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: none; }
   .stat:nth-child(3) { border-top: 1px solid var(--border); }
@@ -841,7 +798,7 @@ footer {
   .report-row { grid-template-columns: 1fr; }
   .rthumb { width: 100%; height: 120px; }
   .rinfo { padding-left: 0; padding-top: 14px; }
-  section, .how, .data, .connect, .featured { padding-left: 20px; padding-right: 20px; }
+  section, .data, .connect, .featured { padding-left: 20px; padding-right: 20px; }
   .nav-inner { padding: 0 20px; }
 }
 </style>
@@ -874,7 +831,6 @@ footer {
     </a>
     <ul class="nav-links">
       <li><a href="#reports">Reports</a></li>
-      <li><a href="#how">How It Works</a></li>
       <li><a href="#data">The Data</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
@@ -894,7 +850,7 @@ footer {
     <p class="hero-sub">Understanding how technology is transforming America</p>
     <div class="hero-btns">
       <a href="#reports" class="btn-ghost">See the Reports</a>
-      <a href="#how"     class="btn-teal">Explore the MCP</a>
+      <a href="#connect" class="btn-teal">Explore the MCP</a>
     </div>
   </div>
 
@@ -1487,61 +1443,6 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════
-     HOW IT WORKS
-══════════════════════════════════════════ -->
-<section class="how" id="how">
-  <div class="container">
-    <div class="how-grid">
-      <div class="how-intro reveal">
-        <div class="section-tag" style="margin-bottom:28px;">How It Works</div>
-        <h2>Ask a question.<br>Get a rigorous analysis.</h2>
-        <p>The CHIP50 MCP server connects Claude AI directly to 38+ waves of national panel data on social media use, political attitudes, and mental health. Ask a research question in plain English — no SQL, no scripting required.</p>
-        <p>Claude selects from 24 specialized analysis tools, runs population-weighted queries against the CHIP50 BigQuery database, and delivers tables, trend analyses, regression output, and full PDF reports — ready for a paper, brief, or press release.</p>
-        <a href="mcp.html" class="btn-teal" style="display:inline-flex;align-items:center;gap:9px;margin-top:8px;">View MCP Documentation <span>→</span></a>
-      </div>
-      <div class="how-steps reveal" data-delay="1">
-        <div class="how-step">
-          <div class="snum">01</div>
-          <div class="step-body">
-            <div class="step-title">Connect Claude to the MCP</div>
-            <div class="step-desc">Add the CHIP50 connector in Claude's settings. Authenticate with Google OAuth. The server is already live — no installation, no API keys.</div>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="snum">02</div>
-          <div class="step-body">
-            <div class="step-title">Ask your research question</div>
-            <div class="step-desc">Type any research question in plain English. Claude automatically selects the right combination of tools and executes them in sequence or parallel.</div>
-            <div class="tool-chips">
-              <div class="tc">generate_crosstab</div>
-              <div class="tc">get_platform_trends</div>
-              <div class="tc">run_ols_regression</div>
-              <div class="tc">run_logistic_regression</div>
-              <div class="tc">generate_marginals_by_wave</div>
-              <div class="tc">generate_pdf_report</div>
-            </div>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="snum">03</div>
-          <div class="step-body">
-            <div class="step-title">Receive robust, structured output</div>
-            <div class="step-desc">Population-weighted tables, trend charts, regression results with confidence intervals, and full PDF reports — with title pages, methodology sections, and reproducibility appendices.</div>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="snum">04</div>
-          <div class="step-body">
-            <div class="step-title">Privacy-by-design, throughout</div>
-            <div class="step-desc">Cell suppression (n&nbsp;&lt;&nbsp;30) at the SQL layer. PHQ-9 returned as population-level aggregates only. No PII. OAuth authentication. All outputs are weighted, anonymized estimates.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
      THE DATA
 ══════════════════════════════════════════ -->
 <section class="data" id="data">
@@ -1609,47 +1510,31 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════
-     CONNECT / SETUP
+     CONNECT (how it works + setup, merged)
 ══════════════════════════════════════════ -->
 <section class="connect" id="connect">
   <div class="container">
     <div class="connect-grid">
       <div class="connect-left reveal">
-        <div class="section-tag" style="margin-bottom:28px;">Get Access</div>
-        <h2>Connect in four steps.<br>Start researching in five.</h2>
-        <p>The CHIP50 MCP server is live on Google Cloud Run. All you need is a Claude account and a Google login. Access is managed — request it at the authentication screen.</p>
-        <p style="margin-top:6px;">Once connected, try:</p>
+        <div class="section-tag" style="margin-bottom:28px;">Connect</div>
+        <h2>Ask a question.<br>Get a rigorous analysis.</h2>
+        <p>The CHIP50 MCP server puts 38+ waves of national panel data — social media use, political attitudes, mental health — behind a single URL. Ask a research question in plain English; your AI assistant picks the right analysis tools and runs population-weighted queries against the live database.</p>
+        <p>Back come tables, trend analyses, regression output with confidence intervals, and full PDF reports — ready for a paper, brief, or press release. Privacy is enforced at the query layer: small cells suppressed, mental-health measures returned only as population aggregates, no PII.</p>
+        <p style="margin-top:18px; margin-bottom:0;">Once connected, try:</p>
         <div class="url-box" style="margin-top:10px; color: var(--cream-2); font-style:italic;">"What variables are available in the CHIP50 dataset? Show me how TikTok usage has changed across all waves."</div>
+        <a href="mcp.html" class="btn-teal" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;">MCP Documentation <span>→</span></a>
       </div>
-      <div class="connect-steps reveal" data-delay="1">
-        <div class="connect-step">
-          <div class="snum">01</div>
-          <div class="cstep-body">
-            <div class="cstep-title">Open Claude Settings</div>
-            <div class="cstep-desc">In Claude Desktop or claude.ai, navigate to <strong>Settings → Connectors → Add custom connector</strong></div>
-          </div>
+      <div class="connect-right reveal" data-delay="1">
+        <div class="url-label">The server URL — it's all you need</div>
+        <div class="url-row">
+          <div class="url-box" id="mcp-url">https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp</div>
+          <button class="copy-btn" id="copy-url" aria-label="Copy server URL" title="Copy URL"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
         </div>
-        <div class="connect-step">
-          <div class="snum">02</div>
-          <div class="cstep-body">
-            <div class="cstep-title">Enter the connector URL</div>
-            <div class="url-box">https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp</div>
-          </div>
-        </div>
-        <div class="connect-step">
-          <div class="snum">03</div>
-          <div class="cstep-body">
-            <div class="cstep-title">Authenticate with Google</div>
-            <div class="cstep-desc">Claude will redirect you to a Google sign-in page. Log in with your authorized Google account. Request access if prompted — you'll be notified once approved.</div>
-          </div>
-        </div>
-        <div class="connect-step">
-          <div class="snum">04</div>
-          <div class="cstep-body">
-            <div class="cstep-title">Start your analysis</div>
-            <div class="cstep-desc">The CHIP50 connector will appear as active. Call <code style="background:var(--bg);padding:2px 6px;border:1px solid var(--border);border-radius:2px;font-size:12px;color:var(--teal);">introduce_mcp()</code> first for a full schema overview, then ask your first research question.</div>
-          </div>
-        </div>
+        <ul class="client-list">
+          <li><strong>Hand it to your assistant</strong>Paste the URL into Claude, ChatGPT, or any MCP-capable client and ask it to connect — it will walk you through the rest.</li>
+          <li><strong>Or add it yourself</strong>Claude: Settings → Connectors → Add custom connector. ChatGPT: Settings → Connectors (developer mode). Cursor, VS Code, and friends: add it to your MCP config.</li>
+          <li><strong>Sign in with Google</strong>Access is managed — request it at the sign-in screen and you'll be notified once approved.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1811,6 +1696,21 @@ footer {
     });
   }, { threshold: 0.6 });
   els.forEach(el => io.observe(el));
+})();
+
+/* ── COPY MCP URL ── */
+(function () {
+  const btn = document.getElementById('copy-url');
+  if (!btn || !navigator.clipboard) return;
+  const icon = btn.innerHTML;
+  btn.addEventListener('click', () => {
+    const url = document.getElementById('mcp-url').textContent.trim();
+    navigator.clipboard.writeText(url).then(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+      btn.classList.add('ok');
+      setTimeout(() => { btn.innerHTML = icon; btn.classList.remove('ok'); }, 1600);
+    });
+  });
 })();
 
 /* ── ACTIVE NAV on scroll ── */
