@@ -18,7 +18,7 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
   SVGs injected by shared `report.js` (no iconset dependency — site stays
   dependency-free). Icon shows the mode a click switches to; same three-state
   logic and `chip50-theme` key.
-- **Status**: awaiting David's local review.
+- **Status**: merged to site-v2, awaiting David's local review.
 - **Lift out**: revert `9fedf20`.
 
 ### 2. Contents toggle rework
@@ -31,7 +31,7 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
   figures/tables break out toward the 948px width the charts are drawn at;
   persists via `chip50-toc`. Mobile: the "Contents" disclosure row itself,
   collapsed by default. Button markup removed from all 28 report pages.
-- **Status**: awaiting David's local review.
+- **Status**: merged to site-v2, awaiting David's local review.
 - **Lift out**: revert `c10c402` (restores the old masthead button and
   behavior; independent of thread 1).
 
@@ -43,8 +43,37 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
   pages keep a plain crumb. Open question: the five standalone reports'
   "CHIP50 Reports" crumb is still inert — their only parent is the
   password-gated homepage; link it anyway?
-- **Status**: awaiting David's local review.
+- **Status**: merged to site-v2, awaiting David's local review.
 - **Lift out**: revert `288fd8d`.
+
+### 4. Raise the bottom of the type scale
+- **Feeder**: `type-floor` · commit `b82e5ec`
+- **Tickets**: —
+- **What**: Small + low-contrast text was rough on the eyes (David,
+  2026-08-13). Homepage: 9.5–11px letterspaced labels come up ~1px, 13px
+  `--cream-dim` body text → 13.5px, `--cream-dim` #7A8FA8 → #8CA0B8. Report
+  system: `--muted` gains a contrast notch in both themes; sub-13px tier
+  (sidebar label, chart ticks/labels, table group rows) up ~0.5–1px; chart
+  text a bit more since it renders scaled-down inside the 948px viewBox.
+  Remaining: `mcp.html` still has a few 10–11px labels — sweep it when that
+  page gets its consolidation-era pass.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `b82e5ec`.
+
+### 5. One MCP-first Connect section
+- **Feeder**: `connect-consolidation` · commit `67bb41a`
+- **Tickets**: relates to the mandate-5 consolidation (see issues #5/#7
+  context); David to attach numbers.
+- **What**: "How It Works" and "Connect/Get Access" merged into a single
+  `#connect` section. Killed the "Connect in four steps. Start researching in
+  five." header and both numbered step columns. Copy is client-agnostic
+  (Claude, ChatGPT, Cursor, any MCP client); the server URL gets top billing
+  with a copy-to-clipboard button. Stops hardcoding tool names/counts in the
+  section (AGENTS.md rule) and drops the stale "n < 30" suppression claim.
+  Nav loses the How It Works item; hero button → `#connect`. Copy is a draft —
+  David wants an editing pass on the combined section.
+- **Status**: merged to site-v2, awaiting David's review + copy edit.
+- **Lift out**: revert `67bb41a` (restores both original sections).
 
 ## Earlier site-v2 work (pre-ledger)
 
