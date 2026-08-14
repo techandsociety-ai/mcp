@@ -47,7 +47,9 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
 - **Lift out**: revert `288fd8d`.
 
 ### 4. Raise the bottom of the type scale
-- **Feeder**: `type-floor` · commit `b82e5ec`
+- **Feeder**: `type-floor` · commit `b82e5ec`; part 2 on `type-floor-2` ·
+  commit `04b8d4c` (whole scale +1px under 19px, incl. mcp.html — David's
+  "+~1px on everything", 2026-08-13)
 - **Tickets**: —
 - **What**: Small + low-contrast text was rough on the eyes (David,
   2026-08-13). Homepage: 9.5–11px letterspaced labels come up ~1px, 13px
@@ -72,7 +74,8 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
   section (AGENTS.md rule) and drops the stale "n < 30" suppression claim.
   Nav loses the How It Works item; hero button → `#connect`. Copy is a draft —
   David wants an editing pass on the combined section.
-- **Status**: merged to site-v2, awaiting David's review + copy edit.
+- **Status**: merged to site-v2; David: "consolidated section IS a big
+  improvement" — approved pending his copy-edit pass.
 - **Lift out**: revert `67bb41a` (restores both original sections).
 
 ## Earlier site-v2 work (pre-ledger)
