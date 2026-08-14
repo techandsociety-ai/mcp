@@ -78,6 +78,21 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
   improvement" — approved pending his copy-edit pass.
 - **Lift out**: revert `67bb41a` (restores both original sections).
 
+### 6. Unlink mcp.html from the homepage
+- **Feeder**: `unlink-mcp-docs` · commit `516fb36`
+- **Tickets**: —
+- **What**: mcp.html stays live but unlinked (same treatment as
+  test-status) while the access story gets decided (David asking Jason for
+  an access-process MVP). Nav "Get Access" → `#connect`; connect-section
+  docs button and footer "MCP Docs" link removed. Pending decisions before
+  the page's rebuild: the request/whitelist process (not David's final
+  call), and the brand direction — per issue #6 the navy homepage look is
+  an explicit placeholder blocked on Jason's deck; mcp.html's chip50.org
+  look is the parent-project family; reports' warm-paper was chosen by
+  David in the #21 unification.
+- **Status**: merged to site-v2, awaiting David's review.
+- **Lift out**: revert `516fb36` (restores all three homepage links).
+
 ## Earlier site-v2 work (pre-ledger)
 
 - `ec30357` Baseline-align the masthead brand and crumb
