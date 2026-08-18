@@ -93,6 +93,73 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
 - **Status**: merged to site-v2, awaiting David's review.
 - **Lift out**: revert `516fb36` (restores all three homepage links).
 
+### 7. Say it once — Data / Connect de-duplication
+- **Feeder**: `data-connect-dedupe` · commit `9668f54`
+- **Tickets**: continues the mandate-5 consolidation begun in thread 5.
+- **What**: Mission, The Data and Connect each opened by defining CHIP50
+  with the same "since 2020 / social media, political attitudes, mental
+  health" triad. Mission keeps the definition. The Data drops its
+  re-introduction and leads with the property its stats and coverage grid
+  demonstrate. Connect drops the dataset recap and opens on the mechanism.
+  Structure unchanged — still three sections, still three nav items.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `9668f54`. Independent of the copy threads, though
+  thread 9 rewrites prose adjacent to it.
+
+### 8. A hard 13px floor under the homepage scale
+- **Feeder**: `type-floor-3` · commit `b35a998`
+- **Tickets**: —
+- **What**: Threads 4 and 4b moved the whole scale up a point at a time but
+  left the bottom tier at 11.5px, which is where the letterspaced labels
+  live (stat captions, coverage headings, report meta, tags, masthead line
+  one). Floor is now 13px; the 11.5/12 split collapses into it. Buttons,
+  section tags and the nav CTA go to 13.5px to keep the ordering. The
+  featured chart's own SVG labels come up too (10 → 11, axis and plate
+  labels → 12). Larger type untouched. Report pages not in scope.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `b35a998`.
+
+### 9. De-Algorithm the page chrome
+- **Feeder**: `homepage-copy` · commit `96ec90d`
+- **Tickets**: mandate 6 (de-slop); carries David's pending copy-edit of
+  the thread-5 connect section.
+- **What**: The site's own voice, rewritten against Garner. Hero drops the
+  gerund tagline for what the site holds; mission leads with method rather
+  than an abstraction and loses a tricolon; Connect's "Ask a question. /
+  Get a rigorous analysis." setup-and-payoff becomes one clause; "Back
+  come tables…" loses the inversion; the URL is no longer sold as "all you
+  need". Eyebrows: the hand-maintained "26 ENTRIES · 2026" count is gone
+  (and its CSS), "· 2026" drops from the hero, and "· JULY 2026" drops
+  from all 26 report rows, where an identical date on every entry carried
+  no information. The type labels (REPORT, CAPSTONE, SYNTHESIS…) stay.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `96ec90d`.
+
+### 10. Break the reversal formula in the report blurbs
+- **Feeder**: `report-blurbs` · commit `990d2f8`
+- **Tickets**: mandate 6 (de-slop).
+- **What**: Read as a column, the 26 blurbs had one sentence shape —
+  finding, em-dash, reversal. 19 carried the dash, 12 turned on "but", 6 on
+  "not X". Twenty are rewritten to vary the architecture; six that never had
+  the tic are untouched, as are all report titles (those belong to the
+  reports). Every claim held fixed — no number, direction, population, wave
+  count or hedge changed, verified by diffing the quantity tokens of each
+  blurb before and after.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `990d2f8`. Safe to lift alone; it touches only
+  `.rrow-desc` text.
+
+### 11. Example query stops breaking mid-word
+- **Feeder**: `urlbox-wrap` · commit `51de858`
+- **Tickets**: —
+- **What**: `.url-box` carried `word-break: break-all` for the long Cloud
+  Run URL, but the example-question box reuses the class, so prose broke
+  wherever the line ran out ("Show me how Ti / kTok usage"). The class now
+  uses `overflow-wrap: break-word`; `break-all` is scoped to `#mcp-url`.
+  Pre-existing defect, caught while screenshotting thread 9.
+- **Status**: merged to site-v2, awaiting David's local review.
+- **Lift out**: revert `51de858`.
+
 ## Earlier site-v2 work (pre-ledger)
 
 - `ec30357` Baseline-align the masthead brand and crumb
