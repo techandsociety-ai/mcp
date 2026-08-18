@@ -475,11 +475,6 @@ nav {
   border-bottom: 1px solid var(--border);
   margin-bottom: 0;
 }
-.reports-count {
-  font-family: var(--font-tight);
-  font-size: 13px; font-weight: 500;
-  letter-spacing: 0.12em; color: var(--cream-dim);
-}
 .report-row {
   display: grid;
   grid-template-columns: 116px 1fr;
@@ -845,12 +840,12 @@ footer {
   <canvas id="constellation"></canvas>
 
   <div class="hero-inner">
-    <div class="hero-eyebrow">Observatory of American Life &nbsp;·&nbsp; CHIP50 &nbsp;·&nbsp; 2026</div>
+    <div class="hero-eyebrow">Observatory of American Life &nbsp;·&nbsp; CHIP50</div>
     <h1 class="hero-title">Tech<br>&amp;&nbsp;Society</h1>
-    <p class="hero-sub">Understanding how technology is transforming America</p>
+    <p class="hero-sub">Six years of national survey data on technology and American life</p>
     <div class="hero-btns">
       <a href="#reports" class="btn-ghost">See the Reports</a>
-      <a href="#connect" class="btn-teal">Explore the MCP</a>
+      <a href="#connect" class="btn-teal">Connect to the data</a>
     </div>
   </div>
 
@@ -866,7 +861,7 @@ footer {
   <div class="container">
     <div class="section-tag reveal">Mission</div>
     <p class="mission-text reveal" data-delay="1">
-      CHIP50 and the National Internet Observatory have tracked the relationship between technology and American life since 2020 — nearly <strong>one million survey responses</strong> across six years, fielded to nationally representative panels. This site reports what that data shows: how <strong>social media, artificial intelligence, and digital communication</strong> are reshaping political attitudes, social trust, and mental health across the country.
+      Since 2020, CHIP50 and the National Internet Observatory have asked nationally representative panels the same questions, wave after wave — nearly <strong>one million survey responses</strong> over six years. This site reports what they show about <strong>social media, artificial intelligence, and digital communication</strong>: who uses these tools, and what changes in American politics, trust, and mental health alongside them.
     </p>
   </div>
 </section>
@@ -985,8 +980,6 @@ footer {
   <div class="container">
     <div class="reports-header reveal">
       <div class="section-tag" style="margin-bottom:0;">Reports</div>
-      <!-- keep in sync with the .report-row list below (hand-maintained) -->
-      <div class="reports-count">26 ENTRIES · 2026</div>
     </div>
 
     <!-- 01 -->
@@ -1006,7 +999,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">Platforms, Democracy</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">Platforms, Democracy</span></div>
         <div class="rrow-title">Who Posts About Politics?</div>
         <div class="rrow-desc">Posting about politics is a minority activity on every platform — and the same distinctive profile (ideologically extreme, educated, male, depressed, conspiratorial) describes the posters across all twelve platforms tracked.</div>
       </div>
@@ -1026,7 +1019,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">INTERACTIVE · JULY 2026 · <span class="t">Mental Health, Platforms</span></div>
+        <div class="rrow-meta">INTERACTIVE · <span class="t">Mental Health, Platforms</span></div>
         <div class="rrow-title">Social Media Intensity and Depression — Interactive Heatmap</div>
         <div class="rrow-desc">A platform-by-frequency view of PHQ-9 depression severity among U.S. adults (Wave 35). Toggle between overall depression and suicidal-ideation item; adjust for demographics to see how much of the heavy-use pattern is who uses each platform.</div>
       </div>
@@ -1047,7 +1040,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">Mental Health, Platforms</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">Mental Health, Platforms</span></div>
         <div class="rrow-title">Does Social Media Use Drive Depression?</div>
         <div class="rrow-desc">A PHQ-9 analysis across 21 survey waves finds that demographic factors explain most of the raw association — but a modest link persists on some platforms for young women and heavy users.</div>
       </div>
@@ -1068,7 +1061,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI, Demographics</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI, Demographics</span></div>
         <div class="rrow-title">America Meets AI</div>
         <div class="rrow-desc">Weekly AI use jumped from 22% to 29% in a year. It's an education, age, and income story — not a partisan one — and the gender gap is among the largest divides. From a 30,000-person national panel.</div>
       </div>
@@ -1091,7 +1084,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Who Uses AI at Work</div>
         <div class="rrow-desc">A majority of U.S. workers now use AI on the job — but adoption is sharply divided by education, income, gender, and age. And who uses AI is not the same as who trusts it.</div>
       </div>
@@ -1107,7 +1100,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">What Workers Actually Use AI For</div>
         <div class="rrow-desc">The most common AI uses at work are troubleshooting and brainstorming — not writing code. AI at work is a broad thinking aid, and the task patterns reveal sharp demographic divides.</div>
       </div>
@@ -1123,7 +1116,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Faster, But Not Freer</div>
         <div class="rrow-desc">Most workers who use AI say it makes them more productive — but the time it frees tends to become more work, expectations are rising, and workers see employers as the main beneficiary.</div>
       </div>
@@ -1139,7 +1132,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Don't Ask, Don't Tell</div>
         <div class="rrow-desc">A majority of workers use AI mostly without mentioning it, without a rulebook, and often after feeding it confidential data. Two-thirds of business owners suspect their employees use AI without disclosing it.</div>
       </div>
@@ -1155,7 +1148,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Whose Job Is Next?</div>
         <div class="rrow-desc">A near-majority of workers expect AI to eventually cost people in their field their jobs — but far fewer fear for their own. Anxiety is highest among the young and white-collar workers.</div>
       </div>
@@ -1171,7 +1164,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Do Degrees Still Matter in the Age of AI?</div>
         <div class="rrow-desc">The public worries that AI is devaluing college degrees — but hiring managers disagree. They still reward degrees and technical majors, and about half now screen résumés with AI.</div>
       </div>
@@ -1187,7 +1180,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">The AI Training Gap</div>
         <div class="rrow-desc">Most workers get no AI training from their employer, and what exists flows to the already-advantaged. Workers say the obstacle is time, not willingness — and they're clear about who should pay.</div>
       </div>
@@ -1203,7 +1196,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Rein In the Titans, Cushion the Workers</div>
         <div class="rrow-desc">Americans distrust AI and its corporate elite, back a worker safety net across party lines, but views diverge most sharply by AI use itself — the more workers use it, the more they diverge from non-users.</div>
       </div>
@@ -1219,7 +1212,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Doubling Down on the Diploma</div>
         <div class="rrow-desc">Contrary to the fear that AI is making college obsolete, American parents are on balance more likely to send their kids to college because of AI — not less.</div>
       </div>
@@ -1235,7 +1228,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Main Street's AI Bet</div>
         <div class="rrow-desc">Most small-business owners who see AI as relevant are already using it and plan to spend more — but they're buying subscriptions rather than building systems, and cost savings remain unproven.</div>
       </div>
@@ -1251,7 +1244,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">CAPSTONE · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">CAPSTONE · <span class="t">AI@Work</span></div>
         <div class="rrow-title">Engagement, Not Fear</div>
         <div class="rrow-desc">Who actually drives demand for an AI safety net? The answer inverts the usual class story — it's the engaged, not the fearful, who most strongly support worker protections.</div>
       </div>
@@ -1267,7 +1260,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">SYNTHESIS · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">SYNTHESIS · <span class="t">AI@Work</span></div>
         <div class="rrow-title">The AI &amp; Work Divide</div>
         <div class="rrow-desc">A synthesis of eleven AI@Work studies: who uses AI, who trusts it, who is protected, and who wants protection all fall along a small number of durable lines. The central axis is engagement versus fear.</div>
       </div>
@@ -1283,7 +1276,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REPORT · <span class="t">AI@Work</span></div>
         <div class="rrow-title">The AI Gender Gap</div>
         <div class="rrow-desc">Across nearly two hundred AI measures — using it, trusting it, feeling it, fearing it — men out-engage women almost everywhere. The gap is not about jobs; it's a confidence gap.</div>
       </div>
@@ -1299,7 +1292,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REFERENCE · JULY 2026 · <span class="t">AI@Work</span></div>
+        <div class="rrow-meta">REFERENCE · <span class="t">AI@Work</span></div>
         <div class="rrow-title">The AI Divides — A Reference Note</div>
         <div class="rrow-desc">A shared definition of the demographic divides that structure AI use and attitudes, so every report in the series names, ranks, and frames them consistently.</div>
       </div>
@@ -1321,7 +1314,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">AI Goes to School</div>
         <div class="rrow-desc">Two-thirds of currently-enrolled students have used AI for their coursework — but most use it lightly. Students treat AI more as a tutor than a ghostwriter.</div>
       </div>
@@ -1337,7 +1330,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">I Learn, They Cheat</div>
         <div class="rrow-desc">Students extend AI's benefits to themselves and its harms to everyone else — believing AI helps them learn but makes peers learn less, even when their own behavior is identical.</div>
       </div>
@@ -1353,7 +1346,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">The Rules Vacuum</div>
         <div class="rrow-desc">Two-thirds of students use AI for schoolwork, but only one in ten says instructors encourage it, and half say it isn't built into any required courses. AI adoption has outrun the rulebook.</div>
       </div>
@@ -1369,7 +1362,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">A Leveler With an Asterisk</div>
         <div class="rrow-desc">For the students least able to pay for academic help, AI is often the irreplaceable option — but those who stand to benefit most often have the least access.</div>
       </div>
@@ -1385,7 +1378,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">The Credential Question</div>
         <div class="rrow-desc">Americans think AI is denting the value of a college degree — but the discount is uneven. Bachelor's degrees and the humanities are marked down; STEM and advanced degrees hold or gain.</div>
       </div>
@@ -1401,7 +1394,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">Curious and Afraid</div>
         <div class="rrow-desc">The generation that has folded AI into its coursework is also the most anxious about it. Concern and fear outrank every positive emotion except curiosity.</div>
       </div>
@@ -1417,7 +1410,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">REPORT · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">REPORT · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">Fluent but Credulous</div>
         <div class="rrow-desc">Two-thirds of students rate themselves skilled with AI, and most grasp that it can err. But on the misconceptions that matter when using AI for schoolwork, fluency masks credulity.</div>
       </div>
@@ -1433,7 +1426,7 @@ footer {
         </svg>
       </div>
       <div class="rinfo">
-        <div class="rrow-meta">CAPSTONE · JULY 2026 · <span class="t" style="color:var(--amber);">AI@School</span></div>
+        <div class="rrow-meta">CAPSTONE · <span class="t" style="color:var(--amber);">AI@School</span></div>
         <div class="rrow-title">Engaged, Uneasy, and Uncritical</div>
         <div class="rrow-desc">Students have adopted AI about as fully as any group in the country, and they are not comfortable with it. Using AI more makes students more excited — not more careful or more skeptical.</div>
       </div>
@@ -1480,7 +1473,7 @@ footer {
           <li>LinkedIn, Reddit, WhatsApp</li>
           <li>Truth Social, Gab, Parler</li>
           <li>Mastodon, Bluesky, Threads</li>
-          <li>Usage · Frequency · Trust · Posting</li>
+          <li>Usage, frequency, trust, posting</li>
         </ul>
       </div>
       <div class="cov-cell">
@@ -1517,22 +1510,22 @@ footer {
     <div class="connect-grid">
       <div class="connect-left reveal">
         <div class="section-tag" style="margin-bottom:28px;">Connect</div>
-        <h2>Ask a question.<br>Get a rigorous analysis.</h2>
-        <p>Put a research question to your assistant in plain English. It picks the analysis tools and runs population-weighted queries against the live database.</p>
-        <p>Back come tables, trend analyses, regression output with confidence intervals, and full PDF reports — ready for a paper, brief, or press release. Privacy is enforced at the query layer: small cells suppressed, mental-health measures returned only as population aggregates, no PII.</p>
+        <h2>Ask the panel a question.</h2>
+        <p>You connect an AI assistant to the server and put the question to it in ordinary English. The assistant chooses the analysis tools and runs population-weighted queries against the live database.</p>
+        <p>What comes back is a table, a trend, a regression with confidence intervals, or a finished PDF report. The privacy rules sit in the query layer rather than with the client: small cells are suppressed, mental-health measures return only as population aggregates, and no personal identifiers leave the enclave.</p>
         <p style="margin-top:18px; margin-bottom:0;">Once connected, try:</p>
         <div class="url-box" style="margin-top:10px; color: var(--cream-2); font-style:italic;">"What variables are available in the CHIP50 dataset? Show me how TikTok usage has changed across all waves."</div>
       </div>
       <div class="connect-right reveal" data-delay="1">
-        <div class="url-label">The server URL — it's all you need</div>
+        <div class="url-label">The server URL</div>
         <div class="url-row">
           <div class="url-box" id="mcp-url">https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp</div>
           <button class="copy-btn" id="copy-url" aria-label="Copy server URL" title="Copy URL"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
         </div>
         <ul class="client-list">
-          <li><strong>Hand it to your assistant</strong>Paste the URL into Claude, ChatGPT, or any MCP-capable client and ask it to connect — it will walk you through the rest.</li>
-          <li><strong>Or add it yourself</strong>Claude: Settings → Connectors → Add custom connector. ChatGPT: Settings → Connectors (developer mode). Cursor, VS Code, and friends: add it to your MCP config.</li>
-          <li><strong>Sign in with Google</strong>Access is managed — request it at the sign-in screen and you'll be notified once approved.</li>
+          <li><strong>Hand it to your assistant</strong>Paste the URL into Claude, ChatGPT, or any MCP-capable client and ask it to connect. It will take you through the rest.</li>
+          <li><strong>Or add it yourself</strong>Claude: Settings → Connectors → Add custom connector. ChatGPT: Settings → Connectors (developer mode). Cursor, VS Code, and other clients: add it to your MCP config.</li>
+          <li><strong>Sign in with Google</strong>Access is managed. Request it at the sign-in screen, and you'll be notified once it's approved.</li>
         </ul>
       </div>
     </div>
