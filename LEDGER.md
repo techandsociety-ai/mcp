@@ -160,6 +160,47 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
 - **Status**: merged to site-v2, awaiting David's local review.
 - **Lift out**: revert `51de858`.
 
+### 12. "Get Access" gets a section, marked TK
+- **Feeder**: `access-tk` · commit `586ba9d`
+- **Tickets**: relates to #14 / the access-story MVP David is taking to
+  Jason; supersedes part of thread 6 (the nav CTA no longer points at
+  `#connect`).
+- **What**: New `#access` section. Since thread 6 the Get Access button
+  pointed at `#connect`, which answers "how do I wire this up" rather than
+  "how do I get let in" — different questions, only one settled. The
+  section states what is known (access is granted, not self-served; Google
+  sign-in) and lists what is not as open questions rather than a "coming
+  soon": who qualifies, how you ask, what the wait is, whether anything
+  answers to a visitor with no account. Carries a visible **TK** flag and a
+  dashed amber border. The Google sign-in line MOVES out of Connect's
+  client list (not duplicated — thread 7's rule); Connect points at
+  `#access` instead. `.client-list a` gets styling; the new link was
+  rendering as a default browser link.
+- **⚠ Do not deploy to prod while the TK is showing.** The access policy
+  is settled first — and that call is not David's alone. `grep -n TK
+  docs/index.html` before any prod merge. A CI guard on the prod deploy
+  is available if wanted, not built.
+- **Status**: merged to site-v2, on staging, awaiting David's review.
+- **Lift out**: revert `586ba9d` (restores the Connect sign-in bullet and
+  points the nav CTA back at `#connect`).
+
+### 13. Link the hosted chat from Connect
+- **Feeder**: `hosted-chat` · commit `4bab5f1`
+- **Tickets**: —
+- **What**: `chat.techandsociety.ai` (LibreChat, creds shared privately) is
+  a client already wired to the server, so it is listed as a third way in
+  alongside "hand the URL to your assistant" and "add it to your config" —
+  not promoted to a section, per David. Placed third, ahead of the access
+  caveat, which applies to all three routes. Deliberately not first:
+  leading with it would make the hosted client the headline product.
+- **OPEN — framing is David's call**: described as "a hosted client already
+  wired to the server". David calls it a demo; the instance titles itself
+  *Tech and Society Insights*, i.e. presents as product. Calling it a demo
+  on the page contradicts what a visitor lands on; calling it the product
+  claims more than has been decided. Neutral wording used until he picks.
+- **Status**: merged to site-v2, on staging, awaiting David's review.
+- **Lift out**: revert `4bab5f1` (one list item).
+
 ## Earlier site-v2 work (pre-ledger)
 
 - `ec30357` Baseline-align the masthead brand and crumb
