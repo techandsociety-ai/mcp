@@ -201,6 +201,25 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
 - **Status**: merged to site-v2, on staging, awaiting David's review.
 - **Lift out**: revert `4bab5f1` (one list item).
 
+### 14. Delete the TK "Get Access" section
+- **Feeder**: `access-remove` · commit `30e9b9b`
+- **Tickets**: supersedes thread 12; relates to #14 / the access story.
+- **What**: David's call (2026-08-25) — the placeholder goes rather than
+  gets filled in. The `#access` section, its `.access`/`.tk-*` CSS, and the
+  nav pointer to it are removed; the Get Access button points back at
+  `#connect`, as it did through threads 6–11. Connect keeps a one-line
+  access caveat in the client list, rewritten to claim only what is true
+  today ("answers only to approved Google accounts. Sign in and it will
+  tell you where you stand") — the old copy promised a request-and-notify
+  flow at the sign-in screen that nothing implements. Done as a hand edit,
+  not a revert of `586ba9d`, because that commit also added `.client-list a`
+  styling which thread 13's hosted-chat link still needs.
+- **This clears the prod blocker** carried by thread 12. `grep -n TK
+  docs/index.html` is now empty.
+- **Status**: merged to site-v2.
+- **Lift out**: revert `30e9b9b` (restores the section and re-points the nav
+  CTA at `#access`).
+
 ## Earlier site-v2 work (pre-ledger)
 
 - `ec30357` Baseline-align the masthead brand and crumb
