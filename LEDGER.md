@@ -220,6 +220,69 @@ Not deployed — `docs/` is the published tree; this file stays repo-root only.
 - **Lift out**: revert `30e9b9b` (restores the section and re-points the nav
   CTA at `#access`).
 
+### 15. Dead links out of the footer
+- **Feeder**: `footer-links` · commits `049f709`, `d3f2e0f`
+- **Tickets**: relates to #14; #30 filed for the contact question.
+- **What**: The GitHub link pointed at `techandsociety-ai/mcp-server`, which is
+  private — a 404 for every visitor who clicked it. Removed rather than
+  redirected; the repo going public is a separate decision. Contact pointed at
+  a personal Gmail, the site's only contact route; also removed, with #30
+  tracking what replaces it. The footer keeps chip50.org.
+- **Status**: merged to site-v2.
+- **Lift out**: revert both commits.
+
+### 16. The site chrome it never had
+- **Feeder**: `site-chrome` · commit `510e8cf`
+- **Tickets**: closes #28.
+- **What**: Favicon built from the masthead's own constellation mark
+  (`assets/favicon.svg` plus 32px and 180px PNGs). Open Graph and Twitter tags
+  on all 31 pages with a 1200×630 card (`assets/og-card.png`) rendered from the
+  site's own type and palette — until now every link pasted into Slack or email
+  arrived as a bare URL. Meta descriptions where missing, canonicals
+  everywhere, and `404.html` in the site's voice with routes back.
+- **Note**: the sweep is purely additive — 405 lines inserted, nothing existing
+  rewritten. A first pass that also normalised `&#x27;` entities in existing
+  prose was thrown away and redone for exactly that reason.
+- **Status**: merged to site-v2.
+- **Lift out**: revert `510e8cf`, delete the four asset files.
+
+### 17. mcp.html retired
+- **Feeder**: `retire-mcp-page` · commit `5e56e11`
+- **Tickets**: closes #31.
+- **What**: Unlinked since thread 6, and the decision is that it is not coming
+  back. It was the last page pointing four times into the private mcp-server
+  repo, and it carried the second unblessed brand (Montserrat/Barlow) the
+  design unification deliberately left alone. `chip50.png` goes with it —
+  nothing else referenced it. `docs/AGENTS.md` corrected in the same commit,
+  including its claim that mcp.html carried the password gate: it never did,
+  and only `index.html` is gated.
+- **Status**: merged to site-v2.
+- **Lift out**: revert `5e56e11`.
+
+### 18. The hosted chat is ours
+- **Feeder**: `chat-framing` · commit `1447076`
+- **Tickets**: settles thread 13's open question.
+- **What**: David's call — chat.techandsociety.ai is the product, so the
+  neutral "a hosted client already wired to the server" becomes "Tech & Society
+  Insights is our own chat, already connected". It stays third in the list,
+  because handing the URL to your own assistant is still the preferred route
+  in; the bump is design rather than order — a teal left rule and a faint
+  gradient tint (`.client-list li.hosted`).
+- **Status**: merged to site-v2.
+- **Lift out**: revert `1447076`.
+
+### 19. Housekeeping
+- **Feeder**: `housekeeping` · commit `ea171f3`
+- **Tickets**: —
+- **What**: `MIGRATION_PLAN.md` deleted — the migration it plans is done.
+  `README.md` was describing a site that no longer exists (listed `mcp.html`
+  and `chip50.png`, pointed at the deleted `website/index.html`, omitted
+  `work/`, `school/`, `assets/`, `test-status/`, `404.html`); the tree now
+  matches disk. `AGENTS.md` gains the WIP → staging → prod path and the
+  thread/ledger convention itself.
+- **Status**: merged to site-v2.
+- **Lift out**: revert `ea171f3`.
+
 ## Earlier site-v2 work (pre-ledger)
 
 - `ec30357` Baseline-align the masthead brand and crumb
