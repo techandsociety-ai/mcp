@@ -10,8 +10,7 @@ deployed and publicly readable.
 The deployed source of **techandsociety.ai** — hand-written static HTML, no
 build step, no framework. It is **not** a single file; the tree is:
 
-- `index.html` — home page
-- `mcp.html` — MCP server docs and connection guide
+- `index.html` — home page, and the only page a visitor is meant to enter by
 - `report-*.html` — five standalone survey reports
 - `work/` — "AI & Work" report series (13 numbered entries, an index, and a
   reference page)
@@ -20,9 +19,11 @@ build step, no framework. It is **not** a single file; the tree is:
 - `test-status/` — machine-generated test dashboard, overwritten by CI from the
   `mcp-server` repo. **Never hand-edit it**; changes will be clobbered by the
   next bot commit.
-- `assets/` — the shared report design system (`report.css`, `report.js`) and
-  extracted chart images (`img/<page>/`)
-- `CNAME`, `chip50.png`, `_config.yml` — Pages plumbing and shared logo
+- `404.html` — not-found page, styled to match `index.html`
+- `assets/` — the shared report design system (`report.css`, `report.js`),
+  extracted chart images (`img/<page>/`), the favicon set, and the Open
+  Graph card (`og-card.png`)
+- `CNAME`, `_config.yml` — Pages plumbing
 
 ## The MCP server
 
@@ -46,11 +47,11 @@ This site only documents it.
 
 ## Design status
 
-- The two brand pages have **different** looks. `index.html`: dark navy
-  (`#091525`) with teal `#2DC4B6` accent, Cormorant Garamond display + Inter /
-  Inter Tight. `mcp.html`: light chip50.org-family look — Montserrat
-  (headings), Barlow (body), Barlow Condensed (labels), navy `#1c3461` /
-  accent `#2d5fa6`. Google Fonts is the only external dependency on either.
+- `index.html` and `404.html`: dark navy (`#091525`) with teal `#2DC4B6`
+  accent, Cormorant Garamond display + Inter / Inter Tight. Google Fonts is
+  the only external dependency. Note this look is an **explicit placeholder**
+  pending the branding decision — see the open branding issue before treating
+  any of its values as settled.
 - **All report pages** (`report-*.html`, `work/`, `school/`) share one design
   system: `assets/report.css` + `assets/report.js`. Warm-paper light/dark
   theme (system serif/sans stacks, no webfonts), sticky masthead with scroll
@@ -69,8 +70,9 @@ This site only documents it.
   under `assets/img/` (restyle to `svg.cv` opportunistically), and
   `work/01`/`work/13` embed matplotlib SVGs that ignore the design tokens
   (wrong colors in dark mode until re-rendered).
-- `index.html` and `mcp.html` carry a client-side password gate (SHA-256 check,
-  `sessionStorage` session). The report pages are not gated.
+- `index.html` carries a client-side password gate (SHA-256 check,
+  `sessionStorage` session). No other page does. Whether that is the right
+  posture is an open question with its own issue; don't change it here.
 
 ## Deployment (corrected — read this)
 
@@ -85,10 +87,13 @@ first: `uv run serve.py` from the repo root (see root `AGENTS.md`).
 
 ## Things to preserve
 
-- The setup section on `mcp.html` is oriented toward **end users connecting to
-  the existing server**, not self-hosting. Don't revert it to deployment
+- The Connect section is oriented toward **end users connecting to the
+  existing server**, not self-hosting. Don't revert it to deployment
   instructions.
-- The server URL in the setup section is the real production URL, not a
+- The server URL in that section is the real production URL, not a
   placeholder.
-- The password gate on `index.html`/`mcp.html` is intentional; don't remove it
-  as "cleanup".
+- The password gate on `index.html` is intentional; don't remove it as
+  "cleanup".
+- Favicon, canonical, and Open Graph tags sit in the head of every page. A new
+  page copies that block and edits the title, description, URL, and the
+  relative depth of the asset paths.
