@@ -691,53 +691,6 @@ nav {
 #mcp-url { word-break: break-all; }
 
 /* ═══════════════════════════════════════════════
-   GET ACCESS — PLACEHOLDER (LEDGER thread 12)
-   Deliberately marked TK. Must not reach production
-   in this state; the access policy lands first.
-═══════════════════════════════════════════════ */
-.access { padding: 96px 40px; }
-.access .section-tag { margin-bottom: 24px; }
-.tk-block {
-  max-width: 880px;
-  border: 1px dashed var(--amber);
-  border-radius: 2px;
-  background: rgba(237,170,27,0.035);
-  padding: 30px 34px 28px;
-}
-.tk-flag {
-  font-family: var(--font-tight);
-  font-size: 13px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 18px;
-}
-.tk-lead {
-  font-size: 15.5px; line-height: 1.7;
-  color: var(--cream);
-  margin-bottom: 22px;
-}
-.tk-note {
-  font-size: 14px; line-height: 1.7;
-  color: var(--cream-dim);
-  margin-bottom: 14px;
-}
-.tk-list { list-style: none; margin: 0 0 22px; }
-.tk-list li {
-  font-size: 14.5px; line-height: 1.6;
-  color: var(--cream-2);
-  display: flex; align-items: baseline; gap: 9px;
-  margin-bottom: 9px;
-}
-.tk-list li::before {
-  content: '';
-  display: inline-block;
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: var(--amber);
-  flex-shrink: 0;
-}
-
-/* ═══════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════ */
 footer {
@@ -885,7 +838,7 @@ footer {
       <li><a href="#data">The Data</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
-    <a href="#access" class="nav-cta">Get Access</a>
+    <a href="#connect" class="nav-cta">Get Access</a>
   </div>
 </nav>
 
@@ -1582,34 +1535,9 @@ footer {
           <li><strong>Hand it to your assistant</strong>Paste the URL into Claude, ChatGPT, or any MCP-capable client and ask it to connect. It will take you through the rest.</li>
           <li><strong>Or add it yourself</strong>Claude: Settings → Connectors → Add custom connector. ChatGPT: Settings → Connectors (developer mode). Cursor, VS Code, and other clients: add it to your MCP config.</li>
           <li><strong>Or use the chat we host</strong>If you would rather not set anything up, <a href="https://chat.techandsociety.ai/" target="_blank" rel="noopener">chat.techandsociety.ai</a> is a hosted client already wired to the server.</li>
-          <li><strong>You need access first</strong>The server answers only to approved accounts. <a href="#access">How that works</a>.</li>
+          <li><strong>You need access first</strong>The server answers only to approved Google accounts. Sign in and it will tell you where you stand.</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     GET ACCESS — PLACEHOLDER, see LEDGER.md thread 12.
-     Carries a visible TK by design. Do not ship to prod like this.
-══════════════════════════════════════════ -->
-<section class="access" id="access">
-  <div class="container">
-    <div class="section-tag reveal" style="margin-bottom:24px;">Get Access</div>
-    <div class="tk-block reveal" data-delay="1">
-      <div class="tk-flag">TK &nbsp;·&nbsp; section to come</div>
-      <p class="tk-lead">Access is granted rather than self-served. You sign in with Google and
-        someone switches it on for your account. That much is settled; the rest of this section
-        is not.</p>
-      <p class="tk-note">Open as of 19 August 2026:</p>
-      <ul class="tk-list">
-        <li>Who qualifies, and whether that is a standing category or a judgement each time</li>
-        <li>How you ask — an address to write to, a form, or an introduction from someone already inside</li>
-        <li>What happens after you ask, and how long it takes</li>
-        <li>Whether any of this answers to a visitor with no account at all</li>
-      </ul>
-      <p class="tk-note" style="margin-bottom:0;">The policy is settled first and this copy follows it. The
-        section exists so the question has somewhere to live and the nav has somewhere to point.</p>
     </div>
   </div>
 </section>
