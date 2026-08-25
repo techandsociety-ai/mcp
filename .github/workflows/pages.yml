@@ -29,6 +29,16 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # Any copy of this workflow running outside the production repo (e.g. the
+      # site-staging mirror) publishes with a blanket noindex so staging never
+      # gets crawled. Production is unaffected: no robots.txt is written there.
+      - name: Add noindex robots.txt (staging only)
+        if: github.repository != 'techandsociety-ai/techandsociety-ai.github.io'
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > docs/robots.txt
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

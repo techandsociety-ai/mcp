@@ -1,53 +1,94 @@
-# AGENTS.md — CHIP50 MCP Docs
+# AGENTS.md — techandsociety.ai site content (`docs/`)
 
-## What this repo is
+Guidance for people and agents editing the deployed site. Repo-wide workflow
+rules (branch/PR scoping, local dev server) live in the root
+[`AGENTS.md`](../AGENTS.md) — read that first. Note that this file is itself
+deployed and publicly readable.
 
-A static GitHub Pages documentation site for the CHIP50 Social Media Survey MCP server. It lives at `https://techandsociety.ai/` and is a single self-contained file: `docs/index.html`.
+## What this directory is
 
-The MCP server itself lives in a separate repo (`techandsociety-ai/mcp-server`). This repo is only the public-facing docs.
+The deployed source of **techandsociety.ai** — hand-written static HTML, no
+build step, no framework. It is **not** a single file; the tree is:
+
+- `index.html` — home page
+- `mcp.html` — MCP server docs and connection guide
+- `report-*.html` — five standalone survey reports
+- `work/` — "AI & Work" report series (13 numbered entries, an index, and a
+  reference page)
+- `school/` — "AI & School" report series (8 numbered entries — entry 06 is
+  intentionally absent — and an index)
+- `test-status/` — machine-generated test dashboard, overwritten by CI from the
+  `mcp-server` repo. **Never hand-edit it**; changes will be clobbered by the
+  next bot commit.
+- `assets/` — the shared report design system (`report.css`, `report.js`) and
+  extracted chart images (`img/<page>/`)
+- `CNAME`, `chip50.png`, `_config.yml` — Pages plumbing and shared logo
 
 ## The MCP server
 
-- **Live URL**: `https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp`
-- **Transport**: Remote MCP over HTTPS (not stdio)
-- **Auth**: Google OAuth — users connect via Settings → Connectors → Add custom connector in Claude
-- **Backend**: Google Cloud Run + BigQuery (`chip50` GCP project, dataset `social_media_demographics`)
+The MCP server is a separate repo:
+[`techandsociety-ai/mcp-server`](https://github.com/techandsociety-ai/mcp-server).
+This site only documents it.
 
-## What the MCP server does
+- **Live URL**: `https://chip50-mcp-zbqg33tava-uc.a.run.app/mcp` — this is the
+  production `chip50-mcp` Cloud Run service. (Cloud Run also serves the same
+  service at a deterministic alias, `chip50-mcp-563455814008.us-central1.run.app`;
+  both hostnames are one service, not two deployments.)
+- **Transport**: remote MCP over HTTPS (not stdio)
+- **Auth**: Google OAuth; access is managed — unauthorized users request access
+  at the auth screen. Users connect via Settings → Connectors → Add custom
+  connector in Claude.
+- **Backend**: Google Cloud Run + BigQuery.
+- **Tools**: don't hardcode tool counts or lists in site copy — they drift.
+  The server documents itself: connect and call `introduce_mcp` (or
+  `get_available_variables`) for the current inventory, and describe tools on
+  the site in terms of what they let a reader do.
 
-Provides AI-accessible tools for analyzing the CHIP50 panel survey — ~10K respondents/wave, 38+ waves, 232 variables covering 20 social media platforms, 9 demographic variables, PHQ-9 mental health items, and political attitudes. All queries return population-weighted estimates with cell suppression (n < 10).
+## Design status
 
-24 tools: `introduce_mcp`, `get_available_variables`, `get_question_wording`, `get_wave_metadata`, `generate_marginals`, `generate_marginals_by_wave`, `generate_marginals_batch`, `generate_crosstab`, `generate_crosstab_by_wave`, `generate_crosstab_filtered`, `generate_crosstab_batch`, `generate_crosstab_multi`, `summarize_pattern_by_wave`, `get_platform_trends`, `get_freq_trends`, `get_ordinal_distribution`, `get_ordinal_distribution_by_demographic`, `get_ordinal_crosstab`, `get_categorical_crosstab`, `get_platform_posting_summary`, `run_ols_regression`, `run_logistic_regression`, `generate_pdf_report`, `get_report_status`.
+- The two brand pages have **different** looks. `index.html`: dark navy
+  (`#091525`) with teal `#2DC4B6` accent, Cormorant Garamond display + Inter /
+  Inter Tight. `mcp.html`: light chip50.org-family look — Montserrat
+  (headings), Barlow (body), Barlow Condensed (labels), navy `#1c3461` /
+  accent `#2d5fa6`. Google Fonts is the only external dependency on either.
+- **All report pages** (`report-*.html`, `work/`, `school/`) share one design
+  system: `assets/report.css` + `assets/report.js`. Warm-paper light/dark
+  theme (system serif/sans stacks, no webfonts), sticky masthead with scroll
+  progress, sidebar TOC with scroll-spy, and inline-SVG charts using the
+  `svg.cv` class vocabulary (`.cs1/.cs2/.cs3` map to the series-color tokens).
+  Per-family accents come from a body class — `series-work` (blue),
+  `series-school` (amber), `series-standalone` (teal) — defined in the token
+  block at the bottom of `report.css`. **A rebrand or new family is a token
+  edit in that one file**; never reintroduce per-page inline styles.
+  The dark-mode toggle persists via the `localStorage` key `chip50-theme` —
+  don't rename it.
+- New report pages: copy the skeleton of any `work/` entry (masthead → sidebar
+  TOC → hero → prose → foot), link the shared assets with the correct relative
+  path, and set the family body class.
+- Known debt: chart images on the five standalone reports are extracted PNGs
+  under `assets/img/` (restyle to `svg.cv` opportunistically), and
+  `work/01`/`work/13` embed matplotlib SVGs that ignore the design tokens
+  (wrong colors in dark mode until re-rendered).
+- `index.html` and `mcp.html` carry a client-side password gate (SHA-256 check,
+  `sessionStorage` session). The report pages are not gated.
 
-## Docs site design
+## Deployment (corrected — read this)
 
-- **Single file**: everything is in `index.html` — no build step, no framework, no dependencies except Google Fonts
-- **Fonts**: Montserrat (headings), Barlow (body), Barlow Condensed (labels/tags) — matches chip50.org
-- **Colors**: Navy `#1c3461` primary, `#2d5fa6` accent blue, white/off-white backgrounds — matches chip50.org
-- **Style target**: looks like it belongs to the chip50.org family but is clearly a docs page, not a knock-off of the main site
-- **Logo**: `chip50.png` — navy US map with checkmark icon
+`docs/` deploys via `.github/workflows/pages.yml`: a push to `main` that
+touches `docs/**` publishes the whole directory to GitHub Pages (custom domain
+`techandsociety.ai`) within a couple of minutes. There is no separate build
+step and no "Pages serves the branch root" config.
 
-## Deployment
+**Do not commit or push to `main` directly** — every merge is a production
+deploy. Work on a branch, open a PR, and let a human merge it. Preview locally
+first: `uv run serve.py` from the repo root (see root `AGENTS.md`).
 
-Push to `main` → GitHub Pages auto-deploys (no workflow needed, Pages is configured to serve from root of `main`). Changes are live within ~30 seconds.
+## Things to preserve
 
-```bash
-cd docs/
-git add -A && git commit -m "..." && git push
-```
-
-## What's on the page
-
-1. **Hero** — tagline, key stats (38+ waves, ~10K respondents, 20 platforms, 232 variables, 24 tools)
-2. **Overview** — plain-English explanation of CHIP50 + how the MCP works (4-step flow)
-3. **Data** — coverage cards: platforms, demographics, mental health, political attitudes, waves, privacy
-4. **Sample Queries** — tabbed section with Quick / Medium / Complex query examples with prompts and expected outputs
-5. **Tools Reference** — all 18 MCP tools with plain-English descriptions
-6. **Setup** — 4-step end-user connection guide (Settings → Connectors → Add custom connector)
-
-## Key decisions / things to preserve
-
-- The setup section is oriented toward **end users connecting to the existing server**, not self-hosting. Do not revert it to deployment instructions.
-- The server URL in the setup section is the live production URL — do not treat it as a placeholder.
-- Access to the server is managed (Google OAuth). Users who aren't authorized should request access at the auth screen.
-- A JS password gate is implemented — the password is stored as a SHA-256 hash checked client-side, with the session stored in `sessionStorage`.
+- The setup section on `mcp.html` is oriented toward **end users connecting to
+  the existing server**, not self-hosting. Don't revert it to deployment
+  instructions.
+- The server URL in the setup section is the real production URL, not a
+  placeholder.
+- The password gate on `index.html`/`mcp.html` is intentional; don't remove it
+  as "cleanup".
