@@ -3,9 +3,9 @@
 The public website for **Tech & Society**, served via GitHub Pages at
 [techandsociety.ai](https://techandsociety.ai).
 
-The site is a small set of self-contained, static HTML pages: a landing page,
-an MCP information page, and a handful of published research reports built from
-the CHIP50 panel survey.
+The site is a set of self-contained, static HTML pages: a landing page and
+thirty-odd published research reports built from the CHIP50 panel survey, two
+of them running series. There is no build step and no framework.
 
 > Looking for the MCP server itself (the tools, BigQuery queries, and Cloud Run
 > deployment)? That lives in a separate repo:
@@ -21,24 +21,20 @@ Jekyll theme — see `docs/_config.yml`), and `docs/CNAME` binds it to the
 ```
 docs/                         ← the deployed site (and nothing outside it)
 ├── index.html                Landing page
-├── mcp.html                  MCP information / access page
-├── report-america-meets-ai.html
-├── report-depression.html
-├── report-depression-heatmap.html
-├── report-social-media-trust.html
-├── report-who-posts-politics.html
-├── chip50.png                Logo
+├── 404.html                  Not-found page
+├── report-*.html             Five standalone reports
+├── work/                     "AI & Work" series — 13 entries, index, reference
+├── school/                   "AI & School" series — 8 entries and an index
+├── test-status/              Machine-generated; overwritten by CI. Never edit.
+├── assets/                   Shared report design system, chart images,
+│                             favicons, Open Graph card
 ├── _config.yml               Pages config (serve HTML as-is, no theme)
 ├── CNAME                     Custom domain: techandsociety.ai
 └── AGENTS.md                 Notes for agents working on the site
 ```
 
-Anything outside `docs/` (this README, `MIGRATION_PLAN.md`, etc.) is repo
-support and is **not** part of the published site.
-
-> **Editing note:** `website/index.html` is an earlier, unpublished draft of the
-> landing page. It is not deployed — edit the copies in `docs/`, which are the
-> source of truth for the live site.
+Anything outside `docs/` (this README, `LEDGER.md`, `serve.py`) is repo support
+and is **not** part of the published site.
 
 ## How it deploys
 
@@ -75,7 +71,13 @@ cd docs && python3 -m http.server 8000
 
 ## Deploying a change
 
-1. Edit files under `docs/`.
-2. Commit and open a PR against `main`.
-3. On merge, `pages.yml` publishes automatically — the live site updates within
-   a minute or so.
+1. Edit files under `docs/` on a branch.
+2. Push that branch to the staging mirror and look at it there:
+   `git push staging <branch>:main` → https://techandsociety.ai/site-staging/
+3. Open a PR against `main`.
+4. On merge, `pages.yml` publishes automatically — the live site updates within
+   a minute or so. Never push to `main` directly; every push to it is a
+   production deploy.
+
+See [`AGENTS.md`](AGENTS.md) for how staging works and for the thread/ledger
+convention used on larger reshapes.
