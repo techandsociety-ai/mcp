@@ -50,9 +50,43 @@ uv run serve.py         # serves docs/ at http://localhost:8000, reloads on edit
 handles it — no venv or install step. Zero-dependency fallback:
 `cd docs && python3 -m http.server 8000`.
 
+## WIP → staging → prod
+
+`techandsociety-ai/site-staging` mirrors this repo and runs the same
+`pages.yml`, so a branch can get a real Pages deploy before it touches
+production:
+
+```bash
+git push staging <branch>:main    # remote `staging` in a local checkout
+```
+
+It serves at **https://techandsociety.ai/site-staging/** — a project Pages
+site under the org domain rather than a subdomain, because a staging subdomain
+needs registrar access this project does not have yet. Every link on the site
+is relative, so it renders correctly under the path prefix. `pages.yml` writes
+a blanket-noindex `robots.txt` in any repo that is not the production one, so
+staging cannot be crawled.
+
+Look at a change on staging before asking for the production merge.
+
 ## Deploying
 
 Merging a change that touches `docs/**` triggers `pages.yml`, which publishes
 `docs/` to GitHub Pages (custom domain `techandsociety.ai`). Changes to
 repo-support files (this file, `README.md`, `serve.py`, …) don't redeploy the
 site.
+
+**Never push to `main` directly.** Every push to it is a production deploy.
+Open a PR and let a human merge it.
+
+## Threads and the ledger
+
+A reshape too large for one PR is built as **threads**: one feeder branch per
+concern, merged back into the working branch with `--no-ff`, each recorded in
+[`LEDGER.md`](LEDGER.md) with what it changed, why, and the exact commit to
+revert to lift it out again. `LEDGER.md` is not deployed, and it doubles as
+the eventual PR body.
+
+That is how the site-v2 rebuild shipped: eighteen threads under a single PR,
+any one of which can still be pulled back out on its own. Keep the ledger
+current as you go — a thread nobody wrote down is a thread nobody can revert.
