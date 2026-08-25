@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Tech &amp; Society</title>
+<meta name="description" content="That page isn&rsquo;t here.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Inter:wght@300;400;500&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#091525; --border:#192E4A;
+  --cream:#EDE8D9; --cream-2:#C5BFB1; --cream-dim:#8CA0B8;
+  --teal:#2DC4B6;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-sans:'Inter',system-ui,sans-serif;
+  --font-tight:'Inter Tight',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--cream); font-family:var(--font-sans);
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:40px; -webkit-font-smoothing:antialiased;
+}
+.glow{
+  position:fixed; width:820px; height:820px; right:-300px; top:-380px; border-radius:50%;
+  background:radial-gradient(circle,rgba(45,196,182,0.10) 0%,rgba(45,196,182,0) 62%);
+  pointer-events:none;
+}
+.box{max-width:560px; position:relative}
+.mark{display:flex; align-items:center; gap:13px; margin-bottom:44px}
+.mark-text{
+  font-family:var(--font-tight); font-size:15px; font-weight:600;
+  letter-spacing:0.02em; color:var(--cream); line-height:1.1;
+}
+h1{
+  font-family:var(--font-serif); font-weight:300; font-size:clamp(40px,7vw,62px);
+  line-height:1.04; letter-spacing:-0.02em; margin-bottom:22px;
+}
+.rule{width:56px; height:2px; background:var(--teal); margin-bottom:26px}
+p{font-size:16px; line-height:1.7; color:var(--cream-2); margin-bottom:16px}
+p.small{font-size:14.5px; color:var(--cream-dim)}
+.links{display:flex; gap:26px; margin-top:36px; flex-wrap:wrap}
+.links a{
+  font-family:var(--font-tight); font-size:14.5px; font-weight:500;
+  letter-spacing:0.02em; color:var(--teal); text-decoration:none;
+  border-bottom:1px solid rgba(45,196,182,0.35); padding-bottom:2px;
+  transition:border-color .2s, color .2s;
+}
+.links a:hover{color:var(--cream); border-bottom-color:var(--cream)}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="box">
+  <div class="mark">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="5" y1="5" x2="25" y2="8" stroke="#2DC4B6" stroke-width="0.7" stroke-opacity="0.5"/>
+      <line x1="25" y1="8" x2="23" y2="21" stroke="#192E4A" stroke-width="0.7" stroke-opacity="0.9"/>
+      <line x1="23" y1="21" x2="15" y2="25" stroke="#2DC4B6" stroke-width="0.7" stroke-opacity="0.5"/>
+      <line x1="15" y1="25" x2="7" y2="22" stroke="#192E4A" stroke-width="0.7" stroke-opacity="0.8"/>
+      <line x1="7" y1="22" x2="5" y2="5" stroke="#192E4A" stroke-width="0.7" stroke-opacity="0.6"/>
+      <circle cx="5" cy="5" r="2.2" fill="#2DC4B6"/>
+      <circle cx="25" cy="8" r="1.6" fill="#EDAA1B"/>
+      <circle cx="15" cy="25" r="2" fill="#2DC4B6"/>
+      <circle cx="23" cy="21" r="1.3" fill="#BF4E2C"/>
+      <circle cx="7" cy="22" r="1.4" fill="#7B6BA8"/>
+    </svg>
+    <div class="mark-text">Tech &amp; Society</div>
+  </div>
+  <h1>That page isn&rsquo;t here.</h1>
+  <div class="rule"></div>
+  <p>The link may be old, or the address may have a typo in it. Nothing on this
+     site has been taken down.</p>
+  <p class="small">If you followed a link from somewhere else and it should work, it is
+     worth telling whoever sent you.</p>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/work/">AI and Work</a>
+    <a href="/school/">AI and School</a>
+  </div>
+</div>
+</body>
+</html>
